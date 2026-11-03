@@ -1,0 +1,1163 @@
+<!doctype html>
+
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AIIA — ბიოლოგია</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+
+        --secondary: #4a90ff;
+
+        --success: #22c55e;
+
+        --text: #202338;
+
+        --muted: #8990a2;
+
+        --line: #e8e6f1;
+
+        --white: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+
+        min-height: 100vh;
+
+        background: #ffffff;
+
+        color: var(--text);
+
+        font-family: "Noto Sans Georgian", Arial, sans-serif;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        color: inherit;
+
+        text-decoration: none;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .app {
+        width: 100%;
+
+        max-width: 950px;
+
+        margin: 0 auto;
+
+        padding: 14px 17px 115px;
+      }
+
+      /* HEADER */
+
+      .header {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 10px;
+      }
+
+      .menu {
+        width: 46px;
+
+        height: 46px;
+
+        flex: 0 0 46px;
+
+        border: 0;
+
+        background: #ffffff;
+
+        border-radius: 19px;
+
+        box-shadow: 0 3px 16px #2632580a;
+
+        display: grid;
+
+        place-items: center;
+      }
+
+      .header-title {
+        flex: 1;
+
+        min-width: 0;
+      }
+
+      .header-title h1 {
+        font-size: 19px;
+
+        margin: 0 0 2px;
+
+        font-weight: 800;
+      }
+
+      .header-title p {
+        font-size: 13px;
+
+        color: #7776ad;
+
+        margin: 0;
+      }
+
+      .xp {
+        display: flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        padding: 10px 12px;
+
+        border-radius: 19px;
+
+        background: #ffffff;
+
+        box-shadow: 0 3px 16px #2632580a;
+
+        color: #7776ad;
+
+        font-weight: 800;
+
+        font-size: 14px;
+
+        white-space: nowrap;
+      }
+
+      .xp span {
+        font-size: 21px;
+      }
+
+      /* PROGRESS */
+
+      .progress-card {
+        border: 1px solid #e1e0e9;
+
+        border-radius: 23px;
+
+        padding: 12px 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        background: #ffffff;
+      }
+
+      .ring {
+        height: 60px;
+
+        width: 60px;
+
+        border: 6px solid #eeecf7;
+
+        border-radius: 50%;
+
+        display: grid;
+
+        place-items: center;
+
+        flex: 0 0 60px;
+
+        color: #7776ad;
+
+        font-size: 19px;
+
+        font-weight: 800;
+      }
+
+      .progress-body {
+        flex: 1;
+
+        min-width: 0;
+      }
+
+      .progress-body h2 {
+        font-size: clamp(12px, 3.5vw, 16px);
+
+        margin: 0 0 4px;
+
+        font-weight: 800;
+
+        white-space: nowrap;
+
+        letter-spacing: -0.3px;
+      }
+
+      .progress-body p {
+        color: #a0a5b3;
+
+        font-size: 11px;
+
+        margin: 0 0 7px;
+      }
+
+      .track {
+        height: 7px;
+
+        border-radius: 10px;
+
+        background: #efedf7;
+
+        overflow: hidden;
+      }
+
+      .fill {
+        height: 100%;
+
+        width: 0;
+
+        background: var(--primary);
+
+        border-radius: 10px;
+
+        transition: width 0.2s;
+      }
+
+      .stat-icon {
+        width: 36px;
+
+        height: 36px;
+
+        display: grid;
+
+        place-items: center;
+
+        background: #f0edff;
+
+        border-radius: 15px;
+
+        color: #655be3;
+
+        flex: 0 0 36px;
+      }
+
+      /* CHAPTERS */
+
+      .section-top {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        gap: 8px;
+
+        margin: 17px 0 9px;
+      }
+
+      .section-top h2 {
+        font-size: 20px;
+
+        margin: 0;
+
+        font-weight: 800;
+      }
+
+      .all {
+        border: 0;
+
+        background: none;
+
+        color: #7776ad;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        padding: 4px 0;
+      }
+
+      .chapters {
+        display: flex;
+
+        gap: 10px;
+
+        overflow-x: auto;
+
+        padding: 0 0 8px;
+
+        scrollbar-width: thin;
+      }
+
+      .chapter-card {
+        border: 0;
+
+        flex: 0 0 clamp(124px, 39vw, 146px);
+
+        height: 106px;
+
+        text-align: left;
+
+        position: relative;
+
+        border-radius: 22px;
+
+        padding: 10px 12px;
+
+        background: #f3f1ff;
+
+        color: #5650bb;
+
+        border: 1px solid #e9e5ff;
+
+        box-shadow: none;
+
+        transition:
+          background 0.2s,
+          color 0.2s,
+          transform 0.2s;
+      }
+
+      .chapter-upcoming {
+        opacity: 0.75;
+
+        cursor: default;
+      }
+
+      .chapter-card.active {
+        background: linear-gradient(135deg, #6766f5, #4c48d9);
+
+        color: #ffffff;
+
+        border-color: transparent;
+
+        box-shadow: 0 8px 15px #5b58c629;
+      }
+
+      .chapter-card:active {
+        transform: scale(0.98);
+      }
+
+      .chapter-number {
+        position: absolute;
+
+        top: 14px;
+
+        left: 11px;
+
+        width: 30px;
+
+        height: 30px;
+
+        border-radius: 50%;
+
+        background: #e2dfff;
+
+        color: #615de6;
+
+        display: grid;
+
+        place-items: center;
+
+        font-weight: 800;
+
+        font-size: 14px;
+      }
+
+      .chapter-card.active .chapter-number {
+        background: #ffffff;
+
+        color: #615de6;
+      }
+
+      .chapter-count {
+        position: absolute;
+
+        right: 11px;
+
+        top: 18px;
+
+        font-size: 13px;
+
+        font-weight: 800;
+      }
+
+      .chapter-name {
+        position: absolute;
+
+        bottom: 10px;
+
+        left: 11px;
+
+        right: 12px;
+
+        font-size: 13px;
+
+        line-height: 1.4;
+
+        font-weight: 800;
+      }
+
+      /* LESSONS */
+
+      .lesson-panel {
+        border: 1px solid #e9e6f3;
+
+        border-radius: 25px;
+
+        padding: 12px 7px 12px;
+
+        background: #faf9ff;
+      }
+
+      .lesson-heading {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin: 0 4px 17px;
+      }
+
+      .lesson-heading h2 {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        font-size: 19px;
+
+        line-height: 1.4;
+
+        margin: 0;
+
+        font-weight: 800;
+
+        min-width: 0;
+      }
+
+      .lesson-heading h2::before {
+        content: "";
+
+        display: block;
+
+        width: 4px;
+
+        height: 27px;
+
+        border-radius: 5px;
+
+        background: #6259e5;
+
+        flex: 0 0 4px;
+      }
+
+      .chapter-tag {
+        color: #7876ae;
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        white-space: nowrap;
+      }
+
+      .lessons {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 8px;
+      }
+
+      .lesson {
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        min-height: 65px;
+
+        padding: 9px 10px;
+
+        background: #ffffff;
+
+        border: 1px solid #e5e3ee;
+
+        border-radius: 21px;
+
+        text-align: left;
+      }
+
+      .lesson-index {
+        font-weight: 800;
+
+        font-size: 15px;
+
+        flex: 0 0 38px;
+      }
+
+      .lesson-title {
+        font-weight: 800;
+
+        font-size: 15px;
+
+        line-height: 1.45;
+
+        flex: 1;
+
+        min-width: 0;
+      }
+
+      .status {
+        width: 27px;
+
+        height: 27px;
+
+        border-radius: 50%;
+
+        background: #a1aabc;
+
+        flex: 0 0 27px;
+      }
+
+      .status.in-progress {
+        background: #ffa331;
+      }
+
+      .status.done {
+        background: #22c55e;
+      }
+
+      .chevron {
+        font-size: 27px;
+
+        line-height: 1;
+
+        color: #8d94a6;
+
+        flex: none;
+      }
+
+      /* BOTTOM NAVIGATION */
+
+      .bottom-nav {
+        position: fixed;
+
+        bottom: 0;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: min(100%, 950px);
+
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        background: #ffffff;
+
+        border-radius: 25px 25px 0 0;
+
+        box-shadow: 0 -5px 24px #28274c12;
+
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+
+        z-index: 10;
+      }
+
+      .nav-link {
+        display: flex;
+
+        align-items: center;
+
+        flex-direction: column;
+
+        gap: 4px;
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+        color: #9599a8;
+      }
+
+      .nav-icon {
+        width: 40px;
+
+        height: 36px;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 12px;
+      }
+
+      .nav-icon svg {
+        width: 22px;
+
+        height: 22px;
+      }
+
+      .nav-link.active {
+        color: #5949df;
+      }
+
+      .nav-link.active .nav-icon {
+        background: #eeebff;
+      }
+
+      @media (max-width: 360px) {
+        .app {
+          padding-left: 12px;
+
+          padding-right: 12px;
+        }
+
+        .progress-card {
+          padding: 14px 10px;
+
+          gap: 9px;
+        }
+
+        .ring {
+          width: 65px;
+
+          height: 65px;
+
+          flex-basis: 65px;
+
+          font-size: 17px;
+        }
+
+        .stat-icon {
+          width: 36px;
+
+          height: 36px;
+
+          flex-basis: 36px;
+        }
+
+        .progress-body h2 {
+          font-size: 12px;
+        }
+
+        .lesson-title {
+          font-size: 13px;
+        }
+      }
+
+      @media (min-width: 700px) {
+        .app {
+          padding: 28px 28px 125px;
+        }
+
+        .chapters {
+          gap: 16px;
+        }
+
+        .chapter-card {
+          flex-basis: 190px;
+
+          height: 120px;
+        }
+
+        .lesson-panel {
+          padding: 16px 12px;
+        }
+
+        .lesson {
+          min-height: 72px;
+        }
+
+        .header-title h1 {
+          font-size: 23px;
+        }
+
+        .progress-body h2 {
+          font-size: 18px;
+        }
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--secondary);
+
+        outline-offset: 3px;
+      }
+
+      /* AIIA — ერთიანი ტიპოგრაფია და მობილური განლაგება */
+
+      :root {
+        --font-h1: 20px;
+
+        --font-h2: 18px;
+
+        --font-h3: 15px;
+
+        --font-body: 14px;
+
+        --font-small: 12px;
+
+        --font-caption: 11px;
+
+        --font-button: 13px;
+      }
+
+      .header-title h1 {
+        font-size: var(--font-h1);
+      }
+
+      .header-title p,
+      .chapter-tag,
+      .all {
+        font-size: var(--font-small);
+      }
+
+      .xp,
+      .chapter-count {
+        font-size: var(--font-button);
+      }
+
+      .progress-body h2,
+      .chapter-name,
+      .lesson-title {
+        font-size: var(--font-h3);
+      }
+
+      .progress-body p {
+        font-size: var(--font-caption);
+      }
+
+      .section-top h2,
+      .lesson-heading h2 {
+        font-size: var(--font-h2);
+      }
+
+      .lesson-index,
+      .chapter-number {
+        font-size: var(--font-body);
+      }
+
+      .nav-link {
+        font-size: var(--font-caption);
+      }
+
+      .chapters {
+        padding: 2px 1px 0;
+
+        margin-bottom: 16px;
+
+        scrollbar-width: none;
+
+        -ms-overflow-style: none;
+      }
+
+      .chapters::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media (min-width: 700px) {
+        :root {
+          --font-h1: 24px;
+
+          --font-h2: 20px;
+
+          --font-h3: 17px;
+
+          --font-body: 15px;
+
+          --font-small: 13px;
+
+          --font-caption: 12px;
+
+          --font-button: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="app">
+      <header class="header">
+        <button
+          class="menu"
+          type="button"
+          aria-label="უკან დაბრუნება"
+          onclick="location.href = 'student-home.html'"
+        >
+          <svg
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#34363b"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+
+        <div class="header-title">
+          <h1>ბიოლოგია</h1>
+
+          <p>VII კლასი</p>
+        </div>
+
+        <div class="xp">
+          <span>🏆</span>
+
+          0 XP
+        </div>
+      </header>
+
+      <section class="progress-card">
+        <div class="ring" id="progress-ring">0%</div>
+
+        <div class="progress-body">
+          <h2>სწავლის პროგრესი</h2>
+
+          <p id="progress-text">0/6 დასრულებული</p>
+
+          <div class="track">
+            <div class="fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="stat-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+          >
+            <path d="M5 19V11M12 19V5M19 19v-7" />
+          </svg>
+        </div>
+      </section>
+
+      <div class="section-top">
+        <h2>თავები</h2>
+
+        <button
+          class="all"
+          type="button"
+          onclick="
+            document
+
+              .getElementById('chapters')
+
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
+          ყველა თავის ნახვა ›
+        </button>
+      </div>
+
+      <div class="chapters" id="chapters"></div>
+
+      <section class="lesson-panel">
+        <div class="lesson-heading">
+          <h2 id="selected-title"></h2>
+
+          <span class="chapter-tag" id="selected-number"></span>
+        </div>
+
+        <div class="lessons" id="lessons"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="მთავარი ნავიგაცია">
+      <a class="nav-link active" href="student-home.html">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z" />
+          </svg>
+        </span>
+
+        <span>მთავარი</span>
+      </a>
+
+      <a class="nav-link" href="student-subjects.html">
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M12 6C8 3 4 4 2 5v15c3-1 7-1 10 2 3-3 7-3 10-2V5c-3-1-7-2-10 1Zm0 0v16"
+            />
+          </svg>
+        </span>
+
+        <span>საგნები</span>
+      </a>
+
+      <a class="nav-link" href="student-mia.html">
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="4" y="6" width="16" height="14" rx="3" />
+
+            <path d="M12 2v4M9 12h1m5 0h1M9 16q3 2 6 0" />
+          </svg>
+        </span>
+
+        <span>AI მენტორი</span>
+      </a>
+
+      <a class="nav-link" href="student-profile.html">
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="8" r="4" />
+
+            <path d="M4 21c0-5 3-8 8-8s8 3 8 8" />
+          </svg>
+        </span>
+
+        <span>პროფილი</span>
+      </a>
+    </nav>
+
+    <script>
+      // აქ შეგიძლია ახალი თავებისა და თემების დამატება.
+
+      const chapters = [
+        {
+          name: "ადამიანის ორგანიზმი",
+
+          lessons: [
+            {
+              title: "გული და სისხლის მიმოქცევა",
+              status: "in-progress",
+              href: "student-biology-lesson.html",
+            },
+
+            {
+              title: "სისხლი და მისი შემადგენლობა",
+              status: "pending",
+              href: null,
+            },
+
+            { title: "სისხლძარღვები", status: "pending", href: null },
+          ],
+        },
+
+        {
+          name: "სუნთქვის სისტემა",
+
+          lessons: [
+            { title: "სუნთქვის ორგანოები", status: "pending", href: null },
+
+            { title: "ფილტვების მუშაობა", status: "pending", href: null },
+
+            { title: "აირთა ცვლა", status: "pending", href: null },
+          ],
+        },
+      ];
+
+      let selected = 0;
+
+      function render() {
+        const chapterList = document.getElementById("chapters");
+
+        chapterList.replaceChildren();
+
+        chapters.forEach((chapter, i) => {
+          const completed = chapter.lessons.filter(
+            (lesson) => lesson.status === "done",
+          ).length;
+
+          const card = document.createElement("button");
+
+          card.type = "button";
+
+          card.className = "chapter-card" + (selected === i ? " active" : "");
+
+          const number = document.createElement("span");
+
+          number.className = "chapter-number";
+
+          number.textContent = i + 1;
+
+          const count = document.createElement("span");
+
+          count.className = "chapter-count";
+
+          count.textContent = completed + "/" + chapter.lessons.length;
+
+          const name = document.createElement("span");
+
+          name.className = "chapter-name";
+
+          name.textContent = chapter.name;
+
+          card.append(number, count, name);
+
+          card.onclick = () => {
+            selected = i;
+
+            render();
+          };
+
+          chapterList.append(card);
+        });
+
+        // Preview of the next chapter: visible at the right edge on mobile.
+
+        const upcoming = document.createElement("div");
+
+        upcoming.className = "chapter-card chapter-upcoming";
+
+        upcoming.setAttribute("aria-label", "თავი 3 — მალე დაემატება");
+
+        upcoming.innerHTML =
+          '<span class="chapter-number">3</span><span class="chapter-name">მალე დაემატება</span>';
+
+        chapterList.append(upcoming);
+
+        const current = chapters[selected];
+
+        document.getElementById("selected-title").textContent = current.name;
+
+        document.getElementById("selected-number").textContent =
+          "თავი " + (selected + 1);
+
+        const list = document.getElementById("lessons");
+
+        list.replaceChildren();
+
+        current.lessons.forEach((lesson, i) => {
+          const a = document.createElement("a");
+
+          a.className = "lesson";
+
+          if (lesson.href) {
+            a.href = lesson.href;
+          } else {
+            a.href = "javascript:void(0)";
+
+            a.setAttribute("aria-disabled", "true");
+
+            a.title = "თემა მალე დაემატება";
+
+            a.style.opacity = "0.65";
+
+            a.addEventListener("click", (event) => {
+              event.preventDefault();
+              alert("ეს თემა მალე დაემატება");
+            });
+          }
+
+          const index = document.createElement("span");
+
+          index.className = "lesson-index";
+
+          index.textContent = selected + 1 + "." + (i + 1);
+
+          const title = document.createElement("span");
+
+          title.className = "lesson-title";
+
+          title.textContent = lesson.title;
+
+          const status = document.createElement("span");
+
+          status.className =
+            "status " +
+            (lesson.status === "done"
+              ? "done"
+              : lesson.status === "in-progress"
+                ? "in-progress"
+                : "");
+
+          status.setAttribute(
+            "aria-label",
+
+            lesson.status === "done"
+              ? "დასრულებული"
+              : lesson.status === "in-progress"
+                ? "მიმდინარე"
+                : "დასაწყები",
+          );
+
+          const chevron = document.createElement("span");
+
+          chevron.className = "chevron";
+
+          chevron.textContent = "›";
+
+          a.append(index, title, status, chevron);
+
+          list.append(a);
+        });
+
+        const allLessons = chapters.flatMap((chapter) => chapter.lessons);
+
+        const done = allLessons.filter(
+          (lesson) => lesson.status === "done",
+        ).length;
+
+        const pct = allLessons.length
+          ? Math.round((done / allLessons.length) * 100)
+          : 0;
+
+        document.getElementById("progress-ring").textContent = pct + "%";
+
+        document.getElementById("progress-text").textContent =
+          done + "/" + allLessons.length + " დასრულებული";
+
+        document.getElementById("progress-fill").style.width = pct + "%";
+      }
+
+      render();
+    </script>
+  </body>
+</html>

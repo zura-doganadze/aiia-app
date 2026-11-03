@@ -1,0 +1,584 @@
+<!doctype html>
+
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+
+    <title>AIIA — მია</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --ink: #182344;
+        --muted: #8790a9;
+        --bg: #f8f9fd;
+        --line: #e9eaf4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Noto Sans Georgian", sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      .app {
+        max-width: 760px;
+        margin: auto;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(180deg, #f3f1ff 0%, #fff 27%, #fff 100%);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 17px 13px;
+        border-bottom: 1px solid #eeeefa;
+        background: #fff;
+      }
+      .avatar {
+        height: 47px;
+        width: 47px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #eeebff;
+        overflow: hidden;
+        flex: none;
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .avatar .fallback {
+        font-weight: 800;
+        color: var(--primary);
+        font-size: 16px;
+      }
+      .heading {
+        flex: 1;
+      }
+      .heading strong {
+        display: block;
+        font-size: 17px;
+      }
+      .online {
+        height: 9px;
+        width: 9px;
+        background: #22c55e;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+      }
+      .more {
+        border: 0;
+        background: #f5f4ff;
+        border-radius: 12px;
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        color: var(--primary);
+        cursor: pointer;
+      }
+      .more svg {
+        width: 19px;
+        height: 19px;
+      }
+      .history-panel {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        top: 73px;
+        right: 12px;
+        width: min(340px, calc(100% - 24px));
+        max-height: 55vh;
+        overflow: auto;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 15px 45px #19204420;
+        border-radius: 16px;
+        padding: 12px;
+      }
+      .history-panel.open {
+        display: block;
+      }
+      .history-panel h2 {
+        font-size: 14px;
+        margin: 4px 6px 12px;
+      }
+      .history-item {
+        width: 100%;
+        border: 0;
+        background: #f8f8ff;
+        border-radius: 10px;
+        padding: 11px;
+        text-align: left;
+        font-family: inherit;
+        color: var(--ink);
+        margin-bottom: 7px;
+        cursor: pointer;
+      }
+      .history-item.active {
+        background: #eeecff;
+        color: #5147c8;
+      }
+      .history-empty {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 8px;
+      }
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 18px 15px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .intro {
+        text-align: center;
+        padding: 14px 8px 6px;
+      }
+      .intro .big {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #6c63ff;
+        margin-bottom: 8px;
+      }
+      .intro .big svg {
+        width: 38px;
+        height: 38px;
+        stroke: #6c63ff;
+        stroke-width: 1.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .intro h1 {
+        font-size: 20px;
+        margin: 7px 0;
+      }
+      .intro p {
+        font-size: 13px;
+        color: #7e87a0;
+        line-height: 1.8;
+        margin: 0;
+      }
+      .bubble {
+        max-width: 87%;
+        padding: 12px 14px;
+        border-radius: 17px;
+        line-height: 1.75;
+        font-size: 13px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .bubble.mia {
+        align-self: flex-start;
+        background: #f0efff;
+        border-bottom-left-radius: 5px;
+      }
+      .bubble.student {
+        align-self: flex-end;
+        background: var(--primary);
+        color: white;
+        border-bottom-right-radius: 5px;
+      }
+      .composer {
+        padding: 10px 13px 13px;
+        background: #fff;
+        border-top: 1px solid #f0f0f6;
+        display: flex;
+        align-items: end;
+        gap: 9px;
+      }
+      .composer textarea {
+        flex: 1;
+        resize: none;
+        min-height: 43px;
+        max-height: 120px;
+        border: 1px solid #e8e9f1;
+        background: #f8f9fc;
+        border-radius: 15px;
+        padding: 12px;
+        font:
+          12px "Noto Sans Georgian",
+          sans-serif;
+        outline: none;
+      }
+      .composer textarea:focus {
+        border-color: #b4afff;
+      }
+      .send {
+        width: 43px;
+        height: 43px;
+        border: 0;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 14px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .send:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .nav {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        padding: 7px 12px max(9px, env(safe-area-inset-bottom));
+        background: #fff;
+        border-top: 1px solid #e9ebf4;
+        box-shadow: 0 -3px 14px rgba(42, 48, 96, 0.035);
+      }
+      .nav a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 34px;
+        width: 44px;
+        margin: auto;
+        text-decoration: none;
+        color: #a4abc0;
+        border-radius: 12px;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+      .nav a svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.9;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .nav a.active {
+        background: #f0edff;
+        color: var(--primary);
+      }
+      .hint {
+        text-align: center;
+        color: #9aa0b1;
+        font-size: 10px;
+        background: #fff;
+        padding-bottom: 7px;
+      }
+      @media (min-width: 760px) {
+        .app {
+          border-left: 1px solid #eee;
+          border-right: 1px solid #eee;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="app">
+      <header>
+        <div class="avatar">
+          <img
+            src="img/mia.png"
+            alt="მია"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'block';
+            "
+          /><span class="fallback" style="display: none">მია</span>
+        </div>
+        <div class="heading"><strong>მია — AI მენტორი</strong></div>
+        <button
+          class="more"
+          id="historyToggle"
+          type="button"
+          title="ჩატების ისტორია"
+          aria-label="ჩატების ისტორია"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 12a9 9 0 1 0 3-6.7" />
+            <path d="M3 3v5h5" />
+            <path d="M12 7v5l3 2" />
+          </svg></button
+        ><button
+          class="more"
+          id="newChat"
+          type="button"
+          title="ახალი ჩატი"
+          aria-label="ახალი ჩატი"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 20H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10" />
+            <path d="M15 5l4 4" />
+            <path d="M9 15l2.5-.5L21 5a2.12 2.12 0 0 0-3-3l-9.5 9.5L8 14z" />
+          </svg>
+        </button>
+      </header>
+      <aside
+        id="historyPanel"
+        class="history-panel"
+        aria-label="ჩატების ისტორია"
+      >
+        <h2>ჩატების ისტორია</h2>
+        <div id="historyList"></div>
+      </aside>
+
+      <section class="messages" id="messages" aria-live="polite">
+        <div class="intro">
+          <div class="big">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"
+              />
+              <path
+                d="m19 16 .7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16Z"
+              />
+            </svg>
+          </div>
+          <h1>გამარჯობა! მე მია ვარ 💜</h1>
+          <p>შენი AI მენტორი. რაში დაგეხმარო დღეს?</p>
+        </div>
+      </section>
+
+      <form class="composer" id="form">
+        <textarea
+          id="question"
+          rows="1"
+          maxlength="2000"
+          placeholder="მიწერე მიას შენი კითხვა..."
+          aria-label="შენი კითხვა"
+        ></textarea
+        ><button class="send" id="send" type="submit" aria-label="გაგზავნა">
+          ➤
+        </button>
+      </form>
+      <div class="hint">დემო ჩატი — AI სერვერთან ჯერ არ არის დაკავშირებული</div>
+
+      <nav class="nav" aria-label="ქვედა ნავიგაცია">
+        <a href="student-home.html" title="მთავარი" aria-label="მთავარი"
+          ><svg viewBox="0 0 24 24">
+            <path d="m3 10 9-7 9 7" />
+            <path d="M5 9v11h14V9" />
+            <path d="M9 20v-7h6v7" /></svg
+        ></a>
+
+        <a
+          href="student-mia.html"
+          class="active"
+          title="AI მენტორი"
+          aria-label="AI მენტორი"
+          aria-current="page"
+          ><svg viewBox="0 0 24 24">
+            <path d="M5 10a7 7 0 0 1 14 0v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z" />
+            <path d="M9 12h.01M15 12h.01M9 16c2 1 4 1 6 0" />
+            <path d="M12 3V1" /></svg
+        ></a>
+
+        <a
+          href="student-achievements.html"
+          title="მიღწევები"
+          aria-label="მიღწევები"
+          ><svg viewBox="0 0 24 24">
+            <path d="M8 4h8v7a4 4 0 0 1-8 0z" />
+            <path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4" />
+            <path d="M12 15v4M8 21h8" /></svg
+        ></a>
+
+        <a href="student-profile.html" title="პროფილი" aria-label="პროფილი"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="3.5" />
+            <path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg
+        ></a>
+      </nav>
+    </main>
+    <script>
+      const messages = document.getElementById("messages"),
+        question = document.getElementById("question"),
+        form = document.getElementById("form");
+
+      const STORAGE_KEY = "aiia_mia_chats_v1";
+
+      let chats = [];
+      let currentId = null;
+
+      try {
+        chats = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        if (!Array.isArray(chats)) chats = [];
+      } catch (e) {
+        chats = [];
+      }
+
+      function persist() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(chats));
+        } catch (e) {
+          console.warn("ჩატების შენახვა ვერ მოხერხდა", e);
+        }
+      }
+
+      function currentChat() {
+        return chats.find((c) => c.id === currentId);
+      }
+
+      function resetView() {
+        messages.querySelectorAll(".bubble").forEach((el) => el.remove());
+        messages.querySelector(".intro").style.display = "block";
+      }
+
+      function createChat() {
+        const chat = {
+          id:
+            Date.now().toString(36) +
+            "-" +
+            Math.random().toString(36).slice(2, 8),
+          title: "ახალი ჩატი",
+          items: [],
+        };
+        chats.unshift(chat);
+        currentId = chat.id;
+        persist();
+        resetView();
+        renderHistory();
+        document.getElementById("historyPanel").classList.remove("open");
+        question.focus();
+      }
+
+      function openChat(id) {
+        const chat = chats.find((c) => c.id === id);
+        if (!chat) return;
+        currentId = id;
+        resetView();
+        chat.items.forEach((m) => addMessage(m.text, m.role, false));
+        if (chat.items.length)
+          messages.querySelector(".intro").style.display = "none";
+        document.getElementById("historyPanel").classList.remove("open");
+        renderHistory();
+      }
+
+      function renderHistory() {
+        const list = document.getElementById("historyList");
+        list.replaceChildren();
+        if (!chats.length) {
+          const empty = document.createElement("div");
+          empty.className = "history-empty";
+          empty.textContent = "ჯერ საუბრები არ არის";
+          list.appendChild(empty);
+          return;
+        }
+        chats.forEach((c) => {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "history-item" + (c.id === currentId ? " active" : "");
+          b.textContent = c.title;
+          b.addEventListener("click", () => openChat(c.id));
+          list.appendChild(b);
+        });
+      }
+
+      function addMessage(text, role, save = true) {
+        if (save) {
+          let c = currentChat();
+          if (!c) {
+            createChat();
+            c = currentChat();
+          }
+          c.items.push({ text, role });
+          if (role === "student" && c.title === "ახალი ჩატი")
+            c.title = text.slice(0, 45);
+          persist();
+          renderHistory();
+        }
+        messages.querySelector(".intro").style.display = "none";
+        const el = document.createElement("div");
+        el.className = "bubble " + role;
+        el.textContent = text;
+        messages.appendChild(el);
+        messages.scrollTop = messages.scrollHeight;
+        return el;
+      }
+
+      function demoReply(q) {
+        const s = q.toLowerCase();
+        if (s.includes("წილად"))
+          return "წილადი მთელის ნაწილს გვიჩვენებს. მაგალითად, თუ პიცას 4 თანაბარ ნაწილად გავყოფთ და ერთს ავიღებთ, ეს იქნება 1/4. 🍕\nგინდა ერთად ვცადოთ ერთი მაგალითი?";
+        if (s.includes("სავარჯიშო"))
+          return "მოდი ვივარჯიშოთ! ✏️\nრამდენია 3 × 4? ჯერ შენ სცადე და შემდეგ ერთად შევამოწმოთ.";
+        if (s.includes("ვისწავლ"))
+          return "სცადე პატარა ნაბიჯებით: 1) წაიკითხე ახსნა; 2) შენი სიტყვებით გაიმეორე; 3) ამოხსენი ერთი სავარჯიშო; 4) გადაამოწმე შეცდომები. 💜";
+        return "კარგი შეკითხვაა! 💜 ეს დემო ვერსიაა და ჯერ რეალურ AI-ს არ უკავშირდება. როცა AI-ს დავაკავშირებთ, შემეძლება შენს კითხვაზე კონკრეტული ახსნა და ნაბიჯ-ნაბიჯ დახმარება.";
+      }
+
+      function send(text) {
+        const q = text.trim();
+        if (!q) return;
+        addMessage(q, "student");
+        question.value = "";
+        question.style.height = "";
+        document.getElementById("send").disabled = true;
+        const reply = demoReply(q);
+        addMessage(reply, "mia");
+        document.getElementById("send").disabled = false;
+        question.focus();
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        send(question.value);
+      });
+      question.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          send(question.value);
+        }
+      });
+      question.addEventListener("input", () => {
+        question.style.height = "auto";
+        question.style.height = Math.min(question.scrollHeight, 120) + "px";
+      });
+      document.getElementById("newChat").addEventListener("click", createChat);
+      document.getElementById("historyToggle").addEventListener("click", () => {
+        renderHistory();
+        document.getElementById("historyPanel").classList.toggle("open");
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !e.target.closest("#historyPanel") &&
+          !e.target.closest("#historyToggle")
+        )
+          document.getElementById("historyPanel").classList.remove("open");
+      });
+      if (chats.length) openChat(chats[0].id);
+      else renderHistory();
+    </script>
+  </body>
+</html>

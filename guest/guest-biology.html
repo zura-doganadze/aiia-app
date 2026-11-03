@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AIIA — ბიოლოგია</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --secondary: #4a90ff;
+        --success: #22c55e;
+        --text: #202338;
+        --muted: #8990a2;
+        --line: #e8e6f1;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #fff;
+        color: var(--text);
+        font-family: "Noto Sans Georgian", Arial, sans-serif;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      svg {
+        display: block;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 950px;
+        margin: 0 auto;
+        padding: 14px 17px 115px;
+      }
+
+      /* HEADER */
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+
+      .menu {
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
+        border: 0;
+        background: white;
+        border-radius: 19px;
+        box-shadow: 0 3px 16px #2632580a;
+        display: grid;
+        place-items: center;
+      }
+
+      .header-title {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .header-title h1 {
+        font-size: 20px;
+        margin: 0 0 2px;
+        font-weight: 800;
+      }
+
+      .header-title p {
+        font-size: 12px;
+        color: #7776ad;
+        margin: 0;
+      }
+
+      .xp {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 12px;
+        border-radius: 19px;
+        background: white;
+        box-shadow: 0 3px 16px #2632580a;
+        color: #7776ad;
+        font-weight: 800;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .xp span {
+        font-size: 21px;
+      }
+
+      /* PROGRESS */
+
+      .progress-card {
+        border: 1px solid #e1e0e9;
+        border-radius: 23px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: white;
+      }
+
+      .ring {
+        height: 60px;
+        width: 60px;
+        border: 6px solid #eeecf7;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        flex: 0 0 60px;
+        color: #7776ad;
+        font-size: 19px;
+        font-weight: 800;
+      }
+
+      .progress-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .progress-body h2 {
+        font-size: 15px;
+        margin: 0 0 4px;
+        font-weight: 800;
+      }
+
+      .progress-body p {
+        color: #a0a5b3;
+        font-size: 11px;
+        margin: 0 0 7px;
+      }
+
+      .track {
+        height: 7px;
+        border-radius: 10px;
+        background: #efedf7;
+        overflow: hidden;
+      }
+
+      .fill {
+        height: 100%;
+        width: 0;
+        background: var(--primary);
+        border-radius: 10px;
+        transition: width 0.2s;
+      }
+
+      .stat-icon {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        background: #f0edff;
+        border-radius: 15px;
+        color: #655be3;
+        flex: 0 0 36px;
+      }
+
+      /* CHAPTERS */
+
+      .section-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin: 17px 0 9px;
+      }
+
+      .section-top h2 {
+        font-size: 18px;
+        margin: 0;
+        font-weight: 800;
+      }
+
+      .all {
+        border: 0;
+        background: none;
+        color: #7776ad;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 0;
+      }
+
+      .chapters {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding: 2px 1px 0;
+        margin-bottom: 16px;
+        scrollbar-width: none;
+      }
+
+      .chapters::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chapter-card {
+        flex: 0 0 clamp(124px, 39vw, 146px);
+        height: 106px;
+        text-align: left;
+        position: relative;
+        border-radius: 22px;
+        padding: 10px 12px;
+        background: #f3f1ff;
+        color: #5650bb;
+        border: 1px solid #e9e5ff;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          transform 0.2s;
+      }
+
+      .chapter-upcoming {
+        opacity: 0.75;
+        cursor: default;
+      }
+
+      .chapter-card.active {
+        background: linear-gradient(135deg, #6766f5, #4c48d9);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 8px 15px #5b58c629;
+      }
+
+      button.chapter-card:active {
+        transform: scale(0.98);
+      }
+
+      .chapter-number {
+        position: absolute;
+        top: 14px;
+        left: 11px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #e2dfff;
+        color: #615de6;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 14px;
+      }
+
+      .chapter-card.active .chapter-number {
+        background: white;
+        color: #615de6;
+      }
+
+      .chapter-count {
+        position: absolute;
+        right: 11px;
+        top: 18px;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .chapter-name {
+        position: absolute;
+        bottom: 10px;
+        left: 11px;
+        right: 12px;
+        font-size: 15px;
+        line-height: 1.4;
+        font-weight: 800;
+      }
+
+      /* LESSONS */
+
+      .lesson-panel {
+        border: 1px solid #e9e6f3;
+        border-radius: 25px;
+        padding: 12px 7px;
+        background: #faf9ff;
+      }
+
+      .lesson-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 0 4px 17px;
+      }
+
+      .lesson-heading h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        line-height: 1.4;
+        margin: 0;
+        font-weight: 800;
+        min-width: 0;
+      }
+
+      .lesson-heading h2::before {
+        content: "";
+        display: block;
+        width: 4px;
+        height: 27px;
+        border-radius: 5px;
+        background: #6259e5;
+        flex: 0 0 4px;
+      }
+
+      .chapter-tag {
+        color: #7876ae;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .lessons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .lesson {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 65px;
+        padding: 9px 10px;
+        background: white;
+        border: 1px solid #e5e3ee;
+        border-radius: 21px;
+        text-align: left;
+      }
+
+      .lesson-index {
+        font-weight: 800;
+        font-size: 14px;
+        flex: 0 0 38px;
+      }
+
+      .lesson-title {
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 1.45;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .status {
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background: #a1aabc;
+        flex: 0 0 27px;
+      }
+
+      .status.in-progress {
+        background: #ffa331;
+      }
+
+      .status.done {
+        background: #22c55e;
+      }
+
+      .chevron {
+        font-size: 27px;
+        line-height: 1;
+        color: #8d94a6;
+        flex: none;
+      }
+
+      /* LOCKED LESSONS */
+
+      .lesson.locked {
+        background: #f8f8fc;
+        color: #9ca1b0;
+        border-color: #edebf3;
+      }
+
+      .lesson.locked .lesson-title {
+        color: #8f95a5;
+      }
+
+      .lesson.locked .lesson-index {
+        color: #a7aabb;
+      }
+
+      .lock-icon {
+        width: 24px;
+        height: 24px;
+        flex: 0 0 24px;
+        color: #969caf;
+      }
+
+      .lock-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .lesson.locked .chevron {
+        display: none;
+      }
+
+      /* REGISTRATION MODAL */
+
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(22, 25, 50, 0.48);
+      }
+
+      .modal-overlay.show {
+        display: flex;
+      }
+
+      .modal {
+        position: relative;
+        width: 100%;
+        max-width: 390px;
+        padding: 27px 22px;
+        border-radius: 23px;
+        background: white;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(20, 20, 70, 0.15);
+      }
+
+      .modal-icon {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 15px;
+        border-radius: 17px;
+        background: #f0edff;
+        color: #6c63ff;
+      }
+
+      .modal h2 {
+        margin: 0 0 10px;
+        font-size: 19px;
+      }
+
+      .modal p {
+        margin: 0 0 20px;
+        font-size: 13px;
+        line-height: 1.8;
+        color: #727b8e;
+      }
+
+      .modal-action {
+        display: block;
+        width: 100%;
+        padding: 13px;
+        border-radius: 12px;
+        background: #6c63ff;
+        color: white;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        border: none;
+        background: transparent;
+        color: #8c91a0;
+        font-size: 23px;
+      }
+
+      /* BOTTOM NAVIGATION */
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(100%, 1040px);
+        padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+        border-radius: 25px 25px 0 0;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 -6px 25px rgba(26, 31, 67, 0.08);
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        z-index: 20;
+      }
+
+      .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        min-width: 0;
+        color: #9297a7;
+        font-size: 11px;
+        font-weight: 700;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .nav-icon {
+        width: 39px;
+        height: 36px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-icon svg {
+        width: 23px;
+        height: 23px;
+      }
+
+      .nav-link.active {
+        color: #553de4;
+      }
+
+      .nav-link.active .nav-icon {
+        background: #eeebff;
+      }
+
+      /* RESPONSIVE */
+
+      @media (max-width: 400px) {
+        .bottom-nav {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+
+        .nav-icon {
+          width: 34px;
+          height: 33px;
+        }
+
+        .nav-icon svg {
+          width: 21px;
+          height: 21px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .app {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+
+        .progress-card {
+          padding: 14px 10px;
+          gap: 9px;
+        }
+
+        .progress-body h2 {
+          font-size: 12px;
+        }
+
+        .lesson-title {
+          font-size: 13px;
+        }
+      }
+
+      @media (min-width: 700px) {
+        .app {
+          padding: 28px 28px 125px;
+        }
+
+        .chapters {
+          gap: 16px;
+        }
+
+        .chapter-card {
+          flex-basis: 190px;
+          height: 120px;
+        }
+
+        .lesson-panel {
+          padding: 16px 12px;
+        }
+
+        .lesson {
+          min-height: 72px;
+        }
+
+        .header-title h1 {
+          font-size: 24px;
+        }
+
+        .progress-body h2 {
+          font-size: 18px;
+        }
+
+        .section-top h2,
+        .lesson-heading h2 {
+          font-size: 20px;
+        }
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--secondary);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="app">
+      <!-- HEADER -->
+
+      <header class="header">
+        <button
+          class="menu"
+          type="button"
+          aria-label="უკან დაბრუნება"
+          onclick="location.href = 'guest-home.html'"
+        >
+          <svg
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#34363b"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+
+        <div class="header-title">
+          <h1>ბიოლოგია</h1>
+          <p id="gradeLabel">VII კლასი</p>
+        </div>
+
+        <div class="xp">
+          <span>🏆</span>
+          <strong id="xpValue">0 XP</strong>
+        </div>
+      </header>
+
+      <!-- PROGRESS -->
+
+      <section class="progress-card">
+        <div class="ring" id="progress-ring">0%</div>
+
+        <div class="progress-body">
+          <h2>სწავლის პროგრესი</h2>
+          <p id="progress-text">0/10 დასრულებული</p>
+
+          <div class="track">
+            <div class="fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="stat-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+          >
+            <path d="M5 19V11M12 19V5M19 19v-7" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- CHAPTERS -->
+
+      <div class="section-top">
+        <h2>თავები</h2>
+        <button
+          class="all"
+          type="button"
+          onclick="
+            document
+              .getElementById('chapters')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
+          ყველა თავის ნახვა ›
+        </button>
+      </div>
+
+      <div class="chapters" id="chapters"></div>
+
+      <!-- LESSONS -->
+
+      <section class="lesson-panel">
+        <div class="lesson-heading">
+          <h2 id="selected-title"></h2>
+          <span class="chapter-tag" id="selected-number"></span>
+        </div>
+
+        <div class="lessons" id="lessons"></div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <nav class="bottom-nav" aria-label="მთავარი ნავიგაცია">
+      <a
+        class="nav-link active"
+        href="guest-home.html"
+        aria-current="page"
+        aria-label="მთავარი"
+      >
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z" />
+          </svg>
+        </span>
+      </a>
+
+      <button
+        class="nav-link"
+        type="button"
+        onclick="openRegister()"
+        aria-label="AI მენტორი"
+      >
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="4" y="6" width="16" height="14" rx="3" />
+            <path d="M12 2v4M9 2h6M1 12h3m16 0h1M9 16c2 1 4 1 6 0" />
+          </svg>
+        </span>
+      </button>
+
+      <button
+        class="nav-link"
+        type="button"
+        onclick="openRegister()"
+        aria-label="მიღწევები"
+      >
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M8 21h8M12 17v4M7 4H5a2 2 0 0 0-2 2v2a5 5 0 0 0 5 5M17 4h2a2 2 0 0 1 2 2v2a5 5 0 0 1-5 5"
+            />
+            <path d="M7 3h10v7a5 5 0 0 1-10 0V3Z" />
+          </svg>
+        </span>
+      </button>
+
+      <button
+        class="nav-link"
+        type="button"
+        onclick="openRegister()"
+        aria-label="პროფილი"
+      >
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21c0-5 3-8 8-8s8 3 8 8" />
+          </svg>
+        </span>
+      </button>
+    </nav>
+
+    <!-- REGISTRATION MODAL -->
+
+    <div
+      class="modal-overlay"
+      id="registerModal"
+      onclick="closeRegister(event)"
+    >
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <button
+          class="modal-close"
+          type="button"
+          onclick="closeRegister()"
+          aria-label="დახურვა"
+        >
+          ×
+        </button>
+
+        <div class="modal-icon">
+          <svg
+            width="27"
+            height="27"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="5" y="10" width="14" height="11" rx="2" />
+            <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+          </svg>
+        </div>
+
+        <h2 id="modalTitle">გააგრძელე სწავლა AIIA-სთან</h2>
+
+        <p>
+          ეს გაკვეთილი რეგისტრირებულ მოსწავლეებს შეუძლიათ გაიარონ. სთხოვე
+          მშობელს რეგისტრაცია და მიიღე 7-დღიანი უფასო წვდომა.
+        </p>
+
+        <a class="modal-action" href="../student-login.html"> რეგისტრაცია </a>
+      </div>
+    </div>
+
+    <script>
+      /* BIOLOGY CHAPTERS */
+
+      const chapters = [
+        {
+          name: "ადამიანის ორგანიზმი",
+          lessons: [
+            { title: "გული და სისხლის მიმოქცევა" },
+            { title: "სისხლი და მისი შემადგენლობა" },
+            { title: "სისხლძარღვები" },
+            { title: "გულის აგებულება" },
+            { title: "სისხლის მიმოქცევის წრეები" },
+            { title: "გულის მუშაობა" },
+            { title: "სისხლის მიმოქცევის სისტემის ჯანმრთელობა" },
+          ],
+        },
+        {
+          name: "სუნთქვის სისტემა",
+          lessons: [
+            { title: "სუნთქვის ორგანოები" },
+            { title: "ფილტვების მუშაობა" },
+            { title: "აირთა ცვლა" },
+          ],
+        },
+      ];
+
+      const FREE_LESSONS = 3;
+      const GUEST_LESSON_URL = "guest-biology-lesson.html";
+      const STORAGE_KEY = "aiia_guest_biology_progress";
+
+      const params = new URLSearchParams(location.search);
+      const grade = params.get("grade") || "7";
+
+      const gradeNames = {
+        5: "V",
+        6: "VI",
+        7: "VII",
+        8: "VIII",
+        9: "IX",
+        10: "X",
+        11: "XI",
+        12: "XII",
+      };
+
+      document.getElementById("gradeLabel").textContent =
+        (gradeNames[grade] || "VII") + " კლასი";
+
+      let selected = 0;
+
+      function readProgress() {
+        try {
+          const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+
+          return {
+            completed: Array.isArray(stored.completed) ? stored.completed : [],
+            xp: Number.isFinite(stored.xp) ? stored.xp : 0,
+          };
+        } catch {
+          return { completed: [], xp: 0 };
+        }
+      }
+
+      function saveProgress(progress) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+      }
+
+      /*
+      გაკვეთილის დასრულების შემდეგ გამოსაძახებელი ფუნქცია.
+      მაგალითად: markGuestLessonComplete(0, 0, 20)
+    */
+      function markGuestLessonComplete(
+        chapterIndex,
+        lessonIndex,
+        earnedXP = 20,
+      ) {
+        if (
+          chapterIndex !== 0 ||
+          lessonIndex < 0 ||
+          lessonIndex >= FREE_LESSONS
+        ) {
+          return;
+        }
+
+        const progress = readProgress();
+        const id = chapterIndex + "-" + lessonIndex;
+
+        if (!progress.completed.includes(id)) {
+          progress.completed.push(id);
+          progress.xp += Math.max(0, earnedXP);
+          saveProgress(progress);
+        }
+
+        render();
+      }
+
+      function isCompleted(chapterIndex, lessonIndex, progress) {
+        return progress.completed.includes(chapterIndex + "-" + lessonIndex);
+      }
+
+      function render() {
+        const progress = readProgress();
+
+        document.getElementById("xpValue").textContent = progress.xp + " XP";
+
+        const chapterList = document.getElementById("chapters");
+        chapterList.replaceChildren();
+
+        chapters.forEach((chapter, i) => {
+          const completed = chapter.lessons.filter((lesson, j) =>
+            isCompleted(i, j, progress),
+          ).length;
+
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className = "chapter-card" + (selected === i ? " active" : "");
+
+          const number = document.createElement("span");
+          number.className = "chapter-number";
+          number.textContent = i + 1;
+
+          const count = document.createElement("span");
+          count.className = "chapter-count";
+          count.textContent = completed + "/" + chapter.lessons.length;
+
+          const name = document.createElement("span");
+          name.className = "chapter-name";
+          name.textContent = chapter.name;
+
+          card.append(number, count, name);
+
+          card.onclick = () => {
+            selected = i;
+            render();
+          };
+
+          chapterList.append(card);
+        });
+
+        const upcoming = document.createElement("div");
+        upcoming.className = "chapter-card chapter-upcoming";
+        upcoming.setAttribute("aria-label", "თავი 3 — მალე დაემატება");
+
+        upcoming.innerHTML =
+          '<span class="chapter-number">3</span>' +
+          '<span class="chapter-name">მალე დაემატება</span>';
+
+        chapterList.append(upcoming);
+
+        const current = chapters[selected];
+
+        document.getElementById("selected-title").textContent = current.name;
+
+        document.getElementById("selected-number").textContent =
+          "თავი " + (selected + 1);
+
+        const list = document.getElementById("lessons");
+        list.replaceChildren();
+
+        current.lessons.forEach((lesson, i) => {
+          const unlocked = selected === 0 && i < FREE_LESSONS;
+          const completed = isCompleted(selected, i, progress);
+
+          const item = document.createElement(unlocked ? "a" : "button");
+
+          item.className = "lesson" + (unlocked ? "" : " locked");
+
+          if (unlocked) {
+            item.href =
+              GUEST_LESSON_URL +
+              "?grade=" +
+              encodeURIComponent(grade) +
+              "&chapter=" +
+              selected +
+              "&lesson=" +
+              i;
+          } else {
+            item.type = "button";
+            item.onclick = openRegister;
+            item.setAttribute(
+              "aria-label",
+              lesson.title + " — რეგისტრაცია საჭიროა",
+            );
+          }
+
+          const index = document.createElement("span");
+          index.className = "lesson-index";
+          index.textContent = selected + 1 + "." + (i + 1);
+
+          const title = document.createElement("span");
+          title.className = "lesson-title";
+          title.textContent = lesson.title;
+
+          const status = document.createElement("span");
+
+          if (unlocked) {
+            status.className = "status " + (completed ? "done" : "");
+
+            status.setAttribute(
+              "aria-label",
+              completed ? "დასრულებული" : "დასაწყები",
+            );
+          } else {
+            status.className = "lock-icon";
+            status.innerHTML =
+              '<svg viewBox="0 0 24 24" fill="none" ' +
+              'stroke="currentColor" stroke-width="1.8">' +
+              '<rect x="5" y="10" width="14" height="11" rx="2"/>' +
+              '<path d="M8 10V7a4 4 0 0 1 8 0v3"/>' +
+              "</svg>";
+          }
+
+          const chevron = document.createElement("span");
+          chevron.className = "chevron";
+          chevron.textContent = "›";
+
+          item.append(index, title, status, chevron);
+          list.append(item);
+        });
+
+        const allLessons = chapters.flatMap((chapter) => chapter.lessons);
+
+        const done = progress.completed.filter((id) =>
+          ["0-0", "0-1", "0-2"].includes(id),
+        ).length;
+
+        const pct = allLessons.length
+          ? Math.round((done / allLessons.length) * 100)
+          : 0;
+
+        document.getElementById("progress-ring").textContent = pct + "%";
+
+        document.getElementById("progress-text").textContent =
+          done + "/" + allLessons.length + " დასრულებული";
+
+        document.getElementById("progress-fill").style.width = pct + "%";
+      }
+
+      function openRegister() {
+        document.getElementById("registerModal").classList.add("show");
+      }
+
+      function closeRegister(event) {
+        if (event && event.target !== event.currentTarget) return;
+
+        document.getElementById("registerModal").classList.remove("show");
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          document.getElementById("registerModal").classList.remove("show");
+        }
+      });
+
+      render();
+    </script>
+  </body>
+</html>

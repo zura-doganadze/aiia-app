@@ -1,5 +1,3 @@
-<!doctype html>
-
 <html lang="ka">
   <head>
     <meta charset="UTF-8" />
@@ -23,772 +21,1274 @@
     <style>
       :root {
         --primary: #6c63ff;
+
         --blue: #4a90ff;
+
         --gold: #ffc857;
+
         --green: #22c55e;
+
         --ink: #202338;
+
         --muted: #777d91;
+
         --line: #e8eaf3;
+
         --shadow: 0 8px 24px rgba(34, 40, 85, 0.05);
       }
 
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
+
         background: white;
+
         color: var(--ink);
+
         font-family: "Noto Sans Georgian", sans-serif;
+
         -webkit-font-smoothing: antialiased;
       }
+
       button,
       input {
         font: inherit;
       }
+
       button {
         cursor: pointer;
       }
+
       button:disabled {
         cursor: default;
+
         opacity: 0.55;
       }
+
       button:focus-visible,
       input:focus-visible,
       a:focus-visible {
         outline: 3px solid #b9b3ff;
+
         outline-offset: 2px;
       }
+
       [hidden] {
         display: none !important;
       }
+
       .page {
         max-width: 720px;
+
         margin: auto;
+
         padding: 0 15px 110px;
       }
+
       .header {
         position: relative;
+
         text-align: center;
+
         padding: 18px 42px 14px;
+
         min-height: 87px;
       }
+
       .header h1 {
         font-size: 17px;
+
         line-height: 1.45;
+
         margin: 0 0 4px;
+
         font-weight: 800;
       }
+
       .header p {
         font-size: 11px;
+
         color: var(--muted);
+
         margin: 0;
       }
+
       .back {
         position: absolute;
+
         top: 19px;
+
         left: 0;
+
         display: grid;
+
         place-items: center;
+
         width: 38px;
+
         height: 38px;
+
         border-radius: 12px;
+
         background: #f4f5fb;
+
         color: #30334a;
+
         text-decoration: none;
       }
+
       .back svg {
         width: 20px;
       }
+
       .tabs {
         display: grid;
+
         grid-template-columns: repeat(3, minmax(0, 1fr));
+
         gap: 3px;
+
         padding: 4px;
+
         background: #f1f3fa;
+
         border-radius: 16px;
+
         margin: 6px 0 23px;
       }
+
       .tab {
         border: 0;
+
         background: transparent;
+
         border-radius: 12px;
+
         min-height: 45px;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         gap: 5px;
+
         font-size: 11px;
+
         font-weight: 700;
+
         color: #555c75;
+
         padding: 7px 2px;
       }
+
       .tab svg {
         width: 15px;
+
         height: 15px;
+
         flex: none;
       }
+
       .tab.active {
         background: var(--primary);
+
         color: white;
+
         box-shadow: 0 3px 8px rgba(108, 99, 255, 0.16);
       }
+
       .section {
         border: 1.5px solid var(--line);
+
         border-radius: 19px;
+
         overflow: hidden;
+
         background: #fff;
+
         margin-bottom: 19px;
       }
+
       .section-heading {
         display: flex;
+
         align-items: center;
+
         gap: 11px;
+
         padding: 14px 16px;
       }
+
       .section-heading h2 {
         font-size: 16px;
+
         font-weight: 800;
+
         margin: 0;
       }
+
       .section-icon {
         width: 37px;
+
         height: 37px;
+
         border-radius: 12px;
+
         display: grid;
+
         place-items: center;
+
         flex: none;
       }
+
       .section-icon svg {
         width: 20px;
+
         height: 20px;
       }
+
       .section-body {
         padding: 17px;
+
         font-size: 14px;
+
         line-height: 1.9;
       }
+
       .section-body p {
         margin: 0 0 13px;
       }
+
       .section-body p:last-child {
         margin: 0;
       }
+
       .discover {
         border-color: #ada1ff;
       }
+
       .discover .section-heading {
         background: #dcd5ff;
+
         color: #5148d8;
       }
+
       .discover .section-icon {
         background: #6c63ff;
+
         color: #fff;
       }
+
       .visual {
         border-color: #8fbeff;
       }
+
       .visual .section-heading {
         background: #cde3ff;
+
         color: #2875dc;
       }
+
       .visual .section-icon {
         background: #4a90ff;
+
         color: #fff;
       }
+
       .visual-box {
         border-radius: 14px;
+
         border: 1px solid #d5e8ff;
+
         background: #f4f9ff;
+
         padding: 14px 9px;
+
         margin-bottom: 14px;
       }
+
       .visual-box svg {
         width: 100%;
+
         max-width: 390px;
+
         display: block;
+
         margin: auto;
       }
+
       .examples {
         border-color: #e2b951;
       }
+
       .examples-header {
         padding: 14px 16px 16px;
+
         background: #ffe7a3;
       }
+
       .examples-header .section-heading {
         padding: 0;
+
         margin-bottom: 14px;
+
         color: #8b6200;
       }
+
       .examples .section-icon {
         background: #ffc857;
+
         color: #654700;
       }
+
       .example-tabs {
         display: grid;
+
         grid-template-columns: 1fr 1fr;
+
         gap: 9px;
       }
+
       .example-tab {
         border: 1px solid #ddb64e;
+
         border-radius: 11px;
+
         background: #fff8e4;
+
         color: #8b6200;
+
         padding: 10px 3px;
+
         font-size: 12px;
+
         font-weight: 700;
       }
+
       .example-tab.active {
         border: 2px solid #d6a629;
+
         background: white;
       }
+
       .example-question {
         font-weight: 700;
+
         margin: 0 0 20px !important;
       }
+
       .step {
         display: grid;
+
         grid-template-columns: 18px 1fr;
+
         gap: 12px;
       }
+
       .step-track {
         position: relative;
+
         display: flex;
+
         justify-content: center;
       }
+
       .step-track:after {
         content: "";
+
         position: absolute;
+
         top: 16px;
+
         bottom: 0;
+
         width: 2px;
+
         background: #e5b43f;
       }
+
       .step:last-child .step-track:after {
         display: none;
       }
+
       .step-dot {
         width: 13px;
+
         height: 13px;
+
         background: #ffc857;
+
         border-radius: 50%;
+
         margin-top: 5px;
+
         z-index: 1;
+
         box-shadow: 0 0 0 3px #fff5d9;
       }
+
       .step-content {
         padding-bottom: 20px;
       }
+
       .step:last-child .step-content {
         padding-bottom: 0;
       }
+
       .step-label {
         display: block;
+
         font-size: 12px;
+
         color: #777d91;
+
         font-weight: 600;
+
         margin-bottom: 6px;
       }
+
       .step-text {
         margin: 0 !important;
+
         font-size: 14px;
       }
+
       .remember {
         border-color: #80d9a0;
       }
+
       .remember .section-heading {
         background: #c3f0d2;
+
         color: #168344;
       }
+
       .remember .section-icon {
         background: #22c55e;
+
         color: white;
       }
+
       .remember-list {
         list-style: none;
+
         margin: 0;
+
         padding: 0;
+
         display: grid;
+
         gap: 13px;
       }
+
       .remember-list li {
         display: flex;
+
         gap: 10px;
+
         align-items: flex-start;
       }
+
       .check {
         background: #22c55e;
+
         color: white;
+
         border-radius: 50%;
+
         width: 19px;
+
         height: 19px;
+
         display: grid;
+
         place-items: center;
+
         flex: none;
+
         margin-top: 5px;
+
         font-size: 12px;
+
         font-weight: 800;
+
         line-height: 1;
       }
+
       .primary {
         background: var(--primary);
+
         color: white;
+
         border: 0;
+
         border-radius: 12px;
+
         padding: 13px 17px;
+
         font-size: 13px;
+
         font-weight: 800;
+
         min-height: 47px;
       }
+
       .primary.full {
         width: 100%;
       }
+
       .secondary {
         background: #fff;
+
         border: 1px solid #e2e6f1;
+
         color: #343b64;
+
         border-radius: 12px;
+
         padding: 12px 16px;
+
         font-size: 12px;
+
         font-weight: 700;
       }
+
       .progress {
         margin: 3px 1px 18px;
       }
+
       .progress-top {
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         gap: 10px;
+
         margin-bottom: 10px;
+
         font-size: 12px;
+
         font-weight: 800;
+
         color: #272e69;
       }
+
       .segments {
         display: grid;
+
         grid-auto-flow: column;
+
         grid-auto-columns: 1fr;
+
         gap: 5px;
       }
+
       .segment {
         height: 7px;
+
         background: #dde3ef;
+
         border-radius: 8px;
       }
+
       .segment.done {
         background: var(--primary);
       }
+
       .segment.current {
         background: #9a93ff;
       }
+
       .task-card {
         border: 1px solid #e7ebf5;
+
         border-radius: 19px;
+
         background: #fff;
+
         box-shadow: var(--shadow);
+
         padding: 20px 17px 17px;
       }
+
       .eyebrow {
         display: inline-block;
+
         background: #f1f0ff;
+
         color: #6961c8;
+
         padding: 6px 10px;
+
         border-radius: 8px;
+
         font-size: 10px;
+
         font-weight: 700;
+
         margin-bottom: 13px;
       }
+
       .task-title {
         font-size: 16px;
+
         font-weight: 800;
+
         line-height: 1.6;
+
         margin: 0 0 13px;
       }
+
       .equation {
         text-align: center;
+
         font-family: Arial, sans-serif;
+
         font-weight: 800;
+
         font-style: italic;
+
         font-size: 30px;
+
         color: #171a52;
+
         letter-spacing: 0.3px;
+
         margin: 15px 0 21px;
       }
+
       .answer-label {
         display: block;
+
         font-size: 12px;
+
         color: #6f768d;
+
         margin-bottom: 8px;
       }
+
       .answer-input {
         width: 100%;
+
         min-height: 47px;
+
         border: 1.5px solid #d9deeb;
+
         border-radius: 10px;
+
         padding: 11px 13px;
+
         font-size: 16px;
+
         background: #fff;
+
         color: #24283d;
       }
+
       .answer-input.correct {
         border-color: #22c55e;
+
         background: #f3fcf5;
       }
+
       .answer-input.incorrect {
         border-color: #f59e0b;
+
         background: #fffbf1;
       }
+
       .feedback {
         border-radius: 11px;
+
         padding: 12px;
+
         margin-top: 12px;
+
         font-size: 12px;
+
         line-height: 1.8;
       }
+
       .feedback.good {
         background: #e5f8ec;
+
         color: #137943;
       }
+
       .feedback.bad {
         background: #fff3de;
+
         color: #9a6200;
       }
+
       .feedback strong {
         display: block;
+
         font-size: 13px;
       }
+
       .task-actions {
         margin-top: 13px;
       }
+
       .task-actions .primary {
         width: 100%;
       }
+
       .nav-actions {
         display: grid;
+
         grid-template-columns: 1fr 1fr;
+
         gap: 12px;
+
         margin-top: 18px;
       }
+
       .nav-actions button {
         width: 100%;
       }
+
       .practice-shell {
         position: relative;
       }
+
       .mia-launch {
         position: fixed;
+
         right: max(16px, calc((100vw - 720px) / 2 + 16px));
+
         bottom: calc(18px + env(safe-area-inset-bottom));
+
         width: 61px;
+
         height: 61px;
+
         border-radius: 50%;
+
         background: linear-gradient(145deg, #d9b2ff, #7866f6);
+
         border: 3px solid white;
+
         box-shadow: 0 5px 18px rgba(70, 46, 150, 0.24);
+
         display: grid;
+
         place-items: center;
+
         color: white;
+
         z-index: 20;
       }
+
       .mia-launch .avatar {
         font-size: 28px;
+
         line-height: 1;
       }
+
       .mia-launch .bubble {
         position: absolute;
+
         bottom: -2px;
+
         right: -3px;
+
         width: 23px;
+
         height: 23px;
+
         background: #6c63ff;
+
         border: 2px solid white;
+
         border-radius: 50%;
+
         display: grid;
+
         place-items: center;
+
         font-size: 12px;
       }
+
       .chat-panel {
         position: fixed;
+
         z-index: 21;
+
         right: max(14px, calc((100vw - 720px) / 2 + 14px));
+
         bottom: calc(89px + env(safe-area-inset-bottom));
+
         width: min(350px, calc(100vw - 28px));
+
         background: white;
+
         border: 1px solid #e3e2f8;
+
         border-radius: 18px;
+
         box-shadow: 0 14px 45px rgba(25, 25, 70, 0.2);
+
         overflow: hidden;
       }
+
       .chat-head {
         background: #f0eeff;
+
         padding: 13px 15px;
+
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         font-size: 13px;
+
         font-weight: 800;
+
         color: #5049b9;
       }
+
       .chat-head button {
         border: 0;
+
         background: transparent;
+
         font-size: 20px;
+
         color: #5049b9;
       }
+
       .chat-messages {
         height: 220px;
+
         overflow: auto;
+
         padding: 13px;
+
         display: flex;
+
         flex-direction: column;
+
         gap: 9px;
       }
+
       .chat-msg {
         max-width: 90%;
+
         padding: 10px 12px;
+
         border-radius: 12px;
+
         font-size: 12px;
+
         line-height: 1.8;
       }
+
       .chat-msg.mia {
         background: #f0eeff;
+
         align-self: flex-start;
       }
+
       .chat-msg.student {
         background: #eaf3ff;
+
         align-self: flex-end;
       }
+
       .chat-compose {
         display: flex;
+
         gap: 6px;
+
         border-top: 1px solid #eef0f6;
+
         padding: 10px;
       }
+
       .chat-compose input {
         min-width: 0;
+
         flex: 1;
+
         border: 1px solid #e1e5f1;
+
         border-radius: 10px;
+
         padding: 9px;
+
         font-size: 12px;
       }
+
       .chat-compose button {
         border: 0;
+
         border-radius: 9px;
+
         background: var(--primary);
+
         color: #fff;
+
         padding: 8px 11px;
       }
+
       .test-overlay {
         position: fixed;
+
         inset: 0;
+
         background: rgba(25, 29, 57, 0.56);
+
         z-index: 30;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         padding: 20px;
       }
+
       .test-modal {
         width: min(400px, 100%);
+
         background: white;
+
         border-radius: 22px;
+
         padding: 23px 19px 20px;
+
         box-shadow: 0 15px 60px rgba(0, 0, 0, 0.17);
+
         position: relative;
+
         text-align: center;
       }
+
       .modal-close {
         position: absolute;
+
         right: 15px;
+
         top: 12px;
+
         border: 0;
+
         background: transparent;
+
         font-size: 23px;
+
         color: #29305c;
       }
+
       .modal-illustration {
         width: 105px;
+
         height: 105px;
+
         border-radius: 50%;
+
         background: #eeeafe;
+
         display: grid;
+
         place-items: center;
+
         margin: 9px auto 14px;
+
         color: var(--primary);
       }
+
       .modal-illustration svg {
         width: 65px;
+
         height: 65px;
       }
+
       .test-modal h2 {
         font-size: 19px;
+
         margin: 0 0 9px;
       }
+
       .test-modal p {
         font-size: 12px;
+
         color: #788096;
+
         line-height: 1.9;
+
         margin: 0 0 17px;
       }
+
       .mia-note {
         background: #efedff;
+
         border-radius: 12px;
+
         padding: 12px;
+
         display: flex;
+
         gap: 10px;
+
         align-items: center;
+
         text-align: left;
+
         margin-bottom: 15px;
+
         color: #35316d;
+
         font-size: 12px;
+
         line-height: 1.8;
       }
+
       .mia-note .mini-avatar {
         background: #d5caff;
+
         border-radius: 50%;
+
         width: 36px;
+
         height: 36px;
+
         flex: none;
+
         display: grid;
+
         place-items: center;
+
         font-size: 21px;
       }
+
       .question-counter {
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         margin-bottom: 12px;
       }
+
       .bookmark {
         border: 0;
+
         border-radius: 9px;
+
         background: #f1f0ff;
+
         color: var(--primary);
+
         padding: 7px 10px;
+
         font-size: 11px;
+
         font-weight: 700;
       }
+
       .bookmark.marked {
         background: #e1dcff;
       }
+
       .choices {
         display: grid;
+
         gap: 10px;
+
         margin: 17px 0 0;
       }
+
       .choice {
         border: 1px solid #e1e5f1;
+
         background: white;
+
         border-radius: 11px;
+
         padding: 11px;
+
         display: flex;
+
         align-items: center;
+
         gap: 11px;
+
         text-align: left;
+
         font-size: 13px;
+
         min-height: 49px;
+
         color: #31374f;
       }
+
       .choice .letter {
         width: 26px;
+
         height: 26px;
+
         border-radius: 50%;
+
         display: grid;
+
         place-items: center;
+
         background: #edf0fb;
+
         color: #444c86;
+
         font-size: 12px;
+
         font-weight: 800;
+
         flex: none;
       }
+
       .choice.selected {
         border: 1.5px solid var(--primary);
+
         background: #f0eeff;
       }
+
       .choice.selected .letter {
         background: var(--primary);
+
         color: white;
       }
+
       .result-card {
         text-align: center;
       }
+
       .score-ring {
         height: 128px;
+
         width: 128px;
+
         margin: 10px auto 17px;
+
         border-radius: 50%;
+
         border: 11px solid #e6e2ff;
+
         display: flex;
+
         flex-direction: column;
+
         align-items: center;
+
         justify-content: center;
+
         color: var(--primary);
       }
+
       .score-ring strong {
         font-size: 29px;
+
         line-height: 1.3;
       }
+
       .score-ring small {
         font-size: 11px;
       }
+
       .result-stats {
         display: grid;
+
         grid-template-columns: 1fr 1fr;
+
         gap: 10px;
+
         margin: 18px 0;
       }
+
       .stat {
         background: #f7f8fc;
+
         border-radius: 12px;
+
         padding: 13px 7px;
+
         font-size: 12px;
       }
+
       .stat strong {
         display: block;
+
         font-size: 19px;
       }
+
       .test-review {
         margin: 15px 0;
+
         text-align: left;
+
         display: grid;
+
         gap: 8px;
       }
+
       .review-item {
         border: 1px solid #e8eaf2;
+
         border-radius: 10px;
+
         padding: 10px;
+
         font-size: 12px;
+
         line-height: 1.8;
       }
+
       .review-item strong {
         display: block;
       }
+
       .review-item .ok {
         color: #159a6b;
       }
+
       .review-item .no {
         color: #b97500;
       }
+
       @media (max-width: 370px) {
         .page {
           padding-left: 11px;
+
           padding-right: 11px;
         }
+
         .header h1 {
           font-size: 15px;
         }
+
         .tab {
           font-size: 10px;
         }
+
         .tab svg {
           width: 13px;
         }
+
         .equation {
           font-size: 27px;
         }
+
         .section-body {
           font-size: 13px;
         }
@@ -798,177 +1298,286 @@
 
       .header .board-launch {
         position: absolute;
+
         right: 0;
+
         top: 19px;
+
         width: 38px;
+
         height: 38px;
+
         border: 0;
+
         border-radius: 12px;
+
         background: #f0eeff;
+
         color: #6c63ff;
+
         display: grid;
+
         place-items: center;
       }
+
       .board-launch svg {
         width: 22px;
+
         height: 22px;
       }
 
       .question-xp {
         display: inline-flex;
+
         align-items: center;
+
         gap: 3px;
+
         background: #fff7e6;
+
         color: #b57a00;
+
         border-radius: 9px;
+
         padding: 7px 10px;
+
         font-size: 11px;
+
         font-weight: 800;
       }
 
       .mia-launch {
         overflow: visible;
       }
+
       .mia-launch .avatar-photo {
         width: 100%;
+
         height: 100%;
+
         object-fit: cover;
+
         border-radius: 50%;
       }
+
       .mia-launch .avatar-fallback {
         font-size: 27px;
       }
+
       .mia-launch .bubble {
         width: 15px;
+
         height: 15px;
+
         right: 0;
+
         bottom: 0;
+
         background: #22c55e;
+
         border: 3px solid #fff;
+
         font-size: 0;
       }
 
       .result-description {
         font-size: 12px;
+
         color: #777d91;
+
         line-height: 1.8;
       }
+
       .xp-stat {
         background: #fff7e6;
+
         color: #a16a00;
       }
+
       .xp-stat strong {
         color: #c48b00;
       }
 
       .mia-analysis {
         background: #f1efff;
+
         border-radius: 15px;
+
         padding: 13px;
+
         margin: 15px 0;
+
         text-align: left;
       }
+
       .mia-analysis-head {
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
         margin-bottom: 12px;
+
         color: #5148d7;
       }
+
       .mia-analysis-head img {
         width: 48px;
+
         height: 48px;
+
         border-radius: 50%;
+
         object-fit: cover;
+
         background: #ddd7ff;
       }
+
       .mia-analysis-head div {
         flex: 1;
       }
+
       .mia-analysis-head strong,
       .mia-analysis-head small {
         display: block;
       }
+
       .mia-analysis-head strong {
         font-size: 13px;
       }
+
       .mia-analysis-head small {
         font-size: 10px;
+
         color: #777d91;
+
         margin-top: 3px;
       }
+
       .mia-analysis-text {
         background: white;
+
         border-radius: 11px;
+
         padding: 13px;
+
         font-size: 12px;
+
         line-height: 1.9;
+
         color: #34364d;
       }
 
       .board-overlay {
         position: fixed;
+
         inset: 0;
+
         background: rgba(23, 26, 57, 0.5);
+
         z-index: 50;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         padding: 15px;
       }
+
       .board-window {
         width: min(850px, 100%);
+
         height: min(700px, 94dvh);
+
         display: flex;
+
         flex-direction: column;
+
         background: white;
+
         border-radius: 19px;
+
         overflow: hidden;
       }
+
       .board-head {
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         padding: 12px 16px;
+
         border-bottom: 1px solid #e8eaf3;
       }
+
       .board-head strong {
         font-size: 15px;
       }
+
       .board-head button {
         border: 0;
+
         background: #f2f3f9;
+
         border-radius: 9px;
+
         width: 35px;
+
         height: 35px;
+
         font-size: 25px;
       }
+
       .board-tools {
         display: flex;
+
         gap: 7px;
+
         flex-wrap: wrap;
+
         padding: 10px;
+
         border-bottom: 1px solid #e8eaf3;
       }
+
       .board-tools button {
         border: 1px solid #e4e6f0;
+
         background: white;
+
         border-radius: 9px;
+
         padding: 8px 10px;
+
         font-size: 11px;
+
         font-weight: 700;
       }
+
       .board-tools button.selected {
         background: #f0eeff;
+
         border-color: #6c63ff;
+
         color: #5148d7;
       }
+
       #board-canvas {
         width: 100%;
+
         flex: 1;
+
         min-height: 0;
+
         background: #fff;
+
         touch-action: none;
+
         cursor: crosshair;
       }
 
@@ -976,13 +1585,18 @@
         .board-overlay {
           padding: 0;
         }
+
         .board-window {
           width: 100%;
+
           height: 100dvh;
+
           border-radius: 0;
         }
+
         .board-tools button {
           font-size: 10px;
+
           padding: 8px;
         }
       }
@@ -995,34 +1609,51 @@
 
       .mini-avatar-photo {
         width: 36px;
+
         height: 36px;
+
         object-fit: cover;
+
         border-radius: 50%;
+
         flex: none;
+
         background: #d5caff;
+
         border: 2px solid white;
       }
 
       .mia-launch {
         z-index: 45;
+
         overflow: visible;
       }
 
       .mia-launch .avatar-photo {
         display: block;
+
         width: 100%;
+
         height: 100%;
+
         border-radius: 50%;
+
         object-fit: cover;
       }
 
       .mia-launch .bubble {
         width: 16px;
+
         height: 16px;
+
         bottom: 0;
+
         right: -1px;
+
         background: #22c55e;
+
         border: 3px solid white;
+
         font-size: 0;
       }
 
@@ -1036,36 +1667,51 @@
 
       .board-head {
         background: #f0eeff;
+
         border-radius: 13px;
+
         padding: 11px 14px;
+
         color: #5148d8;
       }
 
       .board-head button {
         border: 0;
+
         background: white;
+
         border-radius: 10px;
+
         width: 36px;
+
         height: 36px;
+
         color: #5148d8;
+
         font-size: 23px;
       }
 
       .board-tools {
         background: #f7f7ff;
+
         border: 1px solid #e5e2ff;
+
         border-radius: 13px;
+
         padding: 9px;
       }
 
       .board-tools button {
         border-radius: 10px;
+
         transition: background 0.15s;
       }
 
       .board-tools button.selected {
         background: #6c63ff;
+
         color: white;
+
         border-color: #6c63ff;
       }
 
@@ -1077,110 +1723,175 @@
 
       .board-overlay {
         background: rgba(22, 24, 56, 0.58);
+
         padding: 24px;
+
         backdrop-filter: blur(3px);
       }
 
       .board-window {
         width: min(1050px, 82vw);
+
         height: min(790px, 78dvh);
+
         max-height: calc(100dvh - 35px);
+
         border: 1px solid #ded9ff;
+
         border-radius: 23px;
+
         background: #f9f9ff;
+
         box-shadow: 0 28px 90px rgba(20, 18, 65, 0.32);
+
         padding: 16px;
+
         gap: 12px;
+
         overflow: hidden;
       }
 
       .board-head {
         flex: none;
+
         background: linear-gradient(100deg, #6c63ff, #8479ff);
+
         color: #fff;
+
         border: 0;
+
         border-radius: 15px;
+
         padding: 14px 18px;
+
         box-shadow: 0 4px 13px rgba(108, 99, 255, 0.18);
       }
 
       .board-head strong {
         font-size: 17px;
+
         font-weight: 800;
+
         color: white;
       }
 
       .board-head button {
         background: rgba(255, 255, 255, 0.19);
+
         border: 1px solid rgba(255, 255, 255, 0.42);
+
         color: #fff;
+
         width: 38px;
+
         height: 38px;
+
         border-radius: 11px;
       }
 
       .board-tools {
         flex: none;
+
         display: flex;
+
         align-items: center;
+
         gap: 9px;
+
         background: #eeeafe;
+
         border: 1px solid #dcd5ff;
+
         border-radius: 14px;
+
         padding: 10px;
+
         flex-wrap: wrap;
       }
 
       .board-tools button {
         border: 1px solid #d7d0ff;
+
         background: white;
+
         color: #5148b5;
+
         border-radius: 11px;
+
         padding: 11px 15px;
+
         font-size: 12px;
+
         font-weight: 800;
+
         box-shadow: 0 2px 5px rgba(70, 50, 130, 0.05);
       }
 
       .board-tools button.selected {
         background: #6c63ff;
+
         color: white;
+
         border-color: #6c63ff;
       }
 
       .board-tools button:last-child {
         margin-left: auto;
+
         color: #b65d27;
+
         background: #fff4e8;
+
         border-color: #f9dab9;
       }
 
       #board-canvas {
         display: block;
+
         flex: 1;
+
         min-height: 0;
+
         width: 100%;
+
         border: 1px solid #e0e3f0;
+
         border-radius: 15px;
+
         background: white;
+
         box-shadow: inset 0 0 0 1px #f6f7fc;
+
         cursor: crosshair;
       }
 
       .mia-launch {
         position: fixed !important;
+
         right: 24px !important;
+
         bottom: 24px !important;
+
         z-index: 100 !important;
+
         display: grid;
+
         place-items: center;
+
         width: 68px;
+
         height: 68px;
+
         padding: 0;
+
         overflow: visible;
+
         border: 3px solid #fff;
+
         border-radius: 50%;
+
         background: #d9d1ff;
+
         box-shadow: 0 7px 24px rgba(75, 52, 154, 0.29);
       }
 
@@ -1190,27 +1901,41 @@
 
       .mia-launch .avatar-photo {
         width: 100%;
+
         height: 100%;
+
         border-radius: 50%;
+
         object-fit: cover;
+
         display: block;
       }
 
       .mia-launch .bubble {
         position: absolute;
+
         right: 0;
+
         bottom: 1px;
+
         width: 17px;
+
         height: 17px;
+
         border: 3px solid white;
+
         border-radius: 50%;
+
         background: #22c55e;
       }
 
       .chat-panel {
         position: fixed;
+
         z-index: 101;
+
         right: 22px;
+
         bottom: 103px;
       }
 
@@ -1218,36 +1943,54 @@
         .board-overlay {
           padding: 10px;
         }
+
         .board-window {
           width: 100%;
+
           height: min(88dvh, 800px);
+
           max-height: 95dvh;
+
           border-radius: 19px;
+
           padding: 10px;
+
           gap: 9px;
         }
+
         .board-head {
           padding: 11px 13px;
         }
+
         .board-tools {
           gap: 6px;
+
           padding: 8px;
         }
+
         .board-tools button {
           font-size: 10px;
+
           padding: 9px 10px;
         }
+
         .board-tools button:last-child {
           margin-left: 0;
         }
+
         .mia-launch {
           right: 16px !important;
+
           bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+
           width: 64px;
+
           height: 64px;
         }
+
         .chat-panel {
           right: 14px;
+
           bottom: 94px;
         }
       }
@@ -1256,14 +1999,23 @@
 
       #mia-launch {
         position: fixed !important;
+
         right: 18px !important;
+
         bottom: calc(22px + env(safe-area-inset-bottom)) !important;
+
         z-index: 9999 !important;
+
         width: 68px !important;
+
         height: 68px !important;
+
         visibility: visible !important;
+
         opacity: 1 !important;
+
         transform: none !important;
+
         pointer-events: auto !important;
       }
 
@@ -1277,20 +2029,31 @@
 
       #mia-launch .avatar-photo {
         display: block;
+
         width: 100%;
+
         height: 100%;
+
         object-fit: cover;
+
         border-radius: 50%;
       }
 
       #mia-launch .bubble {
         position: absolute;
+
         right: 0;
+
         bottom: 0;
+
         width: 17px;
+
         height: 17px;
+
         background: #22c55e;
+
         border: 3px solid white;
+
         border-radius: 50%;
       }
 
@@ -1301,6 +2064,7 @@
       @media (max-width: 650px) {
         #mia-launch {
           right: 16px !important;
+
           bottom: calc(20px + env(safe-area-inset-bottom)) !important;
         }
       }
@@ -1315,55 +2079,283 @@
       body.mia-active #mia-launch,
       body.mia-active #mia-launch:not([hidden]) {
         display: flex !important;
+
         position: fixed !important;
+
         right: 18px !important;
+
         bottom: calc(24px + env(safe-area-inset-bottom)) !important;
+
         z-index: 2147483000 !important;
+
         width: 76px !important;
+
         height: 76px !important;
+
         border-radius: 50% !important;
+
         padding: 0 !important;
+
         border: 4px solid #fff !important;
+
         background: #e7dfff !important;
+
         box-shadow: 0 5px 24px #4431a155 !important;
+
         align-items: center;
+
         justify-content: center;
+
         overflow: visible !important;
+
         opacity: 1 !important;
+
         visibility: visible !important;
+
         pointer-events: auto !important;
       }
 
       body.mia-active #mia-launch .avatar-photo {
         width: 100% !important;
+
         height: 100% !important;
+
         object-fit: cover !important;
+
         border-radius: 50% !important;
       }
 
       body.mia-active #mia-launch .bubble {
         position: absolute !important;
+
         right: -6px !important;
+
         bottom: -3px !important;
+
         width: 31px !important;
+
         height: 31px !important;
+
         border: 3px solid white !important;
+
         background: #6c63ff !important;
+
         display: flex !important;
+
         align-items: center;
+
         justify-content: center;
+
         border-radius: 50% !important;
       }
 
       body.mia-active #mia-launch .bubble svg {
         width: 17px;
+
         height: 17px;
       }
 
       @media (max-width: 650px) {
         body.mia-active #mia-launch {
           right: 16px !important;
+
           bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+        }
+      }
+
+      /* Updated whiteboard and Mia chat */
+
+      .header {
+        padding-bottom: 10px;
+        min-height: 79px;
+      }
+
+      .tabs {
+        margin-top: 2px;
+        margin-bottom: 14px;
+      }
+
+      .board-window {
+        gap: 10px;
+      }
+
+      .board-tools {
+        order: 3;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+
+        gap: 5px;
+        padding: 8px;
+        margin: 0;
+      }
+
+      .board-tools button,
+      .board-tools button:last-child {
+        margin: 0;
+        padding: 0;
+        flex: 0 1 46px;
+        min-width: 0;
+
+        height: 43px;
+        display: grid;
+        place-items: center;
+
+        color: #5148b5;
+        background: #fff;
+        border: 1px solid #d7d0ff;
+      }
+
+      .board-tools button svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .board-tools button.selected {
+        background: #6c63ff;
+        color: #fff;
+        border-color: #6c63ff;
+      }
+
+      .board-tools button:disabled {
+        opacity: 0.38;
+      }
+
+      .board-tools button:last-child {
+        color: #b65d27;
+        background: #fff4e8;
+        border-color: #f9dab9;
+      }
+
+      .board-color-wrap {
+        position: relative;
+        display: flex;
+        flex: 0 1 46px;
+        min-width: 0;
+      }
+
+      .board-color-wrap > button {
+        flex: 1;
+      }
+
+      .board-color-palette {
+        position: absolute;
+        bottom: calc(100% + 14px);
+        left: 50%;
+
+        transform: translateX(-50%);
+        background: #fff;
+        border: 1px solid #ded9ff;
+
+        border-radius: 13px;
+        padding: 9px;
+        display: grid;
+        grid-template-columns: repeat(3, 28px);
+
+        gap: 9px;
+        box-shadow: 0 8px 24px #20233822;
+        z-index: 4;
+      }
+
+      .board-color-palette[hidden] {
+        display: none !important;
+      }
+
+      .board-color-palette button,
+      .board-tools .board-color-palette button {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        border-radius: 50%;
+
+        background: var(--swatch);
+        border: 2px solid white;
+        padding: 0;
+
+        box-shadow: 0 0 0 1px #d8d9e8;
+        flex: none;
+      }
+
+      .board-color-palette button.active {
+        box-shadow: 0 0 0 3px #6c63ff;
+      }
+
+      #board-canvas {
+        order: 2;
+      }
+
+      .chat-panel {
+        width: min(720px, 88vw);
+        height: 80dvh;
+        max-height: calc(100dvh - 24px);
+
+        right: 50%;
+        bottom: 50%;
+        transform: translate(50%, 50%);
+
+        display: flex;
+        flex-direction: column;
+        border-radius: 19px;
+      }
+
+      .chat-panel[hidden] {
+        display: none !important;
+      }
+
+      .chat-head {
+        flex: none;
+        justify-content: flex-start;
+        gap: 10px;
+        min-height: 61px;
+      }
+
+      .chat-head .chat-head-photo {
+        width: 36px;
+        height: 36px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background: #d5caff;
+      }
+
+      .chat-head .chat-title {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .chat-messages {
+        height: auto;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .chat-compose {
+        flex: none;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+      }
+
+      @media (max-width: 650px) {
+        .board-tools {
+          gap: 4px;
+          padding: 6px;
+        }
+
+        .board-tools button,
+        .board-tools button:last-child {
+          height: 41px;
+          padding: 0;
+        }
+
+        .board-tools button svg {
+          width: 19px;
+          height: 19px;
+        }
+
+        .chat-panel {
+          width: calc(100vw - 20px);
+          height: 80dvh;
+          right: 50%;
+          bottom: 50%;
         }
       }
     </style>
@@ -1383,8 +2375,11 @@
           >
             <path d="m15 18-6-6 6-6" /></svg
         ></a>
+
         <h1>ნატურალური რიცხვები</h1>
+
         <p>მათემატიკა • V კლასი</p>
+
         <button
           class="board-launch"
           id="board-launch"
@@ -1403,6 +2398,7 @@
             <path
               d="M6 3h12a2 2 0 0 1 2 2v6M6 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7M8 3v18M3 8h3M3 13h3"
             />
+
             <path d="m15 19 5-5 2 2-5 5-3 1z" />
           </svg>
         </button>
@@ -1438,6 +2434,7 @@
             stroke-linejoin="round"
           >
             <path d="m4 17-1 4 4-1L20 7l-3-3L4 17Z" />
+
             <path d="m14 7 3 3" /></svg
           >სავარჯიშოები
         </button>
@@ -1468,19 +2465,23 @@
                 stroke-linejoin="round"
               >
                 <path d="M9 18h6M10 22h4" />
+
                 <path
                   d="M8 14c-1.3-1-2-2.6-2-4a6 6 0 1 1 12 0c0 1.4-.7 3-2 4-.8.7-1 1.5-1 3H9c0-1.5-.2-2.3-1-3Z"
                 />
               </svg>
             </div>
+
             <h2>აღმოაჩინე</h2>
           </div>
+
           <div class="section-body">
             <p>
               რამდენი მოსწავლეა შენს კლასში? რამდენი წიგნი დევს თაროზე? რამდენი
               ვაშლია კალათაში? ამ კითხვებზე პასუხის გასაცემად საგნებს ვითვლით და
               ვიყენებთ რიცხვებს: 1, 2, 3, 4...
             </p>
+
             <p>
               ასეთ რიცხვებს <strong>ნატურალური რიცხვები</strong> ეწოდება. ისინი
               იწყება 1-დან და გრძელდება უსასრულოდ. ყოველი მომდევნო ნატურალური
@@ -1501,11 +2502,14 @@
                 stroke-linejoin="round"
               >
                 <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" />
+
                 <circle cx="12" cy="12" r="3" />
               </svg>
             </div>
+
             <h2>ნახე</h2>
           </div>
+
           <div class="section-body">
             <div class="visual-box">
               <svg
@@ -1515,21 +2519,36 @@
               >
                 <g fill="#6C63FF">
                   <circle cx="35" cy="46" r="7" />
+
                   <circle cx="100" cy="35" r="7" />
+
                   <circle cx="100" cy="57" r="7" />
+
                   <circle cx="170" cy="24" r="7" />
+
                   <circle cx="170" cy="46" r="7" />
+
                   <circle cx="170" cy="68" r="7" />
+
                   <circle cx="240" cy="24" r="7" />
+
                   <circle cx="260" cy="24" r="7" />
+
                   <circle cx="240" cy="48" r="7" />
+
                   <circle cx="260" cy="48" r="7" />
+
                   <circle cx="310" cy="18" r="6" />
+
                   <circle cx="326" cy="18" r="6" />
+
                   <circle cx="318" cy="36" r="6" />
+
                   <circle cx="310" cy="54" r="6" />
+
                   <circle cx="326" cy="54" r="6" />
                 </g>
+
                 <g
                   font-family="Arial,sans-serif"
                   font-size="23"
@@ -1538,14 +2557,20 @@
                   fill="#202338"
                 >
                   <text x="35" y="112">1</text>
+
                   <text x="100" y="112">2</text>
+
                   <text x="170" y="112">3</text>
+
                   <text x="250" y="112">4</text>
+
                   <text x="318" y="112">5</text>
                 </g>
+
                 <path d="M30 130H322" stroke="#B8D9FF" stroke-width="2" />
               </svg>
             </div>
+
             <p>
               დააკვირდი: ყოველ მომდევნო ჯგუფში ერთი წერტილით მეტია. სწორედ ასე
               იზრდება ნატურალური რიცხვების მიმდევრობა.
@@ -1567,8 +2592,10 @@
                   <path d="M5 19v-7M12 19V5M19 19v-10" />
                 </svg>
               </div>
+
               <h2>მაგალითები</h2>
             </div>
+
             <div class="example-tabs">
               <button class="example-tab active" onclick="showExample(0)">
                 მაგალითი 1</button
@@ -1577,6 +2604,7 @@
               </button>
             </div>
           </div>
+
           <div class="section-body" id="example-content"></div>
         </section>
 
@@ -1589,8 +2617,10 @@
                 />
               </svg>
             </div>
+
             <h2>დაიმახსოვრე</h2>
           </div>
+
           <div class="section-body">
             <ul class="remember-list">
               <li>
@@ -1599,10 +2629,12 @@
                   >ნატურალური რიცხვები გამოიყენება საგნების დასათვლელად.</span
                 >
               </li>
+
               <li>
                 <span class="check">✓</span
                 ><span>ნატურალური რიცხვები იწყება 1-დან: 1, 2, 3, 4, 5...</span>
               </li>
+
               <li>
                 <span class="check">✓</span
                 ><span>ნატურალური რიცხვების მიმდევრობა უსასრულოა.</span>
@@ -1622,11 +2654,15 @@
             <div class="progress-top">
               <span id="exercise-progress-text">სავარჯიშო 1 / 5</span>
             </div>
+
             <div class="segments" id="exercise-segments"></div>
           </div>
+
           <div class="task-card">
             <h2 class="task-title" id="exercise-title">ამოხსენი განტოლება:</h2>
+
             <div class="equation" id="exercise-equation">3x + 5 = 17</div>
+
             <label class="answer-label" for="exercise-input">შენი პასუხი</label
             ><input
               class="answer-input"
@@ -1636,7 +2672,9 @@
               autocomplete="off"
               placeholder="ჩაწერე პასუხი"
             />
+
             <div class="feedback" id="exercise-feedback" hidden></div>
+
             <div class="task-actions">
               <button
                 class="primary"
@@ -1647,6 +2685,7 @@
               </button>
             </div>
           </div>
+
           <div class="nav-actions">
             <button
               class="secondary"
@@ -1670,8 +2709,10 @@
           <div class="progress-top">
             <span id="test-progress-text">კითხვა 1 / 10</span>
           </div>
+
           <div class="segments" id="test-segments"></div>
         </div>
+
         <div id="test-question-view" class="task-card" hidden>
           <div class="question-counter">
             <span class="eyebrow" id="test-question-badge">კითხვა 1 / 10</span
@@ -1679,10 +2720,14 @@
               ><span aria-hidden="true">⚡</span> 10 XP</span
             >
           </div>
+
           <h2 class="task-title" id="test-question-title"></h2>
+
           <div class="equation" id="test-equation"></div>
+
           <div class="choices" id="test-choices"></div>
         </div>
+
         <div id="test-result-view" class="task-card result-card" hidden>
           <h2 class="task-title">ტესტის შედეგი</h2>
 
@@ -1692,12 +2737,12 @@
           </div>
 
           <h3 id="result-title"></h3>
-          <p id="result-description" class="result-description"></p>
 
           <div class="result-stats">
             <div class="stat">
               ტესტის ქულა<strong id="result-score">0/10</strong>
             </div>
+
             <div class="stat xp-stat">
               ⚡ მიღებული XP<strong id="result-xp">+0 XP</strong>
             </div>
@@ -1710,12 +2755,15 @@
                 alt="მია"
                 onerror="this.style.display = 'none'"
               />
+
               <div>
                 <strong>მიას შეფასება</strong
                 ><small>შენი ტესტის პერსონალური ანალიზი</small>
               </div>
+
               <span>✦</span>
             </div>
+
             <div class="mia-analysis-text" id="mia-analysis-text">
               შედეგის ანალიზი...
             </div>
@@ -1728,6 +2776,7 @@
           >
             პასუხების განხილვა
           </button>
+
           <div id="test-review" class="test-review" hidden></div>
 
           <div class="nav-actions">
@@ -1738,6 +2787,7 @@
             </button>
           </div>
         </div>
+
         <div class="nav-actions" id="test-navigation" hidden>
           <button class="secondary" id="test-prev" onclick="moveTest(-1)">
             ← წინა</button
@@ -1760,6 +2810,7 @@
         alt="მია"
         onerror="
           this.style.display = 'none';
+
           this.nextElementSibling.hidden = false;
         "
       /><span class="avatar-fallback" hidden>👩🏻‍🏫</span
@@ -1777,23 +2828,32 @@
           <path
             d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3-.6L4 20l1.6-5.1a8 8 0 0 1-.6-3.4A7.5 7.5 0 0 1 12.5 4 7.5 7.5 0 0 1 20 11.5Z"
           />
+
           <path d="M9 11.5h.01M12.5 11.5h.01M16 11.5h.01" /></svg
       ></span>
     </button>
 
     <div class="chat-panel" id="chat-panel" hidden>
       <div class="chat-head">
-        <span>✦ მია — შენი AI მენტორი</span
+        <img
+          class="chat-head-photo"
+          src="img/mia.png"
+          alt="მია"
+          onerror="this.style.display = 'none'"
+        /><span class="chat-title">მია — შენი AI მენტორი</span>
+
         ><button aria-label="ჩატის დახურვა" onclick="toggleChat(false)">
           ×
         </button>
       </div>
+
       <div class="chat-messages" id="chat-messages">
         <div class="chat-msg mia">
           გამარჯობა! 👋 თუ ამოცანაში გაგიჭირდა, მომწერე და ნაბიჯ-ნაბიჯ
           დაგეხმარები.
         </div>
       </div>
+
       <form class="chat-compose" onsubmit="sendChat(event)">
         <input
           id="chat-input"
@@ -1817,6 +2877,7 @@
         >
           ×
         </button>
+
         <div class="modal-illustration">
           <svg
             viewBox="0 0 80 80"
@@ -1835,6 +2896,7 @@
               stroke="#B4AAFF"
               fill="#fff"
             />
+
             <rect
               x="29"
               y="8"
@@ -1844,20 +2906,26 @@
               fill="#6C63FF"
               stroke="#6C63FF"
             />
+
             <path d="m27 35 5 5 8-9M44 36h10M27 54l5 5 8-9M44 55h10" />
           </svg>
         </div>
+
         <h2 id="modal-title">შეამოწმე ცოდნა</h2>
+
         <p>გაიარე მოკლე ტესტი და ნახე, რამდენად კარგად აითვისე თემა.</p>
+
         <div class="mia-note">
           <img class="mini-avatar-photo" src="img/mia.png" alt="მია" /><span
             >ტესტის დროს მია პასუხებში არ დაგეხმარება. სცადე
             დამოუკიდებლად!</span
           >
         </div>
+
         <p style="font-weight: 800; color: #5148d8; margin-bottom: 13px">
           ▤ &nbsp; 10 კითხვა
         </p>
+
         <button class="primary full" onclick="startTest()">
           ტესტის დაწყება →
         </button>
@@ -1870,14 +2938,153 @@
           <strong>სამუშაო დაფა</strong
           ><button onclick="closeBoard()" aria-label="დაფის დახურვა">×</button>
         </div>
-        <div class="board-tools">
-          <button id="pen-tool" class="selected" onclick="setBoardTool('pen')">
-            ✎ კალამი</button
-          ><button id="eraser-tool" onclick="setBoardTool('eraser')">
-            ◻ საშლელი</button
-          ><button onclick="undoBoard()">↶ უკან</button
-          ><button onclick="clearBoard()">გასუფთავება</button>
+
+        <div class="board-tools" aria-label="დაფის ხელსაწყოები">
+          <button
+            type="button"
+            id="pen-tool"
+            class="selected"
+            onclick="setBoardTool('pen')"
+            aria-label="კალამი"
+            title="კალამი"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m12 19 7-7 3 3-7 7-4 1 1-4Z" />
+              <path d="m18 13 2-2a2.1 2.1 0 0 0-3-3l-2 2" />
+              <path d="M2 7h8" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="eraser-tool"
+            onclick="setBoardTool('eraser')"
+            aria-label="საშლელი"
+            title="საშლელი"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m20 20-7-7" />
+              <path
+                d="m6.5 20-3-3a2 2 0 0 1 0-3L13 4.5a2 2 0 0 1 3 0l4 4a2 2 0 0 1 0 3L11.5 20H6.5Z"
+              />
+              <path d="M13 20h8" />
+            </svg>
+          </button>
+
+          <div class="board-color-wrap">
+            <button
+              type="button"
+              id="board-palette-toggle"
+              onclick="toggleBoardPalette()"
+              aria-label="ფერების არჩევა"
+              aria-expanded="false"
+              title="ფერები"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="13.5" cy="6.5" r=".7" />
+                <circle cx="17.5" cy="10" r=".7" />
+                <circle cx="8" cy="7" r=".7" />
+                <circle cx="6" cy="12" r=".7" />
+                <path
+                  d="M12 22a10 10 0 1 1 10-10c0 2.5-2 4-4.5 4H15a2 2 0 0 0-1.5 3.3A1.6 1.6 0 0 1 12 22Z"
+                />
+              </svg>
+            </button>
+
+            <div
+              class="board-color-palette"
+              id="board-color-palette"
+              hidden
+            ></div>
+          </div>
+
+          <button
+            type="button"
+            id="board-undo"
+            onclick="undoBoard()"
+            aria-label="უკან დაბრუნება"
+            title="უკან"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M9 14 4 9l5-5" />
+              <path d="M4 9h11a5 5 0 0 1 5 5v2" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="board-redo"
+            onclick="redoBoard()"
+            aria-label="წინ დაბრუნება"
+            title="წინ"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m15 14 5-5-5-5" />
+              <path d="M20 9H9a5 5 0 0 0-5 5v2" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="board-clear"
+            onclick="clearBoard()"
+            aria-label="დაფის გასუფთავება"
+            title="გასუფთავება"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 6h18M8 6V4h8v2M5 6l1 15h12l1-15M10 10v7M14 10v7" />
+            </svg>
+          </button>
         </div>
+
         <canvas id="board-canvas" aria-label="სამუშაო დაფა"></canvas>
       </div>
     </div>
@@ -1887,15 +3094,20 @@
         {
           question:
             "მოცემული რიცხვებიდან ამოარჩიე მხოლოდ ნატურალური რიცხვები: 0; 7; 15; 3,5; 102; −4.",
+
           steps: [
             "გავიხსენოთ, რომ ნატურალური რიცხვებია 1, 2, 3, 4... ისინი დადებითი მთელი რიცხვებია.",
+
             "შევამოწმოთ მოცემული რიცხვები. 7, 15 და 102 ნატურალურია. 0, 3,5 და −4 ნატურალური რიცხვები არ არის.",
           ],
         },
+
         {
           question: "ჩამოთვალე 9-ის მომდევნო სამი ნატურალური რიცხვი.",
+
           steps: [
             "ყოველი მომდევნო ნატურალური რიცხვი წინაზე ერთით მეტია.",
+
             "9-ს ვუმატებთ 1-ს და ვიღებთ 10-ს. შემდეგ მოდის 11 და 12. პასუხია: 10, 11, 12.",
           ],
         },
@@ -1903,32 +3115,58 @@
 
       function showExample(index) {
         document
+
           .querySelectorAll(".example-tab")
+
           .forEach((b, i) => b.classList.toggle("active", i === index));
+
         const el = document.getElementById("example-content");
+
         el.replaceChildren();
+
         const q = document.createElement("p");
+
         q.className = "example-question";
+
         q.textContent = examples[index].question;
+
         el.append(q);
+
         examples[index].steps.forEach((s, i) => {
           const step = document.createElement("div");
+
           step.className = "step";
+
           const track = document.createElement("div");
+
           track.className = "step-track";
+
           const dot = document.createElement("span");
+
           dot.className = "step-dot";
+
           track.append(dot);
+
           const content = document.createElement("div");
+
           content.className = "step-content";
+
           const label = document.createElement("span");
+
           label.className = "step-label";
+
           label.textContent = `ნაბიჯი ${i + 1}`;
+
           const txt = document.createElement("p");
+
           txt.className = "step-text";
+
           txt.textContent = s;
+
           content.append(label, txt);
+
           step.append(track, content);
+
           el.append(step);
         });
       }
@@ -1936,54 +3174,81 @@
       showExample(0);
 
       let activeTab = "theory";
+
       let testStarted = false;
+
       let testFinished = false;
+
       let testIntroSeen = false;
 
       function selectTab(tab) {
         activeTab = tab;
+
         ["theory", "exercises", "test"].forEach((t) => {
           document.getElementById("panel-" + t).hidden = t !== tab;
+
           document
+
             .getElementById("tab-" + t)
+
             .classList.toggle("active", t === tab);
         });
+
         document.body.classList.toggle("mia-active", tab === "exercises");
+
         document.getElementById("mia-launch").hidden = false;
+
         document.getElementById("board-launch").hidden = tab === "theory";
+
         if (tab !== "exercises") toggleChat(false);
+
         if (tab === "test" && !testStarted && !testFinished) {
           document.getElementById("test-overlay").hidden = false;
+
           document.getElementById("test-question-view").hidden = true;
+
           document.getElementById("test-navigation").hidden = true;
         }
+
         if (tab !== "test")
           document.getElementById("test-overlay").hidden = true;
+
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       const exercises = [
         { title: "ამოხსენი განტოლება:", equation: "3x + 5 = 17", answer: 4 },
+
         { title: "იპოვე უცნობი რიცხვი:", equation: "x + 8 = 15", answer: 7 },
+
         { title: "ამოხსენი განტოლება:", equation: "2x = 18", answer: 9 },
+
         { title: "იპოვე უცნობი რიცხვი:", equation: "x − 6 = 12", answer: 18 },
+
         { title: "ამოხსენი განტოლება:", equation: "4x + 2 = 22", answer: 5 },
       ];
 
       let exerciseIndex = 0;
+
       const exerciseStates = exercises.map(() => ({
         value: "",
+
         checked: false,
+
         correct: false,
       }));
 
       function makeSegments(id, count, done, current) {
         const el = document.getElementById(id);
+
         el.replaceChildren();
+
         for (let i = 0; i < count; i++) {
           const s = document.createElement("span");
+
           s.className =
             "segment" + (i < done ? " done" : i === current ? " current" : "");
+
           el.append(s);
         }
       }
@@ -1991,9 +3256,12 @@
       function renderExercise() {
         const ex = exercises[exerciseIndex],
           st = exerciseStates[exerciseIndex];
+
         document.getElementById("exercise-progress-text").textContent =
           `სავარჯიშო ${exerciseIndex + 1} / ${exercises.length}`;
+
         makeSegments("exercise-segments", exercises.length, 0, -1);
+
         [...document.getElementById("exercise-segments").children].forEach(
           (s, i) =>
             (s.className =
@@ -2004,32 +3272,51 @@
                   ? " current"
                   : "")),
         );
+
         document.getElementById("exercise-title").textContent = ex.title;
+
         document.getElementById("exercise-equation").textContent = ex.equation;
+
         const input = document.getElementById("exercise-input");
+
         input.value = st.value;
+
         input.disabled = st.correct;
+
         input.className =
           "answer-input" +
           (st.checked ? (st.correct ? " correct" : " incorrect") : "");
+
         const fb = document.getElementById("exercise-feedback");
+
         fb.hidden = !st.checked;
+
         if (st.checked) {
           fb.className = "feedback " + (st.correct ? "good" : "bad");
+
           fb.replaceChildren();
+
           const strong = document.createElement("strong");
+
           strong.textContent = st.correct ? "✓ სწორია!" : "პასუხი არასწორია.";
+
           const desc = document.createElement("span");
+
           desc.textContent = st.correct
             ? "კარგად გაართვი თავი!"
             : "კიდევ სცადე!";
+
           fb.append(strong, desc);
         }
+
         document.getElementById("exercise-check").hidden = st.correct;
+
         document.getElementById("exercise-check").textContent = st.checked
           ? "ხელახლა შეამოწმე"
           : "შეამოწმე პასუხი";
+
         document.getElementById("exercise-prev").disabled = exerciseIndex === 0;
+
         document.getElementById("exercise-next").textContent =
           exerciseIndex === exercises.length - 1
             ? "ტესტზე გადასვლა →"
@@ -2038,168 +3325,258 @@
 
       function checkExercise() {
         const input = document.getElementById("exercise-input");
+
         const raw = input.value.trim().replace(",", ".");
+
         if (!raw) return;
+
         const st = exerciseStates[exerciseIndex];
+
         st.value = input.value;
+
         st.checked = true;
+
         st.correct = Number(raw) === exercises[exerciseIndex].answer;
+
         renderExercise();
       }
 
       function moveExercise(delta) {
         exerciseStates[exerciseIndex].value =
           document.getElementById("exercise-input").value;
+
         if (delta === 1 && exerciseIndex === exercises.length - 1) {
           selectTab("test");
+
           return;
         }
+
         exerciseIndex = Math.max(
           0,
+
           Math.min(exercises.length - 1, exerciseIndex + delta),
         );
+
         renderExercise();
       }
 
       document
+
         .getElementById("exercise-input")
+
         .addEventListener("input", (e) => {
           const st = exerciseStates[exerciseIndex];
+
           if (!st.correct) {
             st.value = e.target.value;
+
             if (st.checked) {
               st.checked = false;
+
               document.getElementById("exercise-feedback").hidden = true;
+
               e.target.className = "answer-input";
             }
           }
         });
+
       document
+
         .getElementById("exercise-input")
+
         .addEventListener("keydown", (e) => {
           if (e.key === "Enter") checkExercise();
         });
+
       renderExercise();
 
       function toggleChat(force) {
         const panel = document.getElementById("chat-panel");
+
         panel.hidden = typeof force === "boolean" ? !force : !panel.hidden;
+
         if (!panel.hidden) document.getElementById("chat-input").focus();
       }
 
       function sendChat(event) {
         event.preventDefault();
+
         const input = document.getElementById("chat-input");
+
         const message = input.value.trim();
+
         if (!message) return;
+
         appendChat(message, "student");
+
         input.value = "";
+
         appendChat(
           "ჯერ დაფიქრდი, რა მოქმედება უნდა შეასრულო პირველ რიგში. შეგიძლია განტოლების ორივე მხარეს ერთი და იგივე რიცხვი გამოაკლო ან ორივე მხარე ერთსა და იმავე არანულოვან რიცხვზე გაყო. სცადე!",
+
           "mia",
         );
       }
 
       function appendChat(text, who) {
         const el = document.createElement("div");
+
         el.className = "chat-msg " + who;
+
         el.textContent = text;
+
         const list = document.getElementById("chat-messages");
+
         list.append(el);
+
         list.scrollTop = list.scrollHeight;
       }
 
       const tests = [
         {
           title: "რა არის x-ის მნიშვნელობა განტოლებაში?",
+
           equation: "3x + 5 = 17",
+
           choices: ["x = 2", "x = 3", "x = 4", "x = 5"],
+
           correct: 2,
         },
+
         {
           title: "რომელია ყველაზე პატარა ნატურალური რიცხვი?",
+
           equation: "",
+
           choices: ["0", "1", "2", "−1"],
+
           correct: 1,
         },
+
         {
           title: "რომელი რიცხვი მოდის 19-ის შემდეგ?",
+
           equation: "",
+
           choices: ["18", "21", "20", "22"],
+
           correct: 2,
         },
+
         {
           title: "რომელი რიცხვი არ არის ნატურალური?",
+
           equation: "",
+
           choices: ["7", "12", "0", "25"],
+
           correct: 2,
         },
+
         {
           title: "რა არის x-ის მნიშვნელობა?",
+
           equation: "x + 8 = 15",
+
           choices: ["5", "6", "7", "8"],
+
           correct: 2,
         },
+
         {
           title: "რომელია 9-ის მომდევნო ნატურალური რიცხვი?",
+
           equation: "",
+
           choices: ["8", "9", "10", "11"],
+
           correct: 2,
         },
+
         {
           title: "რა არის x-ის მნიშვნელობა?",
+
           equation: "2x = 18",
+
           choices: ["7", "8", "9", "10"],
+
           correct: 2,
         },
+
         {
           title: "რომელი მიმდევრობაა ნატურალური?",
+
           equation: "",
+
           choices: ["0, 1, 2", "1, 2, 3", "−1, 0, 1", "1, 2, 2.5"],
+
           correct: 1,
         },
+
         {
           title: "რა არის x-ის მნიშვნელობა?",
+
           equation: "x − 6 = 12",
+
           choices: ["6", "12", "18", "20"],
+
           correct: 2,
         },
+
         {
           title: "აქვს თუ არა ნატურალურ რიცხვებს ბოლო რიცხვი?",
+
           equation: "",
+
           choices: ["კი", "არა", "100", "1000"],
+
           correct: 1,
         },
       ];
 
       let testIndex = 0;
+
       let bestTestXP = 0;
+
       let testAnswers = Array(tests.length).fill(null);
 
       function closeTestIntro() {
         document.getElementById("test-overlay").hidden = true;
+
         selectTab("theory");
       }
 
       function startTest() {
         testStarted = true;
+
         testFinished = false;
+
         testIndex = 0;
+
         testAnswers = Array(tests.length).fill(null);
+
         document.getElementById("test-overlay").hidden = true;
+
         document.getElementById("test-result-view").hidden = true;
+
         document.getElementById("test-question-view").hidden = false;
+
         document.getElementById("test-navigation").hidden = false;
+
         renderTest();
       }
 
       function renderTest() {
         const q = tests[testIndex];
+
         document.getElementById("test-progress-text").textContent =
           `კითხვა ${testIndex + 1} / ${tests.length}`;
+
         document.getElementById("test-question-badge").textContent =
           `კითხვა ${testIndex + 1} / ${tests.length}`;
+
         makeSegments("test-segments", tests.length, 0, -1);
+
         [...document.getElementById("test-segments").children].forEach(
           (s, i) =>
             (s.className =
@@ -2210,30 +3587,50 @@
                   ? " current"
                   : "")),
         );
+
         document.getElementById("test-question-title").textContent = q.title;
+
         const eq = document.getElementById("test-equation");
+
         eq.textContent = q.equation;
+
         eq.hidden = !q.equation;
+
         const choices = document.getElementById("test-choices");
+
         choices.replaceChildren();
+
         q.choices.forEach((c, i) => {
           const b = document.createElement("button");
+
           b.className =
             "choice" + (testAnswers[testIndex] === i ? " selected" : "");
+
           b.type = "button";
+
           const letter = document.createElement("span");
+
           letter.className = "letter";
+
           letter.textContent = "ABCD"[i];
+
           const text = document.createElement("span");
+
           text.textContent = c;
+
           b.append(letter, text);
+
           b.onclick = () => {
             testAnswers[testIndex] = i;
+
             renderTest();
           };
+
           choices.append(b);
         });
+
         document.getElementById("test-prev").disabled = testIndex === 0;
+
         document.getElementById("test-next").textContent =
           testIndex === tests.length - 1 ? "ტესტის დასრულება →" : "შემდეგი →";
       }
@@ -2241,14 +3638,18 @@
       function moveTest(delta) {
         if (delta === 1 && testIndex === tests.length - 1) {
           finishTest();
+
           return;
         }
+
         testIndex = Math.max(0, Math.min(tests.length - 1, testIndex + delta));
+
         renderTest();
       }
 
       function finishTest() {
         const unanswered = testAnswers.filter((a) => a === null).length;
+
         if (
           unanswered &&
           !confirm(
@@ -2256,57 +3657,77 @@
           )
         )
           return;
+
         testStarted = false;
+
         testFinished = true;
+
         document.getElementById("test-question-view").hidden = true;
+
         document.getElementById("test-navigation").hidden = true;
+
         document.getElementById("test-result-view").hidden = false;
+
         const correct = tests.filter(
           (q, i) => q.correct === testAnswers[i],
         ).length;
+
         const pct = Math.round((correct / tests.length) * 100);
+
         document.getElementById("result-percent").textContent = pct + "%";
+
         document.getElementById("result-fraction").textContent =
           `${correct} / ${tests.length}`;
+
         document.getElementById("result-title").textContent =
           pct >= 80
             ? "ძალიან კარგი შედეგია!"
             : pct >= 50
               ? "კარგი დასაწყისია!"
               : "გაიმეორე თემა და სცადე კიდევ!";
-        document.getElementById("result-description").textContent =
-          `სწორად უპასუხე ${tests.length}-დან ${correct} კითხვას.`;
+
         document.getElementById("result-score").textContent =
           `${correct}/${tests.length}`;
 
         // მხოლოდ წინა საუკეთესო შედეგზე დამატებული XP ირიცხება, თითო სწორი პასუხი 10 XP.
 
         const earned = correct * 10;
+
         const gain = Math.max(0, earned - bestTestXP);
+
         bestTestXP = Math.max(bestTestXP, earned);
 
         document.getElementById("result-xp").textContent = `+${gain} XP`;
 
         document.getElementById("mia-analysis-text").textContent =
           makeDemoMiaAnalysis(correct);
+
         document.getElementById("test-progress-text").textContent =
           "ტესტი დასრულებულია";
+
         makeSegments("test-segments", tests.length, tests.length, -1);
+
         document.getElementById("test-review").hidden = true;
+
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       function makeDemoMiaAnalysis(correct) {
         const wrong = tests
+
           .map((q, i) => ({ q, i }))
+
           .filter(({ q, i }) => testAnswers[i] !== q.correct);
 
         if (!wrong.length)
           return "ყოჩაღ! ყველა კითხვას სწორად უპასუხე. ნატურალური რიცხვები და ამოცანები კარგად გაიგე. შეგიძლია შემდეგ თემაზე გადახვიდე!";
 
         const examples = wrong
+
           .slice(0, 2)
+
           .map(({ q }) => q.equation || q.title)
+
           .join(" და ");
 
         return `შენ ${correct} კითხვას სწორად უპასუხე. ყურადღება მიაქციე ${examples} საკითხს — ამ კითხვებზე შეცდომები დაუშვი. გადახედე ახსნას და კიდევ ივარჯიშე!`;
@@ -2314,137 +3735,307 @@
 
       function toggleReview() {
         const el = document.getElementById("test-review");
+
         el.hidden = !el.hidden;
+
         if (el.hidden) return;
+
         el.replaceChildren();
+
         tests.forEach((q, i) => {
           const row = document.createElement("div");
+
           row.className = "review-item";
+
           const title = document.createElement("strong");
+
           title.textContent = `${i + 1}. ${q.title} ${q.equation}`;
+
           const status = document.createElement("span");
+
           const good = testAnswers[i] === q.correct;
+
           status.className = good ? "ok" : "no";
+
           status.textContent =
             (good ? "✓ სწორი პასუხი: " : "✕ სწორი პასუხი: ") +
             q.choices[q.correct];
+
           row.append(title, status);
+
           el.append(row);
         });
       }
 
       function restartTest() {
         document.getElementById("test-review").hidden = true;
+
         document.getElementById("test-result-view").hidden = true;
+
         document.getElementById("test-overlay").hidden = false;
+
         testFinished = false;
+
         testStarted = false;
       }
 
       // სამუშაო დაფა: ხატვის ისტორია ინახება ჩანართების გადართვისას.
 
       const board = document.getElementById("board-canvas");
+
       const ctx = board.getContext("2d");
 
       let boardTool = "pen",
+        boardColor = "#202338",
         boardStrokes = [],
+        boardRedo = [],
         currentStroke = null,
         boardDrawing = false;
 
       function resizeBoard() {
         const rect = board.getBoundingClientRect();
+
         if (!rect.width || !rect.height) return;
+
         const dpr = window.devicePixelRatio || 1;
+
         board.width = Math.round(rect.width * dpr);
+
         board.height = Math.round(rect.height * dpr);
+
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
         redrawBoard();
       }
 
       function redrawBoard() {
         ctx.clearRect(0, 0, board.clientWidth, board.clientHeight);
+
         for (const stroke of boardStrokes) {
+          if (stroke.clearSnapshot) {
+            ctx.clearRect(0, 0, board.clientWidth, board.clientHeight);
+            continue;
+          }
+
           if (!stroke.points.length) continue;
+
           ctx.beginPath();
-          ctx.strokeStyle = stroke.tool === "eraser" ? "#fff" : "#24243D";
+
+          ctx.strokeStyle =
+            stroke.tool === "eraser" ? "#fff" : stroke.color || "#202338";
+
           ctx.lineWidth = stroke.tool === "eraser" ? 24 : 2.7;
+
           ctx.lineCap = "round";
+
           ctx.lineJoin = "round";
+
           ctx.moveTo(
             stroke.points[0].x * board.clientWidth,
+
             stroke.points[0].y * board.clientHeight,
           );
+
           for (const pt of stroke.points.slice(1))
             ctx.lineTo(pt.x * board.clientWidth, pt.y * board.clientHeight);
+
           if (stroke.points.length === 1) {
             const pt = stroke.points[0];
+
             ctx.lineTo(
               pt.x * board.clientWidth + 0.1,
+
               pt.y * board.clientHeight + 0.1,
             );
           }
+
           ctx.stroke();
         }
       }
 
       function boardPoint(e) {
         const r = board.getBoundingClientRect();
+
         return {
           x: (e.clientX - r.left) / r.width,
+
           y: (e.clientY - r.top) / r.height,
         };
       }
 
       board.addEventListener("pointerdown", (e) => {
         boardDrawing = true;
+
         board.setPointerCapture(e.pointerId);
-        currentStroke = { tool: boardTool, points: [boardPoint(e)] };
+
+        boardRedo = [];
+
+        currentStroke = {
+          tool: boardTool,
+          color: boardColor,
+          points: [boardPoint(e)],
+        };
+
         boardStrokes.push(currentStroke);
+
+        updateBoardHistoryButtons();
+
         redrawBoard();
       });
 
       board.addEventListener("pointermove", (e) => {
         if (!boardDrawing) return;
+
         currentStroke.points.push(boardPoint(e));
+
         redrawBoard();
       });
 
       for (const type of ["pointerup", "pointercancel"])
         board.addEventListener(type, () => {
           boardDrawing = false;
+
           currentStroke = null;
         });
 
       function openBoard() {
         document.getElementById("board-overlay").hidden = false;
+
         document.body.style.overflow = "hidden";
+
         requestAnimationFrame(resizeBoard);
+
+        updateBoardHistoryButtons();
       }
 
       function closeBoard() {
         document.getElementById("board-overlay").hidden = true;
+
         document.body.style.overflow = "";
       }
 
       function setBoardTool(tool) {
         boardTool = tool;
+
         document
+
           .getElementById("pen-tool")
+
           .classList.toggle("selected", tool === "pen");
+
         document
+
           .getElementById("eraser-tool")
+
           .classList.toggle("selected", tool === "eraser");
       }
 
+      const boardColors = [
+        "#202338",
+        "#4A90FF",
+        "#EF4444",
+        "#22C55E",
+        "#6C63FF",
+        "#F59E0B",
+      ];
+
+      const palette = document.getElementById("board-color-palette");
+
+      boardColors.forEach((color) => {
+        const swatch = document.createElement("button");
+
+        swatch.type = "button";
+
+        swatch.style.setProperty("--swatch", color);
+
+        swatch.setAttribute("aria-label", "ფერი " + color);
+
+        swatch.onclick = () => {
+          boardColor = color;
+
+          setBoardTool("pen");
+
+          palette.hidden = true;
+
+          document
+            .getElementById("board-palette-toggle")
+            .setAttribute("aria-expanded", "false");
+
+          updatePaletteSelection();
+        };
+
+        palette.append(swatch);
+      });
+
+      function updatePaletteSelection() {
+        [...palette.children].forEach((button, i) =>
+          button.classList.toggle("active", boardColors[i] === boardColor),
+        );
+      }
+
+      function toggleBoardPalette() {
+        palette.hidden = !palette.hidden;
+
+        document
+          .getElementById("board-palette-toggle")
+          .setAttribute("aria-expanded", String(!palette.hidden));
+      }
+
+      function updateBoardHistoryButtons() {
+        document.getElementById("board-undo").disabled = !boardStrokes.length;
+
+        document.getElementById("board-redo").disabled = !boardRedo.length;
+
+        document.getElementById("board-clear").disabled =
+          !boardStrokes.length ||
+          (boardStrokes.length === 1 && !!boardStrokes[0].clearSnapshot);
+      }
+
       function undoBoard() {
-        boardStrokes.pop();
+        if (!boardStrokes.length) return;
+
+        const action = boardStrokes.pop();
+
+        if (action.clearSnapshot) boardStrokes = action.clearSnapshot.slice();
+
+        boardRedo.push(action);
+
         redrawBoard();
+
+        updateBoardHistoryButtons();
+      }
+
+      function redoBoard() {
+        if (!boardRedo.length) return;
+
+        const action = boardRedo.pop();
+
+        boardStrokes = action.clearSnapshot
+          ? [action]
+          : [...boardStrokes, action];
+
+        redrawBoard();
+
+        updateBoardHistoryButtons();
       }
 
       function clearBoard() {
-        boardStrokes = [];
+        if (!boardStrokes.length) return;
+
+        boardStrokes.push({ clearSnapshot: boardStrokes.slice(), points: [] });
+
+        boardRedo = [];
+
+        boardStrokes = [boardStrokes[boardStrokes.length - 1]];
+
         redrawBoard();
+
+        updateBoardHistoryButtons();
       }
+
+      updatePaletteSelection();
+
+      updateBoardHistoryButtons();
 
       window.addEventListener("resize", () => {
         if (!document.getElementById("board-overlay").hidden) resizeBoard();

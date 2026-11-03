@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AIIA — მოსწავლის პროფილი</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --blue: #4a90ff;
+        --ink: #18213c;
+        --muted: #8892a9;
+        --line: #edf0f7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Noto Sans Georgian", sans-serif;
+        color: var(--ink);
+        background: linear-gradient(130deg, #fafaff, #f3f7ff);
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      [hidden] {
+        display: none !important;
+      }
+
+      .app {
+        max-width: 1040px;
+        min-height: 100vh;
+        margin: auto;
+        padding: 12px 14px 112px;
+      }
+
+      .content {
+        max-width: 460px;
+        margin: auto;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 800;
+        margin: 0 0 12px;
+      }
+
+      /* PROFILE CARD */
+
+      .profile-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 182px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #7167ff, #7668fa);
+        color: white;
+        text-align: center;
+        padding: 17px 15px 18px;
+        box-shadow: 0 9px 22px #6154fa20;
+      }
+
+      .profile-card::before,
+      .profile-card::after {
+        content: "";
+        position: absolute;
+        width: 235px;
+        height: 235px;
+        border-radius: 50%;
+        border: 1px solid #ffffff13;
+        background: #ffffff0a;
+        pointer-events: none;
+      }
+
+      .profile-card::before {
+        top: -180px;
+        left: -45px;
+      }
+
+      .profile-card::after {
+        bottom: -180px;
+        right: -85px;
+      }
+
+      .avatar {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        border: 3px solid white;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 7px;
+        background: #e7e7ff;
+        position: relative;
+      }
+
+      .avatar-emoji {
+        display: none;
+        place-items: center;
+        font-size: 43px;
+      }
+
+      .profile-name {
+        font-size: 17px;
+        font-weight: 800;
+        position: relative;
+      }
+
+      .grade {
+        font-size: 11px;
+        opacity: 0.85;
+        margin-top: 3px;
+        position: relative;
+      }
+
+      .edit {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: #ffffffdd;
+        color: #6556ef;
+        z-index: 2;
+      }
+
+      .edit svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* PROFILE MENU */
+
+      .group {
+        background: white;
+        border-radius: 18px;
+        margin-top: 13px;
+        padding: 5px 11px;
+        box-shadow: 0 6px 22px #1e286008;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        width: 100%;
+        min-height: 51px;
+        padding: 8px 5px;
+        background: transparent;
+        border: 0;
+        text-align: left;
+        color: #46516d;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .item + .item,
+      .panel + .item {
+        border-top: 1px solid #f0f2f8;
+      }
+
+      .item-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        background: #eff0ff;
+        color: #7668ff;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+
+      .item-icon svg {
+        width: 17px;
+        height: 17px;
+        stroke-width: 1.8;
+      }
+
+      .item-label {
+        flex: 1;
+      }
+
+      .chevron {
+        color: #aab1c1;
+        width: 16px;
+        height: 16px;
+        transition: transform 0.2s;
+      }
+
+      .item[aria-expanded="true"] .chevron {
+        transform: rotate(90deg);
+      }
+
+      .group.secondary .item-icon {
+        background: #eaf4ff;
+        color: #5195ff;
+      }
+
+      .group.secondary .item:nth-child(2) .item-icon {
+        background: #f1eaff;
+        color: #a175ff;
+      }
+
+      /* EXPANDED PANELS */
+
+      .panel {
+        padding: 5px 4px 13px;
+        border-top: 1px solid #f0f2f8;
+      }
+
+      .info-card {
+        background: linear-gradient(145deg, #fafaff, #f5f7ff);
+        border: 1px solid #eef0ff;
+        border-radius: 14px;
+        padding: 4px 14px;
+        margin-top: 8px;
+      }
+
+      .info-row {
+        padding: 13px 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .info-row + .info-row {
+        border-top: 1px solid #e9ecf7;
+      }
+
+      .info-label {
+        color: var(--muted);
+        font-size: 10px;
+        margin-bottom: 5px;
+      }
+
+      .info-value {
+        font-size: 12px;
+        font-weight: 800;
+        color: #263253;
+        overflow-wrap: anywhere;
+      }
+
+      .info-actions {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .small-btn {
+        width: 30px;
+        height: 30px;
+        border: 0;
+        border-radius: 9px;
+        background: #ebeaff;
+        color: var(--primary);
+        display: grid;
+        place-items: center;
+      }
+
+      .small-btn svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      /* LOGOUT */
+
+      .logout {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        background: white;
+        border: 0;
+        border-radius: 17px;
+        width: 100%;
+        margin-top: 13px;
+        min-height: 46px;
+        padding: 10px 17px;
+        color: #ff4545;
+        font-size: 12px;
+        font-weight: 800;
+        box-shadow: 0 6px 22px #1e286008;
+      }
+
+      .logout svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      /* BOTTOM NAVIGATION */
+
+      .nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(100%, 1040px);
+        background: white;
+        box-shadow: 0 -5px 20px #1b205116;
+        border-radius: 24px 24px 0 0;
+        padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        z-index: 10;
+      }
+
+      .nav a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #a3aabb;
+        min-height: 35px;
+      }
+
+      .nav a svg {
+        width: 19px;
+        height: 19px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .nav a.active {
+        color: var(--primary);
+      }
+
+      .nav a.active svg {
+        background: #eeebff;
+        border-radius: 12px;
+        box-sizing: content-box;
+        padding: 8px;
+      }
+
+      /* INNER PAGES */
+
+      .inner-page {
+        display: none;
+        max-width: 460px;
+        margin: auto;
+        padding-bottom: 35px;
+      }
+
+      .inner-page.active {
+        display: block;
+      }
+
+      .inner-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 19px;
+      }
+
+      .back-btn {
+        width: 38px;
+        height: 38px;
+        border: 0;
+        border-radius: 12px;
+        background: white;
+        color: var(--ink);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 3px 12px #18213c0a;
+      }
+
+      .back-btn svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .inner-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .inner-intro {
+        background: linear-gradient(135deg, #7167ff, #7668fa);
+        border-radius: 20px;
+        padding: 24px 20px;
+        text-align: center;
+        color: white;
+        margin-bottom: 16px;
+      }
+
+      .inner-intro h2 {
+        font-size: 21px;
+        margin: 0 0 8px;
+      }
+
+      .inner-intro p {
+        font-size: 12px;
+        line-height: 1.9;
+        margin: 0;
+        opacity: 0.94;
+      }
+
+      /* ABOUT PAGE */
+
+      .about-section {
+        background: white;
+        border-radius: 17px;
+        overflow: hidden;
+        margin-bottom: 13px;
+        box-shadow: 0 5px 18px #1e286009;
+      }
+
+      .about-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #7167ff, #7668fa);
+        color: white;
+        padding: 13px 16px;
+      }
+
+      .about-heading h3 {
+        font-size: 13px;
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .about-heading svg {
+        width: 19px;
+        height: 19px;
+        flex-shrink: 0;
+        stroke: white;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .about-body {
+        padding: 16px;
+        color: #53607b;
+        font-size: 12px;
+        line-height: 2;
+      }
+
+      .about-body p {
+        margin: 0;
+      }
+      .about-body strong {
+        color: #334467;
+      }
+
+      .about-footer {
+        text-align: center;
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 800;
+        padding: 23px 8px;
+      }
+
+      /* HELP PAGE */
+
+      .help-card {
+        background: white;
+        border-radius: 17px;
+        padding: 17px;
+        margin-bottom: 13px;
+        box-shadow: 0 5px 18px #1e286009;
+      }
+
+      .help-card h3 {
+        font-size: 13px;
+        margin: 0 0 14px;
+        color: #334467;
+      }
+
+      .faq {
+        border: 1px solid #edf0fa;
+        border-radius: 12px;
+        margin-top: 9px;
+        overflow: hidden;
+      }
+
+      .faq summary {
+        cursor: pointer;
+        padding: 13px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #405070;
+      }
+
+      .faq p {
+        padding: 0 13px 13px;
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.9;
+        color: #69758f;
+      }
+
+      .help-card label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 9px;
+      }
+
+      .help-card textarea {
+        width: 100%;
+        min-height: 112px;
+        resize: vertical;
+        border: 1px solid #e4e8f3;
+        border-radius: 12px;
+        padding: 12px;
+        outline-color: var(--primary);
+        font-size: 12px;
+      }
+
+      .primary-btn {
+        width: 100%;
+        border: 0;
+        border-radius: 12px;
+        background: var(--primary);
+        color: white;
+        padding: 13px;
+        font-size: 12px;
+        font-weight: 800;
+        margin-top: 12px;
+      }
+
+      .support-email {
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+
+      /* EDIT MODAL */
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: #18213c80;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        z-index: 50;
+      }
+
+      .modal.open {
+        display: flex;
+      }
+
+      .modal-card {
+        background: white;
+        width: 100%;
+        max-width: 390px;
+        padding: 23px;
+        border-radius: 20px;
+      }
+
+      .modal-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin: 0 0 20px;
+      }
+
+      .field-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .avatar-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+
+      .avatar-option {
+        width: 52px;
+        height: 52px;
+        background: #f5f5ff;
+        border: 2px solid transparent;
+        border-radius: 13px;
+        font-size: 27px;
+      }
+
+      .avatar-option.selected {
+        border-color: var(--primary);
+        background: #eeebff;
+      }
+
+      .nickname-input {
+        width: 100%;
+        border: 1px solid #dfe2ee;
+        border-radius: 11px;
+        padding: 12px;
+        outline-color: var(--primary);
+        font-size: 13px;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .modal-actions button {
+        flex: 1;
+        border: 0;
+        border-radius: 11px;
+        padding: 12px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .cancel {
+        background: #f2f3f8;
+        color: #555;
+      }
+      .save {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* TOAST */
+
+      .toast {
+        position: fixed;
+        bottom: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #283251;
+        color: white;
+        padding: 11px 17px;
+        border-radius: 12px;
+        font-size: 11px;
+        z-index: 100;
+        display: none;
+        text-align: center;
+        max-width: 90%;
+      }
+
+      .toast.visible {
+        display: block;
+      }
+
+      @media (min-width: 700px) {
+        .app {
+          padding-top: 25px;
+        }
+        .page-title {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SVG ICONS -->
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+      aria-hidden="true"
+    >
+      <symbol id="i-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21c0-5 3-8 8-8s8 3 8 8" />
+      </symbol>
+
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l-1.8 1.8a1.7 1.7 0 0 0-1.9-.3l-1 .4-.4 2.2h-2.6l-.4-2.2-1-.4a1.7 1.7 0 0 0-1.9.3l-1.8-1.8a1.7 1.7 0 0 0 .3-1.9l-.4-1-2.2-.4v-2.6l2.2-.4.4-1a1.7 1.7 0 0 0-.3-1.9l1.8-1.8a1.7 1.7 0 0 0 1.9.3l1-.4.4-2.2h2.6l.4 2.2 1 .4a1.7 1.7 0 0 0 1.9-.3l1.8 1.8a1.7 1.7 0 0 0-.3 1.9l.4 1 2.2.4v2.6l-2.2.4Z"
+        />
+      </symbol>
+
+      <symbol id="i-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 11v6M12 7h.01" />
+      </symbol>
+
+      <symbol id="i-book" viewBox="0 0 24 24">
+        <path
+          d="M12 7c-3-2-6-2-9-1v13c3-1 6-1 9 1 3-2 6-2 9-1V6c-3-1-6-1-9 1Zm0 0v13"
+        />
+      </symbol>
+
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m9 6 6 6-6 6" />
+      </symbol>
+
+      <symbol id="i-copy" viewBox="0 0 24 24">
+        <rect x="8" y="8" width="12" height="12" rx="2" />
+        <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+      </symbol>
+
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" />
+        <circle cx="12" cy="12" r="3" />
+      </symbol>
+
+      <symbol id="i-eye-off" viewBox="0 0 24 24">
+        <path
+          d="m3 3 18 18M10.6 5.1A11 11 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.1 3.7M6.1 6.1C3.6 7.8 2 12 2 12s4 7 10 7a10 10 0 0 0 4.2-.9"
+        />
+      </symbol>
+
+      <symbol id="i-back" viewBox="0 0 24 24">
+        <path d="m15 18-6-6 6-6" />
+      </symbol>
+
+      <symbol id="i-star" viewBox="0 0 24 24">
+        <path d="m12 2 2.7 6.5L21 11l-6.3 2.5L12 20l-2.7-6.5L3 11l6.3-2.5Z" />
+      </symbol>
+
+      <symbol id="i-target" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="12" cy="12" r="1" />
+      </symbol>
+
+      <symbol id="i-rocket" viewBox="0 0 24 24">
+        <path d="M5 15c2-6 7-11 15-12 0 8-6 14-12 16Z" />
+        <path d="M9 15 5 19M5 11 2 14M13 19l-3 3" />
+        <circle cx="15" cy="9" r="2" />
+      </symbol>
+    </svg>
+
+    <main class="app">
+      <!-- PROFILE PAGE -->
+
+      <div class="content" id="profileView">
+        <h1 class="page-title">პროფილი</h1>
+
+        <section class="profile-card">
+          <button
+            class="edit"
+            aria-label="პროფილის რედაქტირება"
+            onclick="openEdit()"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z" />
+            </svg>
+          </button>
+
+          <img
+            class="avatar"
+            id="profilePhoto"
+            src="img/leaderboard-mariam.png"
+            alt="მოსწავლის ფოტო"
+          />
+
+          <div class="avatar avatar-emoji" id="profileEmoji"></div>
+
+          <div class="profile-name" id="profileName">მარიამი</div>
+          <div class="grade">VII კლასი</div>
+        </section>
+
+        <!-- PERSONAL INFORMATION -->
+
+        <section class="group">
+          <button
+            class="item"
+            id="personalToggle"
+            aria-expanded="false"
+            aria-controls="personalPanel"
+            onclick="togglePanel('personal')"
+          >
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <use href="#i-user" />
+              </svg>
+            </span>
+
+            <span class="item-label">პირადი ინფორმაცია</span>
+
+            <svg
+              class="chevron"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <use href="#i-chevron" />
+            </svg>
+          </button>
+
+          <div class="panel" id="personalPanel" hidden>
+            <div class="info-card">
+              <div class="info-row">
+                <div>
+                  <div class="info-label">სახელი და გვარი</div>
+                  <div class="info-value">მარიამ გიორგაძე</div>
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div>
+                  <div class="info-label">კლასი</div>
+                  <div class="info-value">VII კლასი</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SETTINGS -->
+
+          <button
+            class="item"
+            id="settingsToggle"
+            aria-expanded="false"
+            aria-controls="settingsPanel"
+            onclick="togglePanel('settings')"
+          >
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <use href="#i-settings" />
+              </svg>
+            </span>
+
+            <span class="item-label">პარამეტრები</span>
+
+            <svg
+              class="chevron"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <use href="#i-chevron" />
+            </svg>
+          </button>
+
+          <div class="panel" id="settingsPanel" hidden>
+            <div class="info-card">
+              <!-- LOGIN -->
+
+              <div class="info-row">
+                <div>
+                  <div class="info-label">ლოგინი</div>
+                  <div class="info-value" id="studentLogin">mariam48291</div>
+                </div>
+
+                <div class="info-actions">
+                  <button
+                    class="small-btn"
+                    aria-label="ლოგინის კოპირება"
+                    onclick="copyValue('studentLogin')"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                    >
+                      <use href="#i-copy" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- PASSWORD -->
+
+              <div class="info-row">
+                <div>
+                  <div class="info-label">პაროლი</div>
+                  <div class="info-value" id="passwordDisplay">••••••••</div>
+                </div>
+
+                <div class="info-actions">
+                  <button
+                    class="small-btn"
+                    id="passwordEye"
+                    aria-label="პაროლის გამოჩენა"
+                    onclick="togglePassword()"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                    >
+                      <use id="eyeIcon" href="#i-eye" />
+                    </svg>
+                  </button>
+
+                  <button
+                    class="small-btn"
+                    aria-label="პაროლის კოპირება"
+                    onclick="copyPassword()"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                    >
+                      <use href="#i-copy" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT AND HELP -->
+
+        <section class="group secondary">
+          <button class="item" onclick="showPage('about')">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <use href="#i-info" />
+              </svg>
+            </span>
+
+            <span class="item-label">ჩვენ შესახებ</span>
+
+            <svg
+              class="chevron"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <use href="#i-chevron" />
+            </svg>
+          </button>
+
+          <button class="item" onclick="showPage('help')">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <use href="#i-book" />
+              </svg>
+            </span>
+
+            <span class="item-label">დახმარება</span>
+
+            <svg
+              class="chevron"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <use href="#i-chevron" />
+            </svg>
+          </button>
+        </section>
+
+        <button class="logout" onclick="window.location.href = 'index.html'">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M10 17l5-5-5-5M15 12H3M12 3h8v18h-8" />
+          </svg>
+          გასვლა
+        </button>
+      </div>
+
+      <!-- ABOUT PAGE -->
+
+      <section class="inner-page" id="aboutPage">
+        <header class="inner-header">
+          <button
+            class="back-btn"
+            aria-label="უკან დაბრუნება"
+            onclick="goBack()"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="#i-back" />
+            </svg>
+          </button>
+          <h1 class="inner-title">ჩვენ შესახებ</h1>
+        </header>
+
+        <div class="inner-intro">
+          <h2>AIIA ✨</h2>
+          <p>აქ სწავლა თავგადასავლად იქცევა</p>
+        </div>
+
+        <article class="about-section">
+          <div class="about-heading">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <use href="#i-book" />
+            </svg>
+            <h3>რა არის AIIA?</h3>
+          </div>
+          <div class="about-body">
+            <p>
+              AIIA შენი პერსონალური სასწავლო სივრცეა, სადაც შეგიძლია ისწავლო
+              ახალი თემები, შეასრულო სავარჯიშოები და შეამოწმო შენი ცოდნა.
+            </p>
+          </div>
+        </article>
+
+        <article class="about-section">
+          <div class="about-heading">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <use href="#i-star" />
+            </svg>
+            <h3>გაიცანი მია</h3>
+          </div>
+          <div class="about-body">
+            <p>
+              მია შენი პერსონალური AI მენტორია, რომელიც ყოველთვის მზადაა
+              დაგეხმაროს. ის გიხსნის რთულ საკითხებს მარტივად, გპასუხობს
+              კითხვებზე და გეხმარება შეცდომების გამოსწორებაში.
+            </p>
+          </div>
+        </article>
+
+        <article class="about-section">
+          <div class="about-heading">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <use href="#i-target" />
+            </svg>
+            <h3>ჩვენი მისია</h3>
+          </div>
+          <div class="about-body">
+            <p>
+              ჩვენი მისიაა, ყველა მოსწავლეს ჰქონდეს შესაძლებლობა, ისწავლოს
+              საკუთარი ტემპით, მიიღოს საჭირო დახმარება და არცერთი გაუგებარი
+              საკითხის წინაშე არ დარჩეს მარტო.
+            </p>
+          </div>
+        </article>
+
+        <article class="about-section">
+          <div class="about-heading">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <use href="#i-target" />
+            </svg>
+            <h3>ჩვენი მიზანი</h3>
+          </div>
+          <div class="about-body">
+            <p>
+              ჩვენი მიზანია, თითოეულ მოსწავლეს ჰყავდეს პერსონალური AI მენტორი,
+              რომელიც დაეხმარება რთული საკითხების გაგებაში, ცოდნის გაღრმავებასა
+              და საკუთარი შესაძლებლობების განვითარებაში. გვინდა, სწავლა
+              ყველასთვის მარტივი, საინტერესო და ხელმისაწვდომი გავხადოთ.
+            </p>
+          </div>
+        </article>
+
+        <article class="about-section">
+          <div class="about-heading">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <use href="#i-rocket" />
+            </svg>
+            <h3>ჩვენი ხედვა</h3>
+          </div>
+          <div class="about-body">
+            <p>
+              <strong
+                >ჩვენ გვჯერა თითოეული მოსწავლის უსაზღვრო
+                შესაძლებლობების.</strong
+              >
+              გვჯერა, რომ ყველას შეუძლია ნებისმიერი საკითხის სწავლა, თუ მას
+              სწორად აუხსნიან, საჭირო დროს დაეხმარებიან და საკუთარი ტემპით
+              განვითარების შესაძლებლობას მისცემენ.
+            </p>
+            <p style="margin-top: 10px">
+              ჩვენ გვინდა შევქმნათ მომავალი, სადაც ხარისხიანი განათლება
+              ყველასთვის ხელმისაწვდომია და თითოეულ მოსწავლეს შეუძლია საკუთარი
+              პოტენციალის სრულად გამოვლენა.
+            </p>
+          </div>
+        </article>
+
+        <div class="about-footer">AIIA — აქ სწავლა თავგადასავლად იქცევა.</div>
+      </section>
+
+      <!-- HELP PAGE -->
+
+      <section class="inner-page" id="helpPage">
+        <header class="inner-header">
+          <button
+            class="back-btn"
+            aria-label="უკან დაბრუნება"
+            onclick="goBack()"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="#i-back" />
+            </svg>
+          </button>
+          <h1 class="inner-title">დახმარება</h1>
+        </header>
+
+        <div class="help-card">
+          <h3>ხშირად დასმული კითხვები</h3>
+
+          <details class="faq">
+            <summary>როგორ დავიწყო სწავლა?</summary>
+            <p>
+              გადადით მთავარ გვერდზე, აირჩიეთ სასურველი საგანი და გახსენით თემა.
+              შეგიძლიათ გაეცნოთ ახსნას, შეასრულოთ სავარჯიშოები და შეამოწმოთ
+              ცოდნა.
+            </p>
+          </details>
+
+          <details class="faq">
+            <summary>როგორ გამოვიყენო მია?</summary>
+            <p>
+              ქვედა ნავიგაციაში აირჩიეთ მიას აიქონი. დაუსვით კითხვა ან სთხოვეთ
+              რთული საკითხის ახსნა. მია დაგეხმარებათ თემის უკეთ გაგებაში.
+            </p>
+          </details>
+        </div>
+
+        <div class="help-card">
+          <h3>ტექნიკური პრობლემის შეტყობინება</h3>
+
+          <form id="supportForm" onsubmit="submitSupport(event)">
+            <label for="problemText">აღწერე პრობლემა</label>
+            <textarea
+              id="problemText"
+              required
+              placeholder="რა პრობლემა შეგექმნა?"
+            ></textarea>
+            <button class="primary-btn" type="submit">
+              შეტყობინების გაგზავნა
+            </button>
+          </form>
+        </div>
+
+        <div class="help-card">
+          <h3>დაგვიკავშირდი</h3>
+
+          <p
+            style="
+              font-size: 12px;
+              color: #69758f;
+              line-height: 1.8;
+              margin: 0 0 8px;
+            "
+          >
+            დახმარებისთვის შეგიძლია მოგვწერო მხარდაჭერის ელფოსტაზე.
+          </p>
+
+          <a class="support-email" href="mailto:infoaiiaedu@gmail.com">
+            infoaiiaedu@gmail.com
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <nav class="nav" id="bottomNav" aria-label="ქვედა ნავიგაცია">
+      <a href="student-home.html" title="მთავარი" aria-label="მთავარი">
+        <svg viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7" />
+          <path d="M5 9v11h14V9" />
+          <path d="M9 20v-7h6v7" />
+        </svg>
+      </a>
+
+      <a href="student-mia.html" title="AI მენტორი" aria-label="AI მენტორი">
+        <svg viewBox="0 0 24 24">
+          <path d="M5 10a7 7 0 0 1 14 0v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z" />
+          <path d="M9 12h.01M15 12h.01M9 16c2 1 4 1 6 0" />
+          <path d="M12 3V1" />
+        </svg>
+      </a>
+
+      <a
+        href="student-achievements.html"
+        title="მიღწევები"
+        aria-label="მიღწევები"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M8 4h8v7a4 4 0 0 1-8 0z" />
+          <path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4" />
+          <path d="M12 15v4M8 21h8" />
+        </svg>
+      </a>
+
+      <a
+        href="student-profile.html"
+        class="active"
+        aria-current="page"
+        title="პროფილი"
+        aria-label="პროფილი"
+      >
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="3.5" />
+          <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+        </svg>
+      </a>
+    </nav>
+
+    <!-- EDIT PROFILE MODAL -->
+
+    <div
+      class="modal"
+      id="editModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="editTitle"
+    >
+      <div class="modal-card">
+        <h2 class="modal-title" id="editTitle">პროფილის რედაქტირება</h2>
+
+        <label class="field-label">აირჩიე ავატარი</label>
+
+        <div class="avatar-options">
+          <button
+            class="avatar-option"
+            data-avatar="👩🏻‍🎓"
+            onclick="chooseAvatar(this)"
+          >
+            👩🏻‍🎓
+          </button>
+          <button
+            class="avatar-option"
+            data-avatar="👨🏻‍🎓"
+            onclick="chooseAvatar(this)"
+          >
+            👨🏻‍🎓
+          </button>
+          <button
+            class="avatar-option"
+            data-avatar="🦊"
+            onclick="chooseAvatar(this)"
+          >
+            🦊
+          </button>
+          <button
+            class="avatar-option"
+            data-avatar="🐼"
+            onclick="chooseAvatar(this)"
+          >
+            🐼
+          </button>
+          <button
+            class="avatar-option"
+            data-avatar="🚀"
+            onclick="chooseAvatar(this)"
+          >
+            🚀
+          </button>
+        </div>
+
+        <label class="field-label" for="nickname"> მეტსახელი </label>
+
+        <input
+          class="nickname-input"
+          id="nickname"
+          maxlength="24"
+          placeholder="შეიყვანე მეტსახელი"
+        />
+
+        <div class="modal-actions">
+          <button class="cancel" onclick="closeEdit()">გაუქმება</button>
+          <button class="save" onclick="saveProfile()">შენახვა</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script>
+      /* DEMO PROFILE DATA */
+
+      const defaultName = "მარიამი";
+      const demoPassword = "Demo48291!";
+
+      let savedNickname = localStorage.getItem("aiia_student_nickname") || "";
+
+      let savedAvatar = localStorage.getItem("aiia_student_avatar") || "";
+
+      let selectedAvatar = savedAvatar;
+      let passwordVisible = false;
+      let toastTimeout;
+
+      /* PROFILE */
+
+      function renderProfile() {
+        document.getElementById("profileName").textContent =
+          savedNickname || defaultName;
+
+        const photo = document.getElementById("profilePhoto");
+        const emoji = document.getElementById("profileEmoji");
+
+        if (savedAvatar) {
+          photo.style.display = "none";
+          emoji.style.display = "grid";
+          emoji.textContent = savedAvatar;
+        } else {
+          photo.style.display = "block";
+          emoji.style.display = "none";
+        }
+      }
+
+      /* EXPAND PANELS */
+
+      function togglePanel(type) {
+        const id = type === "personal" ? "personalPanel" : "settingsPanel";
+
+        const toggleId =
+          type === "personal" ? "personalToggle" : "settingsToggle";
+
+        const panel = document.getElementById(id);
+        const toggle = document.getElementById(toggleId);
+
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+
+        panel.hidden = expanded;
+        toggle.setAttribute("aria-expanded", String(!expanded));
+
+        if (type === "settings" && expanded) {
+          hidePassword();
+        }
+      }
+
+      /* PASSWORD */
+
+      function togglePassword() {
+        passwordVisible = !passwordVisible;
+
+        document.getElementById("passwordDisplay").textContent = passwordVisible
+          ? demoPassword
+          : "••••••••";
+
+        document
+          .getElementById("passwordEye")
+          .setAttribute(
+            "aria-label",
+            passwordVisible ? "პაროლის დამალვა" : "პაროლის გამოჩენა",
+          );
+
+        document
+          .getElementById("eyeIcon")
+          .setAttribute("href", passwordVisible ? "#i-eye-off" : "#i-eye");
+      }
+
+      function hidePassword() {
+        passwordVisible = false;
+
+        document.getElementById("passwordDisplay").textContent = "••••••••";
+
+        document
+          .getElementById("passwordEye")
+          .setAttribute("aria-label", "პაროლის გამოჩენა");
+
+        document.getElementById("eyeIcon").setAttribute("href", "#i-eye");
+      }
+
+      /* COPY */
+
+      async function copyText(value) {
+        try {
+          await navigator.clipboard.writeText(value);
+          showToast("დაკოპირებულია");
+        } catch (error) {
+          showToast("კოპირება ვერ მოხერხდა");
+        }
+      }
+
+      function copyValue(id) {
+        const value = document.getElementById(id).textContent;
+        copyText(value);
+      }
+
+      function copyPassword() {
+        copyText(demoPassword);
+      }
+
+      /* EDIT PROFILE */
+
+      function openEdit() {
+        selectedAvatar = savedAvatar;
+
+        document.getElementById("nickname").value = savedNickname;
+
+        updateAvatarSelection();
+
+        document.getElementById("editModal").classList.add("open");
+
+        document.getElementById("nickname").focus();
+      }
+
+      function closeEdit() {
+        document.getElementById("editModal").classList.remove("open");
+      }
+
+      function chooseAvatar(button) {
+        selectedAvatar = button.dataset.avatar;
+        updateAvatarSelection();
+      }
+
+      function updateAvatarSelection() {
+        document.querySelectorAll(".avatar-option").forEach((button) => {
+          button.classList.toggle(
+            "selected",
+            button.dataset.avatar === selectedAvatar,
+          );
+        });
+      }
+
+      function saveProfile() {
+        savedNickname = document.getElementById("nickname").value.trim();
+
+        savedAvatar = selectedAvatar;
+
+        localStorage.setItem("aiia_student_nickname", savedNickname);
+
+        localStorage.setItem("aiia_student_avatar", savedAvatar);
+
+        renderProfile();
+        closeEdit();
+        showToast("პროფილი განახლებულია");
+      }
+
+      /* INTERNAL PAGES */
+
+      function showPage(page) {
+        const id = page === "about" ? "aboutPage" : "helpPage";
+
+        document.getElementById("profileView").hidden = true;
+        document.getElementById("bottomNav").hidden = true;
+
+        document.querySelectorAll(".inner-page").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        document.getElementById(id).classList.add("active");
+
+        document.querySelector(".app").style.paddingBottom = "30px";
+
+        window.scrollTo(0, 0);
+      }
+
+      function goBack() {
+        document.querySelectorAll(".inner-page").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        document.getElementById("profileView").hidden = false;
+        document.getElementById("bottomNav").hidden = false;
+
+        document.querySelector(".app").style.paddingBottom = "112px";
+
+        window.scrollTo(0, 0);
+      }
+
+      /* HELP FORM — DEMO */
+
+      function submitSupport(event) {
+        event.preventDefault();
+
+        showToast(
+          "გაგზავნა ჩაირთვება მხარდაჭერის სისტემასთან დაკავშირების შემდეგ",
+        );
+      }
+
+      /* TOAST */
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+
+        toast.textContent = message;
+        toast.classList.add("visible");
+
+        clearTimeout(toastTimeout);
+
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("visible");
+        }, 2500);
+      }
+
+      /* EVENTS */
+
+      document
+        .getElementById("editModal")
+        .addEventListener("click", (event) => {
+          if (event.target.id === "editModal") {
+            closeEdit();
+          }
+        });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (document.getElementById("editModal").classList.contains("open")) {
+            closeEdit();
+          } else if (document.querySelector(".inner-page.active")) {
+            goBack();
+          }
+        }
+      });
+
+      renderProfile();
+    </script>
+  </body>
+</html>

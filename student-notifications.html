@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ka">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AIIA | შეტყობინებები</title>
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --background: #f8fafc;
+        --text: #172033;
+        --muted: #64748b;
+        --border: #e9edf3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--background);
+        font-family: "Noto Sans Georgian", Arial, sans-serif;
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 480px;
+        min-height: 100vh;
+        margin: auto;
+        background: var(--background);
+      }
+
+      /* HEADER */
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        background: white;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: #f0edff;
+        color: var(--primary);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .back svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* UNREAD BADGE */
+
+      .unread-badge {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        padding: 9px 12px;
+        border-radius: 10px;
+        background: var(--primary);
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      /* CONTENT */
+
+      .content {
+        padding: 8px 14px 30px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 22px 0 12px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .mark-all {
+        border: none;
+        background: none;
+        color: var(--primary);
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 4px 0;
+      }
+
+      /* NOTIFICATION CARD */
+
+      .notification {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px rgba(25, 35, 65, 0.035);
+      }
+
+      .notification.unread {
+        border-color: #c9c3ff;
+      }
+
+      /* CARD HEADER */
+
+      .notification-heading {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 13px 14px;
+        cursor: pointer;
+      }
+
+      /* UNREAD BACKGROUNDS */
+
+      .notification.unread.ai .notification-heading {
+        background: #efedff;
+      }
+
+      .notification.unread.activity .notification-heading {
+        background: #fff1de;
+      }
+
+      /* READ BACKGROUND */
+
+      .notification:not(.unread) .notification-heading {
+        background: #f3f4f8;
+      }
+
+      /* MIA AVATAR */
+
+      .mia-avatar {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+        border: 2px solid white;
+        background: white;
+        opacity: 1;
+        filter: none;
+      }
+
+      /* ACTIVITY ICON */
+
+      .notification-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 12px;
+        background: #ffe1b3;
+        font-size: 23px;
+      }
+
+      /* TITLE */
+
+      .notification-top {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .notification-title {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.5;
+        color: var(--text);
+      }
+
+      /* UNREAD DOT */
+
+      .dot {
+        width: 11px;
+        height: 11px;
+        min-width: 11px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+      }
+
+      /* BODY */
+
+      .notification-body {
+        padding: 14px;
+      }
+
+      .notification-text {
+        margin: 0 0 13px;
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      .notification-time {
+        display: block;
+        margin-top: 12px;
+        font-size: 10px;
+        color: #94a3b8;
+      }
+
+      /* BUTTONS */
+
+      .actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .action-btn {
+        padding: 10px 12px;
+        border-radius: 9px;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+
+      .action-btn.primary {
+        background: var(--primary);
+        color: white;
+        border: 1px solid var(--primary);
+      }
+
+      .action-btn.secondary {
+        background: #f5f3ff;
+        color: var(--primary);
+        border: 1px solid #ddd9ff;
+      }
+
+      .action-btn:hover {
+        opacity: 0.88;
+      }
+
+      /* READ STATE - KEEP COLORS */
+
+      .notification:not(.unread) .notification-title {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .notification:not(.unread) .notification-text {
+        color: var(--muted);
+      }
+
+      .notification:not(.unread) .mia-avatar {
+        opacity: 1;
+        filter: none;
+      }
+
+      /* EMPTY STATE */
+
+      .empty {
+        padding: 70px 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 360px) {
+        .header {
+          gap: 8px;
+          padding: 12px;
+        }
+
+        .header h1 {
+          font-size: 15px;
+        }
+
+        .unread-badge {
+          padding: 8px;
+          font-size: 10px;
+        }
+
+        .action-btn {
+          font-size: 10px;
+          padding: 9px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <!-- HEADER -->
+
+      <header class="header">
+        <a
+          class="back"
+          href="./student-home.html"
+          aria-label="მთავარ გვერდზე დაბრუნება"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </a>
+
+        <h1>შეტყობინებები</h1>
+
+        <!-- UNREAD COUNT -->
+
+        <div class="unread-badge" id="unreadBadge" aria-live="polite"></div>
+      </header>
+
+      <!-- NOTIFICATION LIST -->
+
+      <main class="content" id="notificationList"></main>
+    </div>
+
+    <script>
+      /*
+      AIIA MVP DEMO
+
+      შეტყობინებების სტატუსი ინახება
+      მხოლოდ გვერდის მიმდინარე გახსნისას.
+
+      გვერდის ხელახლა გახსნისას
+      ორი დღევანდელი შეტყობინება
+      ისევ წაუკითხავი იქნება.
+    */
+
+      const initialNotifications = [
+        {
+          id: 1,
+          type: "ai",
+          title: "მიას რჩევა 💜",
+          message:
+            "შევამჩნიე, რომ წილადების შეკრების სავარჯიშოებში რამდენიმე შეცდომა დაუშვი. გირჩევ, კიდევ ერთხელ ივარჯიშო ან დამატებითი სავარჯიშოები შექმნა.",
+          time: "10 წუთის წინ",
+          group: "დღეს",
+          read: false,
+          topicUrl: "student-math.html",
+          practiceUrl: "student-mia.html",
+        },
+
+        {
+          id: 2,
+          type: "activity",
+          title: "შეინარჩუნე შენი სერია! 🔥",
+          message:
+            "დღეს ჯერ არ გივარჯიშია. დაუთმე სწავლას 10 წუთი და შეინარჩუნე შენი აქტივობის სერია!",
+          time: "2 საათის წინ",
+          group: "დღეს",
+          read: false,
+          topicUrl: "student-home.html",
+        },
+
+        {
+          id: 3,
+          type: "ai",
+          title: "მიას რჩევა 💜",
+          message:
+            "ნატურალური რიცხვების შედარების სავარჯიშოებში რამდენიმე შეცდომა დაუშვი. გირჩევ, ეს თემა კიდევ ერთხელ გაიარო და ცოდნა გაიმყარო.",
+          time: "გუშინ, 16:30",
+          group: "გუშინ",
+          read: true,
+          topicUrl: "student-math.html",
+          practiceUrl: "student-mia.html",
+        },
+      ];
+
+      /*
+      ყოველ ახალ ჩატვირთვაზე
+      საწყისი მონაცემების ახალი ასლი იქმნება.
+    */
+
+      let notifications = initialNotifications.map((item) => ({ ...item }));
+
+      /* MARK ONE AS READ */
+
+      function markAsRead(id) {
+        const item = notifications.find((n) => n.id === id);
+
+        if (!item || item.read) return;
+
+        item.read = true;
+
+        renderNotifications();
+      }
+
+      /* MARK ALL AS READ */
+
+      function markAllRead() {
+        notifications.forEach((item) => {
+          item.read = true;
+        });
+
+        renderNotifications();
+      }
+
+      /* OPEN ACTION */
+
+      function openAction(id, action) {
+        const item = notifications.find((n) => n.id === id);
+
+        if (!item) return;
+
+        markAsRead(id);
+
+        if (item.type === "ai") {
+          if (action === "retry") {
+            window.location.href = item.topicUrl;
+          }
+
+          if (action === "generate") {
+            window.location.href = item.practiceUrl;
+          }
+        }
+
+        if (item.type === "activity") {
+          window.location.href = item.topicUrl;
+        }
+      }
+
+      /* CREATE BUTTON */
+
+      function createButton(label, variant, callback) {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "action-btn " + variant;
+        button.textContent = label;
+
+        button.addEventListener("click", callback);
+
+        return button;
+      }
+
+      /* UPDATE UNREAD BADGE */
+
+      function updateUnreadBadge() {
+        const unreadCount = notifications.filter((item) => !item.read).length;
+
+        const badge = document.getElementById("unreadBadge");
+
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount + " წაუკითხავი";
+
+          badge.style.display = "flex";
+        } else {
+          badge.textContent = "";
+          badge.style.display = "none";
+        }
+
+        return unreadCount;
+      }
+
+      /* RENDER NOTIFICATIONS */
+
+      function renderNotifications() {
+        const container = document.getElementById("notificationList");
+
+        container.innerHTML = "";
+
+        const unreadCount = updateUnreadBadge();
+
+        const groups = ["დღეს", "გუშინ", "უფრო ადრე"];
+
+        groups.forEach((group) => {
+          const items = notifications.filter((item) => item.group === group);
+
+          if (items.length === 0) return;
+
+          /* GROUP HEADER */
+
+          const groupHeader = document.createElement("div");
+
+          groupHeader.className = "section-title";
+
+          const sectionTitle = document.createElement("span");
+
+          sectionTitle.textContent = group;
+
+          groupHeader.appendChild(sectionTitle);
+
+          /* MARK ALL BUTTON */
+
+          if (group === "დღეს" && unreadCount > 0) {
+            const markButton = document.createElement("button");
+
+            markButton.type = "button";
+            markButton.className = "mark-all";
+            markButton.textContent = "ყველას წაკითხვა";
+
+            markButton.addEventListener("click", markAllRead);
+
+            groupHeader.appendChild(markButton);
+          }
+
+          container.appendChild(groupHeader);
+
+          /* NOTIFICATION CARDS */
+
+          items.forEach((item) => {
+            const card = document.createElement("article");
+
+            card.className =
+              "notification " + item.type + (item.read ? "" : " unread");
+
+            /* COLORED HEADING */
+
+            const heading = document.createElement("div");
+
+            heading.className = "notification-heading";
+
+            /* MIA PHOTO OR ACTIVITY ICON */
+
+            let icon;
+
+            if (item.type === "ai") {
+              icon = document.createElement("img");
+
+              icon.className = "mia-avatar";
+              icon.src = "img/mia.png";
+              icon.alt = "მია";
+            } else {
+              icon = document.createElement("div");
+
+              icon.className = "notification-icon";
+              icon.textContent = "🔥";
+            }
+
+            /* TITLE */
+
+            const top = document.createElement("div");
+
+            top.className = "notification-top";
+
+            const title = document.createElement("h3");
+
+            title.className = "notification-title";
+            title.textContent = item.title;
+
+            top.appendChild(title);
+
+            /* UNREAD DOT */
+
+            if (!item.read) {
+              const dot = document.createElement("span");
+
+              dot.className = "dot";
+
+              top.appendChild(dot);
+            }
+
+            heading.append(icon, top);
+
+            /* BODY */
+
+            const body = document.createElement("div");
+
+            body.className = "notification-body";
+
+            const message = document.createElement("p");
+
+            message.className = "notification-text";
+            message.textContent = item.message;
+
+            /* ACTION BUTTONS */
+
+            const actions = document.createElement("div");
+
+            actions.className = "actions";
+
+            if (item.type === "ai") {
+              actions.appendChild(
+                createButton("თავიდან გავლა", "primary", () =>
+                  openAction(item.id, "retry"),
+                ),
+              );
+
+              actions.appendChild(
+                createButton("დამატებითი სავარჯიშოები", "secondary", () =>
+                  openAction(item.id, "generate"),
+                ),
+              );
+            }
+
+            if (item.type === "activity") {
+              actions.appendChild(
+                createButton("სწავლის გაგრძელება →", "primary", () =>
+                  openAction(item.id, "continue"),
+                ),
+              );
+            }
+
+            /* TIME */
+
+            const time = document.createElement("span");
+
+            time.className = "notification-time";
+            time.textContent = item.time;
+
+            body.append(message, actions, time);
+
+            card.append(heading, body);
+
+            /* MARK CARD AS READ */
+
+            card.addEventListener("click", (event) => {
+              if (event.target.closest("button")) {
+                return;
+              }
+
+              markAsRead(item.id);
+            });
+
+            container.appendChild(card);
+          });
+        });
+
+        /* EMPTY STATE */
+
+        if (notifications.length === 0) {
+          container.innerHTML = `
+          <div class="empty">
+            🔔 შეტყობინებები ჯერ არ გაქვს
+          </div>
+        `;
+        }
+      }
+
+      /* INITIAL RENDER */
+
+      renderNotifications();
+    </script>
+  </body>
+</html>

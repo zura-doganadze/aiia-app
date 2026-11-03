@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AIIA — მათემატიკა</title>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -37,16 +36,13 @@
       a {
         font: inherit;
       }
-
       button {
         cursor: pointer;
       }
-
       a {
         color: inherit;
         text-decoration: none;
       }
-
       svg {
         display: block;
       }
@@ -55,25 +51,24 @@
         width: 100%;
         max-width: 950px;
         margin: 0 auto;
-        padding: 18px 17px 115px;
+        padding: 14px 17px 115px;
       }
 
       /* HEADER */
-
       .header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 27px;
+        margin-bottom: 10px;
       }
 
       .menu {
-        width: 57px;
-        height: 57px;
-        flex: 0 0 57px;
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
         border: 0;
-        background: #ffffff;
+        background: white;
         border-radius: 19px;
         box-shadow: 0 3px 16px #2632580a;
         display: grid;
@@ -86,13 +81,13 @@
       }
 
       .header-title h1 {
-        font-size: 22px;
+        font-size: 20px;
         margin: 0 0 2px;
         font-weight: 800;
       }
 
       .header-title p {
-        font-size: 13px;
+        font-size: 12px;
         color: #7776ad;
         margin: 0;
       }
@@ -101,13 +96,13 @@
         display: flex;
         align-items: center;
         gap: 7px;
-        padding: 14px;
+        padding: 10px 12px;
         border-radius: 19px;
-        background: #ffffff;
+        background: white;
         box-shadow: 0 3px 16px #2632580a;
         color: #7776ad;
         font-weight: 800;
-        font-size: 14px;
+        font-size: 13px;
         white-space: nowrap;
       }
 
@@ -116,25 +111,24 @@
       }
 
       /* PROGRESS */
-
       .progress-card {
         border: 1px solid #e1e0e9;
         border-radius: 23px;
-        padding: 18px 13px;
+        padding: 12px;
         display: flex;
         align-items: center;
         gap: 12px;
-        background: #ffffff;
+        background: white;
       }
 
       .ring {
-        height: 76px;
-        width: 76px;
-        border: 7px solid #eeecf7;
+        height: 60px;
+        width: 60px;
+        border: 6px solid #eeecf7;
         border-radius: 50%;
         display: grid;
         place-items: center;
-        flex: 0 0 76px;
+        flex: 0 0 60px;
         color: #7776ad;
         font-size: 19px;
         font-weight: 800;
@@ -146,17 +140,16 @@
       }
 
       .progress-body h2 {
-        font-size: clamp(12px, 3.5vw, 16px);
+        font-size: 15px;
         margin: 0 0 4px;
         font-weight: 800;
         white-space: nowrap;
-        letter-spacing: -0.3px;
       }
 
       .progress-body p {
         color: #a0a5b3;
         font-size: 11px;
-        margin: 0 0 11px;
+        margin: 0 0 7px;
       }
 
       .track {
@@ -175,28 +168,27 @@
       }
 
       .stat-icon {
-        width: 43px;
-        height: 43px;
+        width: 36px;
+        height: 36px;
         display: grid;
         place-items: center;
         background: #f0edff;
         border-radius: 15px;
         color: #655be3;
-        flex: 0 0 43px;
+        flex: 0 0 36px;
       }
 
       /* CHAPTERS */
-
       .section-top {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 8px;
-        margin: 29px 0 15px;
+        margin: 17px 0 9px;
       }
 
       .section-top h2 {
-        font-size: 20px;
+        font-size: 18px;
         margin: 0;
         font-weight: 800;
       }
@@ -212,47 +204,55 @@
 
       .chapters {
         display: flex;
-        gap: 12px;
+        gap: 10px;
         overflow-x: auto;
-        padding: 2px 1px 18px;
-        scrollbar-width: thin;
+        padding: 2px 1px 0;
+        margin-bottom: 16px;
+        scrollbar-width: none;
+      }
+
+      .chapters::-webkit-scrollbar {
+        display: none;
       }
 
       .chapter-card {
-        border: 0;
-        flex: 0 0 160px;
-        height: 132px;
+        flex: 0 0 clamp(124px, 39vw, 146px);
+        height: 106px;
         text-align: left;
         position: relative;
         border-radius: 22px;
-        padding: 14px;
+        padding: 10px 12px;
         background: #f3f1ff;
         color: #5650bb;
         border: 1px solid #e9e5ff;
-        box-shadow: none;
         transition:
           background 0.2s,
           color 0.2s,
           transform 0.2s;
       }
 
+      .chapter-upcoming {
+        opacity: 0.75;
+        cursor: default;
+      }
+
       .chapter-card.active {
         background: linear-gradient(135deg, #6766f5, #4c48d9);
-        color: #ffffff;
+        color: white;
         border-color: transparent;
         box-shadow: 0 8px 15px #5b58c629;
       }
 
-      .chapter-card:active {
+      button.chapter-card:active {
         transform: scale(0.98);
       }
 
       .chapter-number {
         position: absolute;
         top: 14px;
-        left: 14px;
-        width: 34px;
-        height: 34px;
+        left: 11px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         background: #e2dfff;
         color: #615de6;
@@ -263,13 +263,13 @@
       }
 
       .chapter-card.active .chapter-number {
-        background: #ffffff;
+        background: white;
         color: #615de6;
       }
 
       .chapter-count {
         position: absolute;
-        right: 14px;
+        right: 11px;
         top: 18px;
         font-size: 13px;
         font-weight: 800;
@@ -277,20 +277,19 @@
 
       .chapter-name {
         position: absolute;
-        bottom: 15px;
-        left: 14px;
+        bottom: 10px;
+        left: 11px;
         right: 12px;
-        font-size: 13px;
+        font-size: 15px;
         line-height: 1.4;
         font-weight: 800;
       }
 
       /* LESSONS */
-
       .lesson-panel {
         border: 1px solid #e9e6f3;
         border-radius: 25px;
-        padding: 16px 12px 18px;
+        padding: 12px 7px;
         background: #faf9ff;
       }
 
@@ -306,7 +305,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 19px;
+        font-size: 18px;
         line-height: 1.4;
         margin: 0;
         font-weight: 800;
@@ -333,17 +332,17 @@
       .lessons {
         display: flex;
         flex-direction: column;
-        gap: 11px;
+        gap: 8px;
       }
 
       .lesson {
         width: 100%;
         display: flex;
         align-items: center;
-        gap: 12px;
-        min-height: 79px;
-        padding: 13px 14px;
-        background: #ffffff;
+        gap: 9px;
+        min-height: 65px;
+        padding: 9px 10px;
+        background: white;
         border: 1px solid #e5e3ee;
         border-radius: 21px;
         text-align: left;
@@ -351,7 +350,7 @@
 
       .lesson-index {
         font-weight: 800;
-        font-size: 15px;
+        font-size: 14px;
         flex: 0 0 38px;
       }
 
@@ -374,7 +373,6 @@
       .status.in-progress {
         background: #ffa331;
       }
-
       .status.done {
         background: #22c55e;
       }
@@ -386,52 +384,82 @@
         flex: none;
       }
 
-      /* BOTTOM NAVIGATION */
-
+      /* BOTTOM NAVIGATION — SAME AS STUDENT HOME */
       .bottom-nav {
         position: fixed;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: min(100%, 950px);
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        background: #ffffff;
+        width: min(100%, 1040px);
+        padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
         border-radius: 25px 25px 0 0;
-        box-shadow: 0 -5px 24px #28274c12;
-        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-        z-index: 10;
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: 0 -6px 25px rgba(26, 31, 67, 0.08);
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        z-index: 20;
       }
 
       .nav-link {
         display: flex;
-        align-items: center;
         flex-direction: column;
-        gap: 4px;
-        font-size: 10px;
+        align-items: center;
+        gap: 5px;
+        min-width: 0;
+        color: #9297a7;
+        font-size: 11px;
         font-weight: 700;
-        color: #9599a8;
       }
 
       .nav-icon {
-        width: 40px;
+        width: 39px;
         height: 36px;
+        border-radius: 13px;
         display: grid;
         place-items: center;
-        border-radius: 12px;
       }
 
       .nav-icon svg {
-        width: 22px;
-        height: 22px;
+        width: 23px;
+        height: 23px;
       }
 
       .nav-link.active {
-        color: #5949df;
+        color: #553de4;
       }
 
       .nav-link.active .nav-icon {
         background: #eeebff;
+      }
+
+      .nav-link span:last-child {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 400px) {
+        .bottom-nav {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+
+        .nav-link {
+          font-size: 9px;
+          gap: 3px;
+        }
+
+        .nav-icon {
+          width: 34px;
+          height: 33px;
+        }
+
+        .nav-icon svg {
+          width: 21px;
+          height: 21px;
+        }
       }
 
       @media (max-width: 360px) {
@@ -439,29 +467,13 @@
           padding-left: 12px;
           padding-right: 12px;
         }
-
         .progress-card {
           padding: 14px 10px;
           gap: 9px;
         }
-
-        .ring {
-          width: 65px;
-          height: 65px;
-          flex-basis: 65px;
-          font-size: 17px;
-        }
-
-        .stat-icon {
-          width: 36px;
-          height: 36px;
-          flex-basis: 36px;
-        }
-
         .progress-body h2 {
           font-size: 12px;
         }
-
         .lesson-title {
           font-size: 13px;
         }
@@ -471,30 +483,28 @@
         .app {
           padding: 28px 28px 125px;
         }
-
         .chapters {
           gap: 16px;
         }
-
         .chapter-card {
           flex-basis: 190px;
-          height: 145px;
+          height: 120px;
         }
-
         .lesson-panel {
-          padding: 22px;
+          padding: 16px 12px;
         }
-
         .lesson {
-          min-height: 85px;
+          min-height: 72px;
         }
-
         .header-title h1 {
-          font-size: 26px;
+          font-size: 24px;
         }
-
         .progress-body h2 {
           font-size: 18px;
+        }
+        .section-top h2,
+        .lesson-heading h2 {
+          font-size: 20px;
         }
       }
 
@@ -507,6 +517,7 @@
 
   <body>
     <main class="app">
+      <!-- HEADER -->
       <header class="header">
         <button
           class="menu"
@@ -532,24 +543,19 @@
           <p>V კლასი</p>
         </div>
 
-        <div class="xp">
-          <span>🏆</span>
-          0 XP
-        </div>
+        <div class="xp"><span>🏆</span> 0 XP</div>
       </header>
 
+      <!-- PROGRESS -->
       <section class="progress-card">
         <div class="ring" id="progress-ring">0%</div>
-
         <div class="progress-body">
           <h2>სწავლის პროგრესი</h2>
           <p id="progress-text">0/6 დასრულებული</p>
-
           <div class="track">
             <div class="fill" id="progress-fill"></div>
           </div>
         </div>
-
         <div class="stat-icon">
           <svg
             width="24"
@@ -565,6 +571,7 @@
         </div>
       </section>
 
+      <!-- CHAPTERS -->
       <div class="section-top">
         <h2>თავები</h2>
         <button
@@ -582,43 +589,34 @@
 
       <div class="chapters" id="chapters"></div>
 
+      <!-- LESSONS -->
       <section class="lesson-panel">
         <div class="lesson-heading">
           <h2 id="selected-title"></h2>
           <span class="chapter-tag" id="selected-number"></span>
         </div>
-
         <div class="lessons" id="lessons"></div>
       </section>
     </main>
 
+    <!-- BOTTOM NAVIGATION -->
     <nav class="bottom-nav" aria-label="მთავარი ნავიგაცია">
-      <a class="nav-link active" href="student-home.html">
+      <!-- მთავარი -->
+      <a
+        class="nav-link active"
+        href="student-home.html"
+        aria-current="page"
+        aria-label="მთავარი"
+      >
         <span class="nav-icon">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z" />
           </svg>
         </span>
-        <span>მთავარი</span>
       </a>
 
-      <a class="nav-link" href="student-subjects.html">
-        <span class="nav-icon">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              d="M12 6C8 3 4 4 2 5v15c3-1 7-1 10 2 3-3 7-3 10-2V5c-3-1-7-2-10 1Zm0 0v16"
-            />
-          </svg>
-        </span>
-        <span>საგნები</span>
-      </a>
-
-      <a class="nav-link" href="student-mia.html">
+      <!-- AI მენტორი -->
+      <a class="nav-link" href="student-mia.html" aria-label="AI მენტორი">
         <span class="nav-icon">
           <svg
             viewBox="0 0 24 24"
@@ -627,13 +625,38 @@
             stroke-width="2"
           >
             <rect x="4" y="6" width="16" height="14" rx="3" />
-            <path d="M12 2v4M9 12h1m5 0h1M9 16q3 2 6 0" />
+            <path
+              d="M12 2v4M9 2h6M1 12h3m16 0h3M8 12h1m6 0h1M9 16c2 1 4 1 6 0"
+            />
           </svg>
         </span>
-        <span>AI მენტორი</span>
       </a>
 
-      <a class="nav-link" href="student-profile.html">
+      <!-- მიღწევები -->
+      <a
+        class="nav-link"
+        href="student-achievements.html"
+        aria-label="მიღწევები"
+      >
+        <span class="nav-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M8 21h8M12 17v4M7 4H5a2 2 0 0 0-2 2v2a5 5 0 0 0 5 5M17 4h2a2 2 0 0 1 2 2v2a5 5 0 0 1-5 5"
+            />
+            <path d="M7 3h10v7a5 5 0 0 1-10 0V3Z" />
+          </svg>
+        </span>
+      </a>
+
+      <!-- პროფილი -->
+      <a class="nav-link" href="student-profile.html" aria-label="პროფილი">
         <span class="nav-icon">
           <svg
             viewBox="0 0 24 24"
@@ -645,13 +668,10 @@
             <path d="M4 21c0-5 3-8 8-8s8 3 8 8" />
           </svg>
         </span>
-        <span>პროფილი</span>
       </a>
     </nav>
 
     <script>
-      // აქ შეგიძლია ახალი თავებისა და თემების დამატება.
-
       const chapters = [
         {
           name: "ნატურალური რიცხვები",
@@ -723,7 +743,6 @@
           name.textContent = chapter.name;
 
           card.append(number, count, name);
-
           card.onclick = () => {
             selected = i;
             render();
@@ -732,10 +751,18 @@
           chapterList.append(card);
         });
 
+        const upcoming = document.createElement("div");
+        upcoming.className = "chapter-card chapter-upcoming";
+        upcoming.setAttribute("aria-label", "თავი 3 — მალე დაემატება");
+        upcoming.innerHTML =
+          '<span class="chapter-number">3</span>' +
+          '<span class="chapter-name">მალე დაემატება</span>';
+
+        chapterList.append(upcoming);
+
         const current = chapters[selected];
 
         document.getElementById("selected-title").textContent = current.name;
-
         document.getElementById("selected-number").textContent =
           "თავი " + (selected + 1);
 
@@ -782,7 +809,6 @@
         });
 
         const allLessons = chapters.flatMap((chapter) => chapter.lessons);
-
         const done = allLessons.filter(
           (lesson) => lesson.status === "done",
         ).length;
@@ -792,10 +818,8 @@
           : 0;
 
         document.getElementById("progress-ring").textContent = pct + "%";
-
         document.getElementById("progress-text").textContent =
           done + "/" + allLessons.length + " დასრულებული";
-
         document.getElementById("progress-fill").style.width = pct + "%";
       }
 
