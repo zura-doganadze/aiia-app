@@ -1,0 +1,1203 @@
+<!doctype html>
+
+<html lang="ka">
+
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>AIIA — მშობლის ანგარიში (DEMO v2)</title>
+
+    <style>
+
+      :root {
+
+        --purple: #6044ff;
+
+        --ink: #17133e;
+
+        --muted: #8b86a5;
+
+        --border: #e7e3ff;
+
+      }
+
+      * {
+
+        box-sizing: border-box;
+
+      }
+
+      body {
+
+        margin: 0;
+
+        background: #f7f7fd;
+
+        color: var(--ink);
+
+        font-family: "Noto Sans Georgian", Arial, sans-serif;
+
+      }
+
+      .app {
+
+        max-width: 440px;
+
+        min-height: 100dvh;
+
+        margin: auto;
+
+        background: #fff;
+
+      }
+
+      .screen {
+
+        display: none;
+
+        min-height: 100dvh;
+
+        padding: clamp(16px, 3.2dvh, 28px) 20px 22px;
+
+        flex-direction: column;
+
+      }
+
+      .screen.active {
+
+        display: flex;
+
+      }
+
+      .logo {
+
+        text-align: center;
+
+        color: var(--purple);
+
+        font-weight: 850;
+
+        font-size: 31px;
+
+        margin: 8px 0 18px;
+
+        letter-spacing: -1px;
+
+      }
+
+      h1 {
+
+        font-size: 21px;
+
+        line-height: 1.45;
+
+        text-align: center;
+
+        margin: 0 0 9px;
+
+        font-weight: 800;
+
+      }
+
+      h1 span {
+
+        color: var(--purple);
+
+      }
+
+      .sub {
+
+        text-align: center;
+
+        color: var(--muted);
+
+        font-size: 12px;
+
+        line-height: 1.8;
+
+        margin: 0 0 19px;
+
+      }
+
+      .field {
+
+        height: 49px;
+
+        border: 1px solid var(--border);
+
+        border-radius: 10px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+
+        padding: 0 13px;
+
+        margin-bottom: 12px;
+
+      }
+
+      .field svg {
+
+        width: 19px;
+
+        height: 19px;
+
+        flex: none;
+
+        color: var(--purple);
+
+      }
+
+      .field input::placeholder {
+
+        color: #9e99b4;
+
+        opacity: 1;
+
+      }
+
+      .field input {
+
+        min-width: 0;
+
+        flex: 1;
+
+        border: 0;
+
+        outline: 0;
+
+        font: inherit;
+
+        font-size: 12px;
+
+        color: var(--ink);
+
+      }
+
+      button {
+
+        cursor: pointer;
+
+        font-family: inherit;
+
+      }
+
+      .primary {
+
+        width: 100%;
+
+        height: 49px;
+
+        border: 0;
+
+        border-radius: 10px;
+
+        background: linear-gradient(105deg, #704cff, #4b2af3);
+
+        color: white;
+
+        font-weight: 750;
+
+        font-size: 13px;
+
+        box-shadow: 0 4px 10px #6044ff30;
+
+      }
+
+      .divider {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        color: #aaa4be;
+
+        font-size: 12px;
+
+        margin: 16px 0;
+
+      }
+
+      .divider:before,
+
+      .divider:after {
+
+        content: "";
+
+        height: 1px;
+
+        background: #ddd5ff;
+
+        flex: 1;
+
+      }
+
+      .social {
+
+        height: 44px;
+
+        border: 1px solid #ece9f8;
+
+        background: #fff;
+
+        border-radius: 10px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 12px;
+
+        margin-bottom: 9px;
+
+        font-size: 12px;
+
+        font-weight: 650;
+
+        width: 100%;
+
+        box-shadow: 0 2px 5px #24155a0b;
+
+      }
+
+      .social svg {
+
+        width: 20px;
+
+        height: 20px;
+
+        flex: none;
+
+      }
+
+      .bottom {
+
+        text-align: center;
+
+        color: #9e99b4;
+
+        font-size: 11px;
+
+        margin-top: 14px;
+
+      }
+
+      .link {
+
+        background: none;
+
+        border: 0;
+
+        color: var(--purple);
+
+        font-size: 11px;
+
+        font-weight: 750;
+
+        text-decoration: underline;
+
+        padding: 4px;
+
+      }
+
+      .error {
+
+        color: #d63c4c;
+
+        text-align: center;
+
+        font-size: 12px;
+
+        min-height: 19px;
+
+        margin: 9px 0;
+
+      }
+
+      .back {
+
+        align-self: flex-start;
+
+        border: 0;
+
+        background: none;
+
+        color: var(--purple);
+
+        font-size: 30px;
+
+        padding: 0 4px;
+
+      }
+
+      .otp-art {
+
+        width: 96px;
+
+        height: 96px;
+
+        border-radius: 50%;
+
+        background: #f1edff;
+
+        display: grid;
+
+        place-items: center;
+
+        margin: clamp(12px, 3dvh, 25px) auto 18px;
+
+      }
+
+      .otp-art svg {
+
+        width: 54px;
+
+        height: 54px;
+
+        color: var(--purple);
+
+      }
+
+      .otp-boxes {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 7px;
+
+        margin: 13px 0 18px;
+
+      }
+
+      .otp-boxes input {
+
+        width: min(14%, 45px);
+
+        height: 54px;
+
+        text-align: center;
+
+        border: 1px solid var(--border);
+
+        border-radius: 9px;
+
+        font-size: 23px;
+
+        outline: 0;
+
+      }
+
+      .otp-boxes input:focus {
+
+        border-color: var(--purple);
+
+      }
+
+      .resend {
+
+        text-align: center;
+
+        color: var(--muted);
+
+        font-size: 11px;
+
+        margin-top: 14px;
+
+      }
+
+      .resend button {
+
+        border: 0;
+
+        background: none;
+
+        color: var(--purple);
+
+        font-size: 11px;
+
+        font-weight: 750;
+
+      }
+
+      .resend button:disabled {
+
+        opacity: 0.55;
+
+        cursor: default;
+
+      }
+
+      .notice {
+
+        text-align: center;
+
+        color: var(--muted);
+
+        font-size: 11px;
+
+        margin-top: 15px;
+
+      }
+
+      .success {
+
+        justify-content: center;
+
+        text-align: center;
+
+      }
+
+      .success .logo {
+
+        margin: 0 0 32px;
+
+      }
+
+      .check-outer {
+
+        width: 106px;
+
+        height: 106px;
+
+        background: #eeeaff;
+
+        border-radius: 50%;
+
+        display: grid;
+
+        place-items: center;
+
+        margin: 0 auto 21px;
+
+      }
+
+      .check-inner {
+
+        width: 70px;
+
+        height: 70px;
+
+        border-radius: 50%;
+
+        background: var(--purple);
+
+        display: grid;
+
+        place-items: center;
+
+      }
+
+      .check-inner svg {
+
+        width: 47px;
+
+        height: 47px;
+
+      }
+
+      .success .sub {
+
+        margin: 12px 0 22px;
+
+      }
+
+      .success .primary {
+
+        margin-top: 5px;
+
+      }
+
+      .placeholder {
+
+        margin: auto;
+
+        text-align: center;
+
+      }
+
+      .placeholder .logo {
+
+        margin-bottom: 18px;
+
+      }
+
+      @media (max-height: 700px) {
+
+        .screen {
+
+          padding-top: 12px;
+
+          padding-bottom: 16px;
+
+        }
+
+        .logo {
+
+          font-size: 28px;
+
+          margin: 4px 0 12px;
+
+        }
+
+        .sub {
+
+          margin-bottom: 13px;
+
+          line-height: 1.5;
+
+        }
+
+        .field {
+
+          height: 45px;
+
+          margin-bottom: 9px;
+
+        }
+
+        .primary {
+
+          height: 46px;
+
+        }
+
+        .divider {
+
+          margin: 12px 0;
+
+        }
+
+        .social {
+
+          height: 40px;
+
+          margin-bottom: 7px;
+
+        }
+
+        .bottom {
+
+          margin-top: 9px;
+
+        }
+
+        .otp-art {
+
+          width: 80px;
+
+          height: 80px;
+
+          margin: 10px auto 12px;
+
+        }
+
+        .otp-art svg {
+
+          width: 45px;
+
+          height: 45px;
+
+        }
+
+        .otp-boxes {
+
+          margin: 10px 0 14px;
+
+        }
+
+        .otp-boxes input {
+
+          height: 45px;
+
+        }
+
+        .resend {
+
+          margin-top: 10px;
+
+        }
+
+        .notice {
+
+          margin-top: 8px;
+
+        }
+
+        .success .logo {
+
+          margin-bottom: 20px;
+
+        }
+
+        .check-outer {
+
+          width: 90px;
+
+          height: 90px;
+
+          margin-bottom: 16px;
+
+        }
+
+        .check-inner {
+
+          width: 60px;
+
+          height: 60px;
+
+        }
+
+        .success .sub {
+
+          margin: 10px 0 17px;
+
+        }
+
+      }
+
+      @media (min-width: 520px) {
+
+        body {
+
+          padding: 20px;
+
+        }
+
+        .app {
+
+          min-height: min(760px, calc(100dvh - 40px));
+
+          border-radius: 22px;
+
+          box-shadow: 0 12px 50px #24155a13;
+
+        }
+
+        .screen {
+
+          min-height: min(760px, calc(100dvh - 40px));
+
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <main class="app">
+
+      <section class="screen active" id="login">
+
+        <div class="logo">AIIA</div>
+
+        <h1>კეთილი იყოს შენი<br /><span>დაბრუნება</span></h1>
+
+        <p class="sub">ავტორიზაციისთვის შეიყვანე ელფოსტა</p>
+
+        <label class="field"
+
+          ><svg
+
+            viewBox="0 0 24 24"
+
+            fill="none"
+
+            stroke="currentColor"
+
+            stroke-width="1.8"
+
+          >
+
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+
+            <path d="m3 7 9 6 9-6" /></svg>
+
+          <input
+
+            id="loginEmail"
+
+            type="email"
+
+            placeholder="ელფოსტა"
+
+            autocomplete="email"
+
+        /></label>
+
+        <button class="primary" type="button" onclick="startAuth('login')">
+
+          გაგრძელება →
+
+        </button>
+
+        <p class="error" id="loginError"></p>
+
+        <div class="divider">ან</div>
+
+        <div id="loginSocial"></div>
+
+        <div class="bottom">
+
+          არ გაქვს ანგარიში?
+
+          <button class="link" type="button" onclick="showScreen('register')">
+
+            რეგისტრაცია
+
+          </button>
+
+        </div>
+
+      </section>
+
+      <section class="screen" id="register">
+
+        <div class="logo">AIIA</div>
+
+        <h1>შექმენი მშობლის<br /><span>ანგარიში</span></h1>
+
+        <p class="sub"></p>
+
+        <label class="field"
+
+          ><svg
+
+            viewBox="0 0 24 24"
+
+            fill="none"
+
+            stroke="currentColor"
+
+            stroke-width="1.8"
+
+          >
+
+            <circle cx="12" cy="8" r="4" />
+
+            <path d="M4 21v-2a8 8 0 0 1 16 0v2" /></svg>
+
+          <input
+
+            id="fullName"
+
+            type="text"
+
+            placeholder="სახელი და გვარი"
+
+            autocomplete="name"
+
+        /></label>
+
+        <label class="field"
+
+          ><svg
+
+            viewBox="0 0 24 24"
+
+            fill="none"
+
+            stroke="currentColor"
+
+            stroke-width="1.8"
+
+          >
+
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+
+            <path d="m3 7 9 6 9-6" /></svg>
+
+          <input
+
+            id="registerEmail"
+
+            type="email"
+
+            placeholder="ელფოსტა"
+
+            autocomplete="email"
+
+        /></label>
+
+        <button class="primary" type="button" onclick="startAuth('register')">
+
+          გაგრძელება →
+
+        </button>
+
+        <p class="error" id="registerError"></p>
+
+        <div class="divider">ან</div>
+
+        <div id="registerSocial"></div>
+
+        <div class="bottom">
+
+          უკვე გაქვს ანგარიში?
+
+          <button class="link" type="button" onclick="showScreen('login')">
+
+            შესვლა
+
+          </button>
+
+        </div>
+
+      </section>
+
+      <section class="screen" id="verify">
+
+        <button class="back" type="button" onclick="showScreen(authMode)">
+
+          ←
+
+        </button>
+
+        <div class="otp-art">
+
+          <svg
+
+            viewBox="0 0 24 24"
+
+            fill="none"
+
+            stroke="currentColor"
+
+            stroke-width="1.5"
+
+          >
+
+            <rect x="2" y="6" width="20" height="14" rx="3" />
+
+            <path d="m3 8 9 7 9-7" />
+
+            <path d="M12 2v3" />
+
+          </svg>
+
+        </div>
+
+        <h1 style="font-size: 18px">კოდი გამოგზავნილია ელფოსტაზე</h1>
+
+        <p class="sub" id="emailShown"></p>
+
+        <div class="otp-boxes" id="otpBoxes"></div>
+
+        <button class="primary" type="button" onclick="verifyCode()">
+
+          დადასტურება →
+
+        </button>
+
+        <p class="error" id="otpError"></p>
+
+        <div class="resend">
+
+          კოდი არ მიგიღია?<br /><button
+
+            id="resendButton"
+
+            type="button"
+
+            onclick="resendCode()"
+
+          >
+
+            ხელახლა გაგზავნა
+
+          </button>
+
+        </div>
+
+      </section>
+
+      <section class="screen success" id="success">
+
+        <div class="logo">AIIA</div>
+
+        <div class="check-outer">
+
+          <div class="check-inner">
+
+            <svg
+
+              viewBox="0 0 24 24"
+
+              fill="none"
+
+              stroke="white"
+
+              stroke-width="3"
+
+              stroke-linecap="round"
+
+              stroke-linejoin="round"
+
+            >
+
+              <path d="M4 12l5 5L20 6" />
+
+            </svg>
+
+          </div>
+
+        </div>
+
+        <h1>რეგისტრაცია<br /><span>წარმატებით დასრულდა!</span></h1>
+
+        <p class="sub">
+
+          ახლა შეგიძლიათ დაამატოთ თქვენი შვილი და დაიწყოთ სწავლა AIIA-ში.
+
+        </p>
+
+        <button class="primary" type="button" onclick="openAddStudent()">
+
+          ＋ შვილის დამატება
+
+        </button>
+
+      </section>
+
+      <section class="screen" id="addStudent">
+
+        <div class="placeholder">
+
+          <div class="logo">AIIA</div>
+
+          <h1>შვილის დამატება</h1>
+
+          <p class="sub">
+
+            მოსწავლის დამატების გვერდს შემდეგ ეტაპზე დავაკავშირებთ.
+
+          </p>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <script>
+
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      let authMode = "register";
+
+      let selectedEmail = "";
+
+      let remaining = 48;
+
+      let resendTimer = null;
+
+      function showScreen(id) {
+
+        document
+
+          .querySelectorAll(".screen")
+
+          .forEach((el) => el.classList.toggle("active", el.id === id));
+
+        window.scrollTo(0, 0);
+
+      }
+
+      function startAuth(type) {
+
+        // DEMO: ფორმის შევსება და OTP არ არის საჭირო.
+
+        authMode = type;
+
+        $("loginError").textContent = "";
+
+        $("registerError").textContent = "";
+
+        if (type === "register") {
+
+          showScreen("success");
+
+        } else {
+
+          window.location.href = "parent-home.html";
+
+        }
+
+      }
+
+      function buildOtp() {
+
+        const box = $("otpBoxes");
+
+        box.replaceChildren();
+
+        for (let i = 0; i < 6; i++) {
+
+          const input = document.createElement("input");
+
+          input.type = "text";
+
+          input.inputMode = "numeric";
+
+          input.maxLength = 1;
+
+          input.setAttribute("aria-label", `კოდის ${i + 1}-ე ციფრი`);
+
+          input.addEventListener("input", () => {
+
+            input.value = input.value.replace(/\D/g, "").slice(-1);
+
+            if (input.value && i < 5) box.children[i + 1].focus();
+
+          });
+
+          input.addEventListener("keydown", (event) => {
+
+            if (event.key === "Backspace" && !input.value && i > 0)
+
+              box.children[i - 1].focus();
+
+          });
+
+          input.addEventListener("paste", (event) => {
+
+            event.preventDefault();
+
+            const digits = event.clipboardData
+
+              .getData("text")
+
+              .replace(/\D/g, "")
+
+              .slice(0, 6);
+
+            [...digits].forEach((digit, j) => {
+
+              box.children[j].value = digit;
+
+            });
+
+            box.children[Math.min(digits.length, 5)].focus();
+
+          });
+
+          box.appendChild(input);
+
+        }
+
+        $("otpError").textContent = "";
+
+        startCountdown();
+
+      }
+
+      function startCountdown() {
+
+        clearInterval(resendTimer);
+
+        remaining = 48;
+
+        updateResend();
+
+        resendTimer = setInterval(() => {
+
+          remaining--;
+
+          updateResend();
+
+          if (remaining <= 0) clearInterval(resendTimer);
+
+        }, 1000);
+
+      }
+
+      function updateResend() {
+
+        const button = $("resendButton");
+
+        button.disabled = remaining > 0;
+
+        button.textContent =
+
+          remaining > 0
+
+            ? `ხელახლა გაგზავნა (00:${String(remaining).padStart(2, "0")})`
+
+            : "ხელახლა გაგზავნა";
+
+      }
+
+      function resendCode() {
+
+        if (remaining <= 0) buildOtp();
+
+      }
+
+      function verifyCode() {
+
+        // DEMO v2: no required OTP.
+
+        // DEMO MODE: 6-ნიშნა კოდიც არ არის სავალდებულო.
+
+        $("otpError").textContent = "";
+
+        clearInterval(resendTimer);
+
+        if (authMode === "register") showScreen("success");
+
+        else openAddStudent(); // არსებული სატესტო გადასვლა
+
+      }
+
+      function openAddStudent() {
+
+        // როდესაც parent-add-student.html შეიქმნება, გამოიყენე შემდეგი ხაზი:
+
+        window.location.href = "parent-add-student.html";
+
+        // child registration opens in a separate HTML file.
+
+      }
+
+      function social(provider) {
+
+        alert(
+
+          provider + "-ით რეალური ავტორიზაციისთვის საჭიროა OAuth ინტეგრაცია.",
+
+        );
+
+      }
+
+      const googleSvg = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.27 5.48-4.8 7.18l7.73 6C44.38 38.03 46.98 31.88 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.2A23.9 23.9 0 0 0 0 24c0 3.87.93 7.52 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.14 1.44-4.88 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.97 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
+
+      const appleSvg = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M17.564 12.278c-.027-2.833 2.309-4.214 2.416-4.28-1.323-1.927-3.378-2.19-4.103-2.21-1.726-.18-3.398 1.03-4.275 1.03-.895 0-2.244-1.01-3.709-.98-1.907.03-3.69 1.134-4.67 2.854-1.995 3.454-.51 8.53 1.404 11.32.958 1.367 2.08 2.902 3.54 2.846 1.428-.06 1.966-.923 3.696-.923 1.713 0 2.198.923 3.7.89 1.534-.027 2.5-1.368 3.425-2.746 1.104-1.565 1.554-3.12 1.578-3.201-.034-.01-2.972-1.137-3.002-4.6zM14.75 3.967C15.52 3.03 16.044 1.75 15.902.45c-1.11.045-2.47.75-3.27 1.665-.72.81-1.36 2.14-1.195 3.38 1.25.094 2.53-.64 3.313-1.528z"/></svg>`;
+
+      for (const id of ["loginSocial", "registerSocial"]) {
+
+        $(id).innerHTML =
+
+          `<button type="button" class="social" onclick="social('Google')">${googleSvg} გაგრძელება Google-ით</button><button type="button" class="social" onclick="social('Apple')">${appleSvg} გაგრძელება Apple-ით</button>`;
+
+      }
+
+    </script>
+
+  </body>
+
+</html>

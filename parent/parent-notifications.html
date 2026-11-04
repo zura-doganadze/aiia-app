@@ -1,0 +1,920 @@
+<!doctype html>
+
+<html lang="ka">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AIIA | მშობლის შეტყობინებები</title>
+
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --secondary: #4a90ff;
+        --achievement: #ff9900;
+        --success: #22c55e;
+        --error: #ff4d4f;
+        --ink: #172033;
+        --muted: #64748b;
+        --bg: #f8fafc;
+        --border: #e9edf3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        font-family: "Noto Sans Georgian", Arial, sans-serif;
+        color: var(--ink);
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      .page {
+        max-width: 480px;
+        min-height: 100vh;
+        margin: auto;
+        background: var(--bg);
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        background: #fff;
+        padding: 15px 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      .back {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: #f0edff;
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 27px;
+        line-height: 1;
+      }
+      .header h1 {
+        flex: 1;
+        font-size: 17px;
+        margin: 0;
+      }
+      .unread-badge {
+        background: var(--primary);
+        color: #fff;
+        border-radius: 10px;
+        padding: 9px 11px;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .content {
+        padding: 18px 13px 32px;
+      }
+      .toolbar {
+        display: flex;
+        justify-content: flex-end;
+        min-height: 28px;
+        margin: 0 2px 9px;
+      }
+      .mark-all {
+        border: 0;
+        background: transparent;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .notification {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 17px;
+        overflow: hidden;
+        margin-bottom: 13px;
+        box-shadow: 0 3px 12px #18264b08;
+      }
+      .notification.unread {
+        border-color: #c9c3ff;
+        box-shadow: 0 5px 19px #6c63ff16;
+      }
+      .notification-heading {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 14px;
+        background: #f2f4f8;
+        cursor: pointer;
+      }
+      .notification.unread .notification-heading {
+        background: #efedff;
+      }
+      .mia-avatar,
+      .fallback-avatar {
+        width: 44px;
+        height: 44px;
+        flex: none;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top center;
+        border: 2px solid #fff;
+        background: #ded9ff;
+      }
+      .fallback-avatar {
+        display: none;
+        place-items: center;
+        color: var(--primary);
+        font-weight: 800;
+      }
+      .heading-text {
+        min-width: 0;
+        flex: 1;
+      }
+      .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .notification-title {
+        font-size: 12px;
+        line-height: 1.5;
+        margin: 0;
+        font-weight: 750;
+      }
+      .notification:not(.unread) .notification-title {
+        color: #596579;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        background: var(--primary);
+        border-radius: 50%;
+        flex: none;
+        box-shadow: 0 0 0 3px #6c63ff1c;
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+      .student-chip {
+        background: #fff;
+        color: var(--primary);
+        padding: 4px 8px;
+        border-radius: 7px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .notification:not(.unread) .student-chip {
+        color: #7a8498;
+      }
+      .period {
+        font-size: 10px;
+        color: #645bd1;
+      }
+      .notification:not(.unread) .period {
+        color: #8490a3;
+      }
+
+      .notification-body {
+        padding: 15px;
+      }
+      .summary {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .summary-icon {
+        display: grid;
+        place-items: center;
+        width: 37px;
+        height: 37px;
+        flex: none;
+        background: #e2f9ea;
+        border-radius: 11px;
+        color: var(--success);
+      }
+      .notification:not(.unread) .summary-icon {
+        background: #f0f4f2;
+        color: #82a993;
+      }
+      .summary p {
+        font-size: 12px;
+        line-height: 1.75;
+        margin: 0 0 14px;
+        color: #46516b;
+      }
+      .notification:not(.unread) .summary p {
+        color: #7c879a;
+      }
+      .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--primary);
+        color: white;
+        padding: 11px 14px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .notification:not(.unread) .action-btn {
+        background: #f0edff;
+        color: #6358d7;
+      }
+      .action-btn svg {
+        transition: transform 0.2s;
+      }
+      .action-btn[aria-expanded="true"] svg {
+        transform: rotate(180deg);
+      }
+      .time {
+        display: block;
+        color: #94a3b8;
+        font-size: 10px;
+        margin-top: 12px;
+      }
+
+      /* Expanded weekly report — vivid AIIA design */
+
+      .report-details {
+        border-top: 2px solid var(--primary);
+        padding: 18px 14px 20px;
+        background: #fff;
+      }
+
+      .report-details[hidden] {
+        display: none !important;
+      }
+
+      .report-heading,
+      .topic-title {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.5;
+        color: #172033;
+        margin: 0 0 15px;
+      }
+
+      .heading-icon {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: #eeeafe;
+        color: var(--primary);
+      }
+
+      .heading-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        min-height: 134px;
+        border-radius: 17px;
+        padding: 13px 7px;
+        text-align: center;
+      }
+
+      .stat.topics {
+        background: linear-gradient(135deg, #f1ecff, #ded3ff);
+      }
+
+      .stat.score {
+        background: linear-gradient(135deg, #edfff1, #c6f7d3);
+      }
+
+      .stat-icon {
+        display: grid;
+        place-items: center;
+        margin-bottom: 2px;
+      }
+
+      .stat-icon svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .stat.topics .stat-icon,
+      .stat.topics strong {
+        color: #5845f5;
+      }
+
+      .stat.score .stat-icon,
+      .stat.score strong {
+        color: #078d34;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 36px;
+        line-height: 1.1;
+        font-weight: 850;
+        letter-spacing: -1px;
+      }
+
+      .stat span:last-child {
+        font-size: 11px;
+        color: #26314a;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
+      .topic-title {
+        margin: 22px 0 12px;
+      }
+
+      .subject-name {
+        margin: 16px 0 9px;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .topic-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+
+      .topic-list li {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        border-radius: 13px;
+        padding: 9px 10px;
+        min-height: 55px;
+        background: linear-gradient(105deg, #f2f6ff, #f0fbf3);
+      }
+
+      .topic-list li.needs-work-row {
+        background: linear-gradient(105deg, #fff8ef, #fff1de);
+      }
+
+      .topic-icon {
+        width: 33px;
+        height: 33px;
+        display: grid;
+        place-items: center;
+        flex: none;
+        border-radius: 10px;
+        background: #e0ecff;
+        color: #3977e9;
+      }
+
+      .topic-icon svg {
+        width: 19px;
+        height: 19px;
+      }
+
+      .topic-list li.needs-work-row .topic-icon {
+        background: #ffe7be;
+        color: #d87a00;
+      }
+
+      .topic-name {
+        flex: 1;
+        min-width: 0;
+        font-size: 12px;
+        font-weight: 750;
+        line-height: 1.5;
+        color: #172033;
+      }
+
+      .topic-score {
+        flex: none;
+        min-width: 58px;
+        text-align: center;
+        padding: 8px 9px;
+        border-radius: 10px;
+        font-size: 16px;
+        line-height: 1.1;
+        font-weight: 850;
+        color: #fff;
+        background: linear-gradient(125deg, #44d44c, #0bb83e);
+      }
+
+      .topic-score.needs-work {
+        background: linear-gradient(125deg, #ffb32e, #ff9900);
+        color: #fff;
+      }
+
+      .empty {
+        padding: 40px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 360px) {
+        .header h1 {
+          font-size: 15px;
+        }
+        .unread-badge {
+          font-size: 10px;
+          padding: 8px;
+        }
+        .notification-title {
+          font-size: 11px;
+        }
+        .period {
+          font-size: 9px;
+        }
+        .topic-name {
+          font-size: 11px;
+        }
+        .topic-score {
+          min-width: 50px;
+          font-size: 14px;
+        }
+        .stat strong {
+          font-size: 31px;
+        }
+      }
+
+      /* FINAL — exact vivid direction from the two approved mockups */
+
+      .content {
+        padding-top: 15px;
+      }
+
+      .notification {
+        border: 2px solid #4a90ff;
+        border-radius: 20px;
+        box-shadow: 0 8px 22px rgba(74, 144, 255, 0.1);
+        margin-bottom: 18px;
+      }
+
+      .notification.unread {
+        border: 2px solid #6c63ff;
+        box-shadow: 0 9px 26px rgba(108, 99, 255, 0.17);
+      }
+
+      .notification-heading,
+      .notification:not(.unread) .notification-heading {
+        background: #4a90ff;
+        color: #fff;
+        padding: 17px 15px;
+      }
+
+      .notification.unread .notification-heading {
+        background: #6c63ff;
+      }
+
+      .notification-title,
+      .notification:not(.unread) .notification-title {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 850;
+      }
+
+      .period,
+      .notification:not(.unread) .period {
+        color: #fff;
+        font-size: 11px;
+        font-weight: 650;
+      }
+
+      .student-chip,
+      .notification:not(.unread) .student-chip {
+        background: rgba(255, 255, 255, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        font-size: 11px;
+        padding: 4px 9px;
+      }
+
+      .dot {
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.23);
+      }
+
+      .notification-body {
+        background: #fff;
+        padding: 18px 15px 16px;
+      }
+
+      .summary-icon {
+        width: 43px;
+        height: 43px;
+        border-radius: 13px;
+        background: #ddfbe6;
+        color: #16a34a;
+      }
+
+      .notification:not(.unread) .summary-icon {
+        background: #ddfbe6;
+        color: #16a34a;
+      }
+
+      .summary p,
+      .notification:not(.unread) .summary p {
+        color: #26314a;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .action-btn {
+        width: 100%;
+        min-height: 43px;
+        background: #6c63ff;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 800;
+        border-radius: 11px;
+      }
+
+      .notification:not(.unread) .action-btn {
+        background: #4a90ff;
+        color: #fff;
+      }
+
+      .time {
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .report-details {
+        border-top: 3px solid #6c63ff;
+        background: #fff;
+        padding: 20px 14px 22px;
+      }
+
+      .notification:not(.unread) .report-details {
+        border-top-color: #4a90ff;
+      }
+
+      .report-heading,
+      .topic-title {
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: -0.2px;
+      }
+
+      .heading-icon {
+        background: #e9e5ff;
+        color: #6c63ff;
+        width: 38px;
+        height: 38px;
+      }
+
+      .stat {
+        min-height: 153px;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 5px 15px rgba(28, 35, 62, 0.07);
+      }
+
+      .stat.topics {
+        background: linear-gradient(145deg, #ede6ff 0%, #cbb8ff 100%);
+      }
+
+      .stat.score {
+        background: linear-gradient(145deg, #e5ffea 0%, #a6edb9 100%);
+      }
+
+      .stat strong {
+        font-size: 43px;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+      }
+
+      .stat span:last-child {
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .topic-list {
+        gap: 9px;
+      }
+
+      .topic-list li {
+        min-height: 60px;
+        padding: 11px;
+        border-radius: 14px;
+        background: linear-gradient(105deg, #edf3ff, #eafbf0);
+        border: 1px solid #e4edf7;
+      }
+
+      .topic-list li.needs-work-row {
+        background: linear-gradient(105deg, #fff5e8, #ffedd1);
+        border-color: #ffe2b3;
+      }
+
+      .topic-icon {
+        width: 37px;
+        height: 37px;
+      }
+
+      .topic-name {
+        font-size: 13px;
+        font-weight: 850;
+        color: #20283b;
+      }
+
+      .topic-score {
+        font-size: 17px;
+        font-weight: 900;
+        min-width: 62px;
+        padding: 9px 8px;
+        box-shadow: 0 3px 9px rgba(34, 197, 94, 0.14);
+      }
+
+      .topic-score.needs-work {
+        box-shadow: 0 3px 9px rgba(255, 153, 0, 0.18);
+      }
+
+      @media (max-width: 360px) {
+        .notification-title {
+          font-size: 12px;
+        }
+        .period {
+          font-size: 10px;
+        }
+        .topic-name {
+          font-size: 11px;
+        }
+        .stat strong {
+          font-size: 36px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <header class="header">
+        <a
+          class="back"
+          href="./parent-home.html"
+          aria-label="მთავარ გვერდზე დაბრუნება"
+          >‹</a
+        >
+        <h1>შეტყობინებები</h1>
+        <span class="unread-badge" id="badge"></span>
+      </header>
+      <main class="content">
+        <div class="toolbar">
+          <button class="mark-all" id="markAll" type="button">
+            ყველას წაკითხვა
+          </button>
+        </div>
+        <div id="list"></div>
+      </main>
+    </div>
+
+    <script>
+      // MVP დემო: გვერდის ხელახლა გახსნისას პირველი შეტყობინება კვლავ წაუკითხავია.
+
+      // რეალურ პროდუქტში მონაცემები და წაკითხვის სტატუსი სერვერიდან უნდა მოვიდეს.
+
+      const notifications = [
+        {
+          id: 1,
+          student: "გიორგი",
+          week: "26 ოქტომბერი – 1 ნოემბერი",
+          time: "დღეს, 10:00",
+          read: false,
+          summary:
+            "გიორგიმ ამ კვირაში 5 თემა გაიარა. ნახეთ, რა შედეგები აჩვენა ტესტებში.",
+          subjects: [
+            {
+              name: "მათემატიკა",
+              topics: [
+                ["ნატურალური რიცხვები", 90],
+                ["რიცხვების შედარება", 85],
+                ["შეკრება და გამოკლება", 80],
+                ["გამრავლება", 75],
+                ["გაყოფა", 80],
+              ],
+            },
+          ],
+        },
+
+        {
+          id: 2,
+          student: "გიორგი",
+          week: "19–25 ოქტომბერი",
+          time: "26 ოქტომბერი, 10:00",
+          read: true,
+          summary:
+            "გიორგიმ გასულ კვირაში 3 თემა გაიარა. იხილეთ ტესტების შედეგები.",
+          subjects: [
+            {
+              name: "მათემატიკა",
+              topics: [
+                ["გეომეტრიული ფიგურები", 70],
+                ["მონაკვეთები", 80],
+              ],
+            },
+            { name: "ბიოლოგია", topics: [["უჯრედის აგებულება", 90]] },
+          ],
+        },
+      ];
+
+      const list = document.getElementById("list");
+
+      const chartIcon =
+        '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-9"/><path d="M15 6h6v6"/></svg>';
+
+      const chevron =
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+
+      function topicData(n) {
+        return n.subjects.flatMap((s) => s.topics);
+      }
+
+      const icons = {
+        bars: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 19v-5M12 19V9M19 19V4"/></svg>',
+        layers:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 17l9 5 9-5"/></svg>',
+        trophy:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M7 3h10v8a5 5 0 0 1-10 0V3ZM7 5H4v3a4 4 0 0 0 4 4m9-7h3v3a4 4 0 0 1-4 4M12 16v4m-4 1h8"/></svg>',
+        book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg>',
+        calculator:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h2m4 0h2m-8 4h2m4 0h2m-8 4h2m4 0h2"/></svg>',
+        plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h9M8.5 3.5v9M14 18h7"/></svg>',
+        divide:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 12h16"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>',
+        multiply:
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 5 14 14M19 5 5 19"/></svg>',
+      };
+
+      function topicIcon(name) {
+        if (name.includes("გამრავლ")) return icons.multiply;
+        if (name.includes("გაყოფ")) return icons.divide;
+        if (name.includes("შეკრება")) return icons.plus;
+        if (name.includes("შედარება")) return icons.bars;
+        if (name.includes("რიცხვ")) return icons.calculator;
+        return icons.book;
+      }
+
+      function buildDetails(n) {
+        const topics = topicData(n),
+          average = topics.length
+            ? Math.round(
+                topics.reduce((sum, t) => sum + t[1], 0) / topics.length,
+              )
+            : 0;
+
+        const panel = document.createElement("section");
+        panel.className = "report-details";
+        panel.id = "report-" + n.id;
+        panel.hidden = true;
+
+        panel.innerHTML =
+          '<h4 class="report-heading"><span class="heading-icon">' +
+          icons.bars +
+          '</span>კვირის სასწავლო შედეგები</h4><div class="stats"><div class="stat topics"><span class="stat-icon">' +
+          icons.layers +
+          '</span><strong></strong><span>გავლილი თემა</span></div><div class="stat score"><span class="stat-icon">' +
+          icons.trophy +
+          '</span><strong></strong><span>ტესტების საშუალო შედეგი</span></div></div><h4 class="topic-title"><span class="heading-icon">' +
+          icons.book +
+          '</span>გავლილი თემები და შედეგები</h4><div class="subjects"></div>';
+
+        panel.querySelector(".topics strong").textContent = topics.length;
+
+        panel.querySelector(".score strong").textContent = average + "%";
+
+        const container = panel.querySelector(".subjects");
+
+        n.subjects.forEach((subject) => {
+          const heading = document.createElement("h5");
+          heading.className = "subject-name";
+          heading.textContent = subject.name;
+          container.appendChild(heading);
+
+          const ul = document.createElement("ul");
+          ul.className = "topic-list";
+
+          subject.topics.forEach(([name, score]) => {
+            const li = document.createElement("li");
+            if (score < 80) li.className = "needs-work-row";
+
+            const ico = document.createElement("span");
+            ico.className = "topic-icon";
+            ico.innerHTML = topicIcon(name);
+
+            const label = document.createElement("span");
+            label.className = "topic-name";
+            label.textContent = name;
+
+            const result = document.createElement("span");
+            result.className =
+              "topic-score" + (score < 80 ? " needs-work" : "");
+            result.textContent = score + "%";
+
+            li.append(ico, label, result);
+            ul.appendChild(li);
+          });
+          container.appendChild(ul);
+        });
+        return panel;
+      }
+
+      function render() {
+        const unread = notifications.filter((n) => !n.read).length;
+        const badge = document.getElementById("badge");
+        badge.textContent = unread + " წაუკითხავი";
+        badge.hidden = unread === 0;
+        document.getElementById("markAll").hidden = unread === 0;
+        list.replaceChildren();
+        notifications.forEach((n) => {
+          const card = document.createElement("article");
+          card.className = "notification" + (n.read ? "" : " unread");
+          const heading = document.createElement("div");
+          heading.className = "notification-heading";
+          heading.innerHTML =
+            '<img class="mia-avatar" src="img/mia.png" alt="მია"><span class="fallback-avatar">მ</span><div class="heading-text"><div class="title-row"><h3 class="notification-title">ყოველკვირეული AI რეპორტი</h3></div><div class="meta"><span class="student-chip"></span><span class="period"></span></div></div>';
+          heading.querySelector(".student-chip").textContent = n.student;
+          heading.querySelector(".period").textContent = n.week;
+          if (!n.read) {
+            const dot = document.createElement("span");
+            dot.className = "dot";
+            heading.querySelector(".title-row").appendChild(dot);
+          }
+          heading.querySelector("img").addEventListener("error", (e) => {
+            e.currentTarget.style.display = "none";
+            heading.querySelector(".fallback-avatar").style.display = "grid";
+          });
+          const body = document.createElement("div");
+          body.className = "notification-body";
+          body.innerHTML =
+            '<div class="summary"><span class="summary-icon"></span><p></p></div><button type="button" class="action-btn" aria-expanded="false" aria-controls="report-' +
+            n.id +
+            '"><span>სრული ანგარიშის ნახვა</span>' +
+            chevron +
+            '</button><span class="time"></span>';
+          body.querySelector(".summary-icon").innerHTML = chartIcon;
+          body.querySelector("p").textContent = n.summary;
+          body.querySelector(".time").textContent = n.time;
+          const details = buildDetails(n);
+          const button = body.querySelector("button");
+          function toggle() {
+            const opening = details.hidden;
+            details.hidden = !opening;
+            button.setAttribute("aria-expanded", String(opening));
+            button.querySelector("span").textContent = opening
+              ? "ანგარიშის დახურვა"
+              : "სრული ანგარიშის ნახვა";
+            if (opening && !n.read) {
+              n.read = true;
+              card.classList.remove("unread");
+              heading.querySelector(".dot")?.remove();
+              const count = notifications.filter((x) => !x.read).length;
+              document.getElementById("badge").textContent =
+                count + " წაუკითხავი";
+              document.getElementById("badge").hidden = count === 0;
+              document.getElementById("markAll").hidden = count === 0;
+            }
+          }
+          button.addEventListener("click", toggle);
+          heading.addEventListener("click", toggle);
+          card.append(heading, body, details);
+          list.appendChild(card);
+        });
+        if (!notifications.length) {
+          list.innerHTML =
+            '<div class="empty">შეტყობინებები ჯერ არ გაქვთ</div>';
+        }
+      }
+
+      document.getElementById("markAll").addEventListener("click", () => {
+        notifications.forEach((n) => (n.read = true));
+        render();
+      });
+      render();
+    </script>
+  </body>
+</html>
