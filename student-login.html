@@ -1,24 +1,45 @@
 <!doctype html>
+
 <html lang="ka">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>AIIA — მოსწავლის ავტორიზაცია</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       :root {
         --primary: #6c63ff;
+
         --secondary: #4a90ff;
-        --achievement: #f59e0b;
+
+        --achievement: #ffc857;
+
         --success: #22c55e;
+
         --error: #ff4d4f;
 
-        --text: #151938;
-        --muted: #83889b;
-        --border: #e2e3eb;
+        --text: #111827;
+
+        --muted: #6b7280;
+
+        --border: #e5e7eb;
+
         --background: #ffffff;
-        --info-bg: #f7f5ff;
-        --info-icon-bg: #eae7ff;
+
+        --info-bg: #eff0f4;
+
+        --info-icon-bg: #ffffff;
       }
 
       * {
@@ -31,11 +52,17 @@
 
       body {
         margin: 0;
+
         min-height: 100vh;
+
         min-height: 100dvh;
+
         background: var(--background);
+
         color: var(--text);
+
         font-family: "Noto Sans Georgian", Arial, sans-serif;
+
         -webkit-font-smoothing: antialiased;
       }
 
@@ -50,10 +77,15 @@
 
       .page {
         width: 100%;
+
         max-width: 480px;
+
         min-height: 100vh;
+
         min-height: 100dvh;
+
         margin: 0 auto;
+
         padding: 0 22px 36px;
       }
 
@@ -61,23 +93,33 @@
 
       .topbar {
         padding-top: 28px;
+
         display: flex;
+
         align-items: center;
       }
 
       .back-btn {
         width: 44px;
+
         height: 44px;
+
         display: grid;
+
         place-items: center;
+
         background: transparent;
+
         border: none;
+
         color: var(--text);
+
         padding: 0;
       }
 
       .back-btn svg {
         width: 28px;
+
         height: 28px;
       }
 
@@ -85,19 +127,29 @@
 
       .logo {
         margin: clamp(20px, 4dvh, 42px) auto 22px;
+
         text-align: center;
       }
 
       .logo-text {
         display: inline-block;
+
         font-family: Arial, sans-serif;
+
         font-size: clamp(55px, 15vw, 76px);
-        font-weight: 900;
+
+        font-weight: 700;
+
         letter-spacing: -5px;
+
         line-height: 1.1;
+
         background: linear-gradient(120deg, var(--primary), var(--secondary));
+
         -webkit-background-clip: text;
+
         background-clip: text;
+
         color: transparent;
       }
 
@@ -105,75 +157,113 @@
 
       .heading {
         text-align: center;
+
         margin-bottom: 24px;
       }
 
       .heading h1 {
         margin: 0 0 10px;
-        font-size: clamp(20px, 5.4vw, 27px);
-        font-weight: 800;
+
+        font-size: clamp(22px, 5.4vw, 28px);
+
+        font-weight: 700;
+
         line-height: 1.4;
       }
 
       .heading p {
         margin: 0;
+
         color: var(--muted);
-        font-size: clamp(14px, 3.8vw, 17px);
+
+        font-size: 14px;
       }
 
       /* COLLAPSIBLE INFORMATION CARD */
 
       .student-info {
         width: 100%;
+
         margin-bottom: 26px;
+
         background: var(--info-bg);
-        border-radius: 14px;
+
+        border: 2px solid #eff0f4;
+
+        border-radius: 16px;
+
         overflow: hidden;
       }
 
       .info-toggle {
         width: 100%;
+
         min-height: 62px;
+
         padding: 10px 13px;
+
         display: flex;
+
         align-items: center;
+
         gap: 11px;
+
         border: none;
+
         background: transparent;
+
         color: var(--text);
+
         text-align: left;
       }
 
       .info-icon {
         width: 42px;
+
         height: 42px;
+
         flex: 0 0 42px;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         background: var(--info-icon-bg);
+
         border-radius: 12px;
+
         color: var(--primary);
       }
 
       .info-icon svg {
         width: 23px;
+
         height: 23px;
       }
 
       .info-title {
         flex: 1;
+
         min-width: 0;
+
         font-size: clamp(12px, 3.3vw, 14px);
+
         font-weight: 700;
+
         line-height: 1.5;
       }
 
       .info-chevron {
         width: 20px;
+
         height: 20px;
+
         flex-shrink: 0;
+
         color: var(--primary);
+
         transition: transform 0.2s ease;
       }
 
@@ -182,10 +272,16 @@
       }
 
       .info-content {
+        background: #ffffff;
+
         padding: 0 15px 17px;
+
         color: var(--text);
+
         font-size: 12px;
+
         line-height: 1.8;
+
         font-weight: 500;
       }
 
@@ -194,7 +290,8 @@
       }
 
       .info-content-inner {
-        border-top: 1px solid #e5e1ff;
+        border-top: 1px solid var(--border);
+
         padding-top: 13px;
       }
 
@@ -218,46 +315,71 @@
 
       .field-label {
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
         margin-bottom: 12px;
-        font-size: 16px;
-        font-weight: 700;
-        color: #41475a;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: var(--text);
       }
 
       .field-label svg {
         width: 21px;
+
         height: 21px;
+
         stroke-width: 1.9;
       }
 
       .input-wrap {
         position: relative;
+
         width: 100%;
       }
 
       .leading-icon {
         position: absolute;
+
         top: 50%;
+
         left: 18px;
+
         transform: translateY(-50%);
+
         width: 23px;
+
         height: 23px;
-        color: #a1a6b7;
+
+        color: var(--muted);
+
         pointer-events: none;
       }
 
       .text-input {
         width: 100%;
+
         height: 60px;
+
         padding: 0 52px 0 55px;
+
         border: 1.5px solid var(--border);
-        border-radius: 17px;
+
+        border-radius: 12px;
+
         outline: none;
+
         background: #ffffff;
+
         color: var(--text);
+
         font-size: 16px;
+
         transition:
           border-color 0.2s,
           box-shadow 0.2s;
@@ -269,6 +391,7 @@
 
       .text-input:focus {
         border-color: var(--primary);
+
         box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.09);
       }
 
@@ -278,27 +401,41 @@
 
       .toggle-password {
         position: absolute;
+
         top: 50%;
+
         right: 10px;
+
         transform: translateY(-50%);
+
         width: 44px;
+
         height: 44px;
+
         display: grid;
+
         place-items: center;
+
         background: transparent;
+
         border: none;
-        color: #a1a6b7;
+
+        color: var(--muted);
       }
 
       .toggle-password svg {
         width: 23px;
+
         height: 23px;
       }
 
       .error-message {
         display: none;
+
         color: var(--error);
+
         font-size: 12px;
+
         margin: 8px 4px 0;
       }
 
@@ -310,16 +447,26 @@
 
       .login-btn {
         position: relative;
+
         width: 100%;
+
         height: 62px;
+
         margin-top: 6px;
+
         border: none;
+
         border-radius: 16px;
-        background: linear-gradient(120deg, var(--primary), #5949e9);
+
+        background: var(--primary);
+
         box-shadow: 0 8px 20px rgba(108, 99, 255, 0.23);
+
         color: #ffffff;
-        font-size: 19px;
-        font-weight: 800;
+
+        font-size: 18px;
+
+        font-weight: 700;
       }
 
       .login-btn:active {
@@ -328,15 +475,21 @@
 
       .login-btn .arrow {
         position: absolute;
+
         right: 20px;
+
         top: 50%;
+
         transform: translateY(-50%);
+
         display: grid;
+
         place-items: center;
       }
 
       .login-btn .arrow svg {
         width: 26px;
+
         height: 26px;
       }
 
@@ -344,18 +497,26 @@
 
       .divider {
         display: flex;
+
         align-items: center;
+
         gap: 16px;
+
         margin: 27px 0 24px;
-        color: #9295a3;
+
+        color: var(--muted);
+
         font-size: 15px;
       }
 
       .divider::before,
       .divider::after {
         content: "";
+
         height: 1px;
+
         flex: 1;
+
         background: var(--border);
       }
 
@@ -363,23 +524,37 @@
 
       .guest-btn {
         width: 100%;
+
         min-height: 60px;
+
         padding: 12px 10px;
+
         border: 1.5px solid var(--primary);
+
         border-radius: 16px;
+
         background: #ffffff;
+
         color: var(--primary);
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         gap: 12px;
+
         font-size: clamp(12px, 3.6vw, 16px);
+
         font-weight: 700;
       }
 
       .guest-btn svg {
         width: 24px;
+
         height: 24px;
+
         flex-shrink: 0;
       }
 
@@ -389,7 +564,34 @@
 
       button:focus-visible {
         outline: 3px solid var(--secondary);
+
         outline-offset: 3px;
+      }
+
+      /* TABLET AND DESKTOP: retain focused authentication layout */
+
+      @media (min-width: 481px) {
+        .page {
+          max-width: 520px;
+          padding-left: 32px;
+          padding-right: 32px;
+        }
+
+        .logo {
+          margin-top: 40px;
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .page {
+          max-width: 540px;
+          padding-left: 42px;
+          padding-right: 42px;
+        }
+
+        .topbar {
+          padding-top: 36px;
+        }
       }
 
       /* SMALL MOBILES */
@@ -397,7 +599,9 @@
       @media (max-width: 360px) {
         .page {
           padding-left: 16px;
+
           padding-right: 16px;
+
           padding-bottom: 24px;
         }
 
@@ -407,6 +611,7 @@
 
         .logo {
           margin-top: 18px;
+
           margin-bottom: 16px;
         }
 
@@ -420,18 +625,23 @@
 
         .info-toggle {
           padding: 8px 10px;
+
           gap: 9px;
         }
 
         .info-icon {
           width: 38px;
+
           height: 38px;
+
           flex-basis: 38px;
         }
 
         .info-content {
           font-size: 11px;
+
           padding-left: 12px;
+
           padding-right: 12px;
         }
 
@@ -461,6 +671,7 @@
 
         .logo {
           margin-top: 12px;
+
           margin-bottom: 14px;
         }
 
@@ -492,6 +703,7 @@
   <body>
     <main class="page">
       <!-- BACK -->
+
       <header class="topbar">
         <button
           class="back-btn"
@@ -514,17 +726,21 @@
       </header>
 
       <!-- AIIA LOGO WITHOUT STAR -->
+
       <div class="logo">
         <div class="logo-text">AIIA</div>
       </div>
 
       <!-- TITLE -->
+
       <section class="heading">
         <h1>მოსწავლის ავტორიზაცია</h1>
+
         <p>შეიყვანე შენი მონაცემები</p>
       </section>
 
       <!-- COLLAPSIBLE INFORMATION -->
+
       <section class="student-info" id="studentInfo">
         <button
           class="info-toggle"
@@ -544,8 +760,11 @@
               aria-hidden="true"
             >
               <circle cx="8" cy="15" r="4" />
+
               <path d="M10.8 12.2L20 3" />
+
               <path d="M16 7l3 3" />
+
               <path d="M18 5l3 3" />
             </svg>
           </span>
@@ -582,8 +801,10 @@
       </section>
 
       <!-- LOGIN FORM -->
+
       <form id="loginForm" class="login-form" novalidate>
         <!-- USERNAME -->
+
         <div class="field">
           <label class="field-label" for="username">
             <svg
@@ -594,8 +815,10 @@
               stroke-linejoin="round"
             >
               <circle cx="12" cy="7" r="3.5" />
+
               <path d="M4.5 20v-2.5c0-4 15-4 15 0V20Z" />
             </svg>
+
             ლოგინი
           </label>
 
@@ -609,7 +832,9 @@
               stroke-linecap="round"
             >
               <circle cx="12" cy="12" r="9" />
+
               <path d="M16 9v5c0 2 4 2 4-2" />
+
               <circle cx="12" cy="12" r="4" />
             </svg>
 
@@ -629,6 +854,7 @@
         </div>
 
         <!-- PASSWORD -->
+
         <div class="field">
           <label class="field-label" for="password">
             <svg
@@ -640,9 +866,12 @@
               stroke-linejoin="round"
             >
               <rect x="5" y="10" width="14" height="11" rx="2" />
+
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+
               <circle cx="12" cy="15" r="1" />
             </svg>
+
             პაროლი
           </label>
 
@@ -657,6 +886,7 @@
               stroke-linejoin="round"
             >
               <rect x="5" y="10" width="14" height="11" rx="2" />
+
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
             </svg>
 
@@ -687,6 +917,7 @@
                 aria-hidden="true"
               >
                 <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+
                 <circle cx="12" cy="12" r="3" />
               </svg>
             </button>
@@ -696,8 +927,10 @@
         </div>
 
         <!-- LOGIN -->
+
         <button class="login-btn" type="submit">
           შესვლა
+
           <span class="arrow">
             <svg
               viewBox="0 0 24 24"
@@ -715,9 +948,11 @@
       </form>
 
       <!-- DIVIDER -->
+
       <div class="divider">ან</div>
 
       <!-- GUEST -->
+
       <button class="guest-btn" type="button" onclick="continueAsGuest()">
         <svg
           viewBox="0 0 24 24"
@@ -729,31 +964,42 @@
           aria-hidden="true"
         >
           <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+
           <circle cx="12" cy="12" r="3" />
         </svg>
+
         გააგრძელე სტუმრის რეჟიმში
       </button>
     </main>
 
     <script>
       const form = document.getElementById("loginForm");
+
       const username = document.getElementById("username");
+
       const password = document.getElementById("password");
+
       const togglePassword = document.getElementById("togglePassword");
+
       const eyeIcon = document.getElementById("eyeIcon");
 
       const studentInfo = document.getElementById("studentInfo");
+
       const infoToggle = document.getElementById("infoToggle");
+
       const infoContent = document.getElementById("infoContent");
 
       /* ACCORDION */
 
       infoToggle.addEventListener("click", () => {
         const isOpen = infoToggle.getAttribute("aria-expanded") === "true";
+
         const nextOpen = !isOpen;
 
         infoToggle.setAttribute("aria-expanded", String(nextOpen));
+
         infoContent.hidden = !nextOpen;
+
         studentInfo.classList.toggle("open", nextOpen);
       });
 
@@ -761,17 +1007,25 @@
 
       function showError(input, message) {
         const error = document.getElementById(input.id + "Error");
+
         error.textContent = message;
+
         error.classList.add("visible");
+
         input.classList.add("invalid");
+
         input.setAttribute("aria-invalid", "true");
       }
 
       function clearError(input) {
         const error = document.getElementById(input.id + "Error");
+
         error.textContent = "";
+
         error.classList.remove("visible");
+
         input.classList.remove("invalid");
+
         input.removeAttribute("aria-invalid");
       }
 
@@ -790,48 +1044,52 @@
 
         togglePassword.setAttribute(
           "aria-label",
+
           isHidden ? "პაროლის დამალვა" : "პაროლის ჩვენება",
         );
 
         if (isHidden) {
           eyeIcon.innerHTML = `
+
+ 
+
       <path d="M3 3l18 18"/>
+
+ 
+
       <path d="M10.6 5.1A10.5 10.5 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.3 4.2"/>
+
+ 
+
       <path d="M6.2 6.2C3.4 8.2 2 12 2 12s3.5 7 10 7a10 10 0 0 0 4-.8"/>
+
+ 
+
     `;
         } else {
           eyeIcon.innerHTML = `
+
+ 
+
       <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+
+ 
+
       <circle cx="12" cy="12" r="3"/>
+
+ 
+
     `;
         }
       });
 
-      /* DEMO LOGIN */
+      /* DEMO LOGIN: fields remain visible, but credentials are optional */
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        let valid = true;
-
-        if (!username.value.trim()) {
-          showError(username, "შეიყვანე ლოგინი");
-          valid = false;
-        }
-
-        if (!password.value) {
-          showError(password, "შეიყვანე პაროლი");
-          valid = false;
-        }
-
-        if (!valid) return;
-        if (username.value.trim() !== "1111" || password.value !== "2222") {
-          showError(password, "ლოგინი ან პაროლი არასწორია");
-          return;
-        }
-        // დემო რეჟიმი: სერვერზე ავტორიზაცია ჯერ არ ხდება.
-        // პაროლი არ ინახება.
         sessionStorage.setItem("aiia_demo_role", "student");
+
         sessionStorage.setItem("aiia_demo_mode", "preview");
 
         window.location.href = "student-home.html";

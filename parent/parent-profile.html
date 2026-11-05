@@ -3,6 +3,7 @@
 <html lang="ka">
   <head>
     <meta charset="utf-8" />
+
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 
     <title>AIIA — მშობლის პროფილი</title>
@@ -13,278 +14,484 @@
     />
 
     <style>
+      /* AIIA · Parent profile · clean stylesheet */
+
       :root {
-        --purple: #6c63ff;
-        --bg: #eeebff;
-        --ink: #20243a;
-        --muted: #7a8194;
-        --line: #e9ebf3;
+        --primary: #6c63ff;
+
+        --blue: #4a90ff;
+
+        --success: #22c55e;
+
+        --error: #ff4d4f;
+
+        --surface: #eff0f4;
+
+        --white: #ffffff;
+
+        --text: #111827;
+
+        --muted: #6b7280;
+
+        --line: #e5e7eb;
+
+        --radius: 16px;
       }
-      * {
+
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
       }
+
+      [hidden] {
+        display: none !important;
+      }
+
       body {
         margin: 0;
-        background: #ffffff;
-        font-family: "Noto Sans Georgian", sans-serif;
-        color: var(--ink);
+        color: var(--text);
+        background: var(--white);
+        font:
+          14px/1.6 "Noto Sans Georgian",
+          sans-serif;
       }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      [role="button"]:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 3px;
+      }
+
       .wrap {
         max-width: 540px;
-        margin: auto;
-        padding: 22px 18px 105px;
+        margin: 0 auto;
+        padding: 22px 18px 110px;
       }
+
       h1 {
-        font-size: 23px;
-        margin: 4px 0 22px;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.3;
+        margin: 4px 0 20px;
       }
+
       h2 {
-        font-size: 15px;
+        font-size: 20px;
+        font-weight: 600;
         margin: 26px 0 12px;
       }
-      .card {
-        background: var(--bg);
-        border: 1px solid var(--line);
-        border-radius: 17px;
-        padding: 18px;
-        box-shadow: 0 3px 16px #20243a06;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 600;
       }
-      .profile {
+
+      .card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .profile,
+      .student,
+      .setting,
+      .between {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
       }
-      .avatar {
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        background: #efedff;
-        color: var(--purple);
-        display: grid;
-        place-items: center;
-        font-size: 25px;
-        flex-shrink: 0;
-      }
+
       .grow {
         flex: 1;
         min-width: 0;
       }
-      .name {
-        font-weight: 700;
-        font-size: 16px;
+
+      .avatar {
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        width: 54px;
+        height: 54px;
+        overflow: hidden;
+        border-radius: 50%;
+        background: #e5e2ff;
+        color: var(--primary);
+        font-size: 24px;
       }
-      .sub {
-        font-size: 12px;
+
+      .avatar img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .sub,
+      .small {
+        margin-top: 4px;
         color: var(--muted);
-        margin-top: 5px;
+        font-size: 12px;
         overflow-wrap: anywhere;
       }
-      .iconbtn {
+
+      .iconbtn,
+      .back-btn {
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
         border: 0;
-        background: #f1efff;
-        color: var(--purple);
-        border-radius: 11px;
-        padding: 11px;
-        cursor: pointer;
+        border-radius: 10px;
+        color: var(--primary);
+        background: #e5e2ff;
       }
+
+      .iconbtn svg,
+      .back-btn svg {
+        width: 19px;
+        height: 19px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+      }
+
       .student,
       .setting {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 13px 0;
+        padding: 14px 0;
       }
+
       .student + .student,
       .setting + .setting {
-        border-top: 1px solid var(--line);
+        border-top: 1px solid #d9dce5;
       }
+
       .student .avatar {
         width: 44px;
         height: 44px;
-        font-size: 19px;
       }
-      .arrow {
-        color: #9ba1b2;
-        font-size: 22px;
-      }
-      .add {
-        width: 100%;
-        margin-top: 12px;
-        border: 1px dashed #b9b4ff;
-        border-radius: 12px;
-        background: #f8f7ff;
-        color: var(--purple);
-        padding: 13px;
-        font: 600 13px inherit;
-        cursor: pointer;
-      }
-      .symbol {
-        width: 40px;
-        height: 40px;
-        border-radius: 11px;
-        background: #f2f0ff;
-        display: grid;
-        place-items: center;
-        color: var(--purple);
-        font-size: 18px;
-        flex-shrink: 0;
-      }
+
       .setting {
         cursor: pointer;
       }
+
       .setting strong {
-        font-size: 13px;
+        font-size: 14px;
+        font-weight: 500;
       }
-      .setting .sub {
-        font-size: 11px;
+
+      .arrow {
+        color: #8991a2;
+        font-size: 22px;
       }
+
+      .symbol {
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #e4e1ff;
+        color: var(--primary);
+      }
+
+      .symbol svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .add {
+        width: 100%;
+        margin-top: 12px;
+        padding: 13px;
+        border: 1px dashed var(--primary);
+        border-radius: 12px;
+        color: var(--primary);
+        background: var(--white);
+        font-weight: 600;
+      }
+
       .logout {
         width: 100%;
         margin-top: 18px;
-        background: #fff1f1;
+        padding: 14px;
         border: 0;
-        color: #dc4444;
         border-radius: 12px;
-        padding: 15px;
-        font: 600 13px "Noto Sans Georgian";
-        cursor: pointer;
-      }
-      .nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border-top: 1px solid var(--line);
-        display: flex;
-        justify-content: center;
-        padding: 12px 8px max(12px, env(safe-area-inset-bottom));
-      }
-      .navinner {
-        width: min(540px, 100%);
-        display: flex;
-        justify-content: space-around;
-      }
-      .nav a {
-        text-decoration: none;
-        color: #8990a1;
-        text-align: center;
-        font-size: 11px;
-      }
-      .nav a.active {
-        color: var(--purple);
-        font-weight: 700;
-      }
-      .nav a span {
-        display: block;
-        font-size: 22px;
-        margin-bottom: 2px;
-      }
-      dialog {
-        border: 0;
-        border-radius: 18px;
-        box-shadow: 0 15px 55px #14142d40;
-        width: min(440px, calc(100% - 28px));
-        padding: 22px;
-      }
-      dialog::backdrop {
-        background: #15182a80;
-      }
-      dialog h2 {
-        margin: 0 0 15px;
-        font-size: 18px;
-      }
-      .field {
-        display: block;
-        font-size: 12px;
-        margin: 12px 0 5px;
-      }
-      .fieldinput {
-        width: 100%;
-        border: 1px solid #dde0ec;
-        border-radius: 10px;
-        padding: 12px;
-        font: 13px "Noto Sans Georgian";
-      }
-      .actions {
-        display: flex;
-        gap: 9px;
-        margin-top: 18px;
-      }
-      .btn {
-        flex: 1;
-        border: 0;
-        border-radius: 10px;
-        padding: 12px;
-        font: 600 12px "Noto Sans Georgian";
-        cursor: pointer;
-      }
-      .primary {
-        background: var(--purple);
-        color: #fff;
-      }
-      .secondary {
-        background: #f0f1f7;
-        color: #444;
-      }
-      .small {
-        font-size: 12px;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-      .subscription {
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        margin: 10px 0;
-      }
-      .between {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-      }
-      .pill {
-        font-size: 10px;
-        color: #15803d;
-        background: #dcfce7;
-        padding: 5px 9px;
-        border-radius: 20px;
-      }
-      .linkbtn {
-        border: 0;
-        background: none;
-        color: var(--purple);
-        cursor: pointer;
-        font: 600 12px "Noto Sans Georgian";
-        padding: 5px;
-      }
-      .hidden {
-        display: none;
-      }
-      @media (min-width: 800px) {
-        .wrap {
-          margin-top: 20px;
-        }
-        .nav {
-          position: static;
-          max-width: 540px;
-          margin: 10px auto 0;
-          border: 1px solid var(--line);
-          border-radius: 15px;
-        }
+        background: #fff0f0;
+        color: var(--error);
+        font-weight: 600;
       }
 
-      /* INNER PAGES */
+      /* Bottom navigation: each link owns exactly one grid column. */
+
+      .nav {
+        position: fixed;
+        z-index: 30;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(540px, 100%);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 10px 8px max(12px, env(safe-area-inset-bottom));
+        border-top: 1px solid var(--line);
+        background: var(--white);
+        box-shadow: 0 -4px 16px #1118270a;
+      }
+
+      .nav a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        min-width: 0;
+        color: var(--muted);
+        font-size: 11px;
+        text-align: center;
+        text-decoration: none;
+        line-height: 1.4;
+      }
+
+      .nav a svg {
+        display: block;
+        flex: none;
+        width: 22px;
+        height: 22px;
+      }
+
+      .nav a.active {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* Dialogs */
+
+      dialog {
+        width: min(440px, calc(100% - 28px));
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 22px;
+        border: 0;
+        border-radius: 18px;
+        box-shadow: 0 16px 50px #11182730;
+        color: var(--text);
+      }
+
+      dialog::backdrop {
+        background: #11182780;
+      }
+
+      dialog h2 {
+        margin: 0 0 12px;
+        font-size: 20px;
+      }
+
+      .field {
+        display: block;
+        margin: 12px 0 6px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .fieldinput {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        background: white;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 12px;
+        border: 0;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+
+      .primary,
+      .primary-btn {
+        background: var(--primary);
+        color: white;
+      }
+
+      .secondary {
+        background: var(--surface);
+        color: var(--text);
+      }
+
+      .polished {
+        padding: 24px;
+      }
+
+      .modal-head,
+      .between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .modal-head {
+        margin-bottom: 14px;
+      }
+
+      .modal-icon {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #e5e2ff;
+        color: var(--primary);
+        font-size: 20px;
+      }
+
+      .xbtn {
+        width: 32px;
+        height: 32px;
+        border: 0;
+        border-radius: 9px;
+        background: var(--surface);
+        color: var(--muted);
+        font-size: 23px;
+      }
+
+      .modal-sub {
+        margin: 5px 0 12px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .section-label {
+        margin: 20px 0 10px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .plan-card,
+      .subscription {
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+      }
+
+      .plan-price {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #d9dce5;
+      }
+
+      .plan-price strong {
+        font-size: 19px;
+      }
+
+      .plan-price small,
+      .plan-date {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .plan-date {
+        margin-top: 10px;
+      }
+
+      .pill {
+        padding: 4px 9px;
+        border-radius: 20px;
+        color: #15803d;
+        background: #dcfce7;
+        font-size: 12px;
+      }
+
+      .manage {
+        padding: 9px 12px;
+        border: 0;
+        border-radius: 9px;
+        background: #e5e2ff;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .history-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 16px 4px;
+        border: 0;
+        border-top: 1px solid var(--line);
+        background: transparent;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .full {
+        width: 100%;
+        margin-top: 12px;
+      }
+
+      .toast {
+        display: none;
+        position: fixed;
+        z-index: 200;
+        bottom: 95px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        max-width: 90%;
+        padding: 12px 18px;
+        border-radius: 12px;
+        background: #27304a;
+        color: white;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .toast.visible {
+        display: block;
+      }
+
+      /* Internal pages */
 
       .inner-page {
         display: none;
-
         max-width: 460px;
-
-        margin: auto;
-
-        padding-bottom: 35px;
+        margin: 0 auto;
+        padding: 8px 0 30px;
       }
 
       .inner-page.active {
@@ -293,136 +500,73 @@
 
       .inner-header {
         display: flex;
-
         align-items: center;
-
         gap: 12px;
-
-        margin-bottom: 19px;
-      }
-
-      .back-btn {
-        width: 38px;
-
-        height: 38px;
-
-        border: 0;
-
-        border-radius: 12px;
-
-        background: white;
-
-        color: var(--ink);
-
-        display: grid;
-
-        place-items: center;
-
-        box-shadow: 0 3px 12px #18213c0a;
-      }
-
-      .back-btn svg {
-        width: 19px;
-
-        height: 19px;
+        margin-bottom: 20px;
       }
 
       .inner-title {
-        font-size: 16px;
-
-        font-weight: 800;
-
         margin: 0;
+        font-size: 20px;
+        font-weight: 600;
       }
 
       .inner-intro {
-        background: linear-gradient(135deg, #7167ff, #7668fa);
-
-        border-radius: 20px;
-
         padding: 24px 20px;
-
-        text-align: center;
-
-        color: white;
-
         margin-bottom: 16px;
+        border-radius: 16px;
+        background: var(--primary);
+        color: white;
+        text-align: center;
       }
 
       .inner-intro h2 {
-        font-size: 21px;
-
         margin: 0 0 8px;
+        font-size: 24px;
       }
 
       .inner-intro p {
-        font-size: 12px;
-
-        line-height: 1.9;
-
         margin: 0;
-
-        opacity: 0.94;
+        font-size: 14px;
       }
 
-      /* ABOUT PAGE */
-
-      .about-section {
-        background: white;
-
-        border-radius: 17px;
-
+      .about-section,
+      .help-card {
         overflow: hidden;
-
-        margin-bottom: 13px;
-
-        box-shadow: 0 5px 18px #1e286009;
+        margin-bottom: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: white;
       }
 
       .about-heading {
         display: flex;
-
         align-items: center;
-
         gap: 10px;
-
-        background: linear-gradient(135deg, #7167ff, #7668fa);
-
-        color: white;
-
-        padding: 13px 16px;
+        padding: 14px 16px;
+        background: #6c63ff;
+        color: #ffffff;
       }
 
       .about-heading h3 {
-        font-size: 13px;
-
-        font-weight: 800;
-
         margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
       }
 
       .about-heading svg {
         width: 19px;
-
         height: 19px;
-
-        flex-shrink: 0;
-
-        stroke: white;
-
-        stroke-linecap: round;
-
-        stroke-linejoin: round;
+        flex: none;
+        stroke: #ffffff;
       }
 
       .about-body {
         padding: 16px;
-
-        color: #53607b;
-
-        font-size: 12px;
-
-        line-height: 2;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.9;
       }
 
       .about-body p {
@@ -430,472 +574,77 @@
       }
 
       .about-body strong {
-        color: #334467;
+        color: var(--text);
       }
 
       .about-footer {
+        padding: 20px 8px;
         text-align: center;
-
         color: var(--primary);
-
-        font-size: 13px;
-
-        font-weight: 800;
-
-        padding: 23px 8px;
+        font-weight: 600;
       }
 
-      /* HELP PAGE */
-
       .help-card {
-        background: white;
-
-        border-radius: 17px;
-
-        padding: 17px;
-
-        margin-bottom: 13px;
-
-        box-shadow: 0 5px 18px #1e286009;
+        padding: 18px;
       }
 
       .help-card h3 {
-        font-size: 13px;
-
-        margin: 0 0 14px;
-
-        color: #334467;
+        margin: 0 0 12px;
+        font-size: 16px;
       }
 
       .faq {
-        border: 1px solid #edf0fa;
-
-        border-radius: 12px;
-
         margin-top: 9px;
-
+        border: 1px solid var(--line);
+        border-radius: 12px;
         overflow: hidden;
       }
 
       .faq summary {
+        padding: 12px;
         cursor: pointer;
-
-        padding: 13px;
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        color: #405070;
+        font-weight: 600;
       }
 
       .faq p {
-        padding: 0 13px 13px;
-
         margin: 0;
-
-        font-size: 12px;
-
-        line-height: 1.9;
-
-        color: #69758f;
+        padding: 0 12px 12px;
+        color: var(--muted);
       }
 
       .help-card label {
         display: block;
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        margin-bottom: 9px;
+        margin-bottom: 8px;
+        font-weight: 500;
       }
 
       .help-card textarea {
         width: 100%;
-
-        min-height: 112px;
-
-        resize: vertical;
-
-        border: 1px solid #e4e8f3;
-
-        border-radius: 12px;
-
+        min-height: 110px;
         padding: 12px;
-
-        outline-color: var(--primary);
-
-        font-size: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        resize: vertical;
       }
 
       .primary-btn {
         width: 100%;
-
-        border: 0;
-
-        border-radius: 12px;
-
-        background: var(--primary);
-
-        color: white;
-
-        padding: 13px;
-
-        font-size: 12px;
-
-        font-weight: 800;
-
         margin-top: 12px;
+        padding: 13px;
+        border: 0;
+        border-radius: 12px;
+        font-weight: 600;
       }
 
       .support-email {
         color: var(--blue);
-
-        font-size: 12px;
-
-        font-weight: 700;
-
         overflow-wrap: anywhere;
       }
 
-      [hidden] {
-        display: none !important;
-      }
-      .inner-page {
-        padding-top: 8px;
-      }
-      .polished {
-        padding: 24px;
-        border-radius: 22px;
-      }
-      .modal-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-      }
-      .modal-icon {
-        display: grid;
-        place-items: center;
-        width: 46px;
-        height: 46px;
-        border-radius: 14px;
-        background: #efedff;
-        color: #6c63ff;
-        font-size: 21px;
-      }
-      .xbtn {
-        border: 0;
-        background: #f5f6fa;
-        border-radius: 10px;
-        width: 32px;
-        height: 32px;
-        font-size: 23px;
-        color: #788198;
-        cursor: pointer;
-      }
-      .polished h2 {
-        margin: 0;
-        font-size: 18px;
-      }
-      .modal-sub {
-        font-size: 11px;
-        color: #8892a9;
-        margin: 6px 0 14px;
-        line-height: 1.6;
-      }
-      .polished .field {
-        font-weight: 700;
-        margin-top: 18px;
-      }
-      .polished .fieldinput {
-        padding: 14px;
-        border-radius: 12px;
-      }
-      .polished .btn {
-        padding: 14px;
-      }
-      .section-label {
-        font-size: 13px;
-        margin: 22px 0 12px;
-      }
-      .plan-card {
-        border: 1px solid #eaecf5;
-        background: #fbfbff;
-        border-radius: 15px;
-        padding: 15px;
-        margin-bottom: 12px;
-        font-size: 12px;
-      }
-      .plan-price {
-        border-top: 1px solid #eaecf5;
-        padding-top: 13px;
-        margin-top: 12px;
-      }
-      .plan-price strong {
-        font-size: 19px;
-      }
-      .plan-price small {
-        font-size: 11px;
-        font-weight: 400;
-        color: #8892a9;
-      }
-      .manage {
-        border: 0;
-        background: #eeecff;
-        color: #6c63ff;
-        border-radius: 9px;
-        padding: 9px 12px;
-        font: 700 11px "Noto Sans Georgian";
-        cursor: pointer;
-      }
-      .plan-date {
-        font-size: 11px;
-        color: #8892a9;
-        margin-top: 12px;
-      }
-      .history-row {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 16px 4px;
-        border: 0;
-        border-top: 1px solid #eaecf5;
-        background: transparent;
-        text-align: left;
-        font: 700 12px "Noto Sans Georgian";
-        color: #27304a;
-        cursor: pointer;
-      }
-      .full {
-        width: 100%;
-        margin-top: 12px;
-      }
-      .toast {
-        position: fixed;
-        bottom: 95px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 200;
-        background: #27304a;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 12px;
-        font-size: 12px;
-        display: none;
-        max-width: 90%;
-        text-align: center;
-      }
-      .toast.visible {
-        display: block;
-      }
-      .inner-page .inner-intro {
-        background: linear-gradient(135deg, #7167ff, #7668fa);
-      }
-      .inner-page .about-heading {
-        background: linear-gradient(135deg, #7167ff, #7668fa);
-      }
-      .inner-page svg {
-        stroke-width: 1.8;
-      }
-      button:focus-visible,
-      .setting:focus-visible {
-        outline: 2px solid #6c63ff;
-        outline-offset: 2px;
-      }
-
-      .nav a span svg {
-        width: 22px;
-        height: 22px;
-      }
-      .symbol {
-        font-size: 0;
-      }
-      .symbol svg {
-        width: 20px;
-        height: 20px;
-        stroke: currentColor;
-        stroke-width: 1.8;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      .iconbtn {
-        font-size: 0;
-      }
-      .iconbtn svg {
-        width: 19px;
-        height: 19px;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-
-      .nav[hidden] {
-        display: none !important;
-      }
-
-      /* ქვედა ნავიგაცია — მშობლის მთავარ გვერდთან იდენტური */
-
-      .nav {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        width: min(460px, 100%);
-        max-width: none;
-        margin: 0;
-        border: 0;
-        border-top: 1px solid #e7e9f8;
-        border-radius: 0;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        padding: 11px 4px max(13px, env(safe-area-inset-bottom));
-        background: #fff;
-        box-shadow: 0 -5px 20px #2b2d7509;
-        justify-content: initial;
-        z-index: 30;
-      }
-
-      .nav a {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 4px;
-        text-decoration: none;
-        color: #626d92;
-        font-size: 11px;
-        font-weight: 400;
-        text-align: center;
-      }
-
-      .nav a.active {
-        color: #6245ff;
-        font-weight: 800;
-      }
-
-      .nav svg {
-        width: 22px;
-        height: 22px;
-        display: block;
-      }
-
-      .nav a.active:after {
-        content: "";
-        width: 23px;
-        height: 3px;
-        border-radius: 5px;
-        background: #6245ff;
-      }
-
-      .nav[hidden] {
-        display: none !important;
-      }
-    </style>
-
-    <style>
-      /* Parent identity card: always visible at top of profile */
-
-      #profileView > .parent-hero {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        align-items: center;
-        gap: 13px;
-        background: var(--bg);
-        border: 1px solid #eceef7;
-        border-radius: 18px;
-        padding: 16px 14px;
-        margin: 12px 0 20px;
-        box-shadow: 0 5px 20px rgba(30, 40, 96, 0.05);
-        min-height: 84px;
-      }
-
-      .parent-hero .avatar {
-        width: 54px;
-        height: 54px;
-        min-width: 54px;
-        display: grid;
-        place-items: center;
-        border-radius: 50%;
-        background: #eeecff;
-        font-size: 28px;
-      }
-
-      .parent-hero .grow {
-        flex: 1;
-        min-width: 0;
-      }
-      .parent-hero .name {
-        font-size: 14px;
-        font-weight: 800;
-        color: #1d2542;
-        line-height: 1.5;
-      }
-      .parent-hero .sub {
-        font-size: 11px;
-        color: #8993aa;
-        overflow-wrap: anywhere;
-      }
-
-      .parent-hero .iconbtn {
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
-        width: 36px;
-        height: 36px;
-        border-radius: 11px;
-        background: #f0eeff;
-        border: 1px solid #dcd8ff;
-        color: #6c63ff;
-        cursor: pointer;
-      }
-
-      .parent-hero .iconbtn svg {
-        width: 17px;
-        height: 17px;
-      }
-
-      #profileView > h1 {
-        margin: 8px 0 10px;
-        font-size: 20px;
-        font-weight: 800;
-      }
-
-      /* Separation and subtle dividers for profile sections */
-
-      #profileView > .parent-hero {
-        margin-bottom: 24px;
-      }
-
-      #profileView > h2 {
-        margin-top: 28px;
-        margin-bottom: 12px;
-      }
-
-      #profileView > h2 + .card {
-        margin-bottom: 28px;
-      }
-
-      #profileView .student + .student,
-      #profileView .setting + .setting {
-        border-top: 1px solid #ddd8f5;
-      }
-    </style>
-    <style>
-      /* Images from sibling img directory */
-
-      .parent-hero .avatar img,
-      #students .avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        border-radius: 50%;
+      @media (min-width: 800px) {
+        .wrap {
+          margin-top: 20px;
+        }
       }
     </style>
   </head>
@@ -914,15 +663,19 @@
               alt="მშობლის ფოტო"
               onerror="
                 this.style.display = 'none';
+
                 this.parentElement.textContent = '👤';
               "
               src="../img/role_selection_parent.png"
             />
           </div>
+
           <div class="grow">
             <div class="name" id="parentName">გიორგი მაისურაძე</div>
+
             <div class="sub" id="parentEmail">giorgi@example.com</div>
           </div>
+
           <button
             aria-label="სახელის რედაქტირება"
             class="iconbtn"
@@ -944,35 +697,45 @@
                   alt="ნიკას ფოტო"
                   onerror="
                     this.style.display = 'none';
+
                     this.parentElement.textContent = '👤';
                   "
                   src="../img/leaderboard-luka.png"
                 />
               </div>
+
               <div class="grow">
                 <div class="name">ნიკა მაისურაძე</div>
+
                 <div class="sub">VII კლასი</div>
               </div>
-              <span class="arrow">›</span>
+
+              <span class="arrow"> › </span>
             </div>
+
             <div class="student">
               <div class="avatar">
                 <img
                   alt="მარიამის ფოტო"
                   onerror="
                     this.style.display = 'none';
+
                     this.parentElement.textContent = '👤';
                   "
                   src="../img/leaderboard-mariam.png"
                 />
               </div>
+
               <div class="grow">
                 <div class="name">მარიამ მაისურაძე</div>
+
                 <div class="sub">V კლასი</div>
               </div>
-              <span class="arrow">›</span>
+
+              <span class="arrow"> › </span>
             </div>
           </div>
+
           <button class="add" onclick="openDialog('addStudent')">
             ＋ მოსწავლის დამატება
           </button>
@@ -984,12 +747,6 @@
           <div
             class="setting"
             onclick="openDialog('security')"
-            onkeydown="
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                this.click();
-              }
-            "
             role="button"
             tabindex="0"
           >
@@ -998,22 +755,19 @@
                 <path d="M4 7h16v10H4z M4 8l8 6 8-6"></path>
               </svg>
             </div>
+
             <div class="grow">
-              <strong>უსაფრთხოება</strong>
+              <strong> უსაფრთხოება </strong>
+
               <div class="sub">ელფოსტის შეცვლა</div>
             </div>
-            <span class="arrow">›</span>
+
+            <span class="arrow"> › </span>
           </div>
 
           <div
             class="setting"
             onclick="openDialog('payments')"
-            onkeydown="
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                this.click();
-              }
-            "
             role="button"
             tabindex="0"
           >
@@ -1022,22 +776,19 @@
                 <path d="M3 6h18v12H3z M3 10h18"></path>
               </svg>
             </div>
+
             <div class="grow">
-              <strong>გამოწერა და გადახდები</strong>
+              <strong> გამოწერა და გადახდები </strong>
+
               <div class="sub">გამოწერების მართვა და გადახდების ისტორია</div>
             </div>
-            <span class="arrow">›</span>
+
+            <span class="arrow"> › </span>
           </div>
 
           <div
             class="setting"
             onclick="showPage('help')"
-            onkeydown="
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                this.click();
-              }
-            "
             role="button"
             tabindex="0"
           >
@@ -1048,22 +799,19 @@
                 ></path>
               </svg>
             </div>
+
             <div class="grow">
-              <strong>დახმარება და მხარდაჭერა</strong>
+              <strong> დახმარება და მხარდაჭერა </strong>
+
               <div class="sub">ხშირი კითხვები და დაკავშირება</div>
             </div>
-            <span class="arrow">›</span>
+
+            <span class="arrow"> › </span>
           </div>
 
           <div
             class="setting"
             onclick="showPage('about')"
-            onkeydown="
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                this.click();
-              }
-            "
             role="button"
             tabindex="0"
           >
@@ -1074,17 +822,22 @@
                 ></path>
               </svg>
             </div>
+
             <div class="grow">
-              <strong>ჩვენ შესახებ</strong>
+              <strong> ჩვენ შესახებ </strong>
+
               <div class="sub">გაიგე მეტი AIIA-ს შესახებ</div>
             </div>
-            <span class="arrow">›</span>
+
+            <span class="arrow"> › </span>
           </div>
         </section>
+
         <button class="logout" onclick="openDialog('logout')">
           ⇥ ანგარიშიდან გასვლა
         </button>
       </div>
+
       <section class="inner-page" id="aboutPage">
         <header class="inner-header">
           <button
@@ -1221,10 +974,9 @@
 
           <div class="about-body">
             <p>
-              <strong
-                >ჩვენ გვჯერა თითოეული მოსწავლის უსაზღვრო
-                შესაძლებლობების.</strong
-              >
+              <strong>
+                ჩვენ გვჯერა თითოეული მოსწავლის უსაზღვრო შესაძლებლობების.
+              </strong>
 
               გვჯერა, რომ ყველას შეუძლია ნებისმიერი საკითხის სწავლა, თუ მას
               სწორად აუხსნიან, საჭირო დროს დაეხმარებიან და საკუთარი ტემპით
@@ -1241,6 +993,7 @@
 
         <div class="about-footer">AIIA — აქ სწავლა თავგადასავლად იქცევა.</div>
       </section>
+
       <section class="inner-page" id="helpPage">
         <header class="inner-header">
           <button
@@ -1286,7 +1039,7 @@
           <h3>ტექნიკური პრობლემის შეტყობინება</h3>
 
           <form id="supportForm" onsubmit="submitSupport(event)">
-            <label for="problemText">აღწერეთ პრობლემა</label>
+            <label for="problemText"> აღწერეთ პრობლემა </label>
 
             <textarea
               id="problemText"
@@ -1325,79 +1078,112 @@
     </main>
 
     <nav aria-label="ქვედა ნავიგაცია" class="nav">
-      <a href="parent-home.html"
-        ><svg
+      <a href="parent-home.html">
+        <svg
+          aria-hidden="true"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
           viewbox="0 0 24 24"
         >
-          <path d="m12 2 10 9h-3v10h-6v-7h-2v7H5V11H2z"></path></svg
-        >მთავარი</a
-      >
+          <path d="m12 3 9 8v10h-7v-7h-4v7H3V11z"></path>
+        </svg>
 
-      <a href="parent-subjects.html"
-        ><svg
+        <span> მთავარი </span>
+      </a>
+
+      <a href="parent-subjects.html">
+        <svg
+          aria-hidden="true"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
           viewbox="0 0 24 24"
         >
           <path
             d="M12 6C9 4 5 4 2 5v14c4-1 7-1 10 1 3-2 6-2 10-1V5c-3-1-7-1-10 1Zm0 0v14"
-          ></path></svg
-        >საგნები</a
-      >
+          ></path>
+        </svg>
 
-      <a aria-current="page" class="active" href="parent-profile.html"
-        ><svg
+        <span> საგნები </span>
+      </a>
+
+      <a aria-current="page" class="active" href="parent-profile.html">
+        <svg
+          aria-hidden="true"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
           viewbox="0 0 24 24"
         >
-          <circle cx="12" cy="7" r="4"></circle>
-          <path d="M4 22v-2a8 8 0 0 1 16 0v2"></path></svg
-        >პროფილი</a
-      >
+          <circle cx="12" cy="8" r="4"></circle>
+
+          <path d="M4 21v-2a8 8 0 0 1 16 0v2"></path>
+        </svg>
+
+        <span> პროფილი </span>
+      </a>
     </nav>
 
     <dialog id="addStudent">
       <h2>მოსწავლის დამატება</h2>
-      <label class="field">მოსწავლის სახელი და გვარი</label
-      ><input
+
+      <label class="field"> მოსწავლის სახელი და გვარი </label>
+
+      <input
         class="fieldinput"
         id="studentName"
         placeholder="სახელი და გვარი"
-      /><label class="field">კლასი</label
-      ><select class="fieldinput" id="studentGrade">
+      />
+
+      <label class="field"> კლასი </label>
+
+      <select class="fieldinput" id="studentGrade">
         <option value="">აირჩიე კლასი</option>
+
         <option>V კლასი</option>
+
         <option>VI კლასი</option>
+
         <option>VII კლასი</option>
+
         <option>VIII კლასი</option>
+
         <option>IX კლასი</option>
+
         <option>X კლასი</option>
+
         <option>XI კლასი</option>
+
         <option>XII კლასი</option>
       </select>
+
       <div class="actions">
         <button class="btn secondary" onclick="closeDialog('addStudent')">
-          გაუქმება</button
-        ><button class="btn primary" onclick="addStudent()">დამატება</button>
+          გაუქმება
+        </button>
+
+        <button class="btn primary" onclick="addStudent()">დამატება</button>
       </div>
     </dialog>
 
     <dialog id="logout">
       <h2>ანგარიშიდან გასვლა</h2>
+
       <p class="small">ნამდვილად გსურს ანგარიშიდან გასვლა?</p>
+
       <div class="actions">
         <button class="btn secondary" onclick="closeDialog('logout')">
-          გაუქმება</button
-        ><button
-          class="btn primary"
-          onclick="location.href = 'role-selection.html'"
-        >
+          გაუქმება
+        </button>
+
+        <button class="btn primary" onclick="location.href = '../index.html'">
           გასვლა
         </button>
       </div>
@@ -1405,113 +1191,159 @@
 
     <script>
       const openDialog = (id) => document.getElementById(id).showModal();
+
       const closeDialog = (id) => document.getElementById(id).close();
 
       function saveName() {
         const value = document.getElementById("fullName").value.trim();
+
         if (!value) return alert("შეიყვანე სახელი და გვარი");
+
         document.getElementById("parentName").textContent = value;
+
         closeDialog("editProfile");
       }
 
       function addStudent() {
         const name = document.getElementById("studentName").value.trim(),
           grade = document.getElementById("studentGrade").value;
+
         if (!name || !grade) return alert("შეავსე ორივე ველი");
+
         const item = document.createElement("div");
+
         item.className = "student";
+
         const avatar = document.createElement("div");
+
         avatar.className = "avatar";
+
         avatar.textContent = "👤";
+
         const info = document.createElement("div");
+
         info.className = "grow";
+
         const title = document.createElement("div");
+
         title.className = "name";
+
         title.textContent = name;
+
         const detail = document.createElement("div");
+
         detail.className = "sub";
+
         detail.textContent = grade;
+
         info.append(title, detail);
+
         const arrow = document.createElement("span");
+
         arrow.className = "arrow";
+
         arrow.textContent = "›";
+
         item.append(avatar, info, arrow);
+
         document.getElementById("students").append(item);
+
         closeDialog("addStudent");
+
         document.getElementById("studentName").value = "";
+
         document.getElementById("studentGrade").value = "";
       }
 
-      document.querySelectorAll(".setting").forEach((el) =>
-        el.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            el.click();
-          }
-        }),
-      );
-
       function showPage(page) {
         document.getElementById("profileView").hidden = true;
+
         document.querySelector(".nav").hidden = true;
+
         document
+
           .querySelectorAll(".inner-page")
+
           .forEach((p) => p.classList.remove("active"));
+
         document
+
           .getElementById(page === "about" ? "aboutPage" : "helpPage")
+
           .classList.add("active");
+
         window.scrollTo(0, 0);
       }
 
       function goBack() {
         document
+
           .querySelectorAll(".inner-page")
+
           .forEach((p) => p.classList.remove("active"));
+
         document.getElementById("profileView").hidden = false;
+
         document.querySelector(".nav").hidden = false;
+
         window.scrollTo(0, 0);
       }
 
       function submitSupport(event) {
         event.preventDefault();
+
         showToast(
           "შეტყობინების გაგზავნა ჩაირთვება მხარდაჭერის სისტემასთან დაკავშირების შემდეგ",
         );
       }
 
       let toastTimer;
+
       function showToast(message) {
         const t = document.getElementById("toast");
+
         t.textContent = message;
+
         t.classList.add("visible");
+
         clearTimeout(toastTimer);
+
         toastTimer = setTimeout(() => t.classList.remove("visible"), 3000);
       }
 
       function emailNext() {
         const email = document.getElementById("newEmail").value.trim();
+
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
           showToast("შეიყვანე სწორი ელფოსტა");
+
           return;
         }
+
         if (document.getElementById("codeStep").hidden) {
           document.getElementById("codeStep").hidden = false;
+
           document.getElementById("emailAction").textContent = "დადასტურება";
+
           showToast(
             "დემო: კოდის რეალური გაგზავნა სერვერის დაკავშირებას საჭიროებს",
           );
         } else {
           const code = document.getElementById("emailCode").value;
+
           if (!/^\d{6}$/.test(code)) {
             showToast("შეიყვანე 6-ნიშნა კოდი");
+
             return;
           }
+
           showToast("ელფოსტის შეცვლა საჭიროებს სერვერზე კოდის გადამოწმებას");
         }
       }
 
       function showPaymentHistory() {
         closeDialog("payments");
+
         openDialog("historyDialog");
       }
 
@@ -1529,8 +1361,9 @@
 
     <dialog class="polished" id="editProfile">
       <div class="modal-head">
-        <span class="modal-icon">✎</span
-        ><button
+        <span class="modal-icon"> ✎ </span>
+
+        <button
           aria-label="დახურვა"
           class="xbtn"
           onclick="closeDialog('editProfile')"
@@ -1538,25 +1371,34 @@
           ×
         </button>
       </div>
+
       <h2>პროფილის რედაქტირება</h2>
+
       <p class="modal-sub">განაახლე შენი სახელი და გვარი</p>
-      <label class="field" for="fullName">სახელი და გვარი</label
-      ><input
+
+      <label class="field" for="fullName"> სახელი და გვარი </label>
+
+      <input
         autocomplete="name"
         class="fieldinput"
         id="fullName"
         value="გიორგი მაისურაძე"
       />
+
       <div class="actions">
         <button class="btn secondary" onclick="closeDialog('editProfile')">
-          გაუქმება</button
-        ><button class="btn primary" onclick="saveName()">შენახვა</button>
+          გაუქმება
+        </button>
+
+        <button class="btn primary" onclick="saveName()">შენახვა</button>
       </div>
     </dialog>
+
     <dialog class="polished" id="security">
       <div class="modal-head">
-        <span class="modal-icon">✉</span
-        ><button
+        <span class="modal-icon"> ✉ </span>
+
+        <button
           aria-label="დახურვა"
           class="xbtn"
           onclick="closeDialog('security')"
@@ -1564,19 +1406,25 @@
           ×
         </button>
       </div>
+
       <h2>ელფოსტის შეცვლა</h2>
+
       <p class="modal-sub">დაადასტურე ახალი ელფოსტა 6-ნიშნა კოდით</p>
-      <label class="field" for="newEmail">ახალი ელფოსტა</label
-      ><input
+
+      <label class="field" for="newEmail"> ახალი ელფოსტა </label>
+
+      <input
         autocomplete="email"
         class="fieldinput"
         id="newEmail"
         placeholder="name@example.com"
         type="email"
       />
+
       <div hidden="" id="codeStep">
-        <label class="field" for="emailCode">დადასტურების კოდი</label
-        ><input
+        <label class="field" for="emailCode"> დადასტურების კოდი </label>
+
+        <input
           class="fieldinput"
           id="emailCode"
           inputmode="numeric"
@@ -1584,18 +1432,23 @@
           placeholder="6-ნიშნა კოდი"
         />
       </div>
+
       <div class="actions">
         <button class="btn secondary" onclick="closeDialog('security')">
-          გაუქმება</button
-        ><button class="btn primary" id="emailAction" onclick="emailNext()">
+          გაუქმება
+        </button>
+
+        <button class="btn primary" id="emailAction" onclick="emailNext()">
           კოდის გაგზავნა
         </button>
       </div>
     </dialog>
+
     <dialog class="polished" id="payments">
       <div class="modal-head">
-        <span class="modal-icon">▣</span
-        ><button
+        <span class="modal-icon"> ▣ </span>
+
+        <button
           aria-label="დახურვა"
           class="xbtn"
           onclick="closeDialog('payments')"
@@ -1603,38 +1456,69 @@
           ×
         </button>
       </div>
+
       <h2>გამოწერა და გადახდები</h2>
+
       <h3 class="section-label">აქტიური გამოწერები</h3>
+
       <div class="plan-card">
         <div class="between">
-          <strong>მათემატიკა</strong><span class="pill">აქტიური</span>
+          <strong> მათემატიკა </strong>
+
+          <span class="pill"> აქტიური </span>
         </div>
+
         <div class="modal-sub">ნიკა მაისურაძე</div>
+
         <div class="between plan-price">
-          <strong>19 ₾ <small>/ თვე</small></strong
-          ><button class="manage" onclick="openDialog('managePlan')">
+          <strong>
+            19 ₾
+
+            <small> / თვე </small>
+          </strong>
+
+          <button
+            class="manage"
+            onclick="
+              closeDialog('payments');
+              openDialog('managePlan');
+            "
+          >
             მართვა ›
           </button>
         </div>
+
         <div class="plan-date">შემდეგი გადახდა · 15 დეკემბერი</div>
       </div>
+
       <button class="history-row" onclick="showPaymentHistory()">
-        <span>გადახდების ისტორია</span><span>›</span>
+        <span> გადახდების ისტორია </span>
+
+        <span> › </span>
       </button>
     </dialog>
+
     <dialog class="polished" id="managePlan">
       <div class="modal-head">
-        <span class="modal-icon">▣</span
-        ><button class="xbtn" onclick="closeDialog('managePlan')">×</button>
+        <span class="modal-icon"> ▣ </span>
+
+        <button class="xbtn" onclick="closeDialog('managePlan')">×</button>
       </div>
+
       <h2>გამოწერის მართვა</h2>
+
       <p class="modal-sub">მათემატიკა · ნიკა მაისურაძე</p>
+
       <div class="plan-card">
         <div class="between">
-          <span>ყოველთვიური გადასახადი</span><strong>19 ₾</strong>
+          <span> ყოველთვიური გადასახადი </span>
+
+          <strong> 19 ₾ </strong>
         </div>
+
         <div class="plan-date">შემდეგი გადახდა · 15 დეკემბერი</div>
       </div>
+
       <button
         class="btn secondary full"
         onclick="
@@ -1646,20 +1530,27 @@
         ავტომატური განახლების გამორთვა
       </button>
     </dialog>
+
     <dialog class="polished" id="historyDialog">
       <div class="modal-head">
-        <span class="modal-icon">▤</span
-        ><button class="xbtn" onclick="closeDialog('historyDialog')">×</button>
+        <span class="modal-icon"> ▤ </span>
+
+        <button class="xbtn" onclick="closeDialog('historyDialog')">×</button>
       </div>
+
       <h2>გადახდების ისტორია</h2>
+
       <div class="plan-card between">
         <div>
-          <strong>მათემატიკა</strong>
+          <strong> მათემატიკა </strong>
+
           <div class="modal-sub">15 ნოემბერი · ნიკა</div>
         </div>
-        <strong>19 ₾</strong>
+
+        <strong> 19 ₾ </strong>
       </div>
     </dialog>
+
     <div class="toast" id="toast" role="status"></div>
   </body>
 </html>

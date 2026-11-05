@@ -1,2544 +1,960 @@
- 
+<!doctype html>
 
 <html lang="ka">
-
- 
-
   <head>
-
- 
-
     <meta charset="UTF-8" />
-
- 
-
- 
-
- 
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
- 
-
- 
-
- 
-
     <title>AiiA — საგნები</title>
 
- 
-
- 
-
- 
-
     <link
-
- 
-
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
-
- 
-
       rel="stylesheet"
-
- 
-
     />
 
- 
-
- 
-
- 
-
     <style>
-
- 
-
       :root {
+        --purple: #6c63ff;
 
- 
+        --secondary: #4a90ff;
 
-        --purple: #5739e8;
+        --success: #22c55e;
 
- 
+        --warning: #f59e0b;
 
-        --text: #171927;
+        --surface: #eff0f4;
 
- 
+        --text: #111827;
 
-        --muted: #7b8498;
-
- 
-
+        --muted: #6b7280;
       }
-
- 
 
       * {
-
- 
-
         box-sizing: border-box;
-
- 
-
       }
 
- 
-
       body {
-
- 
-
         margin: 0;
 
- 
-
-        background: #fafafd;
-
- 
+        background: #fff;
 
         color: var(--text);
 
- 
-
         font-family: "Noto Sans Georgian", sans-serif;
-
- 
-
       }
-
- 
 
       button {
-
- 
-
         font: inherit;
 
- 
-
         cursor: pointer;
-
- 
-
       }
-
- 
 
       a {
-
- 
-
         text-decoration: none;
-
- 
-
       }
 
- 
-
       .app {
-
- 
-
         max-width: 520px;
-
- 
 
         margin: auto;
 
- 
-
         min-height: 100dvh;
 
- 
-
-        padding: 28px 22px 112px;
-
- 
-
+        padding: 28px 22px 128px;
       }
 
- 
-
       .header {
-
- 
-
         display: flex;
-
- 
 
         align-items: center;
 
- 
-
         justify-content: space-between;
 
- 
-
         margin-bottom: 30px;
-
- 
-
       }
 
- 
-
       .logo {
-
- 
-
         font-size: 35px;
 
- 
-
-        font-weight: 800;
-
- 
+        font-weight: 700;
 
         letter-spacing: -1px;
 
- 
-
-        color: #6846e9;
-
- 
-
+        color: #6c63ff;
       }
-
- 
 
       .logo i {
-
- 
-
         font-style: normal;
 
- 
-
         color: #4a90ff;
-
- 
-
       }
 
- 
-
       .bell {
-
- 
-
         position: relative;
-
- 
 
         width: 49px;
 
- 
-
         height: 49px;
-
- 
 
         border-radius: 17px;
 
- 
-
-        background: #f5f6fc;
-
- 
+        background: #eff0f4;
 
         border: 1px solid #e7eaf3;
 
- 
-
         display: grid;
-
- 
 
         place-items: center;
 
- 
-
         color: #252c46;
-
- 
-
       }
 
- 
-
       .bell:after {
-
- 
-
         content: "";
-
- 
 
         position: absolute;
 
- 
-
         top: 10px;
-
- 
 
         right: 10px;
 
- 
-
         width: 10px;
-
- 
 
         height: 10px;
 
- 
-
         background: #f04343;
 
- 
-
         border-radius: 50%;
-
- 
-
       }
 
- 
-
       .heading {
-
- 
-
         display: flex;
-
- 
 
         justify-content: space-between;
 
- 
-
         align-items: center;
-
- 
 
         gap: 12px;
 
- 
-
         margin-bottom: 23px;
-
- 
-
       }
 
- 
-
       h1 {
-
- 
-
         font-size: 28px;
-
- 
 
         line-height: 1.2;
 
- 
-
         margin: 0;
 
- 
-
-        font-weight: 800;
-
- 
-
+        font-weight: 700;
       }
 
- 
-
       .student {
-
- 
-
         border: 1px solid #e8eaf3;
 
- 
-
         background: #fff;
-
- 
 
         border-radius: 40px;
 
- 
-
         display: flex;
 
- 
-
         align-items: center;
-
- 
 
         gap: 10px;
 
- 
-
         padding: 6px 11px 6px 6px;
 
- 
-
-        font-weight: 800;
-
- 
+        font-weight: 700;
 
         font-size: 13px;
 
- 
-
         box-shadow: 0 3px 12px #161c3710;
-
- 
-
       }
 
- 
-
       .student img {
-
- 
-
         width: 35px;
-
- 
 
         height: 35px;
 
- 
-
         object-fit: cover;
-
- 
 
         border-radius: 50%;
 
- 
-
         background: #eee9ff;
-
- 
-
       }
 
- 
-
       .student svg {
-
- 
-
         width: 16px;
-
- 
 
         height: 16px;
 
- 
-
         color: #8b91a5;
-
- 
-
       }
 
- 
-
       .student-menu {
-
- 
-
         display: none;
-
- 
 
         margin: -9px 0 16px auto;
 
- 
-
         width: max-content;
-
- 
 
         max-width: 100%;
 
- 
-
         font-size: 12px;
-
- 
 
         padding: 12px 15px;
 
- 
-
         border-radius: 14px;
-
- 
 
         border: 1px solid #e6e8f1;
 
- 
-
         background: white;
-
- 
-
       }
-
- 
 
       .student-menu.show {
-
- 
-
         display: block;
-
- 
-
       }
 
- 
-
       .subject {
-
- 
-
         border-radius: 29px;
-
- 
 
         border: 1px solid;
 
- 
-
         padding: 24px 21px 21px;
 
- 
-
         margin-bottom: 19px;
-
- 
-
       }
-
- 
 
       .math {
+        background: #f1efff;
 
- 
-
-        background: #f0f4ff;
-
- 
-
-        border-color: #dce4f6;
-
- 
-
+        border-color: #e0dcff;
       }
-
- 
 
       .biology {
+        background: #effaf3;
 
- 
-
-        background: #edf9f1;
-
- 
-
-        border-color: #d8ebdd;
-
- 
-
+        border-color: #cfeedb;
       }
-
- 
 
       .chemistry {
+        background: #fff7eb;
 
- 
-
-        background: #fff6ed;
-
- 
-
-        border-color: #f3e4d0;
-
- 
-
+        border-color: #fbe5c6;
       }
-
- 
 
       .physics {
+        background: #eef5ff;
 
- 
-
-        background: #f3f0ff;
-
- 
-
-        border-color: #e2dcf4;
-
- 
-
+        border-color: #d6e7ff;
       }
 
- 
-
       .subject-main {
-
- 
-
         display: flex;
 
- 
-
         align-items: center;
-
- 
 
         gap: 14px;
 
- 
-
         min-height: 96px;
-
- 
-
       }
 
- 
-
       .subject-icon {
-
- 
-
         width: 56px;
-
- 
 
         height: 56px;
 
- 
-
         flex-shrink: 0;
 
- 
-
         display: grid;
-
- 
 
         place-items: center;
 
- 
-
         border-radius: 17px;
 
- 
-
-        background: #3f78e7;
-
- 
+        background: #6c63ff;
 
         color: white;
-
- 
-
       }
-
- 
 
       .biology .subject-icon {
-
- 
-
-        background: #21af66;
-
- 
-
+        background: #22c55e;
       }
-
- 
 
       .chemistry .subject-icon {
-
- 
-
-        background: #ff9b09;
-
- 
-
+        background: #f59e0b;
       }
-
- 
 
       .physics .subject-icon {
-
- 
-
-        background: #6660ef;
-
- 
-
+        background: #4a90ff;
       }
-
- 
 
       .subject-icon svg {
-
- 
-
         width: 31px;
 
- 
-
         height: 31px;
-
- 
-
       }
 
- 
-
       .subject-info {
-
- 
-
         flex: 1;
 
- 
-
         min-width: 0;
-
- 
 
         position: relative;
 
- 
-
         z-index: 1;
-
- 
-
       }
 
- 
-
       .subject-info h2 {
-
- 
-
         margin: 0 0 4px;
-
- 
 
         font-size: 19px;
 
- 
-
         line-height: 1.35;
 
- 
-
-        font-weight: 800;
-
- 
-
+        font-weight: 700;
       }
-
- 
 
       .grade {
-
- 
-
         color: var(--muted);
 
- 
-
         font-size: 14px;
-
- 
-
       }
 
- 
-
       .active {
-
- 
-
         display: inline-flex;
 
- 
-
         align-items: center;
-
- 
 
         gap: 6px;
 
- 
-
         font-size: 11px;
-
- 
 
         font-weight: 700;
 
- 
+        color: #15803d;
 
-        color: #25a66c;
-
- 
-
-        background: #e3f8ec;
-
- 
+        background: #dcfce7;
 
         border-radius: 100px;
 
- 
-
         padding: 3px 9px;
 
- 
-
         margin-top: 6px;
-
- 
-
       }
 
- 
-
       .active:before {
-
- 
-
         content: "";
-
- 
 
         height: 6px;
 
- 
-
         width: 6px;
-
- 
 
         border-radius: 50%;
 
- 
-
-        background: #25b37c;
-
- 
-
+        background: #22c55e;
       }
 
- 
-
       .art {
-
- 
-
         width: 108px;
-
- 
 
         height: 95px;
 
- 
-
         flex-shrink: 0;
-
- 
 
         display: flex;
 
- 
-
         align-items: center;
 
- 
-
         justify-content: center;
-
- 
 
         gap: 0;
 
- 
-
         overflow: visible;
-
- 
-
       }
 
- 
-
       .art img {
-
- 
-
         width: 53%;
-
- 
 
         height: 88%;
 
- 
-
         object-fit: contain;
 
- 
-
         min-width: 0;
-
- 
-
       }
-
- 
 
       .art img:first-child {
-
- 
-
         margin-right: -8px;
-
- 
-
       }
 
- 
-
       .subject-action {
-
- 
-
         display: flex;
-
- 
 
         align-items: center;
 
- 
-
         justify-content: center;
-
- 
 
         gap: 12px;
 
- 
-
         width: 100%;
 
- 
-
         border: 0;
-
- 
 
         border-radius: 17px;
 
- 
-
         min-height: 54px;
-
- 
 
         margin-top: 18px;
 
- 
-
         background: var(--purple);
-
- 
 
         color: #fff;
 
- 
-
         font-size: 16px;
 
- 
-
-        font-weight: 800;
-
- 
-
+        font-weight: 700;
       }
-
- 
 
       .subject-action:focus-visible,
-
- 
-
       .student:focus-visible,
-
- 
-
       .bell:focus-visible {
-
- 
-
         outline: 3px solid #a89aff;
 
- 
-
         outline-offset: 3px;
-
- 
-
       }
-
- 
 
       .subject-action:disabled {
+        background: #e5e7eb;
 
- 
-
-        background: #e4e8f1;
-
- 
-
-        color: #8d95a7;
-
- 
+        color: #9ca3af;
 
         cursor: not-allowed;
-
- 
-
       }
-
- 
 
       .subject-action svg {
-
- 
-
         width: 18px;
 
- 
-
         height: 18px;
-
- 
-
       }
 
- 
+      /* Fixed bottom navigation: equal-sized items, no negative margins */
 
       .nav {
-
- 
-
         position: fixed;
-
- 
 
         bottom: 0;
 
- 
-
         left: 50%;
-
- 
 
         transform: translateX(-50%);
 
- 
-
         width: min(520px, 100%);
 
- 
+        min-height: 82px;
 
-        background: #fff;
+        background: #ffffff;
 
- 
+        border-top: 1px solid #e5e7eb;
 
-        border-radius: 28px 28px 0 0;
+        border-radius: 20px 20px 0 0;
 
- 
-
-        box-shadow: 0 -7px 24px #10112d0b;
-
- 
+        box-shadow: 0 -4px 18px rgba(17, 24, 39, 0.06);
 
         display: grid;
 
- 
+        grid-template-columns: repeat(3, minmax(0, 1fr));
 
-        grid-template-columns: repeat(3, 1fr);
+        align-items: stretch;
 
- 
+        padding: 9px 8px max(12px, env(safe-area-inset-bottom));
 
-        padding: 14px 5px max(14px, env(safe-area-inset-bottom));
-
- 
-
-        z-index: 3;
-
- 
-
+        z-index: 30;
       }
 
- 
-
       .nav a {
+        min-width: 0;
 
- 
+        min-height: 58px;
 
         display: flex;
-
- 
 
         flex-direction: column;
 
- 
-
         align-items: center;
-
- 
-
-        gap: 5px;
-
- 
-
-        color: #9398a8;
-
- 
-
-        font-size: 12px;
-
- 
-
-        font-weight: 600;
-
- 
-
-      }
-
- 
-
-      .nav svg {
-
- 
-
-        width: 24px;
-
- 
-
-        height: 24px;
-
- 
-
-      }
-
- 
-
-      .nav .selected {
-
- 
-
-        color: var(--purple);
-
- 
-
-        font-weight: 800;
-
- 
-
-      }
-
- 
-
-      .nav .selected svg {
-
- 
-
-        background: #eeeaff;
-
- 
-
-        box-sizing: content-box;
-
- 
-
-        padding: 8px;
-
- 
-
-        border-radius: 13px;
-
- 
-
-        margin: -8px;
-
- 
-
-      }
-
- 
-
-      .modal {
-
- 
-
-        position: fixed;
-
- 
-
-        inset: 0;
-
- 
-
-        z-index: 10;
-
- 
-
-        background: #12162b85;
-
- 
-
-        display: none;
-
- 
-
-        align-items: end;
-
- 
 
         justify-content: center;
 
- 
+        gap: 5px;
+
+        color: #6b7280;
+
+        font-size: 12px;
+
+        line-height: 1.3;
+
+        font-weight: 500;
+
+        white-space: nowrap;
+
+        text-align: center;
+      }
+
+      .nav svg {
+        display: block;
+
+        flex: 0 0 24px;
+
+        width: 24px;
+
+        height: 24px;
+
+        box-sizing: border-box;
+      }
+
+      .nav .selected {
+        color: #6c63ff;
+
+        font-weight: 600;
+      }
+
+      .nav .selected svg {
+        background: none;
+
+        padding: 0;
+
+        margin: 0;
+
+        border-radius: 0;
+      }
+
+      .nav a:focus-visible {
+        outline: 2px solid #6c63ff;
+
+        outline-offset: -2px;
+
+        border-radius: 12px;
+      }
+
+      .modal {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 10;
+
+        background: #12162b85;
+
+        display: none;
+
+        align-items: end;
+
+        justify-content: center;
 
         padding: 15px;
-
- 
-
       }
-
- 
 
       .modal.show {
-
- 
-
         display: flex;
-
- 
-
       }
 
- 
-
       .sheet {
-
- 
-
         width: min(490px, 100%);
-
- 
 
         padding: 24px;
 
- 
-
         border-radius: 22px;
 
- 
-
         background: white;
-
- 
-
       }
-
- 
 
       .sheet h2 {
-
- 
-
         margin: 0 0 10px;
-
- 
-
       }
 
- 
-
       .sheet p {
-
- 
-
         line-height: 1.7;
-
- 
 
         font-size: 14px;
 
- 
-
         color: #646d80;
-
- 
-
       }
 
- 
-
       .sheet button {
-
- 
-
         width: 100%;
-
- 
 
         border: 0;
 
- 
-
         background: var(--purple);
-
- 
 
         color: white;
 
- 
-
         border-radius: 12px;
-
- 
 
         padding: 13px;
 
- 
-
         font-weight: 700;
-
- 
-
       }
-
- 
 
       @media (max-width: 380px) {
-
- 
-
         .app {
-
- 
-
-          padding: 22px 14px 110px;
-
- 
-
+          padding: 22px 14px 128px;
         }
-
- 
 
         .subject {
-
- 
-
           padding: 18px 14px;
-
- 
-
         }
-
- 
 
         .subject-main {
-
- 
-
           gap: 10px;
-
- 
-
         }
-
- 
 
         .subject-icon {
-
- 
-
           width: 47px;
 
- 
-
           height: 47px;
-
- 
-
         }
-
- 
 
         .subject-info h2 {
-
- 
-
           font-size: 16px;
-
- 
-
         }
-
- 
 
         .art {
-
- 
-
           width: 82px;
 
- 
-
           height: 80px;
-
- 
-
         }
-
- 
 
         .grade {
-
- 
-
           font-size: 12px;
-
- 
-
         }
-
- 
 
         .subject-action {
-
- 
-
           font-size: 14px;
-
- 
-
         }
-
- 
-
       }
-
- 
-
     </style>
-
- 
-
   </head>
 
- 
-
- 
-
- 
-
   <body>
-
- 
-
     <div class="app">
-
- 
-
       <header class="header">
-
- 
-
         <div class="logo">Aii<i>A</i></div>
 
- 
-
         <button
-
- 
-
           class="bell"
-
- 
-
           aria-label="შეტყობინებები"
-
- 
-
           onclick="location.href = 'parent-notifications.html'"
-
- 
-
         >
-
- 
-
           <svg
-
- 
-
             width="24"
-
- 
-
             height="24"
-
- 
-
             viewBox="0 0 24 24"
-
- 
-
             fill="none"
-
- 
-
             stroke="currentColor"
-
- 
-
             stroke-width="2"
-
- 
-
             stroke-linecap="round"
-
- 
-
           >
-
- 
-
             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
-
- 
-
           </svg>
-
- 
-
         </button>
-
- 
-
       </header>
 
- 
-
- 
-
- 
-
       <div class="heading">
-
- 
-
         <h1>საგნები</h1>
 
- 
-
         <button class="student" id="studentBtn" aria-expanded="false">
-
- 
-
           <img
-
- 
-
             src="../img/zura.png"
-
- 
-
             alt="მოსწავლე"
-
- 
-
             onerror="this.style.display = 'none'"
-
- 
-
           /><span>zura dogana</span
-
- 
-
           ><svg
-
- 
-
             viewBox="0 0 24 24"
-
- 
-
             fill="none"
-
- 
-
             stroke="currentColor"
-
- 
-
             stroke-width="2"
-
- 
-
           >
-
- 
-
             <path d="m6 9 6 6 6-6" />
-
- 
-
           </svg>
-
- 
-
         </button>
-
- 
-
       </div>
-
- 
-
- 
-
- 
 
       <div class="student-menu" id="studentMenu">
-
- 
-
         სატესტო ვერსიაში ერთი მოსწავლეა დამატებული.
-
- 
-
       </div>
 
- 
-
- 
-
- 
-
       <main>
-
- 
-
-        <section class="subject math" onclick="if (!event.target.closest('button')) location.href='parent-subject-math.html'" style="cursor:pointer">
-
- 
-
+        <section
+          class="subject math"
+          onclick="
+            if (!event.target.closest('button'))
+              location.href = 'parent-subject-math.html';
+          "
+          style="cursor: pointer"
+        >
           <div class="subject-main">
-
- 
-
             <div class="subject-icon">
-
- 
-
               <svg
-
- 
-
                 viewBox="0 0 24 24"
-
- 
-
                 fill="none"
-
- 
-
                 stroke="currentColor"
-
- 
-
                 stroke-width="2"
-
- 
-
               >
-
- 
-
                 <rect x="3" y="3" width="18" height="18" rx="3" />
 
- 
-
                 <path
-
- 
-
                   d="M7 9h5m-2.5-2.5v5M15 8h3M7 16l4 3m0-3-4 3M15 16h3m-3 3h3"
-
- 
-
                 />
-
- 
-
               </svg>
-
- 
-
             </div>
 
- 
-
             <div class="subject-info">
-
- 
-
               <h2>მათემატიკა</h2>
 
- 
-
               <div class="grade">V კლასი</div>
-
- 
 
               <span class="active">აქტიურია</span>
-
- 
-
             </div>
-
- 
 
             <div class="art">
-
- 
-
-             <img
-
- 
-
-                src="../img/math-2.png"
-
- 
-
-                alt=""
-
- 
-
-              />
-
- 
-
+              <img src="../img/math-2.png" alt="" />
             </div>
-
- 
-
           </div>
 
- 
-
-          <button class="subject-action" onclick="location.href='parent-subject-math.html'">
-
- 
-
+          <button
+            class="subject-action"
+            onclick="location.href = 'parent-subject-math.html'"
+          >
             საგნის ნახვა
 
- 
-
             <svg
-
- 
-
               viewBox="0 0 24 24"
-
- 
-
               fill="none"
-
- 
-
               stroke="currentColor"
-
- 
-
               stroke-width="2"
-
- 
-
             >
-
- 
-
               <path d="M4 12h16m-7-7 7 7-7 7" />
-
- 
-
             </svg>
-
- 
-
           </button>
-
- 
-
         </section>
-
- 
-
- 
-
- 
 
         <section class="subject biology">
-
- 
-
           <div class="subject-main">
-
- 
-
             <div class="subject-icon">
-
- 
-
               <svg
-
- 
-
                 viewBox="0 0 24 24"
-
- 
-
                 fill="none"
-
- 
-
                 stroke="currentColor"
-
- 
-
                 stroke-width="2"
-
- 
-
               >
-
- 
-
                 <path d="M21 3C9 3 4 8 4 15a6 6 0 0 0 6 6c8 0 11-8 11-18Z" />
 
- 
-
                 <path d="M3 21c4-7 8-10 14-13" />
-
- 
-
               </svg>
-
- 
-
             </div>
 
- 
-
             <div class="subject-info">
-
- 
-
               <h2>ბიოლოგია</h2>
 
- 
-
               <div class="grade">V კლასი</div>
-
- 
-
             </div>
-
- 
 
             <div class="art">
-
- 
-
-  <img
-
- 
-
-                src="../img/biology-2.png"
-
- 
-
-                alt=""
-
- 
-
-              />
-
- 
-
+              <img src="../img/biology-2.png" alt="" />
             </div>
-
- 
-
           </div>
 
- 
-
           <button class="subject-action" disabled>
-
- 
-
             <span>მალე დაემატება</span>
 
- 
-
             <svg
-
- 
-
               viewBox="0 0 24 24"
-
- 
-
               fill="none"
-
- 
-
               stroke="currentColor"
-
- 
-
               stroke-width="2"
-
- 
-
             >
-
- 
-
               <rect x="5" y="10" width="14" height="11" rx="2" />
 
- 
-
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-
- 
-
             </svg>
-
- 
-
           </button>
-
- 
-
         </section>
-
- 
-
- 
-
- 
 
         <section class="subject chemistry">
-
- 
-
           <div class="subject-main">
-
- 
-
             <div class="subject-icon">
-
- 
-
               <svg
-
- 
-
                 viewBox="0 0 24 24"
-
- 
-
                 fill="none"
-
- 
-
                 stroke="currentColor"
-
- 
-
                 stroke-width="2"
-
- 
-
               >
-
- 
-
                 <path
-
- 
-
                   d="M8 3h8M10 3v7l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M7 16h10"
-
- 
-
                 />
-
- 
-
               </svg>
-
- 
-
             </div>
 
- 
-
             <div class="subject-info">
-
- 
-
               <h2>ქიმია</h2>
 
- 
-
               <div class="grade">V კლასი</div>
-
- 
-
             </div>
-
- 
 
             <div class="art">
-
- 
-
-           <img
-
- 
-
-                src="../img/chemistry-2.png"
-
- 
-
-                alt=""
-
- 
-
-              />
-
- 
-
+              <img src="../img/chemistry-2.png" alt="" />
             </div>
-
- 
-
           </div>
 
- 
-
           <button class="subject-action" disabled>
-
- 
-
             <span>მალე დაემატება</span
-
- 
-
             ><svg
-
- 
-
               viewBox="0 0 24 24"
-
- 
-
               fill="none"
-
- 
-
               stroke="currentColor"
-
- 
-
               stroke-width="2"
-
- 
-
             >
-
- 
-
               <rect x="5" y="10" width="14" height="11" rx="2" />
 
- 
-
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-
- 
-
             </svg>
-
- 
-
           </button>
-
- 
-
         </section>
-
- 
-
- 
-
- 
 
         <section class="subject physics">
-
- 
-
           <div class="subject-main">
-
- 
-
             <div class="subject-icon">
-
- 
-
               <svg
-
- 
-
                 viewBox="0 0 24 24"
-
- 
-
                 fill="none"
-
- 
-
                 stroke="currentColor"
-
- 
-
                 stroke-width="2"
-
- 
-
               >
-
- 
-
                 <ellipse
-
- 
-
                   cx="12"
-
- 
-
                   cy="12"
-
- 
-
                   rx="10"
-
- 
-
                   ry="4"
-
- 
-
                   transform="rotate(45 12 12)"
-
- 
-
                 />
-
- 
 
                 <ellipse
-
- 
-
                   cx="12"
-
- 
-
                   cy="12"
-
- 
-
                   rx="10"
-
- 
-
                   ry="4"
-
- 
-
                   transform="rotate(-45 12 12)"
-
- 
-
                 />
-
- 
 
                 <circle
-
- 
-
                   cx="12"
-
- 
-
                   cy="12"
-
- 
-
                   r="2"
-
- 
-
                   fill="currentColor"
-
- 
-
                   stroke="none"
-
- 
-
                 />
-
- 
-
               </svg>
-
- 
-
             </div>
-
- 
 
             <div class="subject-info">
-
- 
-
               <h2>ფიზიკა</h2>
 
- 
-
               <div class="grade">V კლასი</div>
-
- 
-
             </div>
-
- 
 
             <div class="art">
-
- 
-
-          <img
-
- 
-
-                src="../img/physics-2.png"
-
- 
-
-                alt=""
-
- 
-
-              />
-
- 
-
+              <img src="../img/physics-2.png" alt="" />
             </div>
-
- 
-
           </div>
 
- 
-
           <button class="subject-action" disabled>
-
- 
-
             <span>მალე დაემატება</span
-
- 
-
             ><svg
-
- 
-
               viewBox="0 0 24 24"
-
- 
-
               fill="none"
-
- 
-
               stroke="currentColor"
-
- 
-
               stroke-width="2"
-
- 
-
             >
-
- 
-
               <rect x="5" y="10" width="14" height="11" rx="2" />
 
- 
-
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-
- 
-
             </svg>
-
- 
-
           </button>
-
- 
-
         </section>
-
- 
-
       </main>
 
- 
-
- 
-
- 
-
-      <nav class="nav">
-
- 
-
-        <a href="parent-home.html"
-
- 
-
-          ><svg
-
- 
-
+      <nav class="nav" aria-label="მშობლის ნავიგაცია">
+        <a href="parent-home.html" aria-label="მთავარი">
+          <svg
             viewBox="0 0 24 24"
-
- 
-
             fill="none"
-
- 
-
             stroke="currentColor"
-
- 
-
             stroke-width="2"
-
- 
-
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
           >
+            <path d="m3 10 9-7 9 7v11h-7v-7h-4v7H3z" />
+          </svg>
 
- 
+          <span>მთავარი</span>
+        </a>
 
-            <path d="m3 10 9-7 9 7v11h-7v-7h-4v7H3z" /></svg
-
- 
-
-          >მთავარი</a
-
- 
-
-        ><a class="selected" href="parent-subjects.html"
-
- 
-
-          ><svg
-
- 
-
-            viewBox="0 0 24 24"
-
- 
-
-            fill="none"
-
- 
-
-            stroke="currentColor"
-
- 
-
-            stroke-width="2"
-
- 
-
-          >
-
- 
-
-            <path
-
- 
-
-              d="M12 6C9 4 5 4 2 5v14c4-1 7-1 10 1 3-2 6-2 10-1V5c-3-1-7-1-10 1Zm0 0v14"
-
- 
-
-            /></svg
-
- 
-
-          >საგნები</a
-
- 
-
-        ><a href="parent-profile.html"
-
- 
-
-          ><svg
-
- 
-
-            viewBox="0 0 24 24"
-
- 
-
-            fill="none"
-
- 
-
-            stroke="currentColor"
-
- 
-
-            stroke-width="2"
-
- 
-
-          >
-
- 
-
-            <circle cx="12" cy="7" r="4" />
-
- 
-
-            <path d="M4 22v-2a8 8 0 0 1 16 0v2" /></svg
-
- 
-
-          >პროფილი</a
-
- 
-
+        <a
+          class="selected"
+          href="parent-subjects.html"
+          aria-current="page"
+          aria-label="საგნები"
         >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 6C9 4 5 4 2 5v14c4-1 7-1 10 1 3-2 6-2 10-1V5c-3-1-7-1-10 1Zm0 0v14"
+            />
+          </svg>
 
- 
+          <span>საგნები</span>
+        </a>
 
-      </*nav*>
+        <a href="parent-profile.html" aria-label="პროფილი">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="7" r="4" />
+            <path d="M4 22v-2a8 8 0 0 1 16 0v2" />
+          </svg>
 
- 
+          <span>პროფილი</span>
+        </a>
+      </nav>
+    </div>
 
-    </*div*>
-
-<script>
-
- 
-
+    <script>
       const studentBtn = document.getElementById("studentBtn");
 
- 
-
       studentBtn.addEventListener("click", () => {
-
- 
-
         let open = document
-
- 
 
           .getElementById("studentMenu")
 
- 
-
           .classList.toggle("show");
 
- 
-
         studentBtn.setAttribute("aria-expanded", String(open));
-
- 
-
       });
-
- 
-
- 
-
     </script>
-
- 
-
   </body>
-
- 
-
 </html>
-

@@ -1,33 +1,23 @@
 <!doctype html>
 
 <html lang="ka">
-
   <head>
-
     <meta charset="UTF-8" />
 
     <meta
-
       name="viewport"
-
       content="width=device-width,initial-scale=1,viewport-fit=cover"
-
     />
 
     <title>AIIA — მია</title>
 
     <link
-
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
-
       rel="stylesheet"
-
     />
 
     <style>
-
       :root {
-
         --primary: #6c63ff;
 
         --ink: #182344;
@@ -37,17 +27,13 @@
         --bg: #f8f9fd;
 
         --line: #e9eaf4;
-
       }
 
       * {
-
         box-sizing: border-box;
-
       }
 
       body {
-
         margin: 0;
 
         font-family: "Noto Sans Georgian", sans-serif;
@@ -55,27 +41,25 @@
         color: var(--ink);
 
         background: var(--bg);
-
       }
 
       .app {
-
         max-width: 760px;
 
         margin: auto;
 
         height: 100dvh;
 
+        padding-bottom: calc(66px + env(safe-area-inset-bottom));
+
         display: flex;
 
         flex-direction: column;
 
         background: linear-gradient(180deg, #f3f1ff 0%, #fff 27%, #fff 100%);
-
       }
 
       header {
-
         display: flex;
 
         align-items: center;
@@ -87,11 +71,9 @@
         border-bottom: 1px solid #eeeefa;
 
         background: #fff;
-
       }
 
       .avatar {
-
         height: 47px;
 
         width: 47px;
@@ -107,45 +89,41 @@
         overflow: hidden;
 
         flex: none;
-
       }
 
       .avatar img {
-
         width: 100%;
 
         height: 100%;
 
         object-fit: cover;
-
       }
 
       .avatar .fallback {
+        width: 100%;
+
+        height: 100%;
+
+        place-items: center;
 
         font-weight: 800;
 
         color: var(--primary);
 
         font-size: 16px;
-
       }
 
       .heading {
-
         flex: 1;
-
       }
 
       .heading strong {
-
         display: block;
 
         font-size: 17px;
-
       }
 
       .online {
-
         height: 9px;
 
         width: 9px;
@@ -157,11 +135,9 @@
         display: inline-block;
 
         margin-right: 5px;
-
       }
 
       .more {
-
         border: 0;
 
         background: #f5f4ff;
@@ -179,19 +155,15 @@
         color: var(--primary);
 
         cursor: pointer;
-
       }
 
       .more svg {
-
         width: 19px;
 
         height: 19px;
-
       }
 
       .history-panel {
-
         display: none;
 
         position: absolute;
@@ -217,25 +189,19 @@
         border-radius: 16px;
 
         padding: 12px;
-
       }
 
       .history-panel.open {
-
         display: block;
-
       }
 
       .history-panel h2 {
-
         font-size: 14px;
 
         margin: 4px 6px 12px;
-
       }
 
       .history-item {
-
         width: 100%;
 
         border: 0;
@@ -255,29 +221,23 @@
         margin-bottom: 7px;
 
         cursor: pointer;
-
       }
 
       .history-item.active {
-
         background: #eeecff;
 
         color: #5147c8;
-
       }
 
       .history-empty {
-
         font-size: 12px;
 
         color: var(--muted);
 
         padding: 8px;
-
       }
 
       .messages {
-
         flex: 1;
 
         overflow-y: auto;
@@ -289,19 +249,15 @@
         flex-direction: column;
 
         gap: 14px;
-
       }
 
       .intro {
-
         text-align: center;
 
         padding: 14px 8px 6px;
-
       }
 
       .intro .big {
-
         display: flex;
 
         justify-content: center;
@@ -311,11 +267,9 @@
         color: #6c63ff;
 
         margin-bottom: 8px;
-
       }
 
       .intro .big svg {
-
         width: 38px;
 
         height: 38px;
@@ -329,19 +283,15 @@
         stroke-linecap: round;
 
         stroke-linejoin: round;
-
       }
 
       .intro h1 {
-
         font-size: 20px;
 
         margin: 7px 0;
-
       }
 
       .intro p {
-
         font-size: 13px;
 
         color: #7e87a0;
@@ -349,11 +299,9 @@
         line-height: 1.8;
 
         margin: 0;
-
       }
 
       .bubble {
-
         max-width: 87%;
 
         padding: 12px 14px;
@@ -367,21 +315,17 @@
         white-space: pre-wrap;
 
         overflow-wrap: anywhere;
-
       }
 
       .bubble.mia {
-
         align-self: flex-start;
 
         background: #f0efff;
 
         border-bottom-left-radius: 5px;
-
       }
 
       .bubble.student {
-
         align-self: flex-end;
 
         background: var(--primary);
@@ -389,10 +333,10 @@
         color: white;
 
         border-bottom-right-radius: 5px;
-
       }
 
       .composer {
+        flex-shrink: 0;
 
         padding: 10px 13px 13px;
 
@@ -405,11 +349,9 @@
         align-items: end;
 
         gap: 9px;
-
       }
 
       .composer textarea {
-
         flex: 1;
 
         resize: none;
@@ -427,23 +369,17 @@
         padding: 12px;
 
         font:
-
           12px "Noto Sans Georgian",
-
           sans-serif;
 
         outline: none;
-
       }
 
       .composer textarea:focus {
-
         border-color: #b4afff;
-
       }
 
       .send {
-
         width: 43px;
 
         height: 43px;
@@ -459,19 +395,15 @@
         font-size: 20px;
 
         cursor: pointer;
-
       }
 
       .send:disabled {
-
         opacity: 0.5;
 
         cursor: default;
-
       }
 
       .bottom-nav {
-
         position: fixed;
 
         bottom: 0;
@@ -495,13 +427,9 @@
         grid-template-columns: repeat(4, minmax(0, 1fr));
 
         z-index: 20;
-
       }
 
- 
-
       .nav-link {
-
         display: flex;
 
         flex-direction: column;
@@ -521,13 +449,9 @@
         padding: 0;
 
         cursor: pointer;
-
       }
 
- 
-
       .nav-icon {
-
         width: 39px;
 
         height: 36px;
@@ -537,38 +461,24 @@
         display: grid;
 
         place-items: center;
-
       }
 
- 
-
       .nav-icon svg {
-
         width: 23px;
 
         height: 23px;
-
       }
-
- 
 
       .nav-link.active {
-
         color: #553de4;
-
       }
-
- 
 
       .nav-link.active .nav-icon {
-
         background: #eeebff;
-
       }
 
- 
-
       .hint {
+        flex-shrink: 0;
 
         text-align: center;
 
@@ -579,385 +489,273 @@
         background: #fff;
 
         padding-bottom: 7px;
-
       }
 
       @media (max-width: 400px) {
-
         .bottom-nav {
-
           padding-left: 5px;
 
           padding-right: 5px;
-
         }
 
- 
-
         .nav-icon {
-
           width: 34px;
 
           height: 33px;
-
         }
 
- 
-
         .nav-icon svg {
-
           width: 21px;
 
           height: 21px;
-
         }
-
       }
 
- 
-
       @media (min-width: 760px) {
-
         .app {
-
           border-left: 1px solid #eee;
 
           border-right: 1px solid #eee;
-
         }
-
       }
 
-      .guest-notice { margin: 18px auto 0; max-width: 390px; padding: 15px; background: #f3f1ff; border: 1px solid #e4e0ff; border-radius: 14px; color: #534d8b; font-size: 12px; line-height: 1.8; }
+      .guest-notice {
+        margin: 18px auto 0;
+        max-width: 390px;
+        padding: 15px;
+        background: #f3f1ff;
+        border: 1px solid #e4e0ff;
+        border-radius: 14px;
+        color: #534d8b;
+        font-size: 12px;
+        line-height: 1.8;
+      }
 
-      .guest-notice button, .limit-banner button { margin-top: 9px; background: #6c63ff; border: 0; border-radius: 9px; color: white; font: 600 12px "Noto Sans Georgian",sans-serif; padding: 9px 15px; cursor: pointer; }
+      .guest-notice button,
+      .limit-banner button {
+        margin-top: 9px;
+        background: #6c63ff;
+        border: 0;
+        border-radius: 9px;
+        color: white;
+        font:
+          600 12px "Noto Sans Georgian",
+          sans-serif;
+        padding: 9px 15px;
+        cursor: pointer;
+      }
 
-      .guest-remaining { margin-top: 5px; font-weight: 700; }
+      .guest-remaining {
+        margin-top: 5px;
+        font-weight: 700;
+      }
 
-      .limit-banner { padding: 12px 15px; background: #f3f1ff; color: #534d8b; font-size: 12px; text-align: center; }
-
+      .limit-banner {
+        padding: 12px 15px;
+        background: #f3f1ff;
+        color: #534d8b;
+        font-size: 12px;
+        text-align: center;
+      }
     </style>
-
   </head>
 
   <body>
-
     <main class="app">
-
       <header>
-
         <div class="avatar">
-
           <img
-
-            src="img/mia.png"
-
+            src="../img/mia.png"
             alt="მია"
-
             onerror="
-
               this.style.display = 'none';
-
-              this.nextElementSibling.style.display = 'block';
-
+              this.nextElementSibling.style.display = 'grid';
             "
+          />
 
-          /><span class="fallback" style="display: none">მია</span>
-
+          <span class="fallback" style="display: none">მია</span>
         </div>
 
         <div class="heading"><strong>მია — AI მენტორი</strong></div>
 
         <button
-
           class="more"
-
           id="historyToggle"
-
           type="button"
-
           title="ჩატების ისტორია"
-
           aria-label="ჩატების ისტორია"
-
         >
-
           <svg
-
             viewBox="0 0 24 24"
-
             fill="none"
-
             stroke="currentColor"
-
             stroke-width="1.8"
-
             stroke-linecap="round"
-
             stroke-linejoin="round"
-
           >
-
             <path d="M3 12a9 9 0 1 0 3-6.7" />
 
             <path d="M3 3v5h5" />
 
             <path d="M12 7v5l3 2" />
-
           </svg></button
-
         ><button
-
           class="more"
-
           id="newChat"
-
           type="button"
-
           title="ახალი ჩატი"
-
           aria-label="ახალი ჩატი"
-
         >
-
           <svg
-
             viewBox="0 0 24 24"
-
             fill="none"
-
             stroke="currentColor"
-
             stroke-width="1.8"
-
             stroke-linecap="round"
-
             stroke-linejoin="round"
-
           >
-
             <path d="M12 20H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10" />
 
             <path d="M15 5l4 4" />
 
             <path d="M9 15l2.5-.5L21 5a2.12 2.12 0 0 0-3-3l-9.5 9.5L8 14z" />
-
           </svg>
-
         </button>
-
       </header>
 
       <aside
-
         id="historyPanel"
-
         class="history-panel"
-
         aria-label="ჩატების ისტორია"
-
       >
-
         <h2>ჩატების ისტორია</h2>
 
         <div id="historyList"></div>
-
       </aside>
 
       <section class="messages" id="messages" aria-live="polite">
-
         <div class="intro">
-
           <div class="big">
-
             <svg viewBox="0 0 24 24" aria-hidden="true">
-
               <path
-
                 d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"
-
               />
 
               <path
-
                 d="m19 16 .7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16Z"
-
               />
-
             </svg>
-
           </div>
 
           <h1>გამარჯობა! მე მია ვარ 💜</h1>
 
           <p>შენი AI მენტორი. რაში დაგეხმარო დღეს?</p>
 
-          <div class="guest-notice">სტუმრის რეჟიმში AI ასისტენტის გამოყენება შეზღუდულია. სრული წვდომისთვის გაიარე რეგისტრაცია.<div class="guest-remaining" id="guestRemaining"></div><button type="button" onclick="openRegister()">რეგისტრაცია</button></div>
-
+          <div class="guest-notice">
+            სტუმრის რეჟიმში AI ასისტენტის გამოყენება შეზღუდულია. სრული
+            წვდომისთვის გაიარე რეგისტრაცია.
+            <div class="guest-remaining" id="guestRemaining"></div>
+            <button type="button" onclick="openRegister()">რეგისტრაცია</button>
+          </div>
         </div>
-
       </section>
 
-      <div id="limitBanner" class="limit-banner" style="display:none">სტუმრის უფასო კითხვების ლიმიტი ამოიწურა. სრული წვდომისთვის სთხოვე მშობელს რეგისტრაცია.<div><button type="button" onclick="openRegister()">რეგისტრაცია</button></div></div>
+      <div id="limitBanner" class="limit-banner" style="display: none">
+        სტუმრის უფასო კითხვების ლიმიტი ამოიწურა. სრული წვდომისთვის სთხოვე
+        მშობელს რეგისტრაცია.
+        <div>
+          <button type="button" onclick="openRegister()">რეგისტრაცია</button>
+        </div>
+      </div>
 
       <form class="composer" id="form">
-
         <textarea
-
           id="question"
-
           rows="1"
-
           maxlength="2000"
-
           placeholder="მიწერე მიას შენი კითხვა..."
-
           aria-label="შენი კითხვა"
-
         ></textarea
-
         ><button class="send" id="send" type="submit" aria-label="გაგზავნა">
-
           ➤
-
         </button>
-
       </form>
 
-      <div class="hint">დემო ჩატი — AI სერვერთან ჯერ არ არის დაკავშირებული</div>
 
-    <nav class="bottom-nav" aria-label="მთავარი ნავიგაცია">
+      <nav class="bottom-nav" aria-label="მთავარი ნავიგაცია">
+        <a class="nav-link" href="guest-home.html" aria-label="მთავარი">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z" />
+            </svg>
+          </span>
+        </a>
 
-      <a
+        <a
+          class="nav-link active"
+          href="guest-mia.html"
+          aria-current="page"
+          aria-label="მია"
+        >
+          <span class="nav-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="4" y="6" width="16" height="14" rx="3" />
 
-        class="nav-link"
+              <path
+                d="M12 2v4M9 2h6M1 12h3m16 0h3M8 12h1m6 0h1M9 16c2 1 4 1 6 0"
+              />
+            </svg>
+          </span>
+        </a>
 
-        href="guest-home.html"
+        <a
+          class="nav-link"
+          href="guest-achievements.html"
+          aria-label="მიღწევები"
+        >
+          <span class="nav-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M8 21h8M12 17v4M7 4H5a2 2 0 0 0-2 2v2a5 5 0 0 0 5 5M17 4h2a2 2 0 0 1 2 2v2a5 5 0 0 1-5 5"
+              />
 
-        aria-label="მთავარი"
+              <path d="M7 3h10v7a5 5 0 0 1-10 0V3Z" />
+            </svg>
+          </span>
+        </a>
 
-        
+        <a class="nav-link" href="guest-profile.html" aria-label="პროფილი">
+          <span class="nav-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="8" r="4" />
 
-      >
-
-        <span class="nav-icon">
-
-          <svg viewBox="0 0 24 24" fill="currentColor">
-
-            <path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z" />
-
-          </svg>
-
-        </span>
-
-      </a>
-
- 
-
-      <a class="nav-link active" href="guest-mia.html" aria-current="page" aria-label="მია">
-
-        <span class="nav-icon">
-
-          <svg
-
-            viewBox="0 0 24 24"
-
-            fill="none"
-
-            stroke="currentColor"
-
-            stroke-width="2"
-
-          >
-
-            <rect x="4" y="6" width="16" height="14" rx="3" />
-
-            <path
-
-              d="M12 2v4M9 2h6M1 12h3m16 0h3M8 12h1m6 0h1M9 16c2 1 4 1 6 0"
-
-            />
-
-          </svg>
-
-        </span>
-
-      </a>
-
- 
-
-      <a class="nav-link" href="guest-achievements.html" aria-label="მიღწევები">
-
-        <span class="nav-icon">
-
-          <svg
-
-            viewBox="0 0 24 24"
-
-            fill="none"
-
-            stroke="currentColor"
-
-            stroke-width="2"
-
-            stroke-linecap="round"
-
-            stroke-linejoin="round"
-
-          >
-
-            <path
-
-              d="M8 21h8M12 17v4M7 4H5a2 2 0 0 0-2 2v2a5 5 0 0 0 5 5M17 4h2a2 2 0 0 1 2 2v2a5 5 0 0 1-5 5"
-
-            />
-
-            <path d="M7 3h10v7a5 5 0 0 1-10 0V3Z" />
-
-          </svg>
-
-        </span>
-
-      </a>
-
- 
-
-      <a class="nav-link" href="guest-profile.html" aria-label="პროფილი">
-
-        <span class="nav-icon">
-
-          <svg
-
-            viewBox="0 0 24 24"
-
-            fill="none"
-
-            stroke="currentColor"
-
-            stroke-width="2"
-
-          >
-
-            <circle cx="12" cy="8" r="4" />
-
-            <path d="M4 21c0-5 3-8 8-8s8 3 8 8" />
-
-          </svg>
-
-        </span>
-
-      </a>
-
-    </nav>
-
-    </*main*>
+              <path d="M4 21c0-5 3-8 8-8s8 3 8 8" />
+            </svg>
+          </span>
+        </a>
+      </nav>
+    </main>
 
     <script>
-
       const messages = document.getElementById("messages"),
-
         question = document.getElementById("question"),
-
         form = document.getElementById("form");
 
       const STORAGE_KEY = "aiia_guest_mia_chats_v1";
@@ -966,26 +764,32 @@
 
       const GUEST_QUESTION_LIMIT = 5;
 
-      function questionsUsed() { return Number(localStorage.getItem(GUEST_LIMIT_KEY) || 0) || 0; }
+      function questionsUsed() {
+        return Number(localStorage.getItem(GUEST_LIMIT_KEY) || 0) || 0;
+      }
 
-      function openRegister() { window.location.href = "../parent-register.html"; }
+      function openRegister() {
+        window.location.href = "../parent-register.html";
+      }
 
       function updateGuestLimit() {
-
         const remaining = Math.max(0, GUEST_QUESTION_LIMIT - questionsUsed());
 
         const count = document.getElementById("guestRemaining");
 
         if (count) count.textContent = `დარჩენილია ${remaining} უფასო კითხვა`;
 
-        document.getElementById("limitBanner").style.display = remaining === 0 ? "block" : "none";
+        document.getElementById("limitBanner").style.display =
+          remaining === 0 ? "block" : "none";
 
         question.disabled = remaining === 0;
 
         document.getElementById("send").disabled = remaining === 0;
 
-        question.placeholder = remaining === 0 ? "კითხვების ლიმიტი ამოიწურა" : "მიწერე მიას შენი კითხვა...";
-
+        question.placeholder =
+          remaining === 0
+            ? "კითხვების ლიმიტი ამოიწურა"
+            : "მიწერე მიას შენი კითხვა...";
       }
 
       let chats = [];
@@ -993,61 +797,41 @@
       let currentId = null;
 
       try {
-
         chats = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
         if (!Array.isArray(chats)) chats = [];
-
       } catch (e) {
-
         chats = [];
-
       }
 
       function persist() {
-
         try {
-
           localStorage.setItem(STORAGE_KEY, JSON.stringify(chats));
-
         } catch (e) {
-
           console.warn("ჩატების შენახვა ვერ მოხერხდა", e);
-
         }
-
       }
 
       function currentChat() {
-
         return chats.find((c) => c.id === currentId);
-
       }
 
       function resetView() {
-
         messages.querySelectorAll(".bubble").forEach((el) => el.remove());
 
         messages.querySelector(".intro").style.display = "block";
-
       }
 
       function createChat() {
-
         const chat = {
-
           id:
-
             Date.now().toString(36) +
-
             "-" +
-
             Math.random().toString(36).slice(2, 8),
 
           title: "ახალი ჩატი",
 
           items: [],
-
         };
 
         chats.unshift(chat);
@@ -1063,11 +847,9 @@
         document.getElementById("historyPanel").classList.remove("open");
 
         question.focus();
-
       }
 
       function openChat(id) {
-
         const chat = chats.find((c) => c.id === id);
 
         if (!chat) return;
@@ -1079,23 +861,19 @@
         chat.items.forEach((m) => addMessage(m.text, m.role, false));
 
         if (chat.items.length)
-
           messages.querySelector(".intro").style.display = "none";
 
         document.getElementById("historyPanel").classList.remove("open");
 
         renderHistory();
-
       }
 
       function renderHistory() {
-
         const list = document.getElementById("historyList");
 
         list.replaceChildren();
 
         if (!chats.length) {
-
           const empty = document.createElement("div");
 
           empty.className = "history-empty";
@@ -1105,11 +883,9 @@
           list.appendChild(empty);
 
           return;
-
         }
 
         chats.forEach((c) => {
-
           const b = document.createElement("button");
 
           b.type = "button";
@@ -1121,35 +897,27 @@
           b.addEventListener("click", () => openChat(c.id));
 
           list.appendChild(b);
-
         });
-
       }
 
       function addMessage(text, role, save = true) {
-
         if (save) {
-
           let c = currentChat();
 
           if (!c) {
-
             createChat();
 
             c = currentChat();
-
           }
 
           c.items.push({ text, role });
 
           if (role === "student" && c.title === "ახალი ჩატი")
-
             c.title = text.slice(0, 45);
 
           persist();
 
           renderHistory();
-
         }
 
         messages.querySelector(".intro").style.display = "none";
@@ -1165,31 +933,24 @@
         messages.scrollTop = messages.scrollHeight;
 
         return el;
-
       }
 
       function demoReply(q) {
-
         const s = q.toLowerCase();
 
         if (s.includes("წილად"))
-
           return "წილადი მთელის ნაწილს გვიჩვენებს. მაგალითად, თუ პიცას 4 თანაბარ ნაწილად გავყოფთ და ერთს ავიღებთ, ეს იქნება 1/4. 🍕\nგინდა ერთად ვცადოთ ერთი მაგალითი?";
 
         if (s.includes("სავარჯიშო"))
-
           return "მოდი ვივარჯიშოთ! ✏️\nრამდენია 3 × 4? ჯერ შენ სცადე და შემდეგ ერთად შევამოწმოთ.";
 
         if (s.includes("ვისწავლ"))
-
           return "სცადე პატარა ნაბიჯებით: 1) წაიკითხე ახსნა; 2) შენი სიტყვებით გაიმეორე; 3) ამოხსენი ერთი სავარჯიშო; 4) გადაამოწმე შეცდომები. 💜";
 
         return "კარგი შეკითხვაა! 💜 ეს დემო ვერსიაა და ჯერ რეალურ AI-ს არ უკავშირდება. როცა AI-ს დავაკავშირებთ, შემეძლება შენს კითხვაზე კონკრეტული ახსნა და ნაბიჯ-ნაბიჯ დახმარება.";
-
       }
 
       function send(text) {
-
         const q = text.trim();
 
         if (!q) return;
@@ -1209,69 +970,48 @@
         document.getElementById("send").disabled = false;
 
         question.focus();
-
       }
 
       form.addEventListener("submit", (e) => {
-
         e.preventDefault();
 
         send(question.value);
-
       });
 
       question.addEventListener("keydown", (e) => {
-
         if (e.key === "Enter" && !e.shiftKey) {
-
           e.preventDefault();
 
           send(question.value);
-
         }
-
       });
 
       question.addEventListener("input", () => {
-
         question.style.height = "auto";
 
         question.style.height = Math.min(question.scrollHeight, 120) + "px";
-
       });
 
       document.getElementById("newChat").addEventListener("click", createChat);
 
       document.getElementById("historyToggle").addEventListener("click", () => {
-
         renderHistory();
 
         document.getElementById("historyPanel").classList.toggle("open");
-
       });
 
       document.addEventListener("click", (e) => {
-
         if (
-
           !e.target.closest("#historyPanel") &&
-
           !e.target.closest("#historyToggle")
-
         )
-
           document.getElementById("historyPanel").classList.remove("open");
-
       });
 
       if (chats.length) openChat(chats[0].id);
-
       else renderHistory();
 
       updateGuestLimit();
-
     </script>
-
   </body>
-
 </html>

@@ -1,8 +1,7 @@
-<!doctype html>
-
 <html lang="ka">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>AIIA — მათემატიკა</title>
@@ -15,177 +14,286 @@
     <style>
       :root {
         --purple: #6c63ff;
+
         --blue: #4a90ff;
-        --ink: #17192b;
-        --muted: #65708c;
+
+        --ink: #111827;
+
+        --muted: #6b7280;
+
+        --section-bg: #eff0f4;
       }
 
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
+
         background: #fff;
+
         color: var(--ink);
+
         font-family: "Noto Sans Georgian", sans-serif;
       }
+
       button,
       select {
         font: inherit;
       }
+
       button {
         cursor: pointer;
       }
 
       .app {
         max-width: 520px;
+
         margin: auto;
+
         padding: 0 14px 115px;
       }
 
       .header {
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
         padding: 16px 0 14px;
+
         border-bottom: 1.5px solid #e5e8f5;
+
         margin-bottom: 12px;
       }
 
       .back {
         display: grid;
+
         place-items: center;
+
         width: 36px;
+
         height: 36px;
+
         flex: none;
+
         border: 1.5px solid #dcdfff;
+
         background: #f4f2ff;
+
         border-radius: 12px;
+
         color: #6555ed;
+
         padding: 0;
+
         box-shadow: 0 2px 6px #6c63ff12;
       }
 
       .back svg {
         width: 18px;
+
         height: 18px;
+
         stroke: currentColor;
+
         stroke-width: 2.3;
+
         fill: none;
+
         stroke-linecap: round;
+
         stroke-linejoin: round;
       }
 
       .header h1 {
-        font-size: 23px;
+        font-size: 24px;
+
         line-height: 1.25;
+
         margin: 0;
-        font-weight: 800;
+
+        font-weight: 600;
+
         letter-spacing: -0.5px;
+
         flex: 1;
+
         min-width: 0;
       }
 
       .grade {
         border: 1.5px solid #dfe4f4;
+
         border-radius: 13px;
-        background: #f8f9ff;
+
+        background: var(--section-bg);
+
         padding: 10px 7px;
+
         font-size: 12px;
+
         font-weight: 700;
-        color: #252948;
+
+        color: var(--ink);
+
         max-width: 112px;
       }
 
       .section {
         border-radius: 21px;
+
         margin-bottom: 9px;
+
         background: #fff;
-        border: 1.5px solid #dcd6ff;
+
+        border: 1px solid #d8dbe5;
+
         overflow: hidden;
-        padding: 0 9px 10px;
+
+        padding: 0;
       }
 
       .section h2 {
-        font-size: 16px;
-        margin: 0 -9px 9px;
-        font-weight: 800;
-        background: #eeebff;
-        border-bottom: 1.5px solid #d1c9ff;
+        font-size: 18px;
+
+        margin: 0;
+
+        font-weight: 600;
+
+        background: var(--section-bg);
+
+        border-bottom: 1px solid #d8dbe5;
+
         border-radius: 0;
+
         padding: 15px 15px 13px;
-        color: #33228b;
+
+        color: var(--ink);
+      }
+
+      #features {
+        background: #fff;
+
+        padding: 9px;
       }
 
       .accordion {
-        border: 1.5px solid #ddd7ff;
+        border: 1px solid #d8dbe5;
+
         background: #fff;
+
         border-radius: 15px;
+
         margin: 7px 0;
+
         overflow: hidden;
+
         box-shadow: 0 3px 9px #27304a07;
       }
 
       .trigger {
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
         width: 100%;
+
         text-align: left;
+
         border: 0;
-        background: var(--bg);
+
+        background: var(--section-bg);
+
         padding: 11px;
+
         color: var(--ink);
-        font-weight: 800;
+
+        font-weight: 600;
+
         font-size: 13px;
       }
 
       .symbol {
         height: 38px;
+
         width: 38px;
+
         display: grid;
+
         place-items: center;
+
         flex: none;
+
         border-radius: 11px;
+
         background: var(--iconbg);
+
         color: var(--accent);
+
         border: 1px solid var(--line);
       }
 
       .symbol svg {
         width: 22px;
+
         height: 22px;
+
         stroke: currentColor;
+
         fill: none;
+
         stroke-width: 1.9;
+
         stroke-linecap: round;
+
         stroke-linejoin: round;
       }
 
       .trigger .name {
         flex: 1;
-        color: #3d318d;
+
+        color: var(--ink);
       }
 
       .chevron {
         width: 27px;
+
         height: 27px;
+
         border-radius: 9px;
+
         background: #ffffffb8;
-        border: 1px solid var(--line);
+
+        border: 1px solid #d8dbe5;
+
         display: grid;
+
         place-items: center;
+
         color: var(--accent);
+
         transition: transform 0.2s;
       }
 
       .chevron svg {
         width: 16px;
+
         height: 16px;
+
         stroke: currentColor;
+
         stroke-width: 2.5;
+
         fill: none;
+
         stroke-linecap: round;
+
         stroke-linejoin: round;
       }
 
@@ -195,12 +303,19 @@
 
       .details {
         display: none;
+
         padding: 14px 13px 16px;
+
         background: #fff;
+
         border-top: 1px solid var(--line);
-        font-size: 13px;
-        line-height: 1.85;
-        color: #46516b;
+
+        font-size: 14px;
+
+        line-height: 1.75;
+
+        color: var(--muted);
+
         width: 100%;
       }
 
@@ -211,73 +326,109 @@
       .parent,
       .syllabus {
         border-radius: 19px;
+
         margin: 9px 0;
+
         display: block;
+
         overflow: hidden;
       }
 
       .parent {
         background: #fff;
-        border: 1.5px solid #d8d1ff;
+
+        border: 1px solid #6c63ff;
       }
 
       .infohead {
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
         margin: 0;
+
         padding: 13px 14px;
-        background: #eeebff;
+
+        background: var(--section-bg);
+
         border-bottom: 1px solid #d8d1ff;
       }
 
       .bigicon {
         width: 43px;
+
         height: 43px;
+
         flex: none;
+
         display: grid;
+
         place-items: center;
+
         border-radius: 12px;
+
         font-size: 25px;
+
         border: 1.5px solid #c6bfff;
+
         background: #e3ddff;
       }
 
       .parent h2,
       .syllabus h2 {
-        font-size: 15px;
+        font-size: 18px;
+
         margin: 0;
+
         line-height: 1.45;
-        font-weight: 800;
+
+        font-weight: 600;
       }
 
       .parent p,
       .syllabus p {
-        font-size: 12.5px;
-        color: #4e5a77;
+        font-size: 14px;
+
+        color: var(--muted);
+
         line-height: 1.8;
+
         margin: 0;
+
         width: 100%;
+
         padding: 13px 14px 15px;
+
         background: #fff;
       }
 
       .syllabus {
         position: relative;
-        background: #fff;
-        border: 1.5px solid #ffdaa0;
+
+        background: #ffc857;
+
+        border: 1px solid #e6ad35;
+
         text-decoration: none;
+
         color: inherit;
+
         margin-bottom: 13px;
       }
 
       .syllabus .infohead {
-        background: #fff2d3;
+        background: #ffc857;
+
         border-color: #ffdaa0;
+
         padding-right: 39px;
       }
+
       .syllabus .bigicon {
         background: #ffedbc;
+
         border-color: #f6ce7a;
       }
 
@@ -287,20 +438,31 @@
 
       .syllabus .arrow {
         position: absolute;
+
         right: 13px;
+
         top: 23px;
+
         color: #e89b00;
+
         display: grid;
+
         place-items: center;
       }
 
       .syllabus .arrow svg {
         width: 20px;
+
         height: 20px;
+
         stroke: currentColor;
+
         stroke-width: 2.7;
+
         fill: none;
+
         stroke-linecap: round;
+
         stroke-linejoin: round;
       }
 
@@ -308,16 +470,15 @@
         .header h1 {
           font-size: 20px;
         }
+
         .trigger {
           font-size: 12px;
         }
-        .section {
-          padding: 0 7px 9px;
+
+        #features {
+          padding: 7px;
         }
-        .section h2 {
-          margin-left: -7px;
-          margin-right: -7px;
-        }
+
         .parent h2,
         .syllabus h2 {
           font-size: 14px;
@@ -326,24 +487,41 @@
 
       .buy {
         position: fixed;
+
         bottom: 0;
+
         left: 50%;
+
         transform: translateX(-50%);
+
         width: min(520px, 100%);
+
         background: linear-gradient(180deg, #ffffffdd, #fff);
+
         padding: 12px 16px max(16px, env(safe-area-inset-bottom));
+
         z-index: 3;
       }
+
       .buy a {
         display: block;
+
         text-align: center;
+
         text-decoration: none;
+
         border-radius: 17px;
+
         padding: 17px;
+
         background: linear-gradient(110deg, #6c63ff, #4232e9);
+
         color: #fff;
+
         font-size: 17px;
-        font-weight: 800;
+
+        font-weight: 600;
+
         box-shadow: 0 8px 22px #6c63ff45;
       }
 
@@ -351,12 +529,15 @@
         .top h1 {
           font-size: 24px;
         }
+
         .trigger {
           font-size: 13px;
         }
+
         .section {
-          padding: 0 9px 10px;
+          padding: 0;
         }
+
         .parent h2,
         .syllabus h2 {
           font-size: 14px;
@@ -376,26 +557,35 @@
         >
           <svg viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7" /></svg>
         </button>
+
         <h1>მათემატიკა</h1>
+
         <select class="grade" aria-label="კლასი">
           <option>V კლასი</option>
+
           <option>VI კლასი</option>
+
           <option selected>VII კლასი</option>
+
           <option>VIII კლასი</option>
+
           <option>IX კლასი</option>
         </select>
       </header>
 
       <section class="section">
         <h2>რას მიიღებს მოსწავლე?</h2>
+
         <div id="features"></div>
       </section>
 
       <section class="parent">
         <div class="infohead">
           <span class="bigicon" aria-hidden="true">📊</span>
+
           <h2>შვილის პროგრესის მონიტორინგი</h2>
         </div>
+
         <p>
           ყოველკვირეულად მიიღებთ ანგარიშს გავლილი თემებისა და სწავლის შედეგების
           შესახებ, ხოლო ყოველთვიურად — პროგრესის საერთო შეფასებას.
@@ -405,12 +595,15 @@
       <a class="syllabus" href="parent-math-syllabus.html"
         ><div class="infohead">
           <span class="bigicon" aria-hidden="true">📚</span>
+
           <h2>სასწავლო პროგრამა (სილაბუსი)</h2>
         </div>
+
         <span class="arrow" aria-hidden="true"
           ><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></svg></span
       ></a>
     </main>
+
     <div class="buy">
       <a href="parent-subject-pricing.html">ფასებისა და პაკეტების ნახვა →</a>
     </div>
@@ -419,75 +612,116 @@
       const features = [
         {
           title: "თეორია",
+
           icon: "book",
-          bg: "#f3efff",
+
+          bg: "#eff0f4",
+
           line: "#e1d8ff",
+
           iconbg: "#e5dcff",
+
           accent: "#7652ed",
+
           desc: "მოსწავლე გაეცნობა მათემატიკურ თემებს მარტივი და გასაგები ახსნებით. მასალა შეესაბამება სასკოლო სასწავლო პროგრამას.",
         },
 
         {
           title: "სავარჯიშოები",
+
           icon: "pencil",
-          bg: "#ecfbf6",
+
+          bg: "#eff0f4",
+
           line: "#c9f0e1",
+
           iconbg: "#d1f6e7",
+
           accent: "#0d9e73",
+
           desc: "მოსწავლე შეასრულებს სხვადასხვა სირთულის სავარჯიშოებს. დავალებები დაეხმარება ცოდნის განმტკიცებასა და პრაქტიკული უნარების განვითარებაში.",
         },
 
         {
           title: "ტესტები",
+
           icon: "target",
-          bg: "#edf5ff",
+
+          bg: "#eff0f4",
+
           line: "#d2e5ff",
+
           iconbg: "#d8eaff",
+
           accent: "#317ce5",
+
           desc: "მოსწავლე ტესტებით შეამოწმებს მიღებულ ცოდნას. შედეგები დაეხმარება ძლიერი და გასაუმჯობესებელი თემების გამოვლენაში.",
         },
 
         {
           title: "AI მენტორი მია",
+
           icon: "sparkles",
-          bg: "#fff1f7",
+
+          bg: "#eff0f4",
+
           line: "#ffd9e8",
+
           iconbg: "#ffe0ed",
+
           accent: "#d84d8c",
+
           desc: "მია გაუგებარ საკითხებს მოსწავლისთვის გასაგები გზით აუხსნის. საჭიროებისას დამატებითი მაგალითებითა და მინიშნებებით დაეხმარება.",
         },
 
         {
           title: "ინდივიდუალური სწავლება",
+
           icon: "route",
-          bg: "#fff6e8",
+
+          bg: "#eff0f4",
+
           line: "#ffe5ba",
+
           iconbg: "#ffebc8",
+
           accent: "#d88a15",
+
           desc: "სასწავლო გზა მოერგება მოსწავლის ცოდნასა და საჭიროებებს. მეტი ყურადღება დაეთმობა თემებს, რომლებშიც მას დახმარება სჭირდება.",
         },
 
         {
           title: "გემიფიკაცია",
+
           icon: "trophy",
-          bg: "#f1f0ff",
+
+          bg: "#eff0f4",
+
           line: "#dad6ff",
+
           iconbg: "#e0dcff",
+
           accent: "#6454db",
+
           desc: "მიღწევები, სტრიქები და სასწავლო მიზნები სწავლის მოტივაციას გაზრდის. მოსწავლე თვალს მიადევნებს საკუთარ წინსვლას.",
         },
       ];
 
       const paths = {
         book: '<path d="M12 6C9 4 5 4 2 5v14c4-1 7-1 10 1 3-2 6-2 10-1V5c-3-1-7-1-10 1Zm0 0v14"/>',
+
         pencil:
           '<path d="m4 20 4.5-1 11-11-3.5-3.5-11 11L4 20Zm10-13 3.5 3.5"/>',
+
         target:
           '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+
         sparkles:
           '<path d="m12 3 1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8L12 3ZM19 18l.7 2.3L22 21l-2.3.7L19 24l-.7-2.3L16 21l2.3-.7L19 18Z"/>',
+
         route:
           '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h7a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7"/>',
+
         trophy:
           '<path d="M7 3h10v7a5 5 0 0 1-10 0V3ZM7 5H4v3a4 4 0 0 0 4 4m9-7h3v3a4 4 0 0 1-4 4M12 15v4m-4 2h8"/>',
       };
@@ -496,21 +730,31 @@
 
       features.forEach((f, i) => {
         const item = document.createElement("article");
+
         item.className = "accordion";
+
         item.style.cssText = `--bg:${f.bg};--line:${f.line};--iconbg:${f.iconbg};--accent:${f.accent}`;
+
         item.innerHTML = `<button type="button" class="trigger" aria-expanded="false" aria-controls="feature-${i}"><span class="symbol"><svg viewBox="0 0 24 24" aria-hidden="true">${paths[f.icon]}</svg></span><span class="name">${f.title}</span><span class="chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="details" id="feature-${i}">${f.desc}</div>`;
+
         const btn = item.querySelector("button");
+
         btn.addEventListener("click", () => {
           const was = item.classList.contains("open");
+
           document.querySelectorAll(".accordion").forEach((el) => {
             el.classList.remove("open");
+
             el.querySelector("button").setAttribute("aria-expanded", "false");
           });
+
           if (!was) {
             item.classList.add("open");
+
             btn.setAttribute("aria-expanded", "true");
           }
         });
+
         wrap.appendChild(item);
       });
     </script>

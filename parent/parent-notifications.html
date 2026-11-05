@@ -3,68 +3,85 @@
 <html lang="ka">
   <head>
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>AIIA | მშობლის შეტყობინებები</title>
 
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap");
+
       :root {
         --primary: #6c63ff;
         --secondary: #4a90ff;
-        --achievement: #ff9900;
         --success: #22c55e;
-        --error: #ff4d4f;
-        --ink: #172033;
-        --muted: #64748b;
-        --bg: #f8fafc;
-        --border: #e9edf3;
+        --warning: #f59e0b;
+        --ink: #111827;
+        --muted: #6b7280;
+        --surface: #eff0f4;
+        --line: #e5e7eb;
       }
 
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
-        background: var(--bg);
-        font-family: "Noto Sans Georgian", Arial, sans-serif;
+        background: #fff;
         color: var(--ink);
+        font-family: "Noto Sans Georgian", sans-serif;
+        font-size: 14px;
       }
+
       button {
         font: inherit;
         cursor: pointer;
       }
+
+      button:focus-visible,
+      a:focus-visible,
+      .notification-heading:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 3px;
+      }
+
       .page {
         max-width: 480px;
         min-height: 100vh;
         margin: auto;
-        background: var(--bg);
+        background: #fff;
       }
 
       .header {
         display: flex;
         align-items: center;
         gap: 11px;
-        background: #fff;
         padding: 15px 14px;
-        border-bottom: 1px solid var(--border);
+        background: #fff;
+        border-bottom: 1px solid var(--line);
       }
+
       .back {
         display: grid;
         place-items: center;
         width: 38px;
         height: 38px;
         border-radius: 11px;
-        background: #f0edff;
+        background: #efedff;
         color: var(--primary);
         text-decoration: none;
         font-size: 27px;
         line-height: 1;
       }
+
       .header h1 {
         flex: 1;
-        font-size: 17px;
+        font-size: 20px;
+        font-weight: 600;
         margin: 0;
       }
+
       .unread-badge {
         background: var(--primary);
         color: #fff;
@@ -75,46 +92,70 @@
         white-space: nowrap;
       }
 
-      .content {
-        padding: 18px 13px 32px;
+      .unread-badge[hidden],
+      .mark-all[hidden],
+      .report-details[hidden] {
+        display: none !important;
       }
+
+      .content {
+        padding: 15px 13px 32px;
+      }
+
       .toolbar {
         display: flex;
         justify-content: flex-end;
         min-height: 28px;
         margin: 0 2px 9px;
       }
+
       .mark-all {
         border: 0;
         background: transparent;
         color: var(--primary);
-        font-size: 11px;
-        font-weight: 700;
+        font-size: 12px;
+        font-weight: 600;
       }
 
       .notification {
         background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 17px;
+        border: 2px solid var(--line);
+        border-radius: 18px;
         overflow: hidden;
-        margin-bottom: 13px;
-        box-shadow: 0 3px 12px #18264b08;
+        margin-bottom: 18px;
+        box-shadow: 0 5px 16px rgba(17, 24, 39, 0.06);
       }
+
       .notification.unread {
-        border-color: #c9c3ff;
-        box-shadow: 0 5px 19px #6c63ff16;
+        border-color: var(--primary);
+        box-shadow: 0 5px 18px rgba(108, 99, 255, 0.15);
       }
+
       .notification-heading {
         display: flex;
         align-items: center;
         gap: 11px;
-        padding: 14px;
-        background: #f2f4f8;
+        padding: 16px 15px;
+        background: var(--surface);
+        color: var(--ink);
         cursor: pointer;
       }
+
       .notification.unread .notification-heading {
-        background: #efedff;
+        background: var(--primary);
       }
+
+      .notification.unread .notification-title,
+      .notification.unread .period {
+        color: #fff;
+      }
+
+      .notification.unread .student-chip {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        color: #fff;
+      }
+
       .mia-avatar,
       .fallback-avatar {
         width: 44px;
@@ -126,12 +167,14 @@
         border: 2px solid #fff;
         background: #ded9ff;
       }
+
       .fallback-avatar {
         display: none;
         place-items: center;
         color: var(--primary);
-        font-weight: 800;
+        font-weight: 700;
       }
+
       .heading-text {
         min-width: 0;
         flex: 1;
@@ -142,23 +185,24 @@
         justify-content: space-between;
         gap: 8px;
       }
+
       .notification-title {
-        font-size: 12px;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 600;
         line-height: 1.5;
         margin: 0;
-        font-weight: 750;
       }
-      .notification:not(.unread) .notification-title {
-        color: #596579;
-      }
+
       .dot {
         width: 9px;
         height: 9px;
-        background: var(--primary);
-        border-radius: 50%;
         flex: none;
-        box-shadow: 0 0 0 3px #6c63ff1c;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
       }
+
       .meta {
         display: flex;
         align-items: center;
@@ -166,96 +210,94 @@
         flex-wrap: wrap;
         margin-top: 6px;
       }
+
       .student-chip {
         background: #fff;
+        border: 1px solid #d9dce5;
         color: var(--primary);
-        padding: 4px 8px;
+        padding: 4px 9px;
         border-radius: 7px;
-        font-size: 10px;
-        font-weight: 700;
+        font-size: 11px;
+        font-weight: 600;
       }
-      .notification:not(.unread) .student-chip {
-        color: #7a8498;
-      }
+
       .period {
-        font-size: 10px;
-        color: #645bd1;
-      }
-      .notification:not(.unread) .period {
-        color: #8490a3;
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 500;
       }
 
       .notification-body {
-        padding: 15px;
+        background: #fff;
+        padding: 18px 15px 16px;
       }
+
       .summary {
         display: flex;
         gap: 10px;
         align-items: flex-start;
       }
+
       .summary-icon {
         display: grid;
         place-items: center;
-        width: 37px;
-        height: 37px;
+        width: 43px;
+        height: 43px;
         flex: none;
-        background: #e2f9ea;
-        border-radius: 11px;
+        background: #ddfbe6;
+        border-radius: 13px;
         color: var(--success);
       }
-      .notification:not(.unread) .summary-icon {
-        background: #f0f4f2;
-        color: #82a993;
-      }
+
       .summary p {
-        font-size: 12px;
+        font-size: 13px;
         line-height: 1.75;
         margin: 0 0 14px;
-        color: #46516b;
+        color: var(--ink);
       }
-      .notification:not(.unread) .summary p {
-        color: #7c879a;
-      }
+
       .action-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
+        width: 100%;
+        min-height: 43px;
         border: 0;
-        border-radius: 10px;
+        border-radius: 11px;
         background: var(--primary);
-        color: white;
+        color: #fff;
         padding: 11px 14px;
-        font-size: 11px;
-        font-weight: 700;
+        font-size: 12px;
+        font-weight: 600;
       }
+
       .notification:not(.unread) .action-btn {
-        background: #f0edff;
-        color: #6358d7;
+        background: var(--secondary);
       }
+
       .action-btn svg {
         transition: transform 0.2s;
       }
       .action-btn[aria-expanded="true"] svg {
         transform: rotate(180deg);
       }
+
       .time {
         display: block;
-        color: #94a3b8;
-        font-size: 10px;
+        color: var(--muted);
+        font-size: 11px;
         margin-top: 12px;
       }
 
-      /* Expanded weekly report — vivid AIIA design */
-
       .report-details {
-        border-top: 2px solid var(--primary);
-        padding: 18px 14px 20px;
+        border-top: 3px solid var(--primary);
+        padding: 20px 14px 22px;
         background: #fff;
       }
 
-      .report-details[hidden] {
-        display: none !important;
+      .notification:not(.unread) .report-details {
+        border-top-color: var(--secondary);
       }
 
       .report-heading,
@@ -263,10 +305,10 @@
         display: flex;
         align-items: center;
         gap: 9px;
-        font-size: 15px;
-        font-weight: 800;
+        font-size: 16px;
+        font-weight: 600;
         line-height: 1.5;
-        color: #172033;
+        color: var(--ink);
         margin: 0 0 15px;
       }
 
@@ -274,10 +316,10 @@
         display: grid;
         place-items: center;
         flex: none;
-        width: 34px;
-        height: 34px;
+        width: 38px;
+        height: 38px;
         border-radius: 11px;
-        background: #eeeafe;
+        background: #e9e5ff;
         color: var(--primary);
       }
 
@@ -298,18 +340,18 @@
         align-items: center;
         justify-content: center;
         gap: 4px;
-        min-height: 134px;
-        border-radius: 17px;
+        min-height: 145px;
+        border-radius: 16px;
         padding: 13px 7px;
         text-align: center;
+        background: var(--surface);
       }
 
       .stat.topics {
-        background: linear-gradient(135deg, #f1ecff, #ded3ff);
+        background: #edeaff;
       }
-
       .stat.score {
-        background: linear-gradient(135deg, #edfff1, #c6f7d3);
+        background: #e5f9eb;
       }
 
       .stat-icon {
@@ -317,7 +359,6 @@
         place-items: center;
         margin-bottom: 2px;
       }
-
       .stat-icon svg {
         width: 25px;
         height: 25px;
@@ -325,26 +366,25 @@
 
       .stat.topics .stat-icon,
       .stat.topics strong {
-        color: #5845f5;
+        color: var(--primary);
       }
 
       .stat.score .stat-icon,
       .stat.score strong {
-        color: #078d34;
+        color: #15803d;
       }
 
       .stat strong {
         display: block;
-        font-size: 36px;
-        line-height: 1.1;
-        font-weight: 850;
-        letter-spacing: -1px;
+        font-size: 38px;
+        line-height: 1.15;
+        font-weight: 700;
       }
 
       .stat span:last-child {
-        font-size: 11px;
-        color: #26314a;
-        font-weight: 650;
+        font-size: 12px;
+        color: var(--ink);
+        font-weight: 500;
         line-height: 1.45;
       }
 
@@ -354,8 +394,8 @@
 
       .subject-name {
         margin: 16px 0 9px;
-        font-size: 12px;
-        font-weight: 800;
+        font-size: 14px;
+        font-weight: 600;
         color: var(--primary);
       }
 
@@ -364,32 +404,32 @@
         padding: 0;
         list-style: none;
         display: grid;
-        gap: 8px;
+        gap: 9px;
       }
 
       .topic-list li {
         display: flex;
         align-items: center;
         gap: 9px;
+        min-height: 60px;
         border-radius: 13px;
-        padding: 9px 10px;
-        min-height: 55px;
-        background: linear-gradient(105deg, #f2f6ff, #f0fbf3);
+        padding: 10px;
+        background: var(--surface);
       }
 
       .topic-list li.needs-work-row {
-        background: linear-gradient(105deg, #fff8ef, #fff1de);
+        background: #fff3e2;
       }
 
       .topic-icon {
-        width: 33px;
-        height: 33px;
         display: grid;
         place-items: center;
         flex: none;
+        width: 37px;
+        height: 37px;
         border-radius: 10px;
         background: #e0ecff;
-        color: #3977e9;
+        color: var(--secondary);
       }
 
       .topic-icon svg {
@@ -399,34 +439,32 @@
 
       .topic-list li.needs-work-row .topic-icon {
         background: #ffe7be;
-        color: #d87a00;
+        color: #b96800;
       }
 
       .topic-name {
         flex: 1;
         min-width: 0;
-        font-size: 12px;
-        font-weight: 750;
+        font-size: 13px;
+        font-weight: 500;
         line-height: 1.5;
-        color: #172033;
+        color: var(--ink);
       }
 
       .topic-score {
         flex: none;
         min-width: 58px;
         text-align: center;
-        padding: 8px 9px;
+        padding: 9px 8px;
         border-radius: 10px;
         font-size: 16px;
-        line-height: 1.1;
-        font-weight: 850;
+        font-weight: 700;
         color: #fff;
-        background: linear-gradient(125deg, #44d44c, #0bb83e);
+        background: var(--success);
       }
 
       .topic-score.needs-work {
-        background: linear-gradient(125deg, #ffb32e, #ff9900);
-        color: #fff;
+        background: var(--warning);
       }
 
       .empty {
@@ -438,223 +476,12 @@
 
       @media (max-width: 360px) {
         .header h1 {
-          font-size: 15px;
+          font-size: 17px;
         }
         .unread-badge {
           font-size: 10px;
           padding: 8px;
         }
-        .notification-title {
-          font-size: 11px;
-        }
-        .period {
-          font-size: 9px;
-        }
-        .topic-name {
-          font-size: 11px;
-        }
-        .topic-score {
-          min-width: 50px;
-          font-size: 14px;
-        }
-        .stat strong {
-          font-size: 31px;
-        }
-      }
-
-      /* FINAL — exact vivid direction from the two approved mockups */
-
-      .content {
-        padding-top: 15px;
-      }
-
-      .notification {
-        border: 2px solid #4a90ff;
-        border-radius: 20px;
-        box-shadow: 0 8px 22px rgba(74, 144, 255, 0.1);
-        margin-bottom: 18px;
-      }
-
-      .notification.unread {
-        border: 2px solid #6c63ff;
-        box-shadow: 0 9px 26px rgba(108, 99, 255, 0.17);
-      }
-
-      .notification-heading,
-      .notification:not(.unread) .notification-heading {
-        background: #4a90ff;
-        color: #fff;
-        padding: 17px 15px;
-      }
-
-      .notification.unread .notification-heading {
-        background: #6c63ff;
-      }
-
-      .notification-title,
-      .notification:not(.unread) .notification-title {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 850;
-      }
-
-      .period,
-      .notification:not(.unread) .period {
-        color: #fff;
-        font-size: 11px;
-        font-weight: 650;
-      }
-
-      .student-chip,
-      .notification:not(.unread) .student-chip {
-        background: rgba(255, 255, 255, 0.22);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        color: #fff;
-        font-size: 11px;
-        padding: 4px 9px;
-      }
-
-      .dot {
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.23);
-      }
-
-      .notification-body {
-        background: #fff;
-        padding: 18px 15px 16px;
-      }
-
-      .summary-icon {
-        width: 43px;
-        height: 43px;
-        border-radius: 13px;
-        background: #ddfbe6;
-        color: #16a34a;
-      }
-
-      .notification:not(.unread) .summary-icon {
-        background: #ddfbe6;
-        color: #16a34a;
-      }
-
-      .summary p,
-      .notification:not(.unread) .summary p {
-        color: #26314a;
-        font-weight: 700;
-        font-size: 13px;
-        line-height: 1.75;
-      }
-
-      .action-btn {
-        width: 100%;
-        min-height: 43px;
-        background: #6c63ff;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 800;
-        border-radius: 11px;
-      }
-
-      .notification:not(.unread) .action-btn {
-        background: #4a90ff;
-        color: #fff;
-      }
-
-      .time {
-        font-size: 11px;
-        font-weight: 600;
-      }
-
-      .report-details {
-        border-top: 3px solid #6c63ff;
-        background: #fff;
-        padding: 20px 14px 22px;
-      }
-
-      .notification:not(.unread) .report-details {
-        border-top-color: #4a90ff;
-      }
-
-      .report-heading,
-      .topic-title {
-        font-size: 16px;
-        font-weight: 900;
-        letter-spacing: -0.2px;
-      }
-
-      .heading-icon {
-        background: #e9e5ff;
-        color: #6c63ff;
-        width: 38px;
-        height: 38px;
-      }
-
-      .stat {
-        min-height: 153px;
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        box-shadow: 0 5px 15px rgba(28, 35, 62, 0.07);
-      }
-
-      .stat.topics {
-        background: linear-gradient(145deg, #ede6ff 0%, #cbb8ff 100%);
-      }
-
-      .stat.score {
-        background: linear-gradient(145deg, #e5ffea 0%, #a6edb9 100%);
-      }
-
-      .stat strong {
-        font-size: 43px;
-        font-weight: 900;
-        letter-spacing: -1.5px;
-      }
-
-      .stat span:last-child {
-        font-size: 12px;
-        font-weight: 800;
-      }
-
-      .topic-list {
-        gap: 9px;
-      }
-
-      .topic-list li {
-        min-height: 60px;
-        padding: 11px;
-        border-radius: 14px;
-        background: linear-gradient(105deg, #edf3ff, #eafbf0);
-        border: 1px solid #e4edf7;
-      }
-
-      .topic-list li.needs-work-row {
-        background: linear-gradient(105deg, #fff5e8, #ffedd1);
-        border-color: #ffe2b3;
-      }
-
-      .topic-icon {
-        width: 37px;
-        height: 37px;
-      }
-
-      .topic-name {
-        font-size: 13px;
-        font-weight: 850;
-        color: #20283b;
-      }
-
-      .topic-score {
-        font-size: 17px;
-        font-weight: 900;
-        min-width: 62px;
-        padding: 9px 8px;
-        box-shadow: 0 3px 9px rgba(34, 197, 94, 0.14);
-      }
-
-      .topic-score.needs-work {
-        box-shadow: 0 3px 9px rgba(255, 153, 0, 0.18);
-      }
-
-      @media (max-width: 360px) {
         .notification-title {
           font-size: 12px;
         }
@@ -664,8 +491,12 @@
         .topic-name {
           font-size: 11px;
         }
+        .topic-score {
+          min-width: 50px;
+          font-size: 14px;
+        }
         .stat strong {
-          font-size: 36px;
+          font-size: 34px;
         }
       }
     </style>
@@ -680,15 +511,19 @@
           aria-label="მთავარ გვერდზე დაბრუნება"
           >‹</a
         >
+
         <h1>შეტყობინებები</h1>
+
         <span class="unread-badge" id="badge"></span>
       </header>
+
       <main class="content">
         <div class="toolbar">
           <button class="mark-all" id="markAll" type="button">
             ყველას წაკითხვა
           </button>
         </div>
+
         <div id="list"></div>
       </main>
     </div>
@@ -701,20 +536,31 @@
       const notifications = [
         {
           id: 1,
+
           student: "გიორგი",
+
           week: "26 ოქტომბერი – 1 ნოემბერი",
+
           time: "დღეს, 10:00",
+
           read: false,
+
           summary:
             "გიორგიმ ამ კვირაში 5 თემა გაიარა. ნახეთ, რა შედეგები აჩვენა ტესტებში.",
+
           subjects: [
             {
               name: "მათემატიკა",
+
               topics: [
                 ["ნატურალური რიცხვები", 90],
+
                 ["რიცხვების შედარება", 85],
+
                 ["შეკრება და გამოკლება", 80],
+
                 ["გამრავლება", 75],
+
                 ["გაყოფა", 80],
               ],
             },
@@ -723,20 +569,29 @@
 
         {
           id: 2,
+
           student: "გიორგი",
+
           week: "19–25 ოქტომბერი",
+
           time: "26 ოქტომბერი, 10:00",
+
           read: true,
+
           summary:
             "გიორგიმ გასულ კვირაში 3 თემა გაიარა. იხილეთ ტესტების შედეგები.",
+
           subjects: [
             {
               name: "მათემატიკა",
+
               topics: [
                 ["გეომეტრიული ფიგურები", 70],
+
                 ["მონაკვეთები", 80],
               ],
             },
+
             { name: "ბიოლოგია", topics: [["უჯრედის აგებულება", 90]] },
           ],
         },
@@ -756,26 +611,38 @@
 
       const icons = {
         bars: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M5 19v-5M12 19V9M19 19V4"/></svg>',
+
         layers:
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 17l9 5 9-5"/></svg>',
+
         trophy:
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M7 3h10v8a5 5 0 0 1-10 0V3ZM7 5H4v3a4 4 0 0 0 4 4m9-7h3v3a4 4 0 0 1-4 4M12 16v4m-4 1h8"/></svg>',
+
         book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg>',
+
         calculator:
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h2m4 0h2m-8 4h2m4 0h2m-8 4h2m4 0h2"/></svg>',
+
         plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h9M8.5 3.5v9M14 18h7"/></svg>',
+
         divide:
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 12h16"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>',
+
         multiply:
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m5 5 14 14M19 5 5 19"/></svg>',
       };
 
       function topicIcon(name) {
         if (name.includes("გამრავლ")) return icons.multiply;
+
         if (name.includes("გაყოფ")) return icons.divide;
+
         if (name.includes("შეკრება")) return icons.plus;
+
         if (name.includes("შედარება")) return icons.bars;
+
         if (name.includes("რიცხვ")) return icons.calculator;
+
         return icons.book;
       }
 
@@ -788,8 +655,11 @@
             : 0;
 
         const panel = document.createElement("section");
+
         panel.className = "report-details";
+
         panel.id = "report-" + n.id;
+
         panel.hidden = true;
 
         panel.innerHTML =
@@ -811,99 +681,166 @@
 
         n.subjects.forEach((subject) => {
           const heading = document.createElement("h5");
+
           heading.className = "subject-name";
+
           heading.textContent = subject.name;
+
           container.appendChild(heading);
 
           const ul = document.createElement("ul");
+
           ul.className = "topic-list";
 
           subject.topics.forEach(([name, score]) => {
             const li = document.createElement("li");
+
             if (score < 80) li.className = "needs-work-row";
 
             const ico = document.createElement("span");
+
             ico.className = "topic-icon";
+
             ico.innerHTML = topicIcon(name);
 
             const label = document.createElement("span");
+
             label.className = "topic-name";
+
             label.textContent = name;
 
             const result = document.createElement("span");
+
             result.className =
               "topic-score" + (score < 80 ? " needs-work" : "");
+
             result.textContent = score + "%";
 
             li.append(ico, label, result);
+
             ul.appendChild(li);
           });
+
           container.appendChild(ul);
         });
+
         return panel;
       }
 
       function render() {
         const unread = notifications.filter((n) => !n.read).length;
+
         const badge = document.getElementById("badge");
+
         badge.textContent = unread + " წაუკითხავი";
+
         badge.hidden = unread === 0;
+
         document.getElementById("markAll").hidden = unread === 0;
+
         list.replaceChildren();
+
         notifications.forEach((n) => {
           const card = document.createElement("article");
+
           card.className = "notification" + (n.read ? "" : " unread");
+
           const heading = document.createElement("div");
+
           heading.className = "notification-heading";
+
+          heading.tabIndex = 0;
+
+          heading.setAttribute("role", "button");
+
           heading.innerHTML =
             '<img class="mia-avatar" src="img/mia.png" alt="მია"><span class="fallback-avatar">მ</span><div class="heading-text"><div class="title-row"><h3 class="notification-title">ყოველკვირეული AI რეპორტი</h3></div><div class="meta"><span class="student-chip"></span><span class="period"></span></div></div>';
+
           heading.querySelector(".student-chip").textContent = n.student;
+
           heading.querySelector(".period").textContent = n.week;
+
           if (!n.read) {
             const dot = document.createElement("span");
+
             dot.className = "dot";
+
             heading.querySelector(".title-row").appendChild(dot);
           }
+
           heading.querySelector("img").addEventListener("error", (e) => {
             e.currentTarget.style.display = "none";
+
             heading.querySelector(".fallback-avatar").style.display = "grid";
           });
+
           const body = document.createElement("div");
+
           body.className = "notification-body";
+
           body.innerHTML =
             '<div class="summary"><span class="summary-icon"></span><p></p></div><button type="button" class="action-btn" aria-expanded="false" aria-controls="report-' +
             n.id +
             '"><span>სრული ანგარიშის ნახვა</span>' +
             chevron +
             '</button><span class="time"></span>';
+
           body.querySelector(".summary-icon").innerHTML = chartIcon;
+
           body.querySelector("p").textContent = n.summary;
+
           body.querySelector(".time").textContent = n.time;
+
           const details = buildDetails(n);
+
           const button = body.querySelector("button");
+
           function toggle() {
             const opening = details.hidden;
+
             details.hidden = !opening;
+
             button.setAttribute("aria-expanded", String(opening));
+
             button.querySelector("span").textContent = opening
               ? "ანგარიშის დახურვა"
               : "სრული ანგარიშის ნახვა";
+
             if (opening && !n.read) {
               n.read = true;
+
               card.classList.remove("unread");
+
               heading.querySelector(".dot")?.remove();
+
               const count = notifications.filter((x) => !x.read).length;
+
               document.getElementById("badge").textContent =
                 count + " წაუკითხავი";
+
               document.getElementById("badge").hidden = count === 0;
+
               document.getElementById("markAll").hidden = count === 0;
             }
           }
+
           button.addEventListener("click", toggle);
+
           heading.addEventListener("click", toggle);
+
+          heading.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+
+              toggle();
+            }
+          });
+
           card.append(heading, body, details);
+
           list.appendChild(card);
         });
+
         if (!notifications.length) {
           list.innerHTML =
             '<div class="empty">შეტყობინებები ჯერ არ გაქვთ</div>';
@@ -912,8 +849,10 @@
 
       document.getElementById("markAll").addEventListener("click", () => {
         notifications.forEach((n) => (n.read = true));
+
         render();
       });
+
       render();
     </script>
   </body>

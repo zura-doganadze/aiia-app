@@ -1,389 +1,781 @@
 <!doctype html>
 
 <html lang="ka">
+
   <head>
+
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <title>AIIA — შეძენის დადასტურება</title>
+
     <link
+
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
+
       rel="stylesheet"
+
     />
+
     <style>
+
       :root {
+
         --p: #6c63ff;
-        --ink: #171733;
-        --line: #cbbfff;
+
+        --ink: #111827;
+
+        --muted: #6B7280;
+
+        --section-bg: #EFF0F4;
+
+        --line: #DCDDE5;
+
       }
+
       * {
+
         box-sizing: border-box;
+
       }
+
       body {
+
         margin: 0;
+
         background: #fff;
+
         color: var(--ink);
+
         font-family: "Noto Sans Georgian", sans-serif;
+
       }
+
       .wrap {
+
         max-width: 680px;
+
         margin: auto;
+
         padding: 18px 16px 38px;
+
       }
+
       .top {
+
         display: flex;
+
         align-items: center;
+
         justify-content: space-between;
+
         border-bottom: 1px solid #e7e2f4;
+
         padding-bottom: 15px;
+
       }
+
       .top a {
+
         width: 38px;
+
         height: 38px;
+
         display: grid;
+
         place-items: center;
+
         background: #f7f5ff;
+
         border: 1px solid #e0d8ff;
+
         border-radius: 12px;
+
         color: var(--p);
+
         font-size: 24px;
+
         text-decoration: none;
+
       }
+
       .logo {
+
         font-size: 22px;
-        color: #6148ec;
-        font-weight: 800;
-      }
-      .hero {
-        text-align: center;
-        padding: 32px 10px 24px;
-      }
-      .success-icon {
-        width: 92px;
-        height: 92px;
-        margin: 0 auto 17px;
-        display: grid;
-        place-items: center;
-        border-radius: 50%;
-        background: #dcfce7;
-        box-shadow: 0 0 0 12px #f0fdf4;
-      }
-      .success-icon svg {
-        width: 60px;
-        height: 60px;
-      }
-      .hero h1 {
-        font-size: 22px;
-        line-height: 1.4;
-        margin: 0 0 8px;
-        font-weight: 800;
-      }
-      .hero p {
-        font-size: 13px;
-        color: #69708a;
-        margin: 0 auto;
-        max-width: 380px;
-        line-height: 1.7;
-      }
-      .panel {
-        border: 1.5px solid var(--line);
-        border-radius: 19px;
-        overflow: hidden;
-        margin-bottom: 14px;
-      }
-      .panel-head {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: #ddd5ff;
-        border-bottom: 1.5px solid #b7a5ff;
-        padding: 12px 15px;
-        font-size: 14px;
-        font-weight: 800;
-      }
-      .icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
-        background: #fff;
-        border: 1px solid #a995ff;
-        display: grid;
-        place-items: center;
-        color: #6142e9;
-      }
-      .body {
-        padding: 16px;
-      }
-      .summary {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .book {
-        height: 46px;
-        width: 46px;
-        border-radius: 13px;
-        display: grid;
-        place-items: center;
-        background: #f1ecff;
-        font-size: 24px;
-      }
-      .details {
-        flex: 1;
-        min-width: 0;
-      }
-      .name {
-        font-weight: 800;
-        font-size: 16px;
-      }
-      .sub {
-        font-size: 12px;
-        color: #727995;
-        margin-top: 4px;
-        line-height: 1.6;
-      }
-      .price {
-        font-size: 22px;
-        font-weight: 800;
-        color: #6043e8;
-        white-space: nowrap;
-      }
-      .student {
-        display: flex;
-        align-items: center;
-        gap: 11px;
-      }
-      .avatar {
-        width: 44px;
-        height: 44px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 2px solid #e1d8ff;
-        background: #f4f0ff;
-        flex-shrink: 0;
-      }
-      .status {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        border: 1px solid #a5e8c2;
-        background: #eafbf1;
-        border-radius: 15px;
-        padding: 14px;
-        margin: 16px 0;
-        color: #167548;
-      }
-      .status strong {
-        font-size: 13px;
-      }
-      .status small {
-        display: block;
-        color: #438866;
-        font-size: 11px;
-        margin-top: 3px;
-      }
-      .cta {
-        display: block;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 15px;
-        background: linear-gradient(110deg, #6c63ff, #5134df);
-        color: #fff;
-        font-weight: 800;
-        padding: 16px;
-        font-size: 14px;
-        box-shadow: 0 8px 20px #6c63ff30;
-      }
-      .meta {
-        display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        margin-top: 7px;
-      }
-      .chip {
-        font-size: 10px;
-        font-weight: 700;
-        color: #5946af;
-        background: #f6f2ff;
-        border: 1px solid #dcd3ff;
-        padding: 4px 7px;
-        border-radius: 8px;
-      }
-      .summary-icon {
-        height: 46px;
-        width: 46px;
-        border-radius: 13px;
-        display: grid;
-        place-items: center;
-        background: #f1ecff;
-        color: #6043e8;
-        flex-shrink: 0;
-      }
-      .summary-icon svg {
-        width: 25px;
-        height: 25px;
-      }
-      .summary .price {
-        border-left: 1px solid #d4c9f5;
-        padding-left: 11px;
-      }
-      .active-inline {
-        margin-top: 14px;
-        padding: 11px 12px;
-        border-radius: 12px;
-        background: #ecfbf2;
-        border: 1px solid #b5e8c9;
-        color: #177548;
-        font-size: 12px;
-        font-weight: 800;
-      }
-      .active-inline small {
-        display: block;
-        font-size: 11px;
+
+        color: var(--p);
+
         font-weight: 600;
+
+      }
+
+      .hero {
+
+        text-align: center;
+
+        padding: 32px 10px 24px;
+
+      }
+
+      .success-icon {
+
+        width: 92px;
+
+        height: 92px;
+
+        margin: 0 auto 17px;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 50%;
+
+        background: #dcfce7;
+
+        box-shadow: 0 0 0 12px #f0fdf4;
+
+      }
+
+      .success-icon svg {
+
+        width: 60px;
+
+        height: 60px;
+
+      }
+
+      .hero h1 {
+
+        font-size: 24px;
+
+        line-height: 1.4;
+
+        margin: 0 0 8px;
+
+        font-weight: 600;
+
+      }
+
+      .hero p {
+
+        font-size: 13px;
+
+        color: var(--muted);
+
+        margin: 0 auto;
+
+        max-width: 380px;
+
+        line-height: 1.7;
+
+      }
+
+      .panel {
+
+        border: 1px solid var(--line);
+
+        background: #FFFFFF;
+
+        border-radius: 19px;
+
+        overflow: hidden;
+
+        margin-bottom: 14px;
+
+      }
+
+      .panel-head {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        background: var(--section-bg);
+
+        border-bottom: 1px solid var(--line);
+
+        padding: 12px 15px;
+
+        font-size: 16px;
+
+        font-weight: 600;
+
+      }
+
+      .icon {
+
+        width: 32px;
+
+        height: 32px;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+        border: 1px solid #a995ff;
+
+        display: grid;
+
+        place-items: center;
+
+        color: #6142e9;
+
+      }
+
+      .body {
+
+        padding: 16px;
+
+      }
+
+      .summary {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+      }
+
+      .book {
+
+        height: 46px;
+
+        width: 46px;
+
+        border-radius: 13px;
+
+        display: grid;
+
+        place-items: center;
+
+        background: var(--section-bg);
+
+        font-size: 24px;
+
+      }
+
+      .details {
+
+        flex: 1;
+
+        min-width: 0;
+
+      }
+
+      .name {
+
+        font-weight: 600;
+
+        font-size: 16px;
+
+      }
+
+      .sub {
+
+        font-size: 12px;
+
+        color: var(--muted);
+
         margin-top: 4px;
+
+        line-height: 1.6;
+
+      }
+
+      .price {
+
+        font-size: 22px;
+
+        font-weight: 600;
+
+        color: var(--p);
+
+        white-space: nowrap;
+
+      }
+
+      .student {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+
+      }
+
+      .avatar {
+
+        width: 44px;
+
+        height: 44px;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+        border: 2px solid #e1d8ff;
+
+        background: #f4f0ff;
+
+        flex-shrink: 0;
+
+      }
+
+      .status {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        border: 1px solid #a5e8c2;
+
+        background: #F0FDF4;
+
+        border-radius: 15px;
+
+        padding: 14px;
+
+        margin: 16px 0;
+
+        color: #167548;
+
+      }
+
+      .status strong {
+
+        font-size: 13px;
+
+      }
+
+      .status small {
+
+        display: block;
+
+        color: #438866;
+
+        font-size: 11px;
+
+        margin-top: 3px;
+
+      }
+
+      .cta {
+
+        display: block;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        border-radius: 15px;
+
+        background: var(--p);
+
+        color: #fff;
+
+        font-weight: 600;
+
+        padding: 16px;
+
+        font-size: 14px;
+
+        box-shadow: 0 8px 20px #6c63ff30;
+
+      }
+
+      .meta {
+
+        display: flex;
+
+        gap: 6px;
+
+        flex-wrap: wrap;
+
+        margin-top: 7px;
+
+      }
+
+      .chip {
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+        color: #5946af;
+
+        background: #f6f2ff;
+
+        border: 1px solid #dcd3ff;
+
+        padding: 4px 7px;
+
+        border-radius: 8px;
+
+      }
+
+      .summary-icon {
+
+        height: 46px;
+
+        width: 46px;
+
+        border-radius: 13px;
+
+        display: grid;
+
+        place-items: center;
+
+        background: var(--section-bg);
+
+        color: var(--p);
+
+        flex-shrink: 0;
+
+      }
+
+      .summary-icon svg {
+
+        width: 25px;
+
+        height: 25px;
+
+      }
+
+      .summary .price {
+
+        border-left: 1px solid #d4c9f5;
+
+        padding-left: 11px;
+
+      }
+
+      .active-inline {
+
+        margin-top: 14px;
+
+        padding: 11px 12px;
+
+        border-radius: 12px;
+
+        background: #F0FDF4;
+
+        border: 1px solid #b5e8c9;
+
+        color: #177548;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+      }
+
+      .active-inline small {
+
+        display: block;
+
+        font-size: 11px;
+
+        font-weight: 600;
+
+        margin-top: 4px;
+
         color: #428463;
+
       }
+
       @media (max-width: 360px) {
+
         .hero h1 {
+
           font-size: 19px;
+
         }
+
         .price {
+
           font-size: 19px;
+
         }
+
       }
+
     </style>
+
   </head>
+
   <body>
+
     <main class="wrap">
+
       <header class="top">
+
         <a href="parent-subject-checkout.html" aria-label="უკან დაბრუნება">‹</a
+
         ><span class="logo">AIIA</span>
+
       </header>
+
       <section class="hero">
+
         <div class="success-icon">
+
           <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+
             <circle cx="32" cy="32" r="27" fill="#22c55e" />
+
             <path
+
               d="m19 32 9 9 18-20"
+
               stroke="white"
+
               stroke-width="5"
+
               stroke-linecap="round"
+
               stroke-linejoin="round"
+
             />
+
           </svg>
+
         </div>
+
         <h1>შეძენა წარმატებით დასრულდა!</h1>
+
       </section>
+
       <section class="panel">
+
         <div class="panel-head">
+
           <span class="icon" aria-hidden="true"
+
             ><svg
+
               width="19"
+
               height="19"
+
               viewBox="0 0 24 24"
+
               fill="none"
+
               stroke="currentColor"
+
               stroke-width="1.8"
+
               stroke-linecap="round"
+
               stroke-linejoin="round"
+
             >
+
               <path d="m12 3 9 5-9 5-9-5 9-5Z" />
-              <path d="m3 12 9 5 9-5M3 16l9 5 9-5" /></svg
+
+              <path d="m3 12 9 5 9-5M3 16l9 5 9-5" /></*svg*
+
           ></span>
+
           შეძენილი პაკეტი
+
         </div>
+
         <div class="body">
+
           <div class="summary">
+
             <div class="summary-icon" aria-hidden="true">
+
               <svg
+
                 viewBox="0 0 24 24"
+
                 fill="none"
+
                 stroke="currentColor"
+
                 stroke-width="1.8"
+
                 stroke-linecap="round"
+
                 stroke-linejoin="round"
+
               >
+
                 <rect x="5" y="3" width="14" height="18" rx="3" />
+
                 <path d="M9 8h6M9 12h6M9 16h4" />
+
               </svg>
+
             </div>
+
             <div class="details">
+
               <div class="name" id="plan-name">სტანდარტული</div>
+
               <div class="meta">
-                <span class="chip" id="plan-grade">VII კლასი</span
+
+                <span class="chip" id="plan-grade">VII კლასი</*span*
+
                 ><span class="chip">მათემატიკა</span>
+
               </div>
+
             </div>
+
             <div class="price" id="plan-price">29 ₾</div>
+
           </div>
+
           <div class="active-inline">
+
             ✓ პაკეტი აქტიურია<small
+
               >მოქმედების ვადა:
-              <span id="expiry-date">2026 წლის 4 დეკემბრამდე</span></small
+
+              <span id="expiry-date">2026 წლის 4 დეკემბრამდე</span></*small*
+
             >
+
           </div>
+
         </div>
+
       </section>
+
       <section class="panel">
+
         <div class="panel-head">
+
           <span class="icon" aria-hidden="true"
+
             ><svg
+
               width="19"
+
               height="19"
+
               viewBox="0 0 24 24"
+
               fill="none"
+
               stroke="currentColor"
+
               stroke-width="1.8"
+
               stroke-linecap="round"
+
               stroke-linejoin="round"
+
             >
+
               <circle cx="12" cy="8" r="4" />
-              <path d="M4 21v-2a8 8 0 0 1 16 0v2" /></svg
+
+              <path d="M4 21v-2a8 8 0 0 1 16 0v2" /></*svg*
+
           ></span>
+
           მოსწავლე
+
         </div>
+
         <div class="body">
+
           <div class="student">
+
             <img
+
               class="avatar"
+
               id="student-photo"
+
               src="../img/leaderboard-luka.png"
+
               alt="მოსწავლის ფოტო"
+
               onerror="this.style.visibility = 'hidden'"
+
             />
+
             <div>
+
               <div class="name" id="student-name">
+
                 გიო გოგავა
+
               </div>
+
               <div class="sub">VII კლასი</div>
+
             </div>
+
           </div>
+
         </div>
+
       </section>
+
       <a class="cta" href="parent-home.html">მთავარ გვერდზე დაბრუნება →</a>
+
     </main>
+
     <script>
+
       const plans = {
+
         basic: ["საბაზისო", 19],
+
         standard: ["სტანდარტული", 29],
+
         premium: ["პრემიუმი", 49],
+
       };
+
       const params = new URLSearchParams(location.search);
+
       const key = params.get("plan");
+
       const plan = Object.prototype.hasOwnProperty.call(plans, key)
+
         ? plans[key]
+
         : plans.standard;
+
       document.getElementById("plan-name").textContent = plan[0];
+
       document.getElementById("plan-price").textContent = plan[1] + " ₾";
+
       if (params.get("expiry")) {
+
         document.getElementById("expiry-date").textContent =
+
           params.get("expiry");
+
       }
+
       if (params.get("student") === "nino") {
+
         document.getElementById("student-name").textContent =
+
           "მოსწავლე 2 — სახელი გვარი";
+
         document.getElementById("student-photo").src = "img/student-2.png";
+
       }
+
     </script>
+
   </body>
+
 </html>

@@ -14,378 +14,628 @@
     <style>
       :root {
         --primary: #6c63ff;
+
         --ink: #202338;
+
         --muted: #747a90;
+
         --line: #e8eaf3;
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
+
         background: #ffffff;
+
         color: var(--ink);
+
         font-family: "Noto Sans Georgian", sans-serif;
       }
+
       button {
         font: inherit;
+
         cursor: pointer;
       }
+
       button:focus-visible,
       a:focus-visible {
         outline: 3px solid #b9b3ff;
+
         outline-offset: 3px;
       }
+
       [hidden] {
         display: none !important;
       }
+
       .page {
         max-width: 760px;
+
         margin: auto;
+
         padding: 18px 16px 110px;
       }
+
       .top {
         display: flex;
+
         align-items: center;
+
         gap: 14px;
+
         margin-bottom: 18px;
       }
+
       .back {
         width: 40px;
+
         height: 40px;
+
         display: grid;
+
         place-items: center;
+
         background: #fff;
+
         border: 1px solid var(--line);
+
         border-radius: 12px;
+
         text-decoration: none;
+
         color: var(--ink);
+
         font-size: 25px;
       }
+
       .top h1 {
         font-size: 18px;
+
         margin: 0 0 4px;
       }
+
       .top p {
         margin: 0;
+
         color: var(--muted);
+
         font-size: 12px;
       }
+
       .tabs {
         display: grid;
+
         grid-template-columns: repeat(4, 1fr);
+
         gap: 9px;
+
         margin-bottom: 19px;
       }
+
       .tab {
         height: 60px;
+
         border: 1px solid #e5e7f0;
+
         border-radius: 16px;
+
         background: #fff;
+
         color: #60687d;
+
         display: grid;
+
         place-items: center;
+
         transition: 0.15s;
       }
+
       .tab:nth-child(1) {
         background: #f0edff;
+
         color: #6c63ff;
+
         border-color: #f0edff;
       }
+
       .tab:nth-child(2) {
         background: #eaf3ff;
+
         color: #4a90ff;
+
         border-color: #eaf3ff;
       }
+
       .tab:nth-child(3) {
         background: #e7f8ef;
+
         color: #16a34a;
+
         border-color: #e7f8ef;
       }
+
       .tab:nth-child(4) {
         background: #fff3dc;
+
         color: #d99014;
+
         border-color: #fff3dc;
       }
+
       .tab.active {
         border: 2px solid currentColor;
+
         box-shadow:
           0 0 0 3px #6c63ff18,
           0 4px 14px #6c63ff12;
       }
+
       .tab svg {
         width: 29px;
+
         height: 29px;
+
         stroke: currentColor;
+
         fill: none;
+
         stroke-width: 1.8;
+
         stroke-linecap: round;
+
         stroke-linejoin: round;
       }
+
       .card {
         background: #fff;
+
         border: 1px solid var(--line);
+
         border-radius: 19px;
+
         overflow: hidden;
+
         margin-bottom: 16px;
       }
+
       .card-head {
         padding: 16px 18px;
+
         background: #f0edff;
+
         color: #5148cb;
+
         font-size: 16px;
+
         font-weight: 800;
       }
+
       .card-body {
         padding: 19px;
+
         font-size: 14px;
+
         line-height: 1.95;
       }
+
       .card-body p {
         margin: 0 0 13px;
       }
+
       .card-body p:last-child {
         margin: 0;
       }
+
       .blue .card-head {
         background: #eaf3ff;
+
         color: #3278c5;
       }
+
       .green .card-head {
         background: #e7f8ef;
+
         color: #168348;
       }
+
       .note {
         background: #f5f4ff;
+
         border-radius: 12px;
+
         padding: 13px;
+
         margin-top: 14px;
       }
+
       .primary {
         background: var(--primary);
+
         color: white;
+
         border: 0;
+
         border-radius: 12px;
+
         padding: 13px 18px;
+
         font-weight: 800;
+
         width: 100%;
+
         margin-top: 10px;
       }
+
       .visual {
         display: grid;
+
         place-items: center;
+
         min-height: 230px;
+
         border-radius: 15px;
+
         background: radial-gradient(circle, #fff, #eaf3ff);
+
         border: 1px solid #dce7ff;
+
         margin: 10px 0 14px;
       }
+
       .heart {
         font-size: 112px;
+
         line-height: 1;
+
         filter: drop-shadow(0 12px 13px #9b244c25);
+
         transition: transform 0.3s;
+
         user-select: none;
       }
+
       .hint {
         font-size: 12px;
+
         color: var(--muted);
+
         text-align: center;
       }
+
       .model-controls {
         display: flex;
+
         gap: 9px;
+
         margin-top: 13px;
       }
+
       .model-controls button {
         flex: 1;
+
         border: 1px solid #d9d8fa;
+
         background: #f6f5ff;
+
         border-radius: 11px;
+
         padding: 11px;
+
         color: #5148b5;
+
         font-weight: 700;
       }
+
       .video-box {
         min-height: 210px;
+
         border-radius: 15px;
+
         background: linear-gradient(135deg, #e8e3ff, #d8ecff);
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         flex-direction: column;
+
         gap: 10px;
+
         color: #5148b5;
+
         text-align: center;
+
         padding: 20px;
       }
+
       .video-box svg {
         width: 55px;
+
         height: 55px;
+
         stroke: currentColor;
+
         fill: none;
+
         stroke-width: 1.5;
       }
+
       .video-box span {
         font-size: 12px;
       }
+
       .question {
         font-weight: 800;
+
         margin: 0 0 17px;
+
         font-size: 16px;
       }
+
       .answers {
         display: grid;
+
         gap: 10px;
       }
+
       .answer {
         border: 1px solid #dfe3ef;
+
         background: white;
+
         border-radius: 12px;
+
         padding: 13px;
+
         text-align: left;
+
         color: var(--ink);
       }
+
       .answer.selected {
         border: 2px solid var(--primary);
+
         background: #f1efff;
       }
+
       .progress {
         color: var(--muted);
+
         font-size: 12px;
+
         font-weight: 700;
+
         margin-bottom: 13px;
       }
+
       .feedback {
         margin-top: 12px;
+
         border-radius: 12px;
+
         padding: 13px;
+
         background: #f2f7ff;
+
         font-size: 13px;
       }
+
       .mia {
         position: fixed;
+
         right: 20px;
+
         bottom: 20px;
+
         width: 69px;
+
         height: 69px;
+
         border-radius: 50%;
+
         border: 3px solid white;
+
         background: linear-gradient(135deg, #e4d9ff, #a99bff);
+
         box-shadow: 0 7px 22px #5148b544;
+
         z-index: 10;
+
         display: grid;
+
         place-items: center;
+
         padding: 0;
       }
+
       .mia img {
         width: 100%;
+
         height: 100%;
+
         border-radius: 50%;
+
         object-fit: cover;
       }
+
       .mia .fallback {
         font-size: 31px;
       }
+
       .online {
         position: absolute;
+
         right: 0;
+
         bottom: 1px;
+
         background: #22c55e;
+
         border: 3px solid white;
+
         width: 17px;
+
         height: 17px;
+
         border-radius: 50%;
       }
+
       .chat {
         position: fixed;
+
         right: 18px;
+
         bottom: 102px;
+
         width: min(360px, calc(100vw - 36px));
+
         height: min(480px, 70vh);
+
         background: white;
+
         border: 1px solid #dedaff;
+
         box-shadow: 0 18px 50px #20233830;
+
         border-radius: 18px;
+
         overflow: hidden;
+
         z-index: 11;
+
         display: flex;
+
         flex-direction: column;
       }
+
       .chat-head {
         background: #f0eeff;
+
         padding: 13px 16px;
+
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         font-weight: 800;
+
         color: #5148b5;
       }
+
       .chat-head button {
         border: 0;
+
         background: none;
+
         font-size: 25px;
+
         color: inherit;
       }
+
       .messages {
         flex: 1;
+
         overflow: auto;
+
         padding: 13px;
+
         display: flex;
+
         flex-direction: column;
+
         gap: 9px;
       }
+
       .msg {
         max-width: 88%;
+
         padding: 10px 12px;
+
         border-radius: 12px;
+
         background: #f0eeff;
+
         font-size: 12px;
+
         line-height: 1.7;
       }
+
       .msg.mine {
         align-self: flex-end;
+
         background: #eaf3ff;
       }
+
       .compose {
         display: flex;
+
         gap: 7px;
+
         padding: 10px;
+
         border-top: 1px solid var(--line);
       }
+
       .compose input {
         flex: 1;
+
         min-width: 0;
+
         border: 1px solid #dde0ec;
+
         border-radius: 10px;
+
         padding: 10px;
+
         font: inherit;
+
         font-size: 12px;
       }
+
       .compose button {
         border: 0;
+
         border-radius: 10px;
+
         background: var(--primary);
+
         color: white;
+
         padding: 0 13px;
       }
+
       .small {
         font-size: 12px;
+
         color: var(--muted);
       }
+
       @media (max-width: 390px) {
         .page {
           padding: 13px 11px 100px;
         }
+
         .tabs {
           gap: 6px;
         }
+
         .tab {
           height: 55px;
         }
+
         .tab svg {
           width: 25px;
         }
+
         .top h1 {
           font-size: 17px;
         }
@@ -393,151 +643,256 @@
 
       .model-stage {
         position: relative;
+
         height: 360px;
+
         background: radial-gradient(circle at 50% 30%, #fff, #eaf3ff);
+
         border: 1px solid #dce7ff;
+
         border-radius: 17px;
+
         overflow: hidden;
+
         margin: 12px 0;
       }
+
       .model-stage canvas {
         display: block;
+
         width: 100%;
+
         height: 100%;
+
         touch-action: none;
       }
+
       .model-label {
         position: absolute;
+
         left: 12px;
+
         top: 12px;
+
         padding: 7px 10px;
+
         border-radius: 9px;
+
         background: #ffffffd9;
+
         color: #4161a6;
+
         font-size: 11px;
+
         font-weight: 700;
       }
+
       .model-tools {
         display: flex;
+
         flex-wrap: wrap;
+
         gap: 8px;
       }
+
       .model-tools button {
         flex: 1;
+
         min-width: 95px;
+
         border: 1px solid #d6e3ff;
+
         background: #f0f6ff;
+
         color: #3476c0;
+
         border-radius: 11px;
+
         padding: 11px 6px;
+
         font-weight: 700;
+
         font-size: 12px;
       }
+
       .model-fallback {
         position: absolute;
+
         inset: 0;
+
         display: grid;
+
         place-items: center;
+
         color: #66738d;
+
         font-size: 13px;
+
         text-align: center;
+
         padding: 22px;
       }
+
       .video-poster {
         width: 100%;
+
         aspect-ratio: 16/9;
+
         position: relative;
+
         border: 0;
+
         padding: 0;
+
         display: block;
+
         overflow: hidden;
+
         border-radius: 16px;
+
         background: #e7f8ef;
+
         cursor: default;
       }
+
       .video-poster img {
         width: 100%;
+
         height: 100%;
+
         object-fit: cover;
+
         object-position: center 47%;
+
         filter: brightness(0.8);
       }
+
       .play-overlay {
         position: absolute;
+
         inset: 0;
+
         display: grid;
+
         place-items: center;
       }
+
       .play-overlay span {
         width: 64px;
+
         height: 64px;
+
         border-radius: 50%;
+
         display: grid;
+
         place-items: center;
+
         background: #ffffffea;
+
         color: #16a34a;
+
         font-size: 28px;
+
         box-shadow: 0 8px 24px #0003;
       }
+
       .video-caption {
         font-size: 12px;
+
         color: #66738d;
+
         margin-top: 8px;
       }
+
       .modal-backdrop {
         position: fixed;
+
         inset: 0;
+
         background: #20233880;
+
         z-index: 30;
+
         display: grid;
+
         place-items: center;
+
         padding: 20px;
       }
+
       .modal {
         width: min(410px, 100%);
+
         border-radius: 22px;
+
         background: #fff;
+
         padding: 25px;
+
         box-shadow: 0 24px 70px #1115;
       }
+
       .modal h2 {
         font-size: 20px;
+
         margin: 0 0 10px;
       }
+
       .modal p {
         font-size: 14px;
+
         line-height: 1.8;
+
         color: #656b80;
       }
+
       .modal-actions {
         display: flex;
+
         gap: 9px;
+
         margin-top: 20px;
       }
+
       .modal-actions button {
         flex: 1;
+
         padding: 13px 10px;
+
         border-radius: 12px;
+
         font-weight: 800;
       }
+
       .cancel {
         border: 1px solid #e1e3ee;
+
         background: #fff;
+
         color: #596176;
       }
+
       .start {
         border: 0;
+
         background: #6c63ff;
+
         color: white;
       }
+
       .model-info {
         font-size: 12px;
+
         color: #69748a;
+
         line-height: 1.7;
       }
+
       .mia-icon {
         font-size: 30px;
       }
+
       .card.green .card-head {
         background: #e7f8ef;
       }
@@ -546,245 +901,407 @@
 
       .top {
         position: relative;
+
         padding-right: 50px;
       }
+
       .top .board-launch {
         position: absolute;
+
         right: 0;
+
         top: 0;
+
         width: 40px;
+
         height: 40px;
+
         display: grid;
+
         place-items: center;
+
         border: 0;
+
         border-radius: 12px;
+
         background: #f0eeff;
+
         color: #6c63ff;
       }
+
       .board-launch svg {
         width: 22px;
+
         height: 22px;
       }
 
       .chat {
         position: fixed;
+
         z-index: 101;
+
         right: 50%;
+
         bottom: 50%;
+
         transform: translate(50%, 50%);
+
         width: min(720px, 88vw);
+
         height: 80dvh;
+
         max-height: calc(100dvh - 24px);
+
         border-radius: 19px;
+
         box-shadow: 0 18px 60px #20233844;
       }
+
       .chat[hidden] {
         display: none !important;
       }
+
       .chat-head {
         flex: none;
+
         justify-content: flex-start;
+
         gap: 10px;
+
         min-height: 61px;
       }
+
       .chat-head-photo {
         width: 36px;
+
         height: 36px;
+
         object-fit: cover;
+
         border-radius: 50%;
+
         border: 2px solid white;
+
         background: #d5caff;
       }
+
       .chat-title {
         flex: 1;
+
         min-width: 0;
       }
+
       .messages {
         height: auto;
+
         flex: 1;
+
         min-height: 0;
       }
+
       .compose {
         flex: none;
+
         padding-bottom: max(10px, env(safe-area-inset-bottom));
       }
 
       .board-overlay {
         position: fixed;
+
         inset: 0;
+
         background: #16183894;
+
         backdrop-filter: blur(3px);
+
         z-index: 80;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         padding: 24px;
       }
+
       .board-overlay[hidden] {
         display: none !important;
       }
+
       .board-window {
         width: min(1050px, 82vw);
+
         height: min(790px, 78dvh);
+
         max-height: calc(100dvh - 35px);
+
         border: 1px solid #ded9ff;
+
         border-radius: 23px;
+
         background: #f9f9ff;
+
         box-shadow: 0 28px 90px #14124152;
+
         padding: 16px;
+
         gap: 10px;
+
         display: flex;
+
         flex-direction: column;
+
         overflow: hidden;
       }
+
       .board-head {
         display: flex;
+
         align-items: center;
+
         justify-content: space-between;
+
         flex: none;
+
         background: linear-gradient(100deg, #6c63ff, #8479ff);
+
         color: white;
+
         border-radius: 15px;
+
         padding: 14px 18px;
       }
+
       .board-head strong {
         font-size: 17px;
+
         font-weight: 800;
       }
+
       .board-head button {
         background: #ffffff30;
+
         border: 1px solid #ffffff70;
+
         border-radius: 11px;
+
         color: white;
+
         width: 38px;
+
         height: 38px;
+
         font-size: 23px;
       }
+
       .board-tools {
         order: 3;
+
         flex: none;
+
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         gap: 5px;
+
         padding: 8px;
+
         margin: 0;
+
         background: #eeeafe;
+
         border: 1px solid #dcd5ff;
+
         border-radius: 14px;
       }
+
       .board-tools button,
       .board-tools button:last-child {
         margin: 0;
+
         padding: 0;
+
         flex: 0 1 46px;
+
         min-width: 0;
+
         height: 43px;
+
         display: grid;
+
         place-items: center;
+
         border: 1px solid #d7d0ff;
+
         border-radius: 11px;
+
         color: #5148b5;
+
         background: #fff;
       }
+
       .board-tools button svg {
         width: 21px;
+
         height: 21px;
       }
+
       .board-tools button.selected {
         background: #6c63ff;
+
         color: white;
+
         border-color: #6c63ff;
       }
+
       .board-tools button:disabled {
         opacity: 0.38;
       }
+
       .board-tools button:last-child {
         color: #b65d27;
+
         background: #fff4e8;
+
         border-color: #f9dab9;
       }
+
       .board-color-wrap {
         position: relative;
+
         display: flex;
+
         flex: 0 1 46px;
+
         min-width: 0;
       }
+
       .board-color-wrap > button {
         flex: 1;
       }
+
       .board-color-palette {
         position: absolute;
+
         bottom: calc(100% + 14px);
+
         left: 50%;
+
         transform: translateX(-50%);
+
         background: white;
+
         border: 1px solid #ded9ff;
+
         border-radius: 13px;
+
         padding: 9px;
+
         display: grid;
+
         grid-template-columns: repeat(3, 28px);
+
         gap: 9px;
+
         box-shadow: 0 8px 24px #20233822;
+
         z-index: 4;
       }
+
       .board-color-palette[hidden] {
         display: none !important;
       }
+
       .board-color-palette button,
       .board-tools .board-color-palette button {
         width: 28px;
+
         height: 28px;
+
         min-width: 28px;
+
         border-radius: 50%;
+
         background: var(--swatch);
+
         border: 2px solid white;
+
         padding: 0;
+
         box-shadow: 0 0 0 1px #d8d9e8;
+
         flex: none;
       }
+
       .board-color-palette button.active {
         box-shadow: 0 0 0 3px #6c63ff;
       }
+
       #board-canvas {
         order: 2;
+
         display: block;
+
         flex: 1;
+
         min-height: 0;
+
         width: 100%;
+
         border: 1px solid #e0e3f0;
+
         border-radius: 15px;
+
         background: white;
+
         touch-action: none;
+
         cursor: crosshair;
       }
 
       @media (max-width: 650px) {
         .chat {
           width: calc(100vw - 20px);
+
           height: 80dvh;
         }
+
         .board-overlay {
           padding: 10px;
         }
+
         .board-window {
           width: 100%;
+
           height: min(88dvh, 800px);
+
           max-height: 95dvh;
+
           border-radius: 19px;
+
           padding: 10px;
+
           gap: 9px;
         }
+
         .board-tools {
           gap: 4px;
+
           padding: 6px;
         }
+
         .board-tools button,
         .board-tools button:last-child {
           height: 41px;
         }
+
         .board-tools button svg {
           width: 19px;
+
           height: 19px;
         }
       }
@@ -794,12 +1311,16 @@
       .tabs {
         margin-bottom: 15px;
       }
+
       .tab {
         height: 60px;
+
         border-radius: 13px;
       }
+
       .tab svg {
         width: 25px;
+
         height: 25px;
       }
 
@@ -807,186 +1328,300 @@
         .tab {
           height: 54px;
         }
+
         .tab svg {
           width: 23px;
+
           height: 23px;
         }
       }
 
       .model-stage {
         height: 370px;
+
         margin-bottom: 0;
       }
+
       .model-tools {
         position: absolute;
+
         bottom: 12px;
+
         left: 50%;
+
         transform: translateX(-50%);
+
         z-index: 4;
+
         display: flex;
+
         flex-wrap: nowrap;
+
         gap: 7px;
+
         background: #ffffffdd;
+
         backdrop-filter: blur(6px);
+
         padding: 6px;
+
         border: 1px solid #dce6f9;
+
         border-radius: 14px;
+
         box-shadow: 0 5px 18px #263c6a18;
       }
 
       .model-tools button {
         flex: none;
+
         min-width: 0;
+
         width: 39px;
+
         height: 37px;
+
         padding: 0;
+
         display: grid;
+
         place-items: center;
+
         border-radius: 9px;
+
         font-size: 21px;
+
         font-weight: 600;
       }
 
       .video-poster img {
         object-position: center;
+
         filter: none;
       }
+
       .video-poster {
         cursor: default;
       }
+
       .video-caption {
         margin-bottom: 8px;
       }
 
       .test-intro {
         position: relative;
+
         text-align: center;
+
         padding: 25px 16px 17px;
+
         width: min(380px, 100%);
       }
+
       .test-close {
         position: absolute;
+
         right: 14px;
+
         top: 10px;
+
         border: 0;
+
         background: transparent;
+
         color: #30395a;
+
         font-size: 24px;
+
         padding: 2px 6px;
       }
+
       .test-intro-icon {
         width: 80px;
+
         height: 80px;
+
         border-radius: 50%;
+
         background: #efebff;
+
         color: #6c63ff;
+
         display: grid;
+
         place-items: center;
+
         margin: 0 auto 14px;
       }
+
       .test-intro-icon svg {
         width: 42px;
+
         height: 42px;
       }
+
       .test-intro h2 {
         font-size: 17px;
+
         margin: 0 0 6px;
       }
+
       .test-intro p {
         font-size: 12px;
+
         line-height: 1.9;
+
         margin: 0 auto 15px;
+
         max-width: 290px;
       }
+
       .test-mia {
         background: #f0edff;
+
         border-radius: 13px;
+
         padding: 12px;
+
         display: flex;
+
         align-items: center;
+
         text-align: left;
+
         gap: 9px;
+
         color: #47416f;
+
         font-size: 11px;
+
         line-height: 1.8;
       }
+
       .test-mia img {
         width: 34px;
+
         height: 34px;
+
         object-fit: cover;
+
         border-radius: 50%;
+
         flex: none;
       }
+
       .test-count {
         font-size: 11px;
+
         color: #6c63ff;
+
         font-weight: 800;
+
         margin: 15px 0;
       }
+
       .test-start {
         width: 100%;
+
         min-height: 44px;
+
         border-radius: 11px;
+
         font-size: 13px;
+
         font-weight: 800;
       }
 
       .real-model-frame {
         width: 100%;
+
         aspect-ratio: 4/5;
+
         max-height: 530px;
+
         border-radius: 15px;
+
         overflow: hidden;
+
         background: #f2f5fc;
+
         border: 1px solid #dce7ff;
       }
+
       .real-model-frame iframe {
         display: block;
+
         width: 100%;
+
         height: 100%;
+
         border: 0;
       }
+
       .model-credit {
         font-size: 10px;
+
         color: #778098;
+
         margin-top: 9px;
+
         line-height: 1.6;
       }
+
       .video-poster img {
         display: block;
+
         width: 100%;
+
         height: 100%;
+
         object-fit: cover;
       }
+
       .video-poster {
         background: #eaf3ff;
       }
+
       @media (min-width: 650px) {
         .real-model-frame {
           aspect-ratio: 5/4;
         }
       }
+
       .quiz-track {
         height: 7px;
+
         background: #f0edff;
+
         border-radius: 999px;
+
         overflow: hidden;
+
         margin: 0 0 21px;
       }
+
       .quiz-track > div {
         height: 100%;
+
         width: 0;
+
         background: #6c63ff;
+
         border-radius: 999px;
+
         transition: width 0.25s;
       }
+
       .answer:hover {
         border-color: #a49dff;
       }
+
       .primary:disabled {
         opacity: 0.5;
+
         cursor: not-allowed;
       }
+
       .modal-backdrop[hidden],
       section[hidden] {
         display: none !important;
@@ -997,237 +1632,636 @@
       .quiz-heading {
         padding: 4px 0 12px;
       }
+
       .quiz-heading > span {
         display: block;
+
         font-size: 12px;
+
         color: #5e5b9d;
+
         font-weight: 800;
+
         margin-bottom: 9px;
       }
+
       .quiz-segments {
         display: grid;
+
         grid-template-columns: repeat(10, minmax(0, 1fr));
+
         gap: 5px;
       }
+
       .quiz-segments span {
         height: 6px;
+
         border-radius: 20px;
+
         background: #e4e5f1;
       }
+
       .quiz-segments span.done {
         background: #6c63ff;
       }
+
       .quiz-card {
         border-radius: 17px;
       }
+
       .quiz-card .card-body {
         padding: 19px;
       }
+
       .quiz-meta {
         display: flex;
+
         align-items: center;
+
         justify-content: space-between;
+
         gap: 8px;
+
         margin-bottom: 16px;
       }
+
       .quiz-meta span {
         border-radius: 9px;
+
         padding: 7px 10px;
+
         font-size: 11px;
+
         font-weight: 800;
       }
+
       .quiz-meta #question-badge {
         background: #f1efff;
+
         color: #6c63ff;
       }
+
       .quiz-meta .xp-chip {
         background: #fff6e2;
+
         color: #b18416;
       }
+
       .quiz-card .question {
         font-size: 17px;
+
         line-height: 1.65;
+
         margin: 0 0 20px;
       }
+
       .quiz-card .answers {
         gap: 9px;
       }
+
       .quiz-card .answer {
         display: flex;
+
         align-items: center;
+
         gap: 11px;
+
         min-height: 49px;
+
         border-radius: 11px;
+
         font-size: 13px;
+
         padding: 9px 11px;
+
         font-weight: 600;
       }
+
       .answer-letter {
         display: grid;
+
         place-items: center;
+
         width: 24px;
+
         height: 24px;
+
         border-radius: 50%;
+
         background: #f1f0ff;
+
         color: #615bd1;
+
         font-size: 11px;
+
         font-weight: 900;
+
         flex: none;
       }
+
       .answer.selected .answer-letter {
         background: #6c63ff;
+
         color: #fff;
       }
+
       .quiz-actions {
         display: grid;
+
         grid-template-columns: 1fr 1fr;
+
         gap: 9px;
+
         margin-top: 22px;
       }
+
       .quiz-actions button {
         min-height: 43px;
+
         border-radius: 11px;
+
         font-size: 12px;
+
         font-weight: 800;
+
         border: 1px solid #e6e7ef;
+
         background: #fff;
+
         color: #666d80;
       }
+
       .quiz-actions button:last-child {
         background: #6c63ff;
+
         border-color: #6c63ff;
+
         color: #fff;
       }
+
       .quiz-actions button:disabled {
         opacity: 0.45;
+
         cursor: not-allowed;
       }
+
       .result-title {
         text-align: center;
+
         font-size: 18px;
+
         margin: 3px 0 20px;
       }
+
       .score-ring {
         width: 140px;
+
         height: 140px;
+
         border-radius: 50%;
+
         background: conic-gradient(#6c63ff 0%, #ebe8ff 0%);
+
         margin: 0 auto 18px;
+
         display: grid;
+
         place-items: center;
       }
+
       .score-ring > div {
         background: #fff;
+
         width: 119px;
+
         height: 119px;
+
         border-radius: 50%;
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
         flex-direction: column;
       }
+
       .score-ring strong {
         font-size: 29px;
+
         color: #6c63ff;
+
         line-height: 1.3;
       }
+
       .score-ring small {
         font-size: 11px;
+
         color: #9694af;
       }
+
       .result-note {
         text-align: center;
+
         font-weight: 800;
+
         font-size: 14px;
+
         margin: 0 auto 18px;
+
         max-width: 300px;
       }
+
       .result-stats {
         display: grid;
+
         grid-template-columns: 1fr 1fr;
+
         gap: 9px;
+
         margin-bottom: 15px;
       }
+
       .result-stats > div {
         background: #f5f4ff;
+
         border-radius: 12px;
+
         padding: 14px 8px;
+
         text-align: center;
       }
+
       .result-stats > div:last-child {
         background: #fff7e8;
       }
+
       .result-stats small {
         display: block;
+
         color: #7b7d94;
+
         font-size: 10px;
       }
+
       .result-stats strong {
         display: block;
+
         font-size: 16px;
+
         color: #514ac6;
+
         margin-top: 4px;
       }
+
       .result-stats > div:last-child strong {
         color: #c28d18;
       }
+
       .mia-review {
         border-radius: 14px;
+
         background: #f2efff;
+
         padding: 13px;
+
         margin: 0 0 12px;
       }
+
       .mia-review-title {
         display: flex;
+
         align-items: center;
+
         gap: 9px;
+
         color: #6157d3;
+
         font-size: 13px;
       }
+
       .mia-review-title img {
         width: 32px;
+
         height: 32px;
+
         object-fit: cover;
+
         border-radius: 50%;
       }
+
       .mia-review-title span {
         margin-left: auto;
       }
+
       .mia-review p {
         background: #fff;
+
         border-radius: 10px;
+
         padding: 12px;
+
         font-size: 12px;
+
         line-height: 1.85;
+
         margin: 10px 0 0;
       }
+
       .mistakes {
         border: 1px solid #e6e2ff;
+
         border-radius: 12px;
+
         padding: 12px;
+
         margin-top: 12px;
+
         font-size: 12px;
+
         line-height: 1.7;
       }
+
       .mistake {
         padding: 10px 0;
+
         border-bottom: 1px solid #ecebf4;
       }
+
       .mistake:last-child {
         border: 0;
       }
+
       .mistake strong {
         display: block;
       }
+
       .mistake em {
         font-style: normal;
+
         color: #b45309;
       }
+
       .mistake .correct {
         color: #168348;
       }
+
       .result-actions {
         margin-top: 14px;
+      }
+
+      /* AIIA unified design system — biology lesson */
+
+      :root {
+        --primary: #6c63ff;
+        --secondary: #4a90ff;
+        --info-bg: #eff0f4;
+        --line: #eff0f4;
+        --ink: #111827;
+        --muted: #6b7280;
+      }
+
+      body {
+        background: #ffffff;
+        color: var(--ink);
+      }
+
+      .page {
+        max-width: 920px;
+        padding: 20px 20px 110px;
+      }
+
+      .top {
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      .top h1 {
+        font-size: clamp(18px, 2.5vw, 24px);
+        font-weight: 800;
+      }
+
+      .top p {
+        font-size: 12px;
+      }
+
+      .back {
+        border: 2px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .top .board-launch {
+        background: var(--info-bg);
+        border: 2px solid var(--line);
+      }
+
+      .tabs {
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        height: 58px;
+      }
+
+      .tab.active {
+        border: 2px solid currentColor;
+      }
+
+      .card,
+      .quiz-card {
+        border: 2px solid var(--line);
+        border-radius: 16px;
+      }
+
+      .card-head,
+      .blue .card-head,
+      .green .card-head,
+      .card.green .card-head {
+        background: var(--info-bg);
+        color: var(--ink);
+        font-size: 16px;
+        font-weight: 800;
+
+        padding: 16px 18px;
+        border-bottom: 2px solid var(--line);
+      }
+
+      /* 3D და ვიდეო: თეორიის მსგავსად ჰედერი ბარათის ნაწილია;
+
+         სექციის ფერი მხოლოდ გარე ჩარჩოზე გადადის. */
+
+      #model .card,
+      #video .card {
+        overflow: hidden;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 16px;
+      }
+
+      #model .card {
+        border-color: #eaf3ff;
+      }
+
+      #video .card {
+        border-color: #e7f8ef;
+      }
+
+      #model .card-head,
+      #video .card-head {
+        background: var(--info-bg);
+
+        color: var(--ink);
+
+        border-radius: 0;
+
+        margin: 0;
+
+        border-bottom: 0;
+      }
+
+      .card-body {
+        padding: 20px;
+        font-size: 14px;
+        line-height: 1.9;
+      }
+
+      .note,
+      .test-mia,
+      .mia-review,
+      .result-stats > div,
+      .result-stats > div:last-child {
+        background: var(--info-bg);
+        border: 2px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .real-model-frame,
+      .model-stage,
+      .video-poster {
+        border: 2px solid var(--line);
+        border-radius: 14px;
+      }
+
+      .answer,
+      .quiz-actions button,
+      .model-tools button,
+      .model-controls button {
+        border: 2px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .answer.selected {
+        border: 2px solid var(--primary);
+      }
+
+      .chat,
+      .board-window,
+      .modal {
+        border: 2px solid var(--line);
+        border-radius: 16px;
+      }
+
+      .chat-head {
+        background: var(--info-bg);
+        color: var(--ink);
+        border-bottom: 2px solid var(--line);
+      }
+
+      .board-tools {
+        background: var(--info-bg);
+        border: 2px solid var(--line);
+      }
+
+      .board-tools button,
+      .board-tools button:last-child {
+        border-width: 2px;
+      }
+
+      .board-color-palette,
+      #board-canvas,
+      .compose input,
+      .mistakes {
+        border: 2px solid var(--line);
+      }
+
+      .primary,
+      .start,
+      .quiz-actions button:last-child,
+      .compose button {
+        background: var(--primary);
+      }
+
+      .primary:focus-visible,
+      .tab:focus-visible {
+        outline: 3px solid #b9b3ff;
+        outline-offset: 2px;
+      }
+
+      @media (max-width: 480px) {
+        .page {
+          padding: 14px 12px 100px;
+        }
+
+        .top h1 {
+          font-size: 18px;
+        }
+
+        .card-body {
+          padding: 16px;
+        }
+
+        .card-head {
+          padding: 14px 15px;
+        }
+
+        .tabs {
+          gap: 7px;
+        }
+
+        .tab {
+          height: 54px;
+        }
+      }
+
+      @media (min-width: 481px) and (max-width: 1024px) {
+        .page {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+      }
+      /* 3D მოდელის ჰედერი */
+      #model .card-head {
+        background: #eaf3ff !important;
+      }
+
+      /* ვიდეოს ჰედერი */
+      #video .card-head {
+        background: #e7f8ef !important;
+      }
+      .mia-review {
+        padding: 5px;
+        border-radius: 12px;
+      }
+
+      .mia-review-title {
+        min-height: 42px;
+        padding: 4px 7px;
+        gap: 9px;
+      }
+
+      .mia-review-title img {
+        width: 34px;
+        height: 34px;
+      }
+
+      .mia-review p {
+        margin-top: 2px;
+        padding: 8px;
+        border-radius: 9px;
       }
     </style>
   </head>
@@ -1241,10 +2275,13 @@
           aria-label="ბიოლოგიის თემებთან დაბრუნება"
           >‹</a
         >
+
         <div>
           <h1>გული და სისხლის მიმოქცევა</h1>
+
           <p>ბიოლოგია • VII კლასი</p>
         </div>
+
         <button
           class="board-launch"
           id="board-launch"
@@ -1266,6 +2303,7 @@
             <path
               d="M6 3h12a2 2 0 0 1 2 2v6M6 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7M8 3v18M3 8h3M3 13h3"
             />
+
             <path d="m15 19 5-5 2 2-5 5-3 1z" />
           </svg>
         </button>
@@ -1307,6 +2345,7 @@
         >
           <svg viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" />
+
             <path d="m10 8 6 4-6 4V8Z" />
           </svg>
         </button>
@@ -1320,6 +2359,7 @@
         >
           <svg viewBox="0 0 24 24">
             <rect x="5" y="4" width="14" height="18" rx="2" />
+
             <path d="M9 4V2h6v2M8 12l2 2 5-5M8 18h8" />
           </svg>
         </button>
@@ -1328,48 +2368,58 @@
       <section id="learn">
         <article class="card">
           <div class="card-head">აღმოაჩინე</div>
+
           <div class="card-body">
             <p>
               შენი გული განუწყვეტლივ მუშაობს — მაშინაც კი, როცა გძინავს. ის
               კუნთოვანი ორგანოა, რომელიც სისხლს მთელ ორგანიზმში გადაადგილებს.
             </p>
+
             <p>
               სისხლი უჯრედებს ჟანგბადსა და საკვებ ნივთიერებებს აწვდის, ხოლო
               მათგან ნახშირორჟანგისა და სხვა ნარჩენების გამოტანაში მონაწილეობს.
             </p>
+
             <p>
               <strong>გულის აგებულება:</strong> გულს ოთხი კამერა აქვს — ორი
               წინაგული და ორი პარკუჭი. სარქვლები სისხლის ერთი მიმართულებით
               მოძრაობას უზრუნველყოფს.
             </p>
+
             <p>
               მარჯვენა ნაწილი სისხლს ფილტვებისკენ აგზავნის, მარცხენა კი —
               სხეულის დანარჩენი ნაწილისკენ.
             </p>
+
             <div class="note">
               💡 გულის ორივე ნაწილი ერთად მუშაობს, რათა სისხლის მიმოქცევა არ
               შეწყდეს.
             </div>
           </div>
         </article>
+
         <article class="card blue" hidden>
           <div class="card-head">როგორ არის აგებული გული?</div>
+
           <div class="card-body">
             <p>
               გულს აქვს <strong>ოთხი კამერა</strong>: ორი წინაგული და ორი
               პარკუჭი. სარქვლები სისხლის ერთი მიმართულებით მოძრაობას უწყობს
               ხელს.
             </p>
+
             <p>
               გულის მარჯვენა ნაწილი სისხლს ფილტვებისკენ აგზავნის, მარცხენა
               ნაწილი კი — სხეულის დანარჩენი ნაწილისკენ.
             </p>
+
             <div class="note">
               💡 გახსოვდეს: გულის მარცხენა და მარჯვენა ნაწილებს სხვადასხვა
               ფუნქცია აქვთ, მაგრამ ისინი ერთად მუშაობენ.
             </div>
           </div>
         </article>
+
         <button class="primary" onclick="switchTab('model')">
           3D მოდელზე გადასვლა →
         </button>
@@ -1378,11 +2428,13 @@
       <section id="model" hidden>
         <article class="card blue">
           <div class="card-head">დააკვირდი გულის 3D მოდელს</div>
+
           <div class="card-body">
             <p>
               მაუსით ან თითით დაატრიალე ანატომიური გული; მიახლოება და დაშორება
               მოდელის მართვის საშუალებებით შეგიძლია.
             </p>
+
             <div class="real-model-frame">
               <iframe
                 title="ადამიანის გულის ანატომიური 3D მოდელი"
@@ -1392,6 +2444,7 @@
                 src="https://sketchfab.com/models/adb2c91ec8194b24b7ba431aa573a906/embed?autostart=1&ui_theme=light&ui_infos=0"
               ></iframe>
             </div>
+
             <div class="model-credit">
               3D მოდელი: TinkerLane Studio · Sketchfab · CC BY — მუშაობისთვის
               საჭიროა ინტერნეტი.
@@ -1403,6 +2456,7 @@
       <section id="video" hidden>
         <article class="card green">
           <div class="card-head">როგორ მუშაობს გული?</div>
+
           <div class="card-body">
             <div
               class="video-poster"
@@ -1412,21 +2466,26 @@
                 src="../img/biology-video-cover.png"
                 alt="როგორ მუშაობს გული — ვიდეოს გარეკანი"
               />
+
               <div class="play-overlay">
                 <span aria-label="ვიდეო მალე დაემატება">▶</span>
               </div>
             </div>
+
             <div class="video-caption">
               გულის მუშაობის ანიმაცია • ვიდეო მალე დაემატება
             </div>
+
             <p style="margin-top: 17px">
               გულის შეკუმშვისას სისხლი პარკუჭებიდან არტერიებში გადადის.
               მოდუნებისას გულის კამერები კვლავ სისხლით ივსება.
             </p>
+
             <p>
               ეს პროცესი რიტმულად მეორდება და ორგანიზმში სისხლის უწყვეტ
               მიმოქცევას უზრუნველყოფს.
             </p>
+
             <div class="note">
               🎬 აქ მოგვიანებით ჩაიტვირთება მიას მოკლე ახსნითი ვიდეო.
             </div>
@@ -1437,6 +2496,7 @@
       <section id="test" hidden>
         <div class="quiz-heading">
           <span id="counter">კითხვა 1/10</span>
+
           <div
             class="quiz-segments"
             id="quiz-segments"
@@ -1491,6 +2551,7 @@
                   <small>სწორი პასუხები</small
                   ><strong id="correct-count">0/10</strong>
                 </div>
+
                 <div>
                   <small>მიღებული XP</small
                   ><strong id="earned-xp">+0 XP</strong>
@@ -1505,6 +2566,7 @@
                     onerror="this.style.display = 'none'"
                   /><strong>მიას შეფასება</strong><span>✦</span>
                 </div>
+
                 <p id="mia-review-text"></p>
               </div>
 
@@ -1537,6 +2599,7 @@
         <button class="test-close" id="cancel-test" aria-label="დახურვა">
           ×
         </button>
+
         <div class="test-intro-icon">
           <svg
             viewBox="0 0 24 24"
@@ -1547,11 +2610,15 @@
             stroke-linejoin="round"
           >
             <rect x="5" y="4" width="14" height="18" rx="2" />
+
             <path d="M9 4V2h6v2M8 12l2 2 5-5M8 18h8" />
           </svg>
         </div>
+
         <h2 id="modal-title">შეამოწმე ცოდნა</h2>
+
         <p>გაიარე მოკლე ტესტი და ნახე, რამდენად კარგად გაიგე ეს თემა.</p>
+
         <div class="test-mia">
           <img
             src="../img/mia.png"
@@ -1562,7 +2629,9 @@
             დამოუკიდებლად!</span
           >
         </div>
+
         <div class="test-count">▤ &nbsp; 10 კითხვა</div>
+
         <button class="start test-start" id="start-test">
           ტესტის დაწყება →
         </button>
@@ -1580,6 +2649,7 @@
         alt="მია"
         onerror="
           this.hidden = true;
+
           this.nextElementSibling.hidden = false;
         "
       /><span class="fallback" hidden>👩🏻‍🏫</span><span class="online"></span>
@@ -1597,13 +2667,15 @@
           ×
         </button>
       </div>
+
       <div class="messages" id="messages">
         <div class="msg">
           გამარჯობა! 👋 თუ გულის მუშაობის შესახებ კითხვა გაქვს, მომწერე და
           დაგეხმარები.
         </div>
       </div>
-      <form class="compose" onsubmit="sendChat(event)">
+
+      <form class="compose">
         <input
           id="chat-input"
           placeholder="მიწერე მიას..."
@@ -1827,15 +2899,21 @@
       });
 
       document
+
         .getElementById("cancel-test")
+
         .addEventListener("click", () => closeTestIntro());
 
       document
+
         .getElementById("start-test")
+
         .addEventListener("click", () => closeTestIntro(true));
 
       document
+
         .getElementById("test-modal")
+
         .addEventListener("click", (event) => {
           if (event.target.id === "test-modal") closeTestIntro();
         });
@@ -1849,130 +2927,195 @@
       });
 
       let angle = 0;
+
       function rotateHeart(v) {
         angle += v;
+
         document.getElementById("heart").style.transform =
           `rotateY(${angle}deg) rotate(${Math.sin((angle * Math.PI) / 180) * 8}deg)`;
       }
+
       function resetHeart() {
         angle = 0;
+
         document.getElementById("heart").style.transform = "none";
       }
 
       function sendChat(event) {
         event.preventDefault();
+
         document
+
           .querySelector(".compose")
+
           .dispatchEvent(new Event("submit", { cancelable: true }));
       }
+
       function toggleChat(force) {
         if (currentTab === "test" && force !== false) return;
+
         const chat = document.getElementById("chat");
+
         chat.hidden = typeof force === "boolean" ? !force : !chat.hidden;
+
         if (!chat.hidden) document.getElementById("chat-input").focus();
       }
+
       document.querySelector(".compose").addEventListener("submit", (e) => {
         e.preventDefault();
+
         const input = document.getElementById("chat-input"),
           v = input.value.trim();
+
         if (!v) return;
+
         const list = document.getElementById("messages");
+
         const mine = document.createElement("div");
+
         mine.className = "msg mine";
+
         mine.textContent = v;
+
         list.append(mine);
+
         input.value = "";
+
         const reply = document.createElement("div");
+
         reply.className = "msg";
+
         reply.textContent =
           "ეს დემო ჩატია. რეალური AI პასუხებისთვის მოგვიანებით უნდა დავუკავშიროთ მიას სერვისი.";
+
         list.append(reply);
+
         list.scrollTop = list.scrollHeight;
       });
 
       const questions = [
         {
           q: "რამდენი კამერა აქვს ადამიანის გულს?",
+
           a: ["ორი", "სამი", "ოთხი", "ხუთი"],
+
           correct: 2,
         },
+
         {
           q: "რომელი ორგანოსკენ აგზავნის სისხლს გულის მარჯვენა ნაწილი?",
+
           a: ["ფილტვებისკენ", "კუჭისკენ", "ტვინისკენ", "თირკმელებისკენ"],
+
           correct: 0,
         },
+
         {
           q: "რა უწყობს ხელს სისხლის ერთი მიმართულებით მოძრაობას გულში?",
+
           a: ["ძვლები", "სარქვლები", "კანი", "ნერვები"],
+
           correct: 1,
         },
+
         {
           q: "რა ხდება გულის შეკუმშვისას?",
+
           a: [
             "სისხლი ჩერდება",
+
             "სისხლი პარკუჭებიდან არტერიებში გადადის",
+
             "გული აღარ მუშაობს",
+
             "სისხლი ქრება",
           ],
+
           correct: 1,
         },
+
         {
           q: "რის მიწოდებაში მონაწილეობს სისხლი?",
+
           a: [
             "მხოლოდ წყლის",
+
             "მხოლოდ სითბოს",
+
             "ჟანგბადისა და საკვები ნივთიერებების",
+
             "მხოლოდ მარილის",
           ],
+
           correct: 2,
         },
       ];
+
       questions.push(
         {
           q: "რომელი კამერები იღებს სისხლს ვენებიდან?",
+
           a: ["წინაგულები", "პარკუჭები", "სარქვლები", "არტერიები"],
+
           correct: 0,
         },
 
         {
           q: "რომელი კამერები გამოდევნის სისხლს არტერიებში?",
+
           a: ["წინაგულები", "პარკუჭები", "ვენები", "კაპილარები"],
+
           correct: 1,
         },
 
         {
           q: "რომელი სისხლძარღვი მიაქვს სისხლი გულიდან?",
+
           a: ["ვენა", "არტერია", "ლიმფური ძარღვი", "არცერთი"],
+
           correct: 1,
         },
 
         {
           q: "რომელი სისხლძარღვით ბრუნდება სისხლი გულისკენ?",
+
           a: ["არტერიით", "ვენით", "სასუნთქი მილით", "ნერვით"],
+
           correct: 1,
         },
 
         {
           q: "რას აკეთებს გული მოდუნებისას?",
+
           a: [
             "სისხლს მთლიანად აჩერებს",
+
             "კამერები სისხლით ივსება",
+
             "ფილტვებს აჩერებს",
+
             "სარქვლებს აქრობს",
           ],
+
           correct: 1,
         },
       );
+
       let index = 0,
         score = 0;
+
       const responses = Array(questions.length).fill(null);
 
       function paintSegments(count) {
         const el = document.getElementById("quiz-segments");
+
         el.replaceChildren();
+
         for (let i = 0; i < questions.length; i++) {
           const s = document.createElement("span");
+
           s.classList.toggle("done", i < count);
+
           el.appendChild(s);
         }
       }
@@ -1980,33 +3123,55 @@
       function renderQuestion() {
         const q = questions[index],
           n = questions.length;
+
         document.getElementById("counter").textContent =
           `კითხვა ${index + 1}/${n}`;
+
         document.getElementById("question-badge").textContent =
           `კითხვა ${index + 1}/${n}`;
+
         document.getElementById("question").textContent = q.q;
+
         paintSegments(index + 1);
+
         const box = document.getElementById("answers");
+
         box.replaceChildren();
+
         q.a.forEach((answer, i) => {
           const b = document.createElement("button");
+
           b.type = "button";
+
           b.className = "answer";
+
           b.classList.toggle("selected", responses[index] === i);
+
           const letter = document.createElement("span");
+
           letter.className = "answer-letter";
+
           letter.textContent = "ABCD"[i];
+
           const text = document.createElement("span");
+
           text.textContent = answer;
+
           b.append(letter, text);
+
           b.onclick = () => {
             responses[index] = i;
+
             renderQuestion();
           };
+
           box.appendChild(b);
         });
+
         document.getElementById("previous").disabled = index === 0;
+
         document.getElementById("next").disabled = responses[index] === null;
+
         document.getElementById("next").textContent =
           index === n - 1 ? "შედეგის ნახვა →" : "შემდეგი →";
       }
@@ -2014,14 +3179,17 @@
       function previousQuestion() {
         if (index > 0) {
           index--;
+
           renderQuestion();
         }
       }
 
       function nextQuestion() {
         if (responses[index] === null) return;
+
         if (index < questions.length - 1) {
           index++;
+
           renderQuestion();
         } else showResult();
       }
@@ -2029,21 +3197,33 @@
       function showResult() {
         score = questions.reduce(
           (total, q, i) => total + (responses[i] === q.correct ? 1 : 0),
+
           0,
         );
+
         const n = questions.length,
           percent = Math.round((score / n) * 100);
+
         document.getElementById("question-area").hidden = true;
+
         document.getElementById("result").hidden = false;
+
         document.getElementById("counter").textContent = "ტესტი დასრულებულია";
+
         paintSegments(n);
+
         document.getElementById("score-percent").textContent = percent + "%";
+
         document.getElementById("score").textContent = score + "/" + n;
+
         document.getElementById("correct-count").textContent = score + "/" + n;
+
         document.getElementById("earned-xp").textContent =
           "+" + score * 10 + " XP";
+
         document.getElementById("score-ring").style.background =
           `conic-gradient(#6c63ff ${percent}%,#ebe8ff ${percent}%)`;
+
         document.getElementById("result-note").textContent =
           score >= 9
             ? "შესანიშნავია! თემა ძალიან კარგად იცი!"
@@ -2052,9 +3232,13 @@
               : score >= 4
                 ? "კარგი მცდელობაა — კიდევ ივარჯიშე!"
                 : "გაიმეორე თემა და კვლავ სცადე!";
+
         const wrong = questions
+
           .map((q, i) => ({ q, i }))
+
           .filter(({ q, i }) => responses[i] !== q.correct);
+
         const topic = wrong.some(({ i }) => [0, 5, 6].includes(i))
           ? "გულის კამერების ფუნქციები"
           : wrong.some(({ i }) => [1, 7, 8].includes(i))
@@ -2062,37 +3246,57 @@
             : wrong.some(({ i }) => [2, 3, 9].includes(i))
               ? "გულის მუშაობის ეტაპები"
               : "სისხლის ფუნქციები";
+
         document.getElementById("mia-review-text").textContent =
           score === n
             ? "შესანიშნავია! ყველა კითხვას სწორად უპასუხე. კარგად გესმის გულის აგებულება და სისხლის მიმოქცევა."
             : score >= 7
               ? `კარგად იმუშავე! გირჩევ კიდევ ერთხელ გაიმეორო ${topic}, შემდეგ კი სცადო ტესტი თავიდან.`
               : `ჯერ კიდევ შეგიძლია შედეგის გაუმჯობესება. დაიწყე თემით „${topic}“, გადახედე ახსნას და ისევ სცადე.`;
+
         const mistakes = document.getElementById("mistakes");
+
         mistakes.replaceChildren();
+
         wrong.forEach(({ q, i }) => {
           const d = document.createElement("div");
+
           d.className = "mistake";
+
           const title = document.createElement("strong");
+
           title.textContent = `${i + 1}. ${q.q}`;
+
           const chosen = document.createElement("div");
+
           chosen.textContent = "შენი პასუხი: " + q.a[responses[i]];
+
           chosen.className = "wrong";
+
           const correct = document.createElement("div");
+
           correct.className = "correct";
+
           correct.textContent = "სწორი პასუხი: " + q.a[q.correct];
+
           d.append(title, chosen, correct);
+
           mistakes.append(d);
         });
+
         if (!wrong.length) mistakes.textContent = "ყველა პასუხი სწორია!";
+
         mistakes.hidden = true;
+
         document.getElementById("review-toggle").textContent =
           "შეცდომების ნახვა";
       }
 
       function toggleMistakes() {
         const el = document.getElementById("mistakes");
+
         el.hidden = !el.hidden;
+
         document.getElementById("review-toggle").textContent = el.hidden
           ? "შეცდომების ნახვა"
           : "შეცდომების დამალვა";
@@ -2100,10 +3304,15 @@
 
       function restartTest() {
         index = 0;
+
         score = 0;
+
         responses.fill(null);
+
         document.getElementById("result").hidden = true;
+
         document.getElementById("question-area").hidden = false;
+
         renderQuestion();
       }
 
@@ -2317,7 +3526,9 @@
         palette.hidden = !palette.hidden;
 
         document
+
           .getElementById("board-palette-toggle")
+
           .setAttribute("aria-expanded", String(!palette.hidden));
       }
 

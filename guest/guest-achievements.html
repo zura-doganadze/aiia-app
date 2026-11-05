@@ -3,11 +3,8 @@
 <html lang="ka">
   <head>
     <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>AIIA — მიღწევები</title>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -15,616 +12,314 @@
 
     <style>
       :root {
-        --purple: #6c63ff;
-
+        --primary: #6c63ff;
+        --blue: #4a90ff;
+        --gold: #ffc857;
+        --orange: #f59e0b;
+        --green: #22c55e;
         --ink: #17213b;
-
         --muted: #78839a;
-
-        --bg: #f8f9ff;
+        --bg: #f8fafc;
       }
-
       * {
         box-sizing: border-box;
       }
-
       body {
         margin: 0;
-
-        background: linear-gradient(125deg, #fff 0%, #f3f8ff 55%, #edf3ff 100%);
-
+        background: var(--bg);
         color: var(--ink);
-
-        font-family: "Noto Sans Georgian", sans-serif;
+        font-family: "Noto Sans Georgian", Arial, sans-serif;
       }
-
       button,
       select {
         font: inherit;
       }
-
       a {
         text-decoration: none;
-
         color: inherit;
       }
-
       .app {
         max-width: 1040px;
-
-        margin: auto;
-
         min-height: 100vh;
-
+        margin: auto;
         padding: 24px 16px 112px;
       }
-
       .heading {
         display: flex;
-
         align-items: center;
-
         gap: 13px;
-
-        margin-bottom: 14px;
+        margin: 0 auto 14px;
       }
-
       .heading-icon {
-        width: 38px;
-
-        height: 38px;
-
-        border-radius: 11px;
-
-        background: #fff5e4;
-
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: #fff3dc;
         display: grid;
-
         place-items: center;
-
-        font-size: 28px;
+        font-size: 26px;
       }
-
       .heading h1 {
         font-size: 21px;
-
         margin: 0 0 3px;
-
         font-weight: 800;
       }
-
       .heading p {
         font-size: 11px;
-
         color: var(--muted);
-
         margin: 0;
       }
-
       .stats {
         display: grid;
-
         grid-template-columns: 1fr 1fr;
-
         gap: 12px;
       }
-
       .stat {
-        padding: 12px 7px;
-
+        padding: 13px 7px;
         text-align: center;
-
         border-radius: 15px;
-
-        border: 1px solid rgba(100, 80, 200, 0.06);
+        border: 2px solid transparent;
       }
-
       .stat.fire {
-        background: #fff2ed;
+        background: #fff4e5;
+        border-color: #fad6a1;
       }
-
       .stat.points {
         background: #f0edff;
+        border-color: #d9d4ff;
       }
-
       .stat .symbol {
         font-size: 23px;
       }
-
       .stat strong {
         display: block;
-
         font-size: 18px;
-
         margin: 3px 0 2px;
       }
-
       .stat.fire strong {
-        color: #f15d18;
+        color: #d97706;
       }
-
       .stat.points strong {
-        color: #6042f2;
+        color: var(--primary);
       }
-
       .stat small {
         font-size: 10px;
-
         color: #65718a;
       }
-
       .board {
-        margin-top: 15px;
+        margin-top: 16px;
       }
-
       .filter {
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
-
         gap: 9px;
-
-        background: linear-gradient(110deg, #e8f2ff, #f0edff);
-
+        background: #eaf3ff;
+        border: 2px solid #d5e7ff;
         padding: 10px 12px;
-
-        border-radius: 17px;
-
+        border-radius: 16px;
         min-height: 70px;
       }
-
       .subject-heading {
         display: flex;
-
         align-items: center;
-
         gap: 10px;
-
         min-width: 0;
       }
-
       .subject-art {
         width: 45px;
-
         height: 45px;
-
         border-radius: 11px;
-
-        background: linear-gradient(140deg, #40a6ff, #6254ff);
-
+        background: linear-gradient(140deg, #4a90ff, #6c63ff);
         display: grid;
-
         place-items: center;
-
         font-size: 26px;
-
         flex-shrink: 0;
       }
-
       .subject-art img {
         width: 100%;
-
         height: 100%;
-
         object-fit: contain;
       }
-
       .subject-copy {
         min-width: 0;
       }
-
       .subject-copy strong {
         display: block;
-
         font-size: 13px;
-
         font-weight: 800;
       }
-
       .subject-copy small {
         display: block;
-
         font-size: 9px;
-
-        color: #78839a;
-
+        color: var(--muted);
         margin-top: 3px;
       }
-
       .filter select {
-        max-width: 125px;
-
+        max-width: 145px;
         min-width: 108px;
-
         border: 1px solid #cfc7ff;
-
         border-radius: 22px;
-
         background: #f7f5ff;
-
         color: #3e36a2;
-
         font-weight: 700;
-
         font-size: 10px;
-
-        padding: 9px 23px 9px 10px;
-
+        padding: 9px 10px;
         cursor: pointer;
-
-        outline: none;
       }
-
       .podium {
         display: grid;
-
         grid-template-columns: 1fr 1.12fr 1fr;
-
         align-items: end;
-
         gap: 9px;
-
         margin: 48px 7px 13px;
       }
-
       .winner {
         position: relative;
-
         text-align: center;
-
         border-radius: 16px;
-
         padding: 12px 4px 10px;
-
         min-width: 0;
+        border: 2px solid transparent;
       }
-
       .winner.first {
-        background: #fff3d9;
-
+        background: #fff3dc;
+        border-color: #f7d58a;
         min-height: 153px;
       }
-
       .winner.second {
-        background: #e7f3ff;
-
+        background: #eaf3ff;
+        border-color: #cde3ff;
         min-height: 137px;
       }
-
       .winner.third {
-        background: #ffebe7;
-
+        background: #fff0e4;
+        border-color: #f7d5b6;
         min-height: 129px;
       }
-
       .crown {
         position: absolute;
-
         top: -34px;
-
         left: 50%;
-
         transform: translateX(-50%);
-
         width: 40px;
-
         height: 37px;
       }
-
       .crown svg {
         width: 100%;
-
         height: 100%;
-
         overflow: visible;
       }
-
       .avatar {
         width: 62px;
-
         height: 62px;
-
         border-radius: 50%;
-
-        background: #fff8;
-
+        background: #ffffff99;
         display: grid;
-
         place-items: center;
-
         margin: 0 auto 5px;
-
         font-size: 36px;
+        overflow: hidden;
       }
-
       .avatar img,
       .mini-avatar img {
         width: 100%;
-
         height: 100%;
-
         object-fit: cover;
-
         border-radius: 50%;
-
         display: block;
       }
-
       .winner.first .avatar {
         width: 70px;
-
         height: 70px;
-
-        font-size: 41px;
       }
-
       .winner .name {
         font-weight: 800;
-
         font-size: 12px;
-
         white-space: nowrap;
-
         overflow: hidden;
-
         text-overflow: ellipsis;
       }
-
       .winner .score {
         font-size: 13px;
-
         font-weight: 800;
-
-        color: #1685f8;
-
+        color: #287de1;
         margin-top: 3px;
       }
-
       .winner.first .score {
-        color: #c66b00;
+        color: #b77a09;
       }
-
       .winner.third .score {
-        color: #ef5b25;
+        color: #d97706;
       }
-
       .ranking {
         background: white;
-
-        border: 1px solid #eef0f9;
-
-        border-radius: 20px;
-
+        border: 1px solid #e9edf3;
+        border-radius: 18px;
         padding: 9px 10px;
-
         box-shadow: 0 6px 24px #232d5908;
       }
-
       .rank-head,
       .rank-row {
         display: grid;
-
         grid-template-columns: 28px 36px minmax(0, 1fr) auto;
-
         align-items: center;
-
         gap: 8px;
       }
-
       .rank-head {
         font-size: 10px;
-
         color: #7e89a0;
-
         font-weight: 700;
-
         padding: 9px 11px;
       }
-
       .rank-head span:nth-child(2) {
         grid-column: 2/4;
       }
-
       .rank-row {
         min-height: 43px;
-
         padding: 5px 9px;
-
         border-top: 1px solid #f0f2f8;
-
         font-size: 12px;
       }
-
       .rank-row .position {
         font-weight: 800;
-
         color: #53617d;
       }
-
-      .rank-row .mini-avatar {
+      .mini-avatar {
         width: 32px;
-
         height: 32px;
-
         border-radius: 50%;
-
         display: grid;
-
         place-items: center;
-
         background: #f0edff;
-
-        font-size: 22px;
-      }
-
-      .rank-row .mini-avatar {
         overflow: hidden;
       }
-
       .rank-row .name {
         font-weight: 700;
-
         overflow: hidden;
-
         text-overflow: ellipsis;
-
         white-space: nowrap;
       }
-
       .rank-row .score {
         font-size: 11px;
-
         font-weight: 800;
-
         white-space: nowrap;
       }
-
       .rank-row.me {
-        background: #eee8ff;
-
-        border-radius: 13px;
-
-        color: #5737e8;
-
+        background: #f0edff;
+        border-radius: 12px;
+        color: #5748d8;
         border-top-color: transparent;
       }
-
       .rank-row.me .position {
-        color: #5737e8;
+        color: #5748d8;
       }
-
       .note {
         font-size: 10px;
-
         color: #929bb0;
-
         text-align: center;
-
         margin-top: 12px;
       }
-
-      .bottom-nav {
-        position: fixed;
-
-        bottom: 0;
-
-        left: 50%;
-
-        transform: translateX(-50%);
-
-        width: min(100%, 1040px);
-
-        background: #fff;
-
-        box-shadow: 0 -5px 20px #1b205116;
-
-        border-radius: 24px 24px 0 0;
-
-        padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
-
-        display: grid;
-
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-
-        z-index: 10;
-      }
-
-      .nav-link {
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 5px;
-
-        font-size: 10px;
-
-        font-weight: 700;
-
-        color: #9297a7;
-
-        min-width: 0;
-      }
-
-      .nav-icon {
-        height: 35px;
-
-        width: 39px;
-
-        display: grid;
-
-        place-items: center;
-
-        border-radius: 12px;
-      }
-
-      .nav-icon svg {
-        width: 23px;
-
-        height: 23px;
-      }
-
-      .nav-link.active {
-        color: #553de4;
-      }
-
-      .nav-link.active .nav-icon {
-        background: #eeebff;
-      }
-
-      @media (min-width: 700px) {
-        .app {
-          padding: 30px 28px 125px;
-        }
-
-        .stats {
-          max-width: 570px;
-
-          margin: auto;
-        }
-
-        .board {
-          max-width: 640px;
-
-          margin: 26px auto;
-        }
-
-        .heading {
-          max-width: 640px;
-
-          margin: 0 auto 24px;
-        }
-      }
-
-      @media (max-width: 360px) {
-        .app {
-          padding-left: 11px;
-
-          padding-right: 11px;
-        }
-
-        .winner {
-          padding-left: 2px;
-
-          padding-right: 2px;
-        }
-
-        .winner .score {
-          font-size: 11px;
-        }
-
-        .rank-row {
-          gap: 5px;
-
-          padding-left: 6px;
-
-          padding-right: 6px;
-        }
-      }
-
       .nav {
         position: fixed;
         bottom: 0;
@@ -635,9 +330,9 @@
         grid-template-columns: repeat(4, 1fr);
         align-items: center;
         padding: 7px 12px max(9px, env(safe-area-inset-bottom));
-        background: #fff;
+        background: white;
         border-top: 1px solid #e9ebf4;
-        box-shadow: 0 -3px 14px rgba(42, 48, 96, 0.035);
+        box-shadow: 0 -3px 14px #2a306009;
         z-index: 10;
       }
       .nav a {
@@ -647,7 +342,6 @@
         height: 34px;
         width: 44px;
         margin: auto;
-        text-decoration: none;
         color: #a4abc0;
         border-radius: 12px;
         transition:
@@ -665,19 +359,51 @@
       }
       .nav a.active {
         background: #f0edff;
-        color: #6c63ff;
+        color: var(--primary);
+      }
+      @media (min-width: 700px) {
+        .app {
+          padding: 30px 28px 125px;
+        }
+        .stats {
+          max-width: 570px;
+          margin: auto;
+        }
+        .board {
+          max-width: 640px;
+          margin: 26px auto;
+        }
+        .heading {
+          max-width: 640px;
+          margin: 0 auto 24px;
+        }
+      }
+      @media (max-width: 360px) {
+        .app {
+          padding-left: 11px;
+          padding-right: 11px;
+        }
+        .winner {
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+        .winner .score {
+          font-size: 11px;
+        }
+        .rank-row {
+          gap: 5px;
+          padding-left: 6px;
+          padding-right: 6px;
+        }
       }
     </style>
   </head>
-
   <body>
     <main class="app">
       <header class="heading">
         <div class="heading-icon">🏆</div>
-
         <div>
           <h1>მიღწევები</h1>
-
           <p>საერთო მიღწევები და რეიტინგი</p>
         </div>
       </header>
@@ -685,13 +411,10 @@
       <section class="stats" aria-label="საერთო სტატისტიკა">
         <div class="stat fire">
           <div class="symbol">🔥</div>
-
           <strong>7 დღე</strong><small>ზედიზედ სწავლა</small>
         </div>
-
         <div class="stat points">
           <div class="symbol">🏆</div>
-
           <strong>3,450 XP</strong><small>დაგროვილი ქულები</small>
         </div>
       </section>
@@ -702,62 +425,48 @@
             <div class="subject-art" id="subjectArt">
               <img src="../img/math-icon.png" alt="მათემატიკა" />
             </div>
-
             <div class="subject-copy">
               <strong id="subjectTitle">მათემატიკა</strong
               ><small id="subjectSubtitle">საგნობრივი რეიტინგი</small>
             </div>
           </div>
-
           <select id="subject" aria-label="აირჩიე საგანი">
             <option value="math">🧮 მათემატიკა</option>
-
             <option value="biology">🔬 ბიოლოგია</option>
           </select>
         </div>
-
         <div class="podium" id="podium"></div>
-
         <div class="ranking">
           <div class="rank-head">
             <span>#</span><span>მოსწავლე</span><span>XP</span>
           </div>
-
           <div id="rankRows"></div>
         </div>
-
         <p class="note">რეიტინგი და XP ამ ეტაპზე დემო მონაცემებია.</p>
       </section>
     </main>
 
     <nav class="nav" aria-label="ქვედა ნავიგაცია">
-      <a href="guest-home.html" title="მთავარი" aria-label="მთავარი"
+      <a href="guest-home.html" aria-label="მთავარი"
         ><svg viewBox="0 0 24 24">
           <path d="m3 10 9-7 9 7" />
           <path d="M5 9v11h14V9" />
-          <path d="M9 20v-7h6v7" /></svg
-      ></a>
-
-      <a href="guest-mia.html" title="AI მენტორი" aria-label="AI მენტორი"
+          <path d="M9 20v-7h6v7" /></svg></a
+      ><a href="guest-mia.html" aria-label="AI მენტორი"
         ><svg viewBox="0 0 24 24">
           <path d="M5 10a7 7 0 0 1 14 0v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z" />
           <path d="M9 12h.01M15 12h.01M9 16c2 1 4 1 6 0" />
-          <path d="M12 3V1" /></svg
-      ></a>
-
-      <a
+          <path d="M12 3V1" /></svg></a
+      ><a
         href="guest-achievements.html"
         class="active"
         aria-current="page"
-        title="მიღწევები"
         aria-label="მიღწევები"
         ><svg viewBox="0 0 24 24">
           <path d="M8 4h8v7a4 4 0 0 1-8 0z" />
           <path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4" />
-          <path d="M12 15v4M8 21h8" /></svg
-      ></a>
-
-      <a href="guest-achievements.html" title="პროფილი" aria-label="პროფილი"
+          <path d="M12 15v4M8 21h8" /></svg></a
+      ><a href="guest-profile.html" aria-label="პროფილი"
         ><svg viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="3.5" />
           <path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg
@@ -765,209 +474,135 @@
     </nav>
 
     <script>
-      // დროებითი დემო მონაცემები — მოგვიანებით ჩანაცვლდება სერვერის მონაცემებით.
-
-      // სურათები: ჩასვით AIIA-app/img საქაღალდეში მითითებული სახელებით.
+      // დემო მონაცემები; რეალურ მონაცემებს მოგვიანებით სერვერი მიაწვდის.
 
       const photos = {
         mariam: "../img/leaderboard-mariam.png",
-
         nika: "../img/leaderboard-nika.png",
-
         luka: "../img/leaderboard-luka.png",
       };
-
-      // MVP-ის დემო მონაცემები. ქვედა სიაში სამი ავატარი მონაცვლეობით მეორდება.
 
       const people = [
         {
           name: "ნიკა",
-
           photo: photos.nika,
-
           math: 2860,
-
           biology: 1080,
-
           all: 3860,
         },
-
         {
           name: "მარიამი",
-
           photo: photos.mariam,
-
           math: 2450,
-
           biology: 1020,
-
           all: 3450,
         },
-
         {
           name: "ლუკა",
-
           photo: photos.luka,
-
           math: 2190,
-
           biology: 960,
-
           all: 3290,
         },
-
         {
           name: "ანა",
-
           photo: photos.mariam,
-
           math: 1980,
-
           biology: 940,
-
           all: 3120,
         },
-
         {
           name: "გიორგი",
-
           photo: photos.nika,
-
           math: 1750,
-
           biology: 910,
-
           all: 3050,
         },
-
         {
           name: "თეკლა",
-
           photo: photos.luka,
-
           math: 1620,
-
           biology: 890,
-
           all: 2980,
         },
-
         {
           name: "სანდრო",
-
           photo: photos.nika,
-
           math: 1540,
-
           biology: 850,
-
           all: 2860,
         },
-
         {
           name: "ელენე",
-
           photo: photos.mariam,
-
           math: 1490,
-
           biology: 820,
-
           all: 2790,
         },
-
         {
           name: "დათა",
-
           photo: photos.luka,
-
           math: 1420,
-
           biology: 790,
-
           all: 2600,
         },
-
         {
           name: "შენ",
-
           photo: photos.nika,
-
           math: 350,
-
           biology: 300,
-
           all: 3450,
-
           me: true,
         },
       ];
 
-      const avatar = (person) =>
-        `<img src="${person.photo}" alt="${person.name}" loading="lazy">`;
-
       const crowns = {
         1: ["#FFB51B", "#FFDA56"],
-
         2: ["#A9B8D0", "#D5E0EF"],
-
         3: ["#F1A15C", "#F8C49B"],
       };
 
       function crown(place) {
         const [dark, light] = crowns[place];
-
         return `<svg viewBox="0 0 56 48" aria-label="${place} ადგილი"><path d="M6 36 3 12 17 22 28 5 39 22 53 12 50 36Z" fill="${dark}" stroke="${dark}" stroke-width="2" stroke-linejoin="round"/><path d="M10 33 8 19 19 27 28 12 37 27 48 19 46 33Z" fill="${light}"/><rect x="6" y="35" width="44" height="8" rx="3" fill="${dark}"/><text x="28" y="33" text-anchor="middle" font-size="17" font-weight="800" fill="white">${place}</text></svg>`;
       }
 
-      const podium = document.getElementById("podium");
+      const podium = document.getElementById("podium"),
+        rows = document.getElementById("rankRows"),
+        subject = document.getElementById("subject");
 
-      const rows = document.getElementById("rankRows");
-
-      const subject = document.getElementById("subject");
+      function avatar(p) {
+        return `<img src="${p.photo}" alt="${p.name}" loading="lazy">`;
+      }
 
       function render() {
-        const key = subject.value === "all" ? "all" : subject.value;
-
+        const key = subject.value;
         const meta = {
-          all: ["🏆", "ყველა საგანი", "საერთო რეიტინგი"],
-
           math: ["../img/math-icon.png", "მათემატიკა", "საგნობრივი რეიტინგი"],
-
-          biology: ["🌿", "ბიოლოგია", "საგნობრივი რეიტინგი"],
+          biology: ["🔬", "ბიოლოგია", "საგნობრივი რეიტინგი"],
         }[key];
-
         document.getElementById("subjectArt").innerHTML =
           key === "math"
             ? '<img src="../img/math-icon.png" alt="მათემატიკა">'
             : meta[0];
-
         document.getElementById("subjectTitle").textContent = meta[1];
-
         document.getElementById("subjectSubtitle").textContent = meta[2];
-
         const sorted = [...people].sort((a, b) => b[key] - a[key]);
-
-        const card = (person, place) =>
-          `<div class="winner ${place === 1 ? "first" : place === 2 ? "second" : "third"}"><span class="crown">${crown(place)}</span><div class="avatar">${avatar(person)}</div><div class="name">${person.name}</div><div class="score">${person[key].toLocaleString("en-US")} XP</div></div>`;
-
+        function card(p, place) {
+          return `<div class="winner ${place === 1 ? "first" : place === 2 ? "second" : "third"}"><span class="crown">${crown(place)}</span><div class="avatar">${avatar(p)}</div><div class="name">${p.name}</div><div class="score">${p[key].toLocaleString("en-US")} XP</div></div>`;
+        }
         podium.innerHTML =
           card(sorted[1], 2) + card(sorted[0], 1) + card(sorted[2], 3);
-
         rows.innerHTML = sorted
-
           .slice(3)
-
           .map(
             (p, i) =>
               `<div class="rank-row ${p.me ? "me" : ""}"><span class="position">${i + 4}</span><span class="mini-avatar">${avatar(p)}</span><span class="name">${p.name}</span><span class="score">${p[key].toLocaleString("en-US")} XP</span></div>`,
           )
-
           .join("");
       }
 
       subject.addEventListener("change", render);
-
       render();
     </script>
   </body>
